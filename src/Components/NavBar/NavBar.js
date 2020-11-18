@@ -32,7 +32,9 @@ const NavBar = () => {
               </a>
             </li>
             <li>
-              <button className="logout" type="button">Logout</button>
+              <button className="logout" type="button">
+                Logout
+              </button>
             </li>
           </ul>
         </nav>

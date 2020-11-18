@@ -16,7 +16,6 @@ header {
     height: 100%;
   }
 
-
   li {
     color: white;
     text-decoration: none;
@@ -33,9 +32,16 @@ header {
     padding: 0.5rem 1rem;
   }
 
+  .navbar-links {
+    border-radius: 10px;
+    -webkit-transition: background-color 0.3s ease;
+    -moz-transition: background-color 0.3s ease;
+    -o-transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+  }
+
   .navbar-links:hover {
     background-color: rgb(42, 153, 146);
-    border-radius: 4px;
   }
 
   .search-icon {
@@ -74,8 +80,19 @@ header {
   }
 
   .logout {
+    position: relative;
+    font-size: 1rem;
     border-radius: 999px;
     border: none;
-    padding: 0.8rem 2rem;
+    padding: 0.6rem 3rem;
+    -webkit-transition: background-color 0.4s ease;
+    -moz-transition: background-color 0.4s ease;
+    -o-transition: background-color 0.4s ease;
+    transition: background-color 0.4s ease;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: rgb(236, 220, 245);
   }
 }
