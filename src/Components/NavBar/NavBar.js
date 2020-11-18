@@ -31,6 +31,9 @@ const NavBar = () => {
                 Help
               </a>
             </li>
+            <li>
+              <button className="logout" type="button">Logout</button>
+            </li>
           </ul>
         </nav>
       </div>
