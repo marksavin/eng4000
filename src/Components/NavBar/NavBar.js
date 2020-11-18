@@ -12,20 +12,24 @@ const NavBar = () => {
     <header>
       <div className="navbar-contents">
         <a href="/">
-          <FontAwesomeIcon className="logo" icon={faClinicMedical} />
+          <FontAwesomeIcon className="logo fa-2x" icon={faClinicMedical} />
         </a>
         <nav className="navbar">
           <ul className="navbar-menu">
             <li className="search-icon">
-              <input type="search" placeholder="search" />
+              <input type="search" placeholder="search patient" />
               <FontAwesomeIcon className="close" icon={faTimes} />
               <FontAwesomeIcon className="search" icon={faSearch} />
             </li>
-            <li c>
-              <a href="#">Select Wing</a>
+            <li>
+              <a href="#" className="navbar-links">
+                Select Wing
+              </a>
             </li>
             <li>
-              <a href="#">Help</a>
+              <a href="#" className="navbar-links">
+                Help
+              </a>
             </li>
           </ul>
         </nav>
