@@ -1,24 +1,36 @@
 import React from "react";
-import { NavBarItems } from "./NavbarItems.js";
-import styles from "../../Styles/NavBar/NavBar.scss";
+//import icons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faClinicMedical,
+  faSearch,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
   return (
-    <nav className="navbar">
-      <h1 className="navbar-logo">LOGO</h1>
-      <div className="navbar-icon"></div>
-      <ul>
-        {NavBarItems.map((item, index) => {
-          return (
-            <li key={index}>
-              <a className={item.class} href={item.url}>
-                {item.title}
-              </a>
+    <header>
+      <div className="navbar-contents">
+        <a href="/">
+          <FontAwesomeIcon className="logo" icon={faClinicMedical} />
+        </a>
+        <nav className="navbar">
+          <ul className="navbar-menu">
+            <li className="search-icon">
+              <input type="search" placeholder="search" />
+              <FontAwesomeIcon className="close" icon={faTimes} />
+              <FontAwesomeIcon className="search" icon={faSearch} />
             </li>
-          );
-        })}
-      </ul>
-    </nav>
+            <li c>
+              <a href="#">Select Wing</a>
+            </li>
+            <li>
+              <a href="#">Help</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
   );
 };
 
