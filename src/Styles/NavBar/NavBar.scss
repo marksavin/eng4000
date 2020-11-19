@@ -1,5 +1,7 @@
+$base-color: rgb(51, 187, 179);
+
 header {
-  background-color: rgb(51, 187, 179);
+  background-color: $base-color;
   z-index: 99;
   position: fixed;
   width: 100%;
@@ -9,6 +11,7 @@ header {
     max-width: 150rem;
     display: flex;
     flex-direction: row;
+    flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
@@ -55,21 +58,23 @@ header {
     background: #fcfcfc;
     border: 1px solid #aaa;
     border-radius: 5px;
-    text-indent: 32px;
+    text-indent: 40px;
   }
 
   .search {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 17px;
+    left: 30px;
     color: rgb(124, 122, 122);
+    font-size: 1.2rem;
   }
 
   .close {
     position: absolute;
-    top: 10px;
-    left: 320px;
+    top: 16px;
+    left: 340px;
     color: rgb(124, 122, 122);
+    font-size: 1.3rem;
   }
 
   input[type="search"] {
@@ -92,7 +97,111 @@ header {
     cursor: pointer;
   }
 
+  .hamburger-icon {
+    display: none;
+    color: #fff;
+  }
+
+  .hamburger-module {
+    display: none;
+  }
+
   button:hover {
     background-color: rgb(236, 220, 245);
+  }
+
+  @media only screen and (max-width: 1800px) {
+    li {
+      margin: 0 3rem;
+    }
+  }
+
+  @media only screen and (max-width: 1400px) {
+    li {
+      margin: 0 1rem;
+    }
+  }
+
+  @media only screen and(max-width: 1150px) {
+    .navbar-contents {
+      position: relative;
+      padding: 0 5rem;
+    }
+
+    .search-icon input {
+      width: 250px;
+    }
+
+    .close {
+      left: 240px;
+    }
+
+    .navbar-menu {
+      background-color: $base-color;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 350px;
+      height: 100vh;
+      position: absolute;
+      top: 4rem;
+      right: -100%;
+      transition: all 0.5s ease;
+    }
+
+    .navbar-menu.active {
+      width: 350px;
+      right: 0;
+    }
+
+    li {
+      text-align: center;
+      padding: 2rem 0;
+      width: 100%;
+      margin: 0;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+    }
+
+    .hamburger-module {
+      display: flex;
+      justify-content: space-around;
+      flex-flow: column nowrap;
+      position: fixed;
+      width: 2rem;
+      height: 2rem;
+      top: 17px;
+      right: 30px;
+      cursor: pointer;
+    }
+
+    .hamburger-module div {
+      height: 0.25rem;
+      width: 2.5rem;
+      background-color: white;
+      border-radius: 10px;
+      transition: all 0.3s linear;
+    }
+
+    .hamburger-module.active div {
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 10px);
+      }
+      &:nth-child(2) {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -10px);
+      }
+    }
+  }
+
+  @media only screen and(max-width: 500px) {
+    .search-icon {
+      display: none;
+    }
   }
 }

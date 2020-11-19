@@ -5,6 +5,7 @@ import './Styles/app.scss'
 //import components
 import Navigation from './Components/NavBar/NavBar.js';
 
+
 function App() {
   return (
     <div className="App">
