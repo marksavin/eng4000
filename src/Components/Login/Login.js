@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserMd, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 
-
-const LoginTest = ({ setLoginActive }) => {
+const Login = ({ setLoginActive }) => {
   const loginActiveHandler = () => {
     setLoginActive(false);
   };
@@ -22,19 +21,21 @@ const LoginTest = ({ setLoginActive }) => {
         </div>
         <div className="login-component">
           <div className="login-form">
-
             <div className="login-form-group">
-              <label className="label" htmlFor="token">Token</label>
+              <label className="label" htmlFor="token">
+                Token
+              </label>
               <input className="token" type="text" placeholder="token" />
               <FontAwesomeIcon className="user-icon" icon={faUserMd} />
             </div>
 
             <div className="login-form-group">
-              <label className="label" htmlFor="password">Password</label>
+              <label className="label" htmlFor="password">
+                Password
+              </label>
               <input className="password" type="text" placeholder="password" />
               <FontAwesomeIcon className="user-icon" icon={faUnlockAlt} />
             </div>
-            
           </div>
           <div className="login-button">
             <button className="button" onClick={loginActiveHandler}>
@@ -47,4 +48,4 @@ const LoginTest = ({ setLoginActive }) => {
   );
 };
 
-export default LoginTest;
+export default Login;
