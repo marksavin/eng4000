@@ -1,0 +1,73 @@
+wing_hospital {
+  display: flex;
+  justify-content: space-between;
+}
+
+bs {
+  text-align: center;
+  margin: auto;
+  justify-content: center;
+}
+
+tab {
+  flex: 1;
+  text-align: center;
+}
+html {
+  box-sizing: border-box;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 15px;
+  text-align: left;
+}
+tr:nth-child(even) {
+  background-color: #eee;
+}
+tr:nth-child(odd) {
+  background-color: #fff;
+}
+#t01 th {
+  background-color: blue;
+  color: white;
+}
+div.banner {
+  float: right;
+  width: 100px;
+  height: 400px;
+}
+
+div.rb1_mve {
+  width: 300px;
+  height: 200px;
+  background-color: lightgrey;
+  position: absolute;
+  top: 100px;
+  right: 0px;
+}
+
+div.rb2_mve {
+  width: 300px;
+  height: 100px;
+  background-color: lightgrey;
+  position: absolute;
+  top: 310px;
+  right: 0px;
+}
+
+/* div.c2 {
+  width: 300px;
+  height: 80px;
+  margin: 0 auto;
+  background-color: lightgrey;
+  padding: 0;
+  margin-top: 1rem;
+  align-self: right;
+} */
