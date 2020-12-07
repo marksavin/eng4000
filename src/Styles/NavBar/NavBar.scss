@@ -35,6 +35,13 @@ header {
     padding: 0.5rem 1rem;
   }
 
+  input {
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 15px 0.8px rgb(26, 70, 65);
+  }
+  }
+
   .navbar-links {
     border-radius: 10px;
     -webkit-transition: background-color 0.3s ease;

@@ -1,12 +1,12 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Asap', sans-serif;
+$base-color: rgb(51, 187, 179);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Asap", sans-serif;
 }
 
-
-@import url('https://fonts.googleapis.com/css2?family=Asap:wght@400;500;600;700&display=swap');
-@import './NavBar/NavBar.scss';
-
-
+@import url("https://fonts.googleapis.com/css2?family=Asap:wght@400;500;600;700&display=swap");
+@import "./NavBar/NavBar.scss";
+@import "./Login/Login.scss";

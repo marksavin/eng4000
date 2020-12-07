@@ -1,15 +1,17 @@
 //testing
-import React from "react";
+import React, { useState } from "react";
 //import styles
-import './Styles/app.scss'
+import "./Styles/app.scss";
 //import components
-import Navigation from './Components/NavBar/NavBar.js';
-
+import Navigation from "./Components/NavBar/NavBar.js";
+import Login from "./Components/Login/Login.js";
 
 function App() {
+  const [loginActive, setLoginActive] = useState(true);
+
   return (
     <div className="App">
-      <Navigation />
+      {loginActive ? <Login setLoginActive={setLoginActive} /> : <Navigation />}
     </div>
   );
 }
