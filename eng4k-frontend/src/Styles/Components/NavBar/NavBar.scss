@@ -1,6 +1,10 @@
 $base-color: rgb(51, 187, 179);
 
-header {
+// .NavBar__Spacing {
+//   padding: $xl-size $xl-size $xl-size $xl-size;
+// }
+
+.main-navbar {
   background-color: $base-color;
   z-index: 99;
   position: fixed;
@@ -39,7 +43,7 @@ header {
     &:focus {
       outline: none;
       box-shadow: 0 0 15px 0.8px rgb(26, 70, 65);
-  }
+    }
   }
 
   .navbar-links {

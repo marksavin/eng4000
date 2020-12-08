@@ -16,7 +16,7 @@ const NavBar = () => {
   };
 
   return (
-    <header>
+    <header className="main-navbar">
       <div className="navbar-contents">
         <a href="/">
           <FontAwesomeIcon className="logo fa-2x" icon={faClinicMedical} />
