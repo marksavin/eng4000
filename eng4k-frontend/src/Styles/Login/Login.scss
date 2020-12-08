@@ -322,3 +322,20 @@ $base-color: rgb(51, 187, 179);
     }
   }
 }
+
+@media screen and (max-height: 650px) and (min-width: 950px) {
+  .login-contents {
+    height: 30rem;
+  }
+
+  .login-component {
+    margin-top: 1rem;
+  }
+
+  .login-form {
+    margin-top: 1rem;
+  }
+
+  .login-button {
+  }
+}
