@@ -18,7 +18,15 @@ function createData(name, type, room, urgency, sbar) {
   return { name, type, room, urgency, sbar };
 }
 
-const rows = [createData("Mark Savin", "N/A", "122B", "Very", 1)];
+const rows = [
+  createData("Mark Savin", "sick", "122B", "yes", 1),
+  createData("Maneesh Wathagame", "sick", "300C", "yes", 2),
+  createData("Sarah Feroz", "healthy", "290D", "no", 3),
+  createData("Samuel On", "healthy", "110A", "no", 4),
+  createData("Dhruv Dustpan", "healthy", "402C", "no", 5),
+  createData("Brandon Chan", "sick", "300L", "yes", 6),
+  createData("Tiffany Alvear", "sick", "101A", "no", 7),
+];
 
 export default function BasicTable() {
   const classes = useStyles();
@@ -31,17 +39,15 @@ export default function BasicTable() {
             <TableRow>
               <TableCell align="right">Name</TableCell>
               <TableCell align="right">Type</TableCell>
-              <TableCell align="right">Room&nbsp;(g)</TableCell>
-              <TableCell align="right">Urgency&nbsp;(g)</TableCell>
-              <TableCell align="right">SBAR&nbsp;(g)</TableCell>
+              <TableCell align="right">Room&nbsp;</TableCell>
+              <TableCell align="right">Urgency&nbsp;</TableCell>
+              <TableCell align="right">SBAR&nbsp;</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rows.map((row) => (
               <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
+                <TableCell align="right">{row.name}</TableCell>
                 <TableCell align="right">{row.type}</TableCell>
                 <TableCell align="right">{row.room}</TableCell>
                 <TableCell align="right">{row.urgency}</TableCell>

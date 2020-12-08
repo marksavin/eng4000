@@ -1,13 +1,11 @@
 $base-color: rgb(51, 187, 179);
 
-// .NavBar__Spacing {
-//   padding: $xl-size $xl-size $xl-size $xl-size;
-// }
-
 .main-navbar {
   background-color: $base-color;
   z-index: 99;
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 4rem;
 

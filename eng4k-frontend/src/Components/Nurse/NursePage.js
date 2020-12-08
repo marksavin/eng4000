@@ -8,6 +8,7 @@ export default class NursePage extends React.Component {
   render() {
     return (
       <div>
+        <NavBar />
         <Header />
         <Table />
       </div>
