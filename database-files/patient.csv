@@ -1,0 +1,6 @@
+patient_id,patient_name,admission_date,patient_date_of_birth,patient_weight,patient_height
+1,Bob Harris,2020-12-01 23:16,1999-10-20,250,180
+2,James Bond,2020-12-01 23:16,1972-10-20,180,190
+3,Rachel Greene,2020-12-01 23:16,1965-10-20,140,140
+4,Emillia Stanford,2020-12-01 23:16,2002-10-20,120,150
+5,Gerald Stanford,2020-12-01 23:16,1987-10-20,180,180
