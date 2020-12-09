@@ -15,6 +15,7 @@ function App() {
         <Switch>
           <Navigation />
           <Route path="/nurse"> */}
+      <Navigation />
       <Sbar />
       {/* </Route>
         </Switch>

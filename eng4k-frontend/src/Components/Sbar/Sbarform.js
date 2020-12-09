@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Grid, TextField, makeStyles, InputLabel } from "@material-ui/core";
-import { useForm, Form, Grid12, Inputgroup } from "../Sbar/useForm.js";
+import Background from "./Background.js";
+import Situation from "./Situation.js";
+import Assessment from "./Assessment.js";
+import Recommendation from "./Recommendation.js";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiFormControl-root": {
-      width: "100%",
-      margin: theme.spacing(1),
-      verticleAlighn: "center",
-    },
+import { makeStyles } from "@material-ui/core";
+import { Form, ButtonForm } from "../Sbar/useForm.js";
+
+const paperStyle = makeStyles((theme) => ({
+  pageContent: {
+    margin: "1%",
+    padding: "2%",
   },
 }));
 
@@ -28,6 +30,7 @@ const initialFieldValues = {
   s_concern_bp: false,
   s_concern_pulse: false,
   s_concern_temperature: false,
+  s_concern_o2: false,
   b_awareness_alert_oriented: false,
   b_awareness_confused_cooperative: false,
   b_awareness_non_coop_agit_combative: false,
@@ -61,115 +64,27 @@ const initialFieldValues = {
 };
 
 export default function Sbarform() {
-  const { values, setValues, handleInput } = useForm(initialFieldValues);
-  const { nurseId, setNurseId } = useForm("");
-
   return (
     <div className="sbar">
       <div className="sbar-container">
         <Form>
-          <Grid container>
-            <Grid item xs={12} md={6}>
-              <Inputgroup
-                label="Nurse Name"
-                name="nurseName"
-                values={nurseId}
-                onChange={handleInput}
-                text="Situation: This is "
-              ></Inputgroup>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Inputgroup
-                label="Unit"
-                name="unit"
-                values={values.s_unit}
-                onChange={handleInput}
-                text="I'm calling from "
-              ></Inputgroup>
-            </Grid>
-            <Grid12>
-              <Inputgroup
-                label="Patient name and location"
-                name="patientName"
-                values={values.note_patient_id}
-                onChange={handleInput}
-                text="I'm calling about: "
-              ></Inputgroup>
-            </Grid12>
-            <Grid12>
-              <Inputgroup
-                label="Code status"
-                name="codeStatus"
-                values={values.s_code_status}
-                onChange={handleInput}
-                text="The Patient's code status is: "
-              ></Inputgroup>
-            </Grid12>
-            <Grid12>
-              <Inputgroup
-                label="Problem"
-                name="problem"
-                values={values.s_problem}
-                onChange={handleInput}
-                text="The problem I am calling about is: "
-              ></Inputgroup>
-            </Grid12>
-            <Grid item lg={4} xl={2}>
-              <InputLabel style={{ width: "100%" }}>
-                I have assessed the patient personaly: Vital signs are:
-              </InputLabel>
-            </Grid>
-            <Grid item lg={4} xl={2}>
-              <TextField
-                size="small"
-                variant="outlined"
-                label="Blood Pressure"
-                name="bloodPressure"
-                values={values.s_BP}
-                onChange={handleInput}
-              />
-            </Grid>
-            <Grid item lg={4} xl={2}>
-              <TextField
-                size="small"
-                variant="outlined"
-                label="Pulse"
-                name="pulse"
-                values={values.s_pulse}
-                onChange={handleInput}
-              />
-            </Grid>
-            <Grid item lg={4} xl={2}>
-              <TextField
-                size="small"
-                variant="outlined"
-                label="Respiration"
-                name="respiration"
-                values={values.s_Respiration}
-                onChange={handleInput}
-              />
-            </Grid>
-            <Grid item lg={4} xl={2}>
-              <TextField
-                size="small"
-                variant="outlined"
-                label="Temperature"
-                name="temperature"
-                values={values.s_temperature}
-                onChange={handleInput}
-              />
-            </Grid>
-            <Grid item lg={4} xl={2}>
-              <TextField
-                size="small"
-                variant="outlined"
-                label="O2 sat"
-                name="o2Sat"
-                values={values.s_o2}
-                onChange={handleInput}
-              />
-            </Grid>
-          </Grid>
+          <Situation initialFieldValues={initialFieldValues} />
+          <Background initialFieldValues={initialFieldValues} />
+          <Assessment initialFieldValues={initialFieldValues} />
+          <Recommendation initialFieldValues={initialFieldValues} />
+
+          <div
+            className="button-styles"
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            <ButtonForm label="Submit" type="submit" />
+            <ButtonForm color="default" label="Reset" type="submit" />
+          </div>
         </Form>
       </div>
     </div>
