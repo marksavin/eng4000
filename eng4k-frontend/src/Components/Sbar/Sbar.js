@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Sbar() {
+export default function Sbar(props) {
   const classes = useStyles();
   return (
     <>
@@ -33,7 +33,7 @@ export default function Sbar() {
         Patient Name{" "}
       </div>
       <Paper className={classes.pageContent} elevation={4}>
-        <Sbarfrom />
+        <Sbarfrom nurseID={props.nurseID} nurseName={props.nurseName}/>
       </Paper>
     </>
   );

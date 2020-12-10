@@ -54,7 +54,7 @@ const initialFieldValues = {
   r_problem_persist_contact: false,
 };
 
-export default function Sbarform() {
+export default function Sbarform(props) {
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     if ("s_unit" in fieldValues)
@@ -106,6 +106,7 @@ export default function Sbarform() {
         values={values}
         handleInput={handleInput}
         errors={errors}
+        nurseName={props.nurseName}
       />
       <Background
         initialFieldValues={initialFieldValues}

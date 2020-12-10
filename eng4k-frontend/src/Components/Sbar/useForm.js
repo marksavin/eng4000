@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, userCallback } from "react";
 import {
   Grid,
   ThemeProvider,
@@ -52,9 +52,8 @@ export function useForm(
   const [values, setValues] = useState(initialFieldValues);
   const [errors, setErrors] = useState({});
 
-  const handleInput = (event) => {
+  const handleInput = userCallback((event) => {
     const { name, value } = event.target;
-    console.log(values);
     setValues({
       ...values,
       [name]: value,
@@ -62,7 +61,7 @@ export function useForm(
     if (validateOnChange) {
       validate({ [name]: value });
     }
-  };
+  });
 
   return {
     values,

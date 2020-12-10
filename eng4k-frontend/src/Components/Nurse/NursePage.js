@@ -36,7 +36,7 @@ export default class NursePage extends React.Component {
           </Route>
 
           <Route path="/nurse/:id">
-            <Sbar />
+            <Sbar nurseID="1" nurseName="Mark Apple" />
           </Route>
         </Switch>
       </div>

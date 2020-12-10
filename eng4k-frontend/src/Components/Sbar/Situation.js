@@ -30,7 +30,7 @@ export default function Situation(props) {
           <Inputgroup
             label="Nurse Name"
             name="nurseId"
-            value={nurseId}
+            value={props.nurseName}
             onChange={props.handleInput}
             text="This is"
           ></Inputgroup>
@@ -73,7 +73,7 @@ export default function Situation(props) {
             text="The problem I am calling about is: "
           ></Inputgroup>
         </Grid12>
-        <Grid item lg={4} xl={3}>
+        <Grid item lg={4} xl={4}>
           <InputLabel style={{ width: "100%" }}>
             I have assessed the patient personaly: Vital signs are:
           </InputLabel>
