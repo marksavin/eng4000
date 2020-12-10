@@ -1,24 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import Background from "./Background.js";
 import Situation from "./Situation.js";
 import Assessment from "./Assessment.js";
 import Recommendation from "./Recommendation.js";
-
-import { makeStyles } from "@material-ui/core";
-import { Form, ButtonForm } from "../Sbar/useForm.js";
-
-const paperStyle = makeStyles((theme) => ({
-  pageContent: {
-    margin: "1%",
-    padding: "2%",
-  },
-}));
+import { Form, ButtonForm, useForm } from "../Sbar/useForm.js";
 
 const initialFieldValues = {
   note_id: "",
   note_patient_id: "",
   note_room_id: "",
-  date_created: new Date(1),
+  date_created: new Date(),
   s_problem: "",
   s_unit: "",
   s_code_status: "",
@@ -44,12 +35,12 @@ const initialFieldValues = {
   b_skin_extremities_cold: false,
   b_skin_extremities_warm: false,
   b_o2_time: "",
-  b_oximeter_detection: "",
+  b_oximeter_detection: false,
   a_problem: "",
-  a_problem_cardiac: "",
-  a_problem_infection: "",
-  a_problem_neurologic: "",
-  a_problem_respitory: "",
+  a_problem_cardiac: false,
+  a_problem_infection: false,
+  a_problem_neurologic: false,
+  a_problem_respitory: false,
   a_problem_unsure_deterioriating: false,
   a_unstable: false,
   a_arrest: false,
@@ -58,35 +49,92 @@ const initialFieldValues = {
   r_patient_family_code_status: false,
   r_test_needed: "",
   r_change_treatment_ordered: "",
-  r_freq_vital_signs: "",
-  r_time_problem_will_last: "",
-  r_problem_persist_contact: "",
+  r_freq_vital_signs: false,
+  r_time_problem_will_last: false,
+  r_problem_persist_contact: false,
 };
 
 export default function Sbarform() {
-  return (
-    <div className="sbar">
-      <div className="sbar-container">
-        <Form>
-          <Situation initialFieldValues={initialFieldValues} />
-          <Background initialFieldValues={initialFieldValues} />
-          <Assessment initialFieldValues={initialFieldValues} />
-          <Recommendation initialFieldValues={initialFieldValues} />
+  const validate = (fieldValues = values) => {
+    let temp = { ...errors };
+    if ("s_unit" in fieldValues)
+      temp.s_unit = fieldValues.s_unit ? "" : "This field is required";
+    if ("note_patient_id" in fieldValues)
+      temp.note_patient_id = fieldValues.note_patient_id
+        ? ""
+        : "This field is required";
+    setErrors({
+      ...temp,
+    });
 
-          <div
-            className="button-styles"
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              width: "100%",
-            }}
-          >
-            <ButtonForm label="Submit" type="submit" />
-            <ButtonForm color="default" label="Reset" type="submit" />
-          </div>
-        </Form>
+    if (fieldValues == values) return Object.values(temp).every((x) => x == "");
+  };
+
+  const { values, setValues, errors, setErrors, handleInput } = useForm(
+    initialFieldValues,
+    true,
+    validate
+  );
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (validate()) {
+      // creatNewSbarNote();
+      console.log("call api to make a post request");
+    }
+  };
+
+  const creatNewSbarNote = useCallback(() => {
+    fetch(`/nurse/patientId`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(values),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+      }
+    });
+  }, []);
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Situation
+        initialFieldValues={initialFieldValues}
+        values={values}
+        handleInput={handleInput}
+        errors={errors}
+      />
+      <Background
+        initialFieldValues={initialFieldValues}
+        values={values}
+        handleInput={handleInput}
+      />
+      <Assessment
+        initialFieldValues={initialFieldValues}
+        values={values}
+        handleInput={handleInput}
+      />
+      <Recommendation
+        initialFieldValues={initialFieldValues}
+        values={values}
+        handleInput={handleInput}
+      />
+
+      <div
+        className="button-styles"
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        <ButtonForm label="Submit" type="submit" />
+        <ButtonForm color="default" label="Reset" type="submit" />
       </div>
-    </div>
+    </Form>
   );
 }

@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     },
     "& .MuiFormLabel-root": {
       display: "inline-block",
+      whiteSpace: "nowrap",
     },
     "& .MuiGrid-root": {
       display: "flex",
@@ -43,29 +44,41 @@ const theme = createMuiTheme({
   },
 });
 
-export function useForm(initialFieldValues) {
+export function useForm(
+  initialFieldValues,
+  validateOnChange = false,
+  validate
+) {
   const [values, setValues] = useState(initialFieldValues);
+  const [errors, setErrors] = useState({});
 
   const handleInput = (event) => {
     const { name, value } = event.target;
+    console.log(values);
     setValues({
       ...values,
       [name]: value,
     });
+    if (validateOnChange) {
+      validate({ [name]: value });
+    }
   };
 
   return {
     values,
     setValues,
+    errors,
+    setErrors,
     handleInput,
   };
 }
 
 export function Form(props) {
   const classes = useStyles();
+  const { children, ...other } = props;
   return (
     <ThemeProvider theme={theme}>
-      <form className={classes.root} autoComplete="off">
+      <form className={classes.root} autoComplete="off" {...other}>
         {props.children}
       </form>
     </ThemeProvider>
@@ -105,7 +118,7 @@ export function TextFieldSingle(props) {
 }
 
 export function Inputgroup(props) {
-  const { name, label, value, onChange, text } = props;
+  const { name, label, value, onChange, text, error = null } = props;
   return (
     <>
       <InputLabel>{text}</InputLabel>
@@ -116,6 +129,7 @@ export function Inputgroup(props) {
         name={name}
         value={value}
         onChange={onChange}
+        {...(error && { error: true, helperText: error })}
       />
     </>
   );
