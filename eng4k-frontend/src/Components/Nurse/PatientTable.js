@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -108,12 +110,12 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox
+          {/* <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{ "aria-label": "select all desserts" }}
-          />
+          /> */}
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -159,15 +161,16 @@ const useToolbarStyles = makeStyles((theme) => ({
   highlight:
     theme.palette.type === "light"
       ? {
-          color: theme.palette.secondary.main,
-          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+          color: theme.palette.primary.main,
+          backgroundColor: lighten(theme.palette.primary.main, 0.85),
         }
       : {
-          color: theme.palette.text.primary,
-          backgroundColor: theme.palette.secondary.dark,
+          color: theme.palette.text.secondary,
+          backgroundColor: theme.palette.primary.dark,
         },
   title: {
     flex: "1 1 100%",
+    fontSize: "2rem",
   },
 }));
 
@@ -197,7 +200,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          Patient List
         </Typography>
       )}
 
@@ -266,7 +269,13 @@ export default function EnhancedTable() {
   ]);
 
   useEffect(() => {
-    fetch(`/userTransactionHistory/1`)
+    fetch(`/nurse/viewPatients`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({ nurseId: 1 }),
+    })
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -276,7 +285,9 @@ export default function EnhancedTable() {
       })
       .then((result) => {
         console.log(result);
-        setPatients(result);
+        // if (result.length > 0) {
+        //   setPatients(result);
+        // }
       });
   }, []);
 
@@ -352,7 +363,7 @@ export default function EnhancedTable() {
           width: "80%",
         }}
       >
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={4}>
           <EnhancedTableToolbar numSelected={selected.length} />
           <TableContainer>
             <Table
@@ -372,7 +383,6 @@ export default function EnhancedTable() {
               />
               <TableBody>
                 {stableSort(patients, getComparator(order, orderBy))
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((patients, index) => {
                     const isItemSelected = isSelected(patients.name);
                     const labelId = `enhanced-table-checkbox-${index}`;
@@ -384,7 +394,7 @@ export default function EnhancedTable() {
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={patients.name}
+                        key={patients.patient_name}
                         selected={isItemSelected}
                       >
                         <TableCell padding="checkbox">

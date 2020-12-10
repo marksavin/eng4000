@@ -1,6 +1,6 @@
 import React from "react";
 import { Paper, Grid, makeStyles, InputLabel } from "@material-ui/core";
-import { useForm, Grid12, Checkbox, Inputgroup } from "../Sbar/useForm.js";
+import { Grid12, Checkbox, Inputgroup } from "../Sbar/useForm.js";
 
 const paperStyle = makeStyles((theme) => ({
   pageContent: {

@@ -6,7 +6,7 @@ const db = require("../db/index_nurse");
 
 router.get("/viewPatients", async (req, res, next) => {
   const schema = Joi.object({
-    id: Joi.string().required(),
+    nurseId: Joi.string().required(),
   });
 
   const result = schema.validate(req.body);
@@ -18,7 +18,7 @@ router.get("/viewPatients", async (req, res, next) => {
   }
 
   try {
-    let queryResults = await db.currentPatientList(req.body.id);
+    let queryResults = await db.currentPatientList(req.body.nurseId);
     res.json(queryResults);
   } catch (e) {
     console.log(e);

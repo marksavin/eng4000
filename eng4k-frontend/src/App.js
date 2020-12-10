@@ -11,16 +11,23 @@ import Sbar from "./Components/Sbar/Sbar.js";
 function App() {
   return (
     <div className="App">
-      {/* <Router>
-        <Login />
+      <Router>
         <Switch>
-          <Navigation />
-          <Route path="/nurse"> */}
-      <Navigation />
-      <Sbar />
-      {/* </Route>
+          <Route exact path="/nurse">
+            <Navigation />
+            <NursePage />
+          </Route>
+
+          <Route exact path="/nurse">
+            <Navigation />
+            <NursePage />
+          </Route>
+
+          <Route path="/">
+            <Login />
+          </Route>
         </Switch>
-      </Router> */}
+      </Router>
     </div>
   );
 }
