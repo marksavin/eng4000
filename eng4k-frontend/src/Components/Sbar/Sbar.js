@@ -19,8 +19,22 @@ const useStyles = makeStyles((theme) => ({
 export default function Sbar() {
   const classes = useStyles();
   return (
-    <Paper className={classes.pageContent} elevation={4}>
-      <Sbarfrom />
-    </Paper>
+    <>
+      <div
+        className="sbar-title"
+        style={{
+          position: "absolute",
+          fontSize: "5rem",
+          top: "110px",
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+      >
+        Patient Name{" "}
+      </div>
+      <Paper className={classes.pageContent} elevation={4}>
+        <Sbarfrom />
+      </Paper>
+    </>
   );
 }
