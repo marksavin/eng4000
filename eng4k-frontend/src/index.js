@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+// import NursePage from "./Components/Nurse/NursePage.js";
 
 ReactDOM.render(
+  // <NursePage />,
   <React.StrictMode>
     <App />
   </React.StrictMode>,
