@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import PropTypes from "prop-types";
 import clsx from "clsx";
@@ -40,6 +40,7 @@ function getComparator(order, orderBy) {
 }
 
 function stableSort(array, comparator) {
+  console.log(array);
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
@@ -135,8 +136,9 @@ EnhancedTableHead.propTypes = {
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
-    paddingLeft: theme.spacing(2),
+    paddingLeft: theme.spacing(5),
     paddingRight: theme.spacing(1),
+    paddingTop: theme.spacing(5),
   },
   highlight:
     theme.palette.type === "light"
@@ -156,7 +158,7 @@ const useToolbarStyles = makeStyles((theme) => ({
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected } = props;
+  const { numSelected, name } = props;
 
   return (
     <Toolbar
@@ -171,7 +173,7 @@ const EnhancedTableToolbar = (props) => {
           variant="subtitle1"
           component="div"
         >
-          {numSelected} selected
+          Loading {name} SBAR...
         </Typography>
       ) : (
         <Typography
@@ -232,30 +234,27 @@ const useStyles = makeStyles((theme) => ({
 export default function EnhancedTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
+  const [orderBy, setOrderBy] = React.useState("patient_name");
   const [selected, setSelected] = React.useState([]);
+  const [patientName, setPatientName] = React.useState("");
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  const history = useHistory();
+
   const [patients, setPatients] = useState([
     {
-      patient_name: "Maneesh",
-      a_problem: "not sick",
-      note_room_id: 1,
-      r_priority: 1,
-      update_status: "Needs update",
+      patient_name: "-",
+      a_problem: "-",
+      note_room_id: "-",
+      r_priority: "-",
+      update_status: "-",
     },
   ]);
 
   useEffect(() => {
-    fetch(`/nurse/viewPatients`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify({ nurseId: 1 }),
-    })
+    fetch(`/nurse/viewPatients/1`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -265,7 +264,7 @@ export default function EnhancedTable() {
       })
       .then((result) => {
         console.log(result);
-        if (result !== undefined && result.length === 0) {
+        if (result !== undefined && result.length !== 0) {
           setPatients(result);
         }
         // if (result.length > 0) {
@@ -282,7 +281,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = patients.map((n) => n.name);
+      const newSelecteds = patients.map((n) => n.patient_name);
       setSelected(newSelecteds);
       return;
     }
@@ -306,6 +305,11 @@ export default function EnhancedTable() {
       );
     }
 
+    setTimeout(function () {
+      //your code to be executed after 1 second
+      history.push(`/nurse/${patientName}`);
+    }, 1500);
+    setPatientName(name);
     setSelected(newSelected);
   };
 
@@ -347,7 +351,10 @@ export default function EnhancedTable() {
         }}
       >
         <Paper className={classes.paper} elevation={4}>
-          <EnhancedTableToolbar numSelected={selected.length} />
+          <EnhancedTableToolbar
+            numSelected={selected.length}
+            name={patientName}
+          />
           <TableContainer>
             <Table
               className={classes.table}
@@ -367,14 +374,16 @@ export default function EnhancedTable() {
               <TableBody>
                 {stableSort(patients, getComparator(order, orderBy)).map(
                   (patients, index) => {
-                    const isItemSelected = isSelected(patients.name);
+                    const isItemSelected = isSelected(patients.patient_name);
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, patients.name)}
-                        role="checkbox"
+                        onClick={(event) =>
+                          handleClick(event, patients.patient_name)
+                        }
+                        role={"checkbox"}
                         aria-checked={isItemSelected}
                         tabIndex={-1}
                         key={patients.patient_name}

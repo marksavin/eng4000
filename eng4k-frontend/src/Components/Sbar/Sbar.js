@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Paper, makeStyles } from "@material-ui/core";
+import { useHistory, useParams } from "react-router-dom";
 
 import Sbarfrom from "./Sbarform.js";
 
@@ -17,7 +18,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Sbar(props) {
+  const param = useParams();
   const classes = useStyles();
+
   return (
     <>
       <div
@@ -30,10 +33,14 @@ export default function Sbar(props) {
           transform: "translateX(-50%)",
         }}
       >
-        Patient Name{" "}
+        Patient: {param.id}
       </div>
       <Paper className={classes.pageContent} elevation={4}>
-        <Sbarfrom nurseID={props.nurseID} nurseName={props.nurseName}/>
+        <Sbarfrom
+          nurseID={props.nurseID}
+          nurseName={props.nurseName}
+          patientName={param.id}
+        />
       </Paper>
     </>
   );

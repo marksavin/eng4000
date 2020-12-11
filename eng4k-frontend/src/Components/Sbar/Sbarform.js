@@ -99,6 +99,8 @@ export default function Sbarform(props) {
     });
   }, []);
 
+  initialFieldValues.note_patient_id = props.patientName;
+
   return (
     <Form onSubmit={handleSubmit}>
       <Situation
@@ -106,19 +108,11 @@ export default function Sbarform(props) {
         handleInput={handleInput}
         errors={errors}
         nurseName={props.nurseName}
+        patientName={props.patientName}
       />
-      <Background
-        values={values}
-        handleInput={handleInput}
-      />
-      <Assessment
-        values={values}
-        handleInput={handleInput}
-      />
-      <Recommendation
-        values={values}
-        handleInput={handleInput}
-      />
+      <Background values={values} handleInput={handleInput} />
+      <Assessment values={values} handleInput={handleInput} />
+      <Recommendation values={values} handleInput={handleInput} />
 
       <div
         className="button-styles"
