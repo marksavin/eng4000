@@ -29,7 +29,7 @@ export default class NursePage extends React.Component {
       <div>
         <Switch>
           <Route exact path="/nurse">
-            <Header />
+            <Header title="Wing Hospital Name" />
             <MuiThemeProvider theme={theme}>
               <PatientTable />
             </MuiThemeProvider>

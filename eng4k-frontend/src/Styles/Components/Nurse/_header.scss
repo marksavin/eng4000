@@ -1,9 +1,17 @@
+// .nurse__title {
+//   //   position: absolute;
+//   //   top: 6rem;
+//   left: 50%;
+//   align-items: center;
+//   display: flex;
+//   justify-content: center;
+// }
+
 .nurse__title {
-  //   position: absolute;
-  //   top: 6rem;
+  position: absolute;
+  font-size: 2rem;
   left: 50%;
-  padding: $xl-size;
-  align-items: center;
-  display: flex;
-  justify-content: center;
+  top: 100px;
+  transform: translateX(-50%);
+  text-align: center;
 }

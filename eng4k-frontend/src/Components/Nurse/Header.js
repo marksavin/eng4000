@@ -7,7 +7,7 @@ const Header = (props) => (
 );
 
 Header.defaultProps = {
-  title: "Wing Hospital Name",
+  title: "",
 };
 
 export default Header;

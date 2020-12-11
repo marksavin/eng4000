@@ -209,6 +209,7 @@ EnhancedTableToolbar.propTypes = {
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+    fontSize: "5rem",
   },
   paper: {
     width: "100%",
@@ -216,6 +217,7 @@ const useStyles = makeStyles((theme) => ({
   },
   table: {
     minWidth: 750,
+    fontSize: "5rem",
   },
   visuallyHidden: {
     border: 0,
@@ -340,7 +342,7 @@ export default function EnhancedTable() {
         alignItems: "center",
         width: "100%",
         heigh: "100%",
-        top: "200px",
+        top: "300px",
       }}
     >
       <div
