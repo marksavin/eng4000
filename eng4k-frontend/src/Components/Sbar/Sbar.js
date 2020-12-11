@@ -7,10 +7,9 @@ import Sbarfrom from "./Sbarform.js";
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
-    "& .MuiPaper-elevation1": {},
-    margin: "19rem 5% 5% 5%",
-    padding: "0.5%",
-    paddingLeft: "15%",
+    position: 'absolute',
+    padding: "2%",
+    top: '0',
   },
 }));
 
@@ -21,13 +20,15 @@ export default function Sbar(props) {
   return (
     <>
       <Header title={`Patient: ${param.id}`} />
-      <Paper className={classes.pageContent} elevation={4}>
-        <Sbarfrom
-          nurseID={props.nurseID}
-          nurseName={props.nurseName}
-          patientName={param.id}
-        />
-      </Paper>
+      <div className="paper-container">
+        <Paper className={classes.pageContent} elevation={4}>
+          <Sbarfrom
+            nurseID={props.nurseID}
+            nurseName={props.nurseName}
+            patientName={param.id}
+          />
+        </Paper>
+      </div>
     </>
   );
 }
