@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useCallback } from "react";
 import Background from "./Background.js";
 import Situation from "./Situation.js";
 import Assessment from "./Assessment.js";
@@ -67,7 +67,8 @@ export default function Sbarform(props) {
       ...temp,
     });
 
-    if (fieldValues == values) return Object.values(temp).every((x) => x == "");
+    if (fieldValues === values)
+      return Object.values(temp).every((x) => x === "");
   };
 
   const { values, setValues, errors, setErrors, handleInput } = useForm(
@@ -97,7 +98,7 @@ export default function Sbarform(props) {
       } else {
       }
     });
-  }, []);
+  }, [values]);
 
   initialFieldValues.note_patient_id = props.patientName;
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Paper, Grid, makeStyles, InputLabel } from "@material-ui/core";
 import {
   Grid12,
@@ -15,7 +15,6 @@ const paperStyle = makeStyles((theme) => ({
 }));
 
 const Situation = React.memo(function Situation(props) {
-  const [nurseId, setNurseId] = useState("");
   const paperstyle = paperStyle();
 
   return (

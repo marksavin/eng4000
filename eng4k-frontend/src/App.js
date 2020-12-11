@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //import styles
 import "./Styles/app.scss";
@@ -6,7 +6,6 @@ import "./Styles/app.scss";
 import Navigation from "./Components/NavBar/NavBar.js";
 import Login from "./Components/Login/Login.js";
 import NursePage from "./Components/Nurse/NursePage.js";
-import Sbar from "./Components/Sbar/Sbar.js";
 
 function App() {
   return (

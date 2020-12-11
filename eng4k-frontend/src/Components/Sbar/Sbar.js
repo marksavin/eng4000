@@ -1,12 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Paper, makeStyles } from "@material-ui/core";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import Sbarfrom from "./Sbarform.js";
-
-const styles = () => ({
-  root: { borderRadius: 20, borderColor: "#000", padding: 50 },
-});
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {

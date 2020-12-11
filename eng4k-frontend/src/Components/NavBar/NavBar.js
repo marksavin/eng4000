@@ -5,7 +5,6 @@ import {
   faClinicMedical,
   faSearch,
   faTimes,
-  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
