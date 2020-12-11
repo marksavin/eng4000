@@ -102,24 +102,20 @@ export default function Sbarform(props) {
   return (
     <Form onSubmit={handleSubmit}>
       <Situation
-        initialFieldValues={initialFieldValues}
         values={values}
         handleInput={handleInput}
         errors={errors}
         nurseName={props.nurseName}
       />
       <Background
-        initialFieldValues={initialFieldValues}
         values={values}
         handleInput={handleInput}
       />
       <Assessment
-        initialFieldValues={initialFieldValues}
         values={values}
         handleInput={handleInput}
       />
       <Recommendation
-        initialFieldValues={initialFieldValues}
         values={values}
         handleInput={handleInput}
       />

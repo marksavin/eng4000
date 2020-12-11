@@ -52,16 +52,18 @@ export function useForm(
   const [values, setValues] = useState(initialFieldValues);
   const [errors, setErrors] = useState({});
 
-  const handleInput = userCallback((event) => {
+  // const handleInput = userCallback(() => {
+  const handleInput = (event) => {
     const { name, value } = event.target;
     setValues({
       ...values,
       [name]: value,
     });
-    if (validateOnChange) {
-      validate({ [name]: value });
-    }
-  });
+    // if (validateOnChange) {
+    //   validate({ [name]: value });
+    // }
+  };
+  // });
 
   return {
     values,

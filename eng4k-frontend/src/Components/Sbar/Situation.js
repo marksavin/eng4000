@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  Paper,
-  Grid,
-  makeStyles,
-  InputLabel,
-} from "@material-ui/core";
+import { Paper, Grid, makeStyles, InputLabel } from "@material-ui/core";
 import {
   Grid12,
   TextFieldSingle,
@@ -19,7 +14,7 @@ const paperStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function Situation(props) {
+const Situation = React.memo(function Situation(props) {
   const [nurseId, setNurseId] = useState("");
   const paperstyle = paperStyle();
 
@@ -168,4 +163,6 @@ export default function Situation(props) {
       </Grid>
     </Paper>
   );
-}
+});
+
+export default Situation;
