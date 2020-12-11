@@ -292,6 +292,7 @@ export default function EnhancedTable() {
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
+    setPatientName(name);
 
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, name);
@@ -306,22 +307,18 @@ export default function EnhancedTable() {
       );
     }
 
-    setTimeout(function () {
-      //your code to be executed after 1 second
-      history.push(`/nurse/${patientName}`);
-    }, 1500);
     setPatientName(name);
     setSelected(newSelected);
   };
 
-  //   const handleChangePage = (event, newPage) => {
-  //     setPage(newPage);
-  //   };
-
-  //   const handleChangeRowsPerPage = (event) => {
-  //     setRowsPerPage(parseInt(event.target.value, 10));
-  //     setPage(0);
-  //   };
+  useEffect(() => {
+    if (selected.length > 0) {
+      setTimeout(function () {
+        //your code to be executed after 1 second
+        history.push(`/nurse/${patientName}`);
+      }, 1000);
+    }
+  });
 
   const handleChangeDense = (event) => {
     setDense(event.target.checked);

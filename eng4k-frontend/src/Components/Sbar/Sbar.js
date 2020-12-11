@@ -7,9 +7,9 @@ import Sbarfrom from "./Sbarform.js";
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
-    position: 'absolute',
+    position: "absolute",
     padding: "2%",
-    top: '0',
+    top: "0",
   },
 }));
 

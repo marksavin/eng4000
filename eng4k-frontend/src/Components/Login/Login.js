@@ -30,15 +30,17 @@ const Login = () => {
               <label className="label" htmlFor="password">
                 Password
               </label>
-              <input className="password" type="text" placeholder="password" />
+              <input
+                className="password"
+                type="password"
+                placeholder="password"
+              />
               <FontAwesomeIcon className="user-icon" icon={faUnlockAlt} />
             </div>
           </div>
           <div className="login-button">
             <Link to="/nurse">
-              <button className="button">
-                Login
-              </button>
+              <button className="button">Login</button>
             </Link>
           </div>
         </div>
