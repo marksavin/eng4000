@@ -54,6 +54,11 @@ const initialFieldValues = {
   r_problem_persist_contact: false,
 };
 
+const SituationMemo = React.memo(Situation);
+const BackgroundMemo = React.memo(Background);
+const AssessmentMemo = React.memo(Assessment);
+const RecommendationMemo = React.memo(Recommendation);
+
 export default function Sbarform(props) {
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
@@ -104,16 +109,16 @@ export default function Sbarform(props) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Situation
+      <SituationMemo
         values={values}
         handleInput={handleInput}
         errors={errors}
         nurseName={props.nurseName}
         patientName={props.patientName}
       />
-      <Background values={values} handleInput={handleInput} />
-      <Assessment values={values} handleInput={handleInput} />
-      <Recommendation values={values} handleInput={handleInput} />
+      <BackgroundMemo values={values} handleInput={handleInput} />
+      <AssessmentMemo values={values} handleInput={handleInput} />
+      <RecommendationMemo values={values} handleInput={handleInput} />
 
       <div
         className="button-styles"

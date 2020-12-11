@@ -1,6 +1,6 @@
 import React from "react";
 import { Paper, Grid, makeStyles, InputLabel } from "@material-ui/core";
-import {Grid12, Inputgroup, Checkbox } from "../Sbar/useForm.js";
+import { Grid12, Inputgroup, Checkbox } from "../Sbar/useForm.js";
 
 const paperStyle = makeStyles((theme) => ({
   pageContent: {
@@ -9,7 +9,7 @@ const paperStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function Recommendation(props) {
+const Recommendation = React.memo(function Recommendation(props) {
   const paperstyle = paperStyle();
 
   return (
@@ -83,4 +83,6 @@ export default function Recommendation(props) {
       </Grid>
     </Paper>
   );
-}
+});
+
+export default Recommendation;

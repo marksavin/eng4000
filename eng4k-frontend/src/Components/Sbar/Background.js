@@ -9,7 +9,7 @@ const paperStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function Background(props) {
+const Background = React.memo(function Background(props) {
   const paperstyle = paperStyle();
 
   return (
@@ -151,4 +151,6 @@ export default function Background(props) {
       </Grid>
     </Paper>
   );
-}
+});
+
+export default Background;

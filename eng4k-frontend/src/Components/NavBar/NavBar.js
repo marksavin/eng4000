@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,7 +16,7 @@ const NavBar = () => {
   };
 
   return (
-    <header className='main-navbar'>
+    <header className="main-navbar">
       <div className="navbar-contents">
         <a href="/">
           <FontAwesomeIcon className="logo fa-2x" icon={faClinicMedical} />
@@ -47,9 +48,11 @@ const NavBar = () => {
               </a>
             </li>
             <li>
-              <button className="logout" type="button">
-                Logout
-              </button>
+              <Link to="/">
+                <button className="logout" type="button">
+                  Logout
+                </button>
+              </Link>
             </li>
           </ul>
         </nav>

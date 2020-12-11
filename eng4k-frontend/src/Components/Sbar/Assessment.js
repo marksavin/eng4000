@@ -9,7 +9,7 @@ const paperStyle = makeStyles((theme) => ({
   },
 }));
 
-export default function Assessment(props) {
+const Assessment = React.memo(function Assessment(props) {
   const paperstyle = paperStyle();
 
   return (
@@ -88,4 +88,6 @@ export default function Assessment(props) {
       </Grid>
     </Paper>
   );
-}
+});
+
+export default Assessment;
