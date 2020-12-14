@@ -16,6 +16,14 @@ const paperStyle = makeStyles((theme) => ({
 }));
 
 const Situation = React.memo(function Situation(props) {
+  const {
+    values,
+    handleInput,
+    errors,
+    nurseName,
+    patientName,
+    situation,
+  } = props;
   const paperstyle = paperStyle();
 
   return (
@@ -27,8 +35,8 @@ const Situation = React.memo(function Situation(props) {
             <Inputgroup
               label="Nurse Name"
               name="nurseId"
-              value={props.nurseName}
-              onChange={props.handleInput}
+              value={nurseName}
+              onChange={handleInput}
               text="This is"
             ></Inputgroup>
           </Grid>

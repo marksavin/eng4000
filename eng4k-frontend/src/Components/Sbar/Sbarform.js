@@ -5,6 +5,60 @@ import Assessment from "./Assessment.js";
 import Recommendation from "./Recommendation.js";
 import { Form, ButtonForm, useForm } from "../Sbar/useForm.js";
 
+const situation = {
+  s_problem: "",
+  s_unit: "",
+  s_code_status: "",
+  s_BP: "",
+  s_pulse: "",
+  s_respiration: "",
+  s_temperature: "",
+  s_o2: "",
+  s_concern_bp: false,
+  s_concern_pulse: false,
+  s_concern_temperature: false,
+  s_concern_o2: false,
+};
+
+const background = {
+  b_awareness_alert_oriented: false,
+  b_awareness_confused_cooperative: false,
+  b_awareness_non_coop_agit_combative: false,
+  b_awareness_lethargic: false,
+  b_awareness_stuporous: false,
+  b_awareness_comatose: false,
+  b_skin_warm_dry: false,
+  b_skin_pale: false,
+  b_skin_mottled: false,
+  b_skin_diaphoretic: false,
+  b_skin_extremities_cold: false,
+  b_skin_extremities_warm: false,
+  b_o2_time: "",
+  b_oximeter_detection: false,
+};
+
+const assessment = {
+  a_problem: "",
+  a_problem_cardiac: false,
+  a_problem_infection: false,
+  a_problem_neurologic: false,
+  a_problem_respitory: false,
+  a_problem_unsure_deterioriating: false,
+  a_unstable: false,
+  a_arrest: false,
+};
+
+const recommendation = {
+  r_request: "",
+  r_priority: false,
+  r_patient_family_code_status: false,
+  r_test_needed: "",
+  r_change_treatment_ordered: "",
+  r_freq_vital_signs: false,
+  r_time_problem_will_last: false,
+  r_problem_persist_contact: false,
+};
+
 const initialFieldValues = {
   note_id: "",
   note_patient_id: "",
@@ -115,10 +169,23 @@ export default function Sbarform(props) {
         errors={errors}
         nurseName={props.nurseName}
         patientName={props.patientName}
+        situation={situation}
       />
-      <BackgroundMemo values={values} handleInput={handleInput} />
-      <AssessmentMemo values={values} handleInput={handleInput} />
-      <RecommendationMemo values={values} handleInput={handleInput} />
+      <BackgroundMemo
+        values={values}
+        handleInput={handleInput}
+        background={background}
+      />
+      <AssessmentMemo
+        values={values}
+        handleInput={handleInput}
+        assessment={assessment}
+      />
+      <RecommendationMemo
+        values={values}
+        handleInput={handleInput}
+        recommendation={recommendation}
+      />
 
       <div
         className="button-styles"
