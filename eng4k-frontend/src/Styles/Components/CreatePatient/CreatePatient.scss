@@ -1,0 +1,56 @@
+.CreatePatient {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  border: 5px solid black;
+  transform: translate(0, 100px);
+  width: 600px;
+}
+.promptMessage {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 200px;
+  width: 100%;
+}
+.patientForm {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 100%;
+}
+.Dob input[type="text"] {
+  width: 40px;
+}
+.Height input[type="text"] {
+  width: 40px;
+}
+.Weight input[type="text"] {
+  width: 40px;
+}
+
+.FirstName,
+.LastName,
+.Dob,
+.Height,
+.Weight {
+  padding: 8px;
+}
+
+.Height,
+.Weight {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
