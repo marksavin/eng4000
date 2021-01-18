@@ -1,6 +1,7 @@
 import React from "react";
 //import DateFnsUtils from "@date-io/date-fns";
 //import { DatePicker } from "@material-ui/pickers";
+import { Box, Button } from "@material-ui/core";
 
 class CreatePatient extends React.Component {
   state = {
@@ -74,7 +75,7 @@ class CreatePatient extends React.Component {
               </div>
               <div className="Weight">
                 <label className="weightLabel" htmlFor="weight">
-                  Weight :
+                  Weight:
                 </label>
                 <input
                   className="weight"
@@ -85,15 +86,27 @@ class CreatePatient extends React.Component {
               </div>
               <div className="Height">
                 <label className="heightLabel" htmlFor="height">
-                  Height :
+                  Height:
                 </label>
                 <input
                   className="height"
                   type="text"
                   onChange={(e) => this.setState({ height: e.target.value })}
-                ></input>{" "}
+                ></input>
                 m
               </div>
+            </div>
+          </div>
+          <div className="Buttons">
+            <div className="cancBut">
+              <Button variant="contained" color="secondary">
+                Cancel
+              </Button>
+            </div>
+            <div className="subBut">
+              <Button variant="contained" color="primary">
+                Submit
+              </Button>
             </div>
           </div>
         </div>
