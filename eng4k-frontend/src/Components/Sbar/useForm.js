@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import {
   Grid,
   ThemeProvider,
@@ -45,20 +45,47 @@ const theme = createMuiTheme({
 });
 
 export function useForm(
-  initialFieldValues,
   validateOnChange = false,
-  validate
+  validate,
+  situation,
+  background,
+  assessment,
+  recommendation
 ) {
-  const [values, setValues] = useState(initialFieldValues);
+  const [situationValue, setSituationValue] = useState(situation);
+  const [backgroundValue, setBackgroundValue] = useState(background);
+  const [assessmentValue, setAssessmentValue] = useState(assessment);
+  const [recValue, setRecValue] = useState(recommendation);
   const [errors, setErrors] = useState({});
 
   // const handleInput = userCallback(() => {
   const handleInput = (event) => {
     const { name, value } = event.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
+    if (name.charAt(0) === "s") {
+      console.log(situationValue);
+      setSituationValue({
+        ...situationValue,
+        [name]: value,
+      });
+    } else if (name.charAt(0) === "b") {
+      console.log(backgroundValue);
+      setBackgroundValue({
+        ...backgroundValue,
+        [name]: value,
+      });
+    } else if (name.charAt(0) === "a") {
+      console.log(assessmentValue);
+      setAssessmentValue({
+        ...assessmentValue,
+        [name]: value,
+      });
+    } else if (name.charAt(0) === "r") {
+      console.log(recValue);
+      setRecValue({
+        ...recValue,
+        [name]: value,
+      });
+    }
     // if (validateOnChange) {
     //   validate({ [name]: value });
     // }
@@ -66,8 +93,10 @@ export function useForm(
   // });
 
   return {
-    values,
-    setValues,
+    situationValue,
+    backgroundValue,
+    assessmentValue,
+    recValue,
     errors,
     setErrors,
     handleInput,

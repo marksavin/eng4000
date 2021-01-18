@@ -22,7 +22,7 @@ const Recommendation = React.memo(function Recommendation(props) {
             <Inputgroup
               label="What needs to be done"
               name="r_request"
-              value={props.values.r_request}
+              value={props.recommendation.r_request}
               onChange={props.handleInput}
               text="I request that you  "
             ></Inputgroup>
@@ -31,7 +31,7 @@ const Recommendation = React.memo(function Recommendation(props) {
             <Checkbox
               label="Come to see the patient at this time"
               name="r_priority"
-              value={props.values.r_priority}
+              value={props.recommendation.r_priority}
               onChange={props.handleInput}
             ></Checkbox>
           </Grid12>
@@ -39,7 +39,7 @@ const Recommendation = React.memo(function Recommendation(props) {
             <Checkbox
               label="Talk to the patient or family about code status."
               name="r_patient_family_code_status"
-              value={props.values.r_patient_family_code_status}
+              value={props.recommendation.r_patient_family_code_status}
               onChange={props.handleInput}
             ></Checkbox>
           </Grid12>
@@ -47,7 +47,7 @@ const Recommendation = React.memo(function Recommendation(props) {
             <Inputgroup
               label="CXR, ABG, EKG, CBC, or BMP"
               name="r_test_needed"
-              value={props.values.r_test_needed}
+              value={props.recommendation.r_test_needed}
               onChange={props.handleInput}
               text="Are any tests needed:"
             ></Inputgroup>
@@ -63,7 +63,7 @@ const Recommendation = React.memo(function Recommendation(props) {
             <Checkbox
               label="How often do you want vital signs?"
               name="r_freq_vital_signs"
-              value={props.values.r_freq_vital_signs}
+              value={props.recommendation.r_freq_vital_signs}
               onChange={props.handleInput}
             ></Checkbox>
           </Grid12>
@@ -71,7 +71,7 @@ const Recommendation = React.memo(function Recommendation(props) {
             <Checkbox
               label="How long do you expect this problem will last?"
               name="r_time_problem_will_last"
-              value={props.values.r_time_problem_will_last}
+              value={props.recommendation.r_time_problem_will_last}
               onChange={props.handleInput}
             ></Checkbox>
           </Grid12>
@@ -79,7 +79,7 @@ const Recommendation = React.memo(function Recommendation(props) {
             <Checkbox
               label="If the patient does not get better when would you want us to call again?"
               name="r_problem_persist_contact"
-              value={props.values.r_problem_persist_contact}
+              value={props.recommendation.r_problem_persist_contact}
               onChange={props.handleInput}
             ></Checkbox>
           </Grid12>

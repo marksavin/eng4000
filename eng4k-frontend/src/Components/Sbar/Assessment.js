@@ -22,7 +22,7 @@ const Assessment = React.memo(function Assessment(props) {
             <Inputgroup
               label="Problem"
               name="a_problem"
-              value={props.values.a_problem}
+              value={props.assessment.a_problem}
               onChange={props.handleInput}
               text="This is what I think the problem is:"
             ></Inputgroup>
@@ -36,7 +36,7 @@ const Assessment = React.memo(function Assessment(props) {
             <Checkbox
               label="Cardiac"
               name="a_problem_cardiac"
-              value={props.values.a_problem_cardiac}
+              value={props.assessment.a_problem_cardiac}
               onChange={props.handleInput}
             ></Checkbox>
           </Grid>
@@ -44,7 +44,7 @@ const Assessment = React.memo(function Assessment(props) {
             <Checkbox
               label="Infection"
               name="a_problem_infection"
-              value={props.values.a_problem_infection}
+              value={props.assessment.a_problem_infection}
               onChange={props.handleInput}
             ></Checkbox>
           </Grid>
@@ -52,7 +52,7 @@ const Assessment = React.memo(function Assessment(props) {
             <Checkbox
               label="Neurologic"
               name="a_problem_neurologic"
-              value={props.values.a_problem_neurologic}
+              value={props.assessment.a_problem_neurologic}
               onChange={props.handleInput}
             ></Checkbox>
           </Grid>
@@ -60,7 +60,7 @@ const Assessment = React.memo(function Assessment(props) {
             <Checkbox
               label="Respitory"
               name="a_problem_respitory"
-              value={props.values.a_problem_respitory}
+              value={props.assessment.a_problem_respitory}
               onChange={props.handleInput}
             ></Checkbox>
           </Grid>
@@ -68,7 +68,7 @@ const Assessment = React.memo(function Assessment(props) {
             <Checkbox
               label="I am not sure what the problem is but the patient is deteriorating."
               name="a_problem_unsure_deterioriating"
-              value={props.values.a_problem_unsure_deterioriating}
+              value={props.assessment.a_problem_unsure_deterioriating}
               onChange={props.handleInput}
             ></Checkbox>
           </Grid12>
@@ -76,7 +76,7 @@ const Assessment = React.memo(function Assessment(props) {
             <Checkbox
               label="The patient seems to be unstable, we need to do something."
               name="a_unstable"
-              value={props.values.a_unstable}
+              value={props.assessment.a_unstable}
               onChange={props.handleInput}
             ></Checkbox>
           </Grid12>
@@ -84,7 +84,7 @@ const Assessment = React.memo(function Assessment(props) {
             <Checkbox
               label="I am afraid the patient may arrest."
               name="a_arrest"
-              value={props.values.a_arrest}
+              value={props.assessment.a_arrest}
               onChange={props.handleInput}
             ></Checkbox>
           </Grid12>
