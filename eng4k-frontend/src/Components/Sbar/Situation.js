@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Paper, Grid, makeStyles, InputLabel } from "@material-ui/core";
 import {
   Grid12,
@@ -15,7 +15,7 @@ const paperStyle = makeStyles((theme) => ({
   },
 }));
 
-const Situation = React.memo(function Situation(props) {
+function Situation(props) {
   const {
     values,
     handleInput,
@@ -24,7 +24,19 @@ const Situation = React.memo(function Situation(props) {
     patientName,
     situation,
   } = props;
+
   const paperstyle = paperStyle();
+
+  const [testing, setTesting] = useState("something");
+
+  const handleChildInput = (event) => {
+    setTesting(event.target.value);
+  };
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    console.log(testing);
+  });
 
   return (
     <div className="paper-situation">
@@ -35,8 +47,7 @@ const Situation = React.memo(function Situation(props) {
             <Inputgroup
               label="Nurse Name"
               name="nurseId"
-              value={nurseName}
-              onChange={handleInput}
+              defaultValue={nurseName}
               text="This is"
             ></Inputgroup>
           </Grid>
@@ -44,8 +55,8 @@ const Situation = React.memo(function Situation(props) {
             <Inputgroup
               label="Unit"
               name="s_unit"
-              value={props.situation.s_unit}
-              onChange={props.handleInput}
+              defaultValue={props.situation.s_unit}
+              onBlur={props.handleInput}
               text="I'm calling from"
               error={props.errors.s_unit}
             ></Inputgroup>
@@ -54,8 +65,8 @@ const Situation = React.memo(function Situation(props) {
             <Inputgroup
               label="Patient name and location"
               name="note_patient_id"
-              value={props.situation.note_patient_id}
-              onChange={props.handleInput}
+              defaultValue={props.situation.note_patient_id}
+              onBlur={props.handleInput}
               text="I'm calling about: "
               error={props.errors.note_patient_id}
             ></Inputgroup>
@@ -64,8 +75,8 @@ const Situation = React.memo(function Situation(props) {
             <Inputgroup
               label="Code status"
               name="s_code_status"
-              value={props.situation.s_code_status}
-              onChange={props.handleInput}
+              defaultValue={props.situation.s_code_status}
+              onBlur={props.handleInput}
               text="The Patient's code status is: "
             ></Inputgroup>
           </Grid12>
@@ -73,8 +84,8 @@ const Situation = React.memo(function Situation(props) {
             <Inputgroup
               label="Problem"
               name="s_problem"
-              value={props.situation.s_problem}
-              onChange={props.handleInput}
+              defaultValue={props.situation.s_problem}
+              onBlur={props.handleInput}
               text="The problem I am calling about is: "
             ></Inputgroup>
           </Grid12>
@@ -87,40 +98,40 @@ const Situation = React.memo(function Situation(props) {
             <TextFieldSingle
               label="Blood Pressure"
               name="s_BP"
-              value={props.situation.s_BP}
-              onChange={props.handleInput}
+              defaultValue={props.situation.s_BP}
+              onBlur={props.handleInput}
             />
           </Grid>
           <Grid item lg={4} xl={2}>
             <TextFieldSingle
               label="Pulse"
               name="s_pulse"
-              value={props.situation.s_pulse}
-              onChange={props.handleInput}
+              defaultValue={props.situation.s_pulse}
+              onBlur={props.handleInput}
             />
           </Grid>
           <Grid item lg={4} xl={2}>
             <TextFieldSingle
               label="Respiration"
               name="s_respiration"
-              value={props.situation.s_respiration}
-              onChange={props.handleInput}
+              defaultValue={props.situation.s_respiration}
+              onBlur={props.handleInput}
             />
           </Grid>
           <Grid item lg={4} xl={2}>
             <TextFieldSingle
               label="Temperature"
               name="s_temperature"
-              value={props.situation.s_temperature}
-              onChange={props.handleInput}
+              defaultValue={props.situation.s_temperature}
+              onBlur={props.handleInput}
             />
           </Grid>
           <Grid item lg={4} xl={3}>
             <TextFieldSingle
               label="O2 sat"
               name="s_o2"
-              value={props.situation.s_o2}
-              onChange={props.handleInput}
+              defaultValue={props.situation.s_o2}
+              onBlur={props.handleInput}
             />
           </Grid>
           <Grid12>
@@ -135,7 +146,7 @@ const Situation = React.memo(function Situation(props) {
               label="Blood pressure because it is less than 90 or 30 mmHg below usual."
               name="s_concern_bp"
               value={props.situation.s_concern_bp}
-              onChange={props.handleInput}
+              onBlur={props.handleInput}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -143,7 +154,7 @@ const Situation = React.memo(function Situation(props) {
               label="Pulse because it is over 125 or less than 45."
               name="s_concern_pulse"
               value={props.situation.s_concern_pulse}
-              onChange={props.handleInput}
+              onBlur={props.handleInput}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -151,7 +162,7 @@ const Situation = React.memo(function Situation(props) {
               label="Respiration because it is less than 10 or over 30."
               name="s_concern_respiration"
               value={props.situation.s_concern_respiration}
-              onChange={props.handleInput}
+              onBlur={props.handleInput}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -159,7 +170,7 @@ const Situation = React.memo(function Situation(props) {
               label="Temperature because it is less than 96 or over 104."
               name="s_concern_temperature"
               value={props.situation.s_concern_temperature}
-              onChange={props.handleInput}
+              onBlur={props.handleInput}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={6}>
@@ -167,13 +178,13 @@ const Situation = React.memo(function Situation(props) {
               label="O2 Sat because it is <90% despite oxygen."
               name="s_concern_o2"
               value={props.situation.s_concern_o2}
-              onChange={props.handleInput}
+              onBlur={props.handleInput}
             ></Checkbox>
           </Grid>
         </Grid>
       </Paper>
     </div>
   );
-});
+}
 
 export default Situation;

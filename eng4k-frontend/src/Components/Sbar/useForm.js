@@ -62,25 +62,22 @@ export function useForm(
   const handleInput = (event) => {
     const { name, value } = event.target;
     if (name.charAt(0) === "s") {
-      console.log(situationValue);
       setSituationValue({
         ...situationValue,
         [name]: value,
       });
+      console.log(situationValue);
     } else if (name.charAt(0) === "b") {
-      console.log(backgroundValue);
       setBackgroundValue({
         ...backgroundValue,
         [name]: value,
       });
     } else if (name.charAt(0) === "a") {
-      console.log(assessmentValue);
       setAssessmentValue({
         ...assessmentValue,
         [name]: value,
       });
     } else if (name.charAt(0) === "r") {
-      console.log(recValue);
       setRecValue({
         ...recValue,
         [name]: value,
@@ -134,21 +131,21 @@ export function Grid6(props) {
 }
 
 export function TextFieldSingle(props) {
-  const { name, label, value, onChange } = props;
+  const { name, label, defaultValue, onBlur } = props;
   return (
     <TextField
       size="small"
       variant="outlined"
       label={label}
       name={name}
-      value={value}
-      onChange={onChange}
+      value={defaultValue}
+      onBlur={onBlur}
     />
   );
 }
 
 export function Inputgroup(props) {
-  const { name, label, value, onChange, text, error = null } = props;
+  const { name, label, defaultValue, onBlur, text, error = null } = props;
   return (
     <>
       <InputLabel>{text}</InputLabel>
@@ -157,8 +154,8 @@ export function Inputgroup(props) {
         variant="outlined"
         label={label}
         name={name}
-        value={value}
-        onChange={onChange}
+        value={defaultValue}
+        onBlur={onBlur}
         {...(error && { error: true, helperText: error })}
       />
     </>
@@ -166,7 +163,7 @@ export function Inputgroup(props) {
 }
 
 export function Checkbox(props) {
-  const { name, label, value, onChange } = props;
+  const { name, label, value, onBlur } = props;
 
   const convertToEventFromCheckbox = (name, value) => ({
     target: {
@@ -184,7 +181,7 @@ export function Checkbox(props) {
             color="primary"
             checked={value}
             onChange={(event) =>
-              onChange(convertToEventFromCheckbox(name, event.target.checked))
+              onBlur(convertToEventFromCheckbox(name, event.target.checked))
             }
           />
         }

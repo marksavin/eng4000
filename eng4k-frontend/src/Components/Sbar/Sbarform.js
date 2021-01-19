@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import Background from "./Background.js";
 import Situation from "./Situation.js";
 import Assessment from "./Assessment.js";
@@ -118,19 +118,15 @@ const recommendation = {
 // const RecommendationMemo = React.memo(Recommendation);
 
 export default function Sbarform(props) {
-  const validate = (fieldValues = values) => {
+  const validate = (fieldValues = situationValue) => {
     let temp = { ...errors };
     if ("s_unit" in fieldValues)
       temp.s_unit = fieldValues.s_unit ? "" : "This field is required";
-    if ("note_patient_id" in fieldValues)
-      temp.note_patient_id = fieldValues.note_patient_id
-        ? ""
-        : "This field is required";
     setErrors({
       ...temp,
     });
 
-    if (fieldValues === values)
+    if (fieldValues === situationValue)
       return Object.values(temp).every((x) => x === "");
   };
 
@@ -154,17 +150,18 @@ export default function Sbarform(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (validate()) {
-      const combinedValues = [
-        situationValue,
-        backgroundValue,
-        assessmentValue,
-        recValue,
-      ];
-      console.log(combinedValues);
-      // creatNewSbarNote();
-      console.log("call api to make a post request");
-    }
+    // if (validate()) {
+    const combinedValues = {
+      ...situationValue,
+      ...backgroundValue,
+      ...assessmentValue,
+      ...recValue,
+    };
+
+    console.log(combinedValues);
+    // creatNewSbarNote();
+    console.log("call api to make a post request");
+    // }
   };
 
   const creatNewSbarNote = useCallback(() => {
@@ -182,7 +179,11 @@ export default function Sbarform(props) {
     });
   }, [values]);
 
-  situation.note_patient_id = props.patientName;
+  situationValue.note_patient_id = props.patientName;
+  useEffect(() => {
+    // Update the document title using the browser API
+    console.log(situationValue);
+  });
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -193,18 +194,9 @@ export default function Sbarform(props) {
         patientName={props.patientName}
         situation={situationValue}
       />
-      <Background
-        handleInput={handleInput}
-        background={backgroundValue}
-      />
-      <assessmentValue
-        handleInput={handleInput}
-        assessment={assessmentValue}
-      />
-      <Recommendation
-        handleInput={handleInput}
-        recommendation={recValue}
-      />
+      <Background handleInput={handleInput} background={backgroundValue} />
+      <Assessment handleInput={handleInput} assessment={assessmentValue} />
+      <Recommendation handleInput={handleInput} recommendation={recValue} />
 
       <div
         className="button-styles"

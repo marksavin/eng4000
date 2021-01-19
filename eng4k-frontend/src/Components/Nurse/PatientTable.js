@@ -21,6 +21,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import Button from "@material-ui/core/Button";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -65,10 +66,22 @@ const headCells = [
   },
   { id: "r_priority", numeric: false, disablePadding: false, label: "Urgency" },
   {
-    id: "update_status",
-    numeric: true,
+    id: "view_history",
+    numeric: false,
     disablePadding: false,
-    label: "SBAR status",
+    label: "Last Updated",
+  },
+  {
+    id: "SBAR_history",
+    numeric: false,
+    disablePadding: false,
+    label: "SBAR history",
+  },
+  {
+    id: "update",
+    numeric: false,
+    disablePadding: false,
+    label: "Update",
   },
 ];
 
@@ -251,6 +264,9 @@ export default function EnhancedTable() {
       note_room_id: "-",
       r_priority: "-",
       update_status: "-",
+      last_updated: "-",
+      SBAR_history: "-",
+      update: "-",
     },
   ]);
 
@@ -343,7 +359,6 @@ export default function EnhancedTable() {
       }}
     >
       <div
-        className={classes.root}
         style={{
           width: "80%",
         }}
@@ -378,21 +393,13 @@ export default function EnhancedTable() {
                     return (
                       <TableRow
                         hover
-                        onClick={(event) =>
-                          handleClick(event, patients.patient_name)
-                        }
                         role={"checkbox"}
                         aria-checked={isItemSelected}
                         tabIndex={-1}
                         key={patients.patient_name}
                         selected={isItemSelected}
                       >
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            checked={isItemSelected}
-                            inputProps={{ "aria-labelledby": labelId }}
-                          />
-                        </TableCell>
+                        <TableCell padding="checkbox"></TableCell>
                         <TableCell
                           component="th"
                           id={labelId}
@@ -412,6 +419,34 @@ export default function EnhancedTable() {
                         </TableCell>
                         <TableCell align="right">
                           {patients.update_status}
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button variant="contained" color="primary">
+                            View SBAR History
+                          </Button>
+                        </TableCell>
+                        <TableCell align="right">
+                          {patients.update_status !== "Needs update" ? (
+                            <Button
+                              variant="contained"
+                              color="secondary"
+                              onClick={(event) =>
+                                handleClick(event, patients.patient_name)
+                              }
+                            >
+                              {patients.update_status}
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              onClick={(event) =>
+                                handleClick(event, patients.patient_name)
+                              }
+                            >
+                              {patients.update_status}
+                            </Button>
+                          )}
                         </TableCell>
                       </TableRow>
                     );

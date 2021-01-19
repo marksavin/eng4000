@@ -22,8 +22,8 @@ const Assessment = React.memo(function Assessment(props) {
             <Inputgroup
               label="Problem"
               name="a_problem"
-              value={props.assessment.a_problem}
-              onChange={props.handleInput}
+              defaultValue={props.assessment.a_problem}
+              onBlur={props.handleInput}
               text="This is what I think the problem is:"
             ></Inputgroup>
           </Grid>
@@ -37,7 +37,7 @@ const Assessment = React.memo(function Assessment(props) {
               label="Cardiac"
               name="a_problem_cardiac"
               value={props.assessment.a_problem_cardiac}
-              onChange={props.handleInput}
+              onBlur={props.handleInput}
             ></Checkbox>
           </Grid>
           <Grid item lg={4} xl={2}>
@@ -45,15 +45,15 @@ const Assessment = React.memo(function Assessment(props) {
               label="Infection"
               name="a_problem_infection"
               value={props.assessment.a_problem_infection}
-              onChange={props.handleInput}
+              onBlur={props.handleInput}
             ></Checkbox>
           </Grid>
           <Grid item lg={4} xl={2}>
             <Checkbox
               label="Neurologic"
               name="a_problem_neurologic"
-              value={props.assessment.a_problem_neurologic}
-              onChange={props.handleInput}
+              defaultValue={props.assessment.a_problem_neurologic}
+              onBlur={props.handleInput}
             ></Checkbox>
           </Grid>
           <Grid item lg={4} xl={2}>
@@ -61,7 +61,7 @@ const Assessment = React.memo(function Assessment(props) {
               label="Respitory"
               name="a_problem_respitory"
               value={props.assessment.a_problem_respitory}
-              onChange={props.handleInput}
+              onBlur={props.handleInput}
             ></Checkbox>
           </Grid>
           <Grid12>
@@ -69,7 +69,7 @@ const Assessment = React.memo(function Assessment(props) {
               label="I am not sure what the problem is but the patient is deteriorating."
               name="a_problem_unsure_deterioriating"
               value={props.assessment.a_problem_unsure_deterioriating}
-              onChange={props.handleInput}
+              onBlur={props.handleInput}
             ></Checkbox>
           </Grid12>
           <Grid12>
@@ -77,7 +77,7 @@ const Assessment = React.memo(function Assessment(props) {
               label="The patient seems to be unstable, we need to do something."
               name="a_unstable"
               value={props.assessment.a_unstable}
-              onChange={props.handleInput}
+              onBlur={props.handleInput}
             ></Checkbox>
           </Grid12>
           <Grid12>
@@ -85,7 +85,7 @@ const Assessment = React.memo(function Assessment(props) {
               label="I am afraid the patient may arrest."
               name="a_arrest"
               value={props.assessment.a_arrest}
-              onChange={props.handleInput}
+              onBlur={props.handleInput}
             ></Checkbox>
           </Grid12>
         </Grid>
