@@ -1,73 +1,90 @@
 .container {
   margin: auto;
   direction: flex;
-  transform: translate(0, 100px);
+  transform: translate(0, 50%);
   box-shadow: 0px 0px 15px 10px rgba(15, 15, 15, 0.2);
-  width: 40%;
+  width: 50%;
 }
 
 .promptMessage {
   display: flex;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   justify-content: center;
   align-items: center;
   height: 100px;
   width: 100%;
 }
 .patientForm {
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
+  height: 250px;
   width: 100%;
 }
 .Buttons {
   display: flex;
   justify-content: center;
   align-content: center;
-  padding: 30px;
+  padding: 10px;
 }
 
-input[type="text"] {
-  padding: 2px;
-  font-weight: 700;
-  background-color: #f3f3f3;
-  border: 0;
-  border-radius: 4px;
-}
-
-label {
-  padding: 6px;
-  margin-right: 4px;
-}
-
-.Dob input[type="text"] {
-  width: 40px;
-}
-.Height input[type="text"] {
-  width: 40px;
-}
-.Weight input[type="text"] {
-  width: 40px;
-}
-
-.FirstName,
-.LastName,
-.Dob,
-.Height,
-.Weight {
-  padding: 8px;
-}
-
-.Height,
-.Weight {
+.cNames {
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.Dob {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  padding: 10px;
+  width: 100%;
+}
+
+.hW {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.doblabel {
+  margin-right: 10px;
+}
+
+.dobmonth,
+.dobday {
+  width: 65px;
+}
+
+.dobyear {
+  width: 100px;
+  text-align: center;
+}
+
+.dobmonth,
+.dobday,
+.dobyear {
+  padding: 5px;
+}
+
+.weightForm,
+.heightForm {
+  width: 110px;
+}
+
+.FirstName {
+  margin-right: 5px;
+}
+.LastName {
+  margin-left: 5px;
 }
 
 .subBut,
 .cancBut {
   margin: 10px;
+}
+
+.Height,
+.Weight {
+  padding: 5px;
 }
