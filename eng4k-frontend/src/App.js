@@ -1,5 +1,5 @@
-//testing
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //import styles
 import "./Styles/app.scss";
 //import components
@@ -8,12 +8,20 @@ import Login from "./Components/Login/Login.js";
 import NursePage from "./Components/Nurse/NursePage.js";
 
 function App() {
-  const [loginActive, setLoginActive] = useState(true);
-
   return (
     <div className="App">
-      {/*loginActive ? <Login setLoginActive={setLoginActive} /> : <Navigation />*/}
-      <NursePage />
+      <Router>
+        <Switch>
+          <Route path="/nurse">
+            <Navigation />
+            <NursePage />
+          </Route>
+
+          <Route path="/">
+            <Login />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

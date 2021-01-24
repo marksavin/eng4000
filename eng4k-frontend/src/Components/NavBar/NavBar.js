@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faClinicMedical,
   faSearch,
   faTimes,
-  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
@@ -48,9 +48,11 @@ const NavBar = () => {
               </a>
             </li>
             <li>
-              <button className="logout" type="button">
-                Logout
-              </button>
+              <Link to="/">
+                <button className="logout" type="button">
+                  Logout
+                </button>
+              </Link>
             </li>
           </ul>
         </nav>

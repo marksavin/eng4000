@@ -1,13 +1,8 @@
 .nurse__title {
-<<<<<<< HEAD
-  //   position: absolute;
-  //   top: 6rem;
+  position: absolute;
+  font-size: 2rem;
   left: 50%;
-  padding: $xl-size;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-=======
-    position: absolute;
->>>>>>> 76bf72e72d0459f4f830cae938f91200cadded89
+  top: 150px;
+  transform: translateX(-50%);
+  text-align: center;
 }

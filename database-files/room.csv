@@ -1,0 +1,6 @@
+room_id,room_type,room_location,room_capacity
+1,"standard ward",101,1
+2,"semi Private",102,2
+3,private,103,3
+4,"standard ward",104,4
+10,"standard wardsssss",105,50

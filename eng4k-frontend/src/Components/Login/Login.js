@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserMd, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 
-const Login = ({ setLoginActive }) => {
-  const loginActiveHandler = () => {
-    setLoginActive(false);
-  };
-
+const Login = () => {
   return (
     <section className="login">
       <div className="login-contents">
@@ -33,14 +30,18 @@ const Login = ({ setLoginActive }) => {
               <label className="label" htmlFor="password">
                 Password
               </label>
-              <input className="password" type="text" placeholder="password" />
+              <input
+                className="password"
+                type="password"
+                placeholder="password"
+              />
               <FontAwesomeIcon className="user-icon" icon={faUnlockAlt} />
             </div>
           </div>
           <div className="login-button">
-            <button className="button" onClick={loginActiveHandler}>
-              Login
-            </button>
+            <Link to="/nurse">
+              <button className="button">Login</button>
+            </Link>
           </div>
         </div>
       </div>
