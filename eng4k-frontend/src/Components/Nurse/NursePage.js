@@ -27,18 +27,9 @@ export default class NursePage extends React.Component {
   render() {
     return (
       <div>
-        <Switch>
-          <Route exact path="/nurse">
-            <Header title="Wing Hospital Name" />
-            <MuiThemeProvider theme={theme}>
-              <PatientTable />
-            </MuiThemeProvider>
-          </Route>
-
-          <Route path="/nurse/:id">
-            <Sbar nurseID="1" nurseName="Mark Apple" />
-          </Route>
-        </Switch>
+        <NavBar />
+        <Header />
+        <PatientTable />
       </div>
     );
   }

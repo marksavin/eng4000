@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import { lighten, makeStyles } from "@material-ui/core/styles";
@@ -9,6 +7,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
+import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -21,6 +20,26 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
+
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData("Cupcake", 305, 3.7, 67, 4.3),
+  createData("Donut", 452, 25.0, 51, 4.9),
+  createData("Eclair", 262, 16.0, 24, 6.0),
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData("Honeycomb", 408, 3.2, 87, 6.5),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  createData("Jelly Bean", 375, 0.0, 94, 0.0),
+  createData("KitKat", 518, 26.0, 65, 7.0),
+  createData("Lollipop", 392, 0.2, 98, 0.0),
+  createData("Marshmallow", 318, 0, 81, 2.0),
+  createData("Nougat", 360, 19.0, 9, 37.0),
+  createData("Oreo", 437, 18.0, 63, 4.0),
+];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -39,7 +58,6 @@ function getComparator(order, orderBy) {
 }
 
 function stableSort(array, comparator) {
-  console.log(array);
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
@@ -90,12 +108,12 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          {/* <Checkbox
+          <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{ "aria-label": "select all desserts" }}
-          /> */}
+          />
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -135,29 +153,27 @@ EnhancedTableHead.propTypes = {
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
-    paddingLeft: theme.spacing(5),
+    paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
-    paddingTop: theme.spacing(5),
   },
   highlight:
     theme.palette.type === "light"
       ? {
-          color: theme.palette.primary.main,
-          backgroundColor: lighten(theme.palette.primary.main, 0.85),
+          color: theme.palette.secondary.main,
+          backgroundColor: lighten(theme.palette.secondary.light, 0.85),
         }
       : {
-          color: theme.palette.text.secondary,
-          backgroundColor: theme.palette.primary.dark,
+          color: theme.palette.text.primary,
+          backgroundColor: theme.palette.secondary.dark,
         },
   title: {
     flex: "1 1 100%",
-    fontSize: "2rem",
   },
 }));
 
 const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
-  const { numSelected, name } = props;
+  const { numSelected } = props;
 
   return (
     <Toolbar
@@ -172,7 +188,7 @@ const EnhancedTableToolbar = (props) => {
           variant="subtitle1"
           component="div"
         >
-          Loading {name} SBAR...
+          {numSelected} selected
         </Typography>
       ) : (
         <Typography
@@ -181,7 +197,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Patient List
+          Nutrition
         </Typography>
       )}
 
@@ -209,7 +225,6 @@ EnhancedTableToolbar.propTypes = {
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-    fontSize: "5rem",
   },
   paper: {
     width: "100%",
@@ -217,7 +232,6 @@ const useStyles = makeStyles((theme) => ({
   },
   table: {
     minWidth: 750,
-    fontSize: "5rem",
   },
   visuallyHidden: {
     border: 0,
@@ -235,27 +249,24 @@ const useStyles = makeStyles((theme) => ({
 export default function EnhancedTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("patient_name");
+  const [orderBy, setOrderBy] = React.useState("calories");
   const [selected, setSelected] = React.useState([]);
-  const [patientName, setPatientName] = React.useState("");
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const history = useHistory();
-
   const [patients, setPatients] = useState([
     {
-      patient_name: "-",
-      a_problem: "-",
-      note_room_id: "-",
-      r_priority: "-",
-      update_status: "-",
+      patient_name: "Maneesh",
+      a_problem: "not sick",
+      note_room_id: 1,
+      r_priority: 1,
+      update_status: "Needs update",
     },
   ]);
 
   useEffect(() => {
-    fetch(`/nurse/viewPatients/1`)
+    fetch(`/userTransactionHistory/1`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -265,12 +276,7 @@ export default function EnhancedTable() {
       })
       .then((result) => {
         console.log(result);
-        if (result !== undefined && result.length !== 0) {
-          setPatients(result);
-        }
-        // if (result.length > 0) {
-        //
-        // }
+        setPatients(result);
       });
   }, []);
 
@@ -282,7 +288,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = patients.map((n) => n.patient_name);
+      const newSelecteds = rows.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -292,7 +298,6 @@ export default function EnhancedTable() {
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
-    setPatientName(name);
 
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, name);
@@ -307,18 +312,17 @@ export default function EnhancedTable() {
       );
     }
 
-    setPatientName(name);
     setSelected(newSelected);
   };
 
-  useEffect(() => {
-    if (selected.length > 0) {
-      setTimeout(function () {
-        //your code to be executed after 1 second
-        history.push(`/nurse/${patientName}`);
-      }, 1000);
-    }
-  });
+  //   const handleChangePage = (event, newPage) => {
+  //     setPage(newPage);
+  //   };
+
+  //   const handleChangeRowsPerPage = (event) => {
+  //     setRowsPerPage(parseInt(event.target.value, 10));
+  //     setPage(0);
+  //   };
 
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
@@ -339,7 +343,7 @@ export default function EnhancedTable() {
         alignItems: "center",
         width: "100%",
         heigh: "100%",
-        top: "300px",
+        top: "200px",
       }}
     >
       <div
@@ -348,11 +352,8 @@ export default function EnhancedTable() {
           width: "80%",
         }}
       >
-        <Paper className={classes.paper} elevation={4}>
-          <EnhancedTableToolbar
-            numSelected={selected.length}
-            name={patientName}
-          />
+        <Paper className={classes.paper}>
+          <EnhancedTableToolbar numSelected={selected.length} />
           <TableContainer>
             <Table
               className={classes.table}
@@ -370,21 +371,20 @@ export default function EnhancedTable() {
                 rowCount={patients.length}
               />
               <TableBody>
-                {stableSort(patients, getComparator(order, orderBy)).map(
-                  (patients, index) => {
-                    const isItemSelected = isSelected(patients.patient_name);
+                {stableSort(patients, getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((patients, index) => {
+                    const isItemSelected = isSelected(patients.name);
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
                       <TableRow
                         hover
-                        onClick={(event) =>
-                          handleClick(event, patients.patient_name)
-                        }
-                        role={"checkbox"}
+                        onClick={(event) => handleClick(event, patients.name)}
+                        role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={patients.patient_name}
+                        key={patients.name}
                         selected={isItemSelected}
                       >
                         <TableCell padding="checkbox">
@@ -415,8 +415,7 @@ export default function EnhancedTable() {
                         </TableCell>
                       </TableRow>
                     );
-                  }
-                )}
+                  })}
                 {emptyRows > 0 && (
                   <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
                     <TableCell colSpan={6} />
