@@ -22,7 +22,7 @@ const Recommendation = React.memo(function Recommendation(props) {
             <Inputgroup
               label="What needs to be done"
               name="r_request"
-              defaultValue={props.recommendation.r_request}
+              value={props.recommendation.r_request}
               onBlur={props.handleInput}
               text="I request that you  "
             ></Inputgroup>
@@ -47,7 +47,7 @@ const Recommendation = React.memo(function Recommendation(props) {
             <Inputgroup
               label="CXR, ABG, EKG, CBC, or BMP"
               name="r_test_needed"
-              defaultValue={props.recommendation.r_test_needed}
+              value={props.recommendation.r_test_needed}
               onBlur={props.handleInput}
               text="Are any tests needed:"
             ></Inputgroup>

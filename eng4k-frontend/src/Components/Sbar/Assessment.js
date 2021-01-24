@@ -22,7 +22,7 @@ const Assessment = React.memo(function Assessment(props) {
             <Inputgroup
               label="Problem"
               name="a_problem"
-              defaultValue={props.assessment.a_problem}
+              value={props.assessment.a_problem}
               onBlur={props.handleInput}
               text="This is what I think the problem is:"
             ></Inputgroup>

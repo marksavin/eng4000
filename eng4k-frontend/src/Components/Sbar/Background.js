@@ -131,14 +131,14 @@ const Background = React.memo(function Background(props) {
             <Inputgroup
               label="(l/min) or (%)"
               name="s_o2"
-              defaultValue={props.background.s_o2}
+              value={props.background.s_o2}
               onBlur={props.handleInput}
               text="The patient has been on "
             ></Inputgroup>
             <Inputgroup
               label="(hours)"
               name="b_o2_time"
-              defaultValue={props.background.b_o2_time}
+              value={props.background.b_o2_time}
               onBlur={props.handleInput}
               text="For how long:"
             ></Inputgroup>

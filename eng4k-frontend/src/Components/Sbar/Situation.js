@@ -55,7 +55,7 @@ function Situation(props) {
             <Inputgroup
               label="Unit"
               name="s_unit"
-              defaultValue={props.situation.s_unit}
+              value={props.situation.s_unit}
               onBlur={props.handleInput}
               text="I'm calling from"
               error={props.errors.s_unit}
@@ -75,7 +75,7 @@ function Situation(props) {
             <Inputgroup
               label="Code status"
               name="s_code_status"
-              defaultValue={props.situation.s_code_status}
+              value={props.situation.s_code_status}
               onBlur={props.handleInput}
               text="The Patient's code status is: "
             ></Inputgroup>
@@ -84,7 +84,7 @@ function Situation(props) {
             <Inputgroup
               label="Problem"
               name="s_problem"
-              defaultValue={props.situation.s_problem}
+              value={props.situation.s_problem}
               onBlur={props.handleInput}
               text="The problem I am calling about is: "
             ></Inputgroup>
@@ -98,7 +98,7 @@ function Situation(props) {
             <TextFieldSingle
               label="Blood Pressure"
               name="s_BP"
-              defaultValue={props.situation.s_BP}
+              value={props.situation.s_BP}
               onBlur={props.handleInput}
             />
           </Grid>
@@ -106,7 +106,7 @@ function Situation(props) {
             <TextFieldSingle
               label="Pulse"
               name="s_pulse"
-              defaultValue={props.situation.s_pulse}
+              value={props.situation.s_pulse}
               onBlur={props.handleInput}
             />
           </Grid>
@@ -114,7 +114,7 @@ function Situation(props) {
             <TextFieldSingle
               label="Respiration"
               name="s_respiration"
-              defaultValue={props.situation.s_respiration}
+              value={props.situation.s_respiration}
               onBlur={props.handleInput}
             />
           </Grid>
@@ -122,7 +122,7 @@ function Situation(props) {
             <TextFieldSingle
               label="Temperature"
               name="s_temperature"
-              defaultValue={props.situation.s_temperature}
+              value={props.situation.s_temperature}
               onBlur={props.handleInput}
             />
           </Grid>
@@ -130,7 +130,7 @@ function Situation(props) {
             <TextFieldSingle
               label="O2 sat"
               name="s_o2"
-              defaultValue={props.situation.s_o2}
+              value={props.situation.s_o2}
               onBlur={props.handleInput}
             />
           </Grid>

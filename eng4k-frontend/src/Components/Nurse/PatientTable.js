@@ -429,7 +429,7 @@ export default function EnhancedTable() {
                           {patients.update_status !== "Needs update" ? (
                             <Button
                               variant="contained"
-                              color="secondary"
+                              color="primary"
                               onClick={(event) =>
                                 handleClick(event, patients.patient_name)
                               }
@@ -439,7 +439,7 @@ export default function EnhancedTable() {
                           ) : (
                             <Button
                               variant="contained"
-                              color="primary"
+                              color="secondary"
                               onClick={(event) =>
                                 handleClick(event, patients.patient_name)
                               }
