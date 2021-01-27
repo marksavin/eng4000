@@ -60,6 +60,7 @@ export function useForm(
 
   // const handleInput = userCallback(() => {
   const handleInput = (event) => {
+    console.log(event.target);
     const { name, value } = event.target;
     if (name.charAt(0) === "s") {
       setSituationValue({

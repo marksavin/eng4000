@@ -112,10 +112,6 @@ const recommendation = {
 //   r_problem_persist_contact: false,
 // };
 
-// const SituationMemo = React.memo(Situation);
-// const BackgroundMemo = React.memo(Background);
-// const AssessmentMemo = React.memo(Assessment);
-// const RecommendationMemo = React.memo(Recommendation);
 
 export default function Sbarform(props) {
   const validate = (fieldValues = situationValue) => {
