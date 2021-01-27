@@ -15,6 +15,10 @@ const NavBar = () => {
     setOpen(!open);
   };
 
+  const handleSearchInput = (event) => {
+    console.log(event.target.value);
+  };
+
   return (
     <header className="main-navbar">
       <div className="navbar-contents">
@@ -22,7 +26,11 @@ const NavBar = () => {
           <FontAwesomeIcon className="logo fa-2x" icon={faClinicMedical} />
         </a>
         <a className="search-icon">
-          <input type="search" placeholder="search patient" />
+          <input
+            type="search"
+            placeholder="search patient"
+            onChange={handleSearchInput}
+          />
           <FontAwesomeIcon className="close" icon={faTimes} />
           <FontAwesomeIcon className="search" icon={faSearch} />
         </a>
