@@ -6,6 +6,7 @@ import "./Styles/app.scss";
 import Navigation from "./Components/NavBar/NavBar.js";
 import Login from "./Components/Login/Login.js";
 import NursePage from "./Components/Nurse/NursePage.js";
+import CreatePatient from "./Components/CreatePatient/CreatePatient";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
           <Route path="/nurse">
             <Navigation />
             <NursePage />
+          </Route>
+
+          <Route exact path="/nurse/add-patient">
+            <CreatePatient />
           </Route>
 
           <Route path="/">
