@@ -15,9 +15,9 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/nurse">
-            <Navigation setSearch={setSearch} search={search} />
-            <NursePage search={search} />
+          <Route exact path="/nurse">
+            <Navigation />
+            <NursePage />
           </Route>
 
 
