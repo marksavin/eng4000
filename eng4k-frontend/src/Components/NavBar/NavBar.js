@@ -8,7 +8,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 
-const NavBar = () => {
+const NavBar = (props) => {
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -16,7 +16,11 @@ const NavBar = () => {
   };
 
   const handleSearchInput = (event) => {
-    console.log(event.target.value);
+    props.setSearch(event.target.value);
+  };
+
+  const handleReset = (event) => {
+    props.setSearch("");
   };
 
   return (
@@ -29,9 +33,14 @@ const NavBar = () => {
           <input
             type="search"
             placeholder="search patient"
+            value={props.search}
             onChange={handleSearchInput}
           />
-          <FontAwesomeIcon className="close" icon={faTimes} />
+          <FontAwesomeIcon
+            className="close"
+            icon={faTimes}
+            onClick={handleReset}
+          />
           <FontAwesomeIcon className="search" icon={faSearch} />
         </a>
 

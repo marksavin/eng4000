@@ -17,36 +17,35 @@ const theme = createMuiTheme({
   },
 });
 
-export default class NursePage extends React.Component {
-  state = {};
-  render() {
-    return (
-      <div>
-        <Switch>
-          <Route exact path="/nurse">
-            <Link to="/nurse/add-patient">
-              <Button
-                variant="contained"
-                color="primary"
-                className="add_patient_button"
-                style={{ fontSize: "1.5rem" }}
-              >
-                Add Patient
-              </Button>
-            </Link>
-            <Header title="Wing Hospital Name" />
-            <MuiThemeProvider theme={theme}>
-              <PatientTable />
-            </MuiThemeProvider>
-          </Route>
+const NursePage = (props) => {
+  return (
+    <div>
+      <Switch>
+        <Route exact path="/nurse">
+          <Link to="/nurse/add-patient">
+            <Button
+              variant="contained"
+              color="primary"
+              className="add_patient_button"
+              style={{ fontSize: "1.5rem" }}
+            >
+              Add Patient
+            </Button>
+          </Link>
+          <Header title="Wing Hospital Name" />
+          <MuiThemeProvider theme={theme}>
+            <PatientTable search={props.search} />
+          </MuiThemeProvider>
+        </Route>
 
-          <Route exact path="/nurse/add-patient"></Route>
+        <Route exact path="/nurse/add-patient"></Route>
 
-          <Route path="/nurse/:id">
-            <Sbar nurseID="1" nurseName="Mark Apple" />
-          </Route>
-        </Switch>
-      </div>
-    );
-  }
-}
+        <Route path="/nurse/:id">
+          <Sbar nurseID="1" nurseName="Mark Apple" />
+        </Route>
+      </Switch>
+    </div>
+  );
+};
+
+export default NursePage;
