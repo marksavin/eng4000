@@ -18,9 +18,7 @@ function App() {
             <NursePage />
           </Route>
 
-          <Route exact path="/nurse/add-patient">
-            <CreatePatient />
-          </Route>
+
 
           <Route path="/">
             <Login />

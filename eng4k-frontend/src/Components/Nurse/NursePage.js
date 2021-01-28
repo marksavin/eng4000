@@ -30,10 +30,13 @@ export default class NursePage extends React.Component {
             </MuiThemeProvider>
           </Route>
 
+          <Route exact path="/nurse/add-patient">
+            <CreatePatient />
+          </Route>
+
           <Route path="/nurse/:id">
             <Sbar nurseID="1" nurseName="Mark Apple" />
           </Route>
-
         </Switch>
       </div>
     );
