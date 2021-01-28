@@ -112,7 +112,6 @@ const recommendation = {
 //   r_problem_persist_contact: false,
 // };
 
-
 export default function Sbarform(props) {
   const validate = (fieldValues = situationValue) => {
     let temp = { ...errors };
@@ -144,10 +143,12 @@ export default function Sbarform(props) {
     recommendation
   );
 
+  const combinedValues = {};
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // if (validate()) {
-    const combinedValues = {
+    combinedValues = {
       ...situationValue,
       ...backgroundValue,
       ...assessmentValue,
