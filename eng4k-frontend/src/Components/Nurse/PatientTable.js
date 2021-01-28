@@ -40,7 +40,6 @@ function getComparator(order, orderBy) {
 }
 
 function stableSort(array, comparator) {
-  console.log(array);
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
@@ -245,7 +244,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EnhancedTable() {
+export default function EnhancedTable(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("patient_name");
@@ -271,24 +270,33 @@ export default function EnhancedTable() {
   ]);
 
   useEffect(() => {
-    fetch(`/nurse/viewPatients/1`)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          console.log("network response was bad");
-        }
-      })
-      .then((result) => {
-        console.log(result);
-        if (result !== undefined && result.length !== 0) {
-          setPatients(result);
-        }
-        // if (result.length > 0) {
-        //
-        // }
-      });
-  }, []);
+    if (props.search === "") {
+      fetch(`/nurse/viewPatients/1`)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          } else {
+            console.log("network response was bad");
+          }
+        })
+        .then((result) => {
+          if (result !== undefined && result.length !== 0) {
+            setPatients(result);
+          }
+        });
+    } else {
+      const searchedPatients = patients.filter((patient) =>
+        patient.patient_name
+          .toLowerCase()
+          .startsWith(props.search.toLowerCase())
+      );
+      setPatients(searchedPatients);
+
+      // patients
+      //   .filter((patient) => patient.patient_name.includes(props.search))
+      //   .map((filteredPatient) => setPatients(filteredPatient));
+    }
+  }, [props.search]);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
