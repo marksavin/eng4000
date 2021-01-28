@@ -15,12 +15,10 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/nurse">
-            <Navigation />
-            <NursePage />
+          <Route path="/nurse">
+            <Navigation serach={search} setSearch={setSearch} />
+            <NursePage search={search} />
           </Route>
-
-
 
           <Route path="/">
             <Login />

@@ -4,6 +4,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import PatientTable from "./PatientTable.js";
 import Header from "./Header";
 import Sbar from "../Sbar/Sbar.js";
+import CreatePatient from "../CreatePatient/CreatePatient.js";
 
 import { Button, createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
 
@@ -38,7 +39,9 @@ const NursePage = (props) => {
           </MuiThemeProvider>
         </Route>
 
-        <Route exact path="/nurse/add-patient"></Route>
+        <Route exact path="/nurse/add-patient">
+          <CreatePatient />
+        </Route>
 
         <Route path="/nurse/:id">
           <Sbar nurseID="1" nurseName="Mark Apple" />
