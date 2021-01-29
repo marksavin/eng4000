@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 //import styles
-import "./Styles/app.scss";
+import './Styles/app.scss';
 //import components
-import Navigation from "./Components/NavBar/NavBar.js";
-import Login from "./Components/Login/Login.js";
-import NursePage from "./Components/Nurse/NursePage.js";
-import CreatePatient from "./Components/CreatePatient/CreatePatient";
-import PhysicianPage from "./Components/Physician/PhysicianPage";
+import Navigation from './Components/NavBar/NavBar.js';
+import Login from './Components/Login/Login.js';
+import NursePage from './Components/Nurse/NursePage.js';
+import CreatePatient from './Components/CreatePatient/CreatePatient';
+import PhysicianPage from './Components/Physician/PhysicianPage';
 
 function App() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
 
   return (
     <div className="App">
@@ -21,7 +21,7 @@ function App() {
             <NursePage search={search} />
           </Route>
           <Route path="/physician">
-            <PhysicianPage />
+            <PhysicianPage search={search} />
           </Route>
 
           <Route path="/">

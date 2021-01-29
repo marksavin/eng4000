@@ -1,10 +1,19 @@
-import React from "react";
-import NavBar from "../NavBar/NavBar";
-import PatientTable from "../Nurse/PatientTable";
+import React from 'react';
+import NavBar from '../NavBar/NavBar';
+import PatientTable from '../Nurse/PatientTable';
 
 class PhysicianPage extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return <div>PhysicianPage</div>;
+    return (
+      <div>
+        <NavBar />
+        <PatientTable search={this.props.search} />
+      </div>
+    );
   }
 }
 
