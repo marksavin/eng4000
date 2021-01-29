@@ -28,7 +28,7 @@ const NursePage = (props) => {
               variant="contained"
               color="primary"
               className="add_patient_button"
-              style={{ fontSize: "1.5rem" }}
+              style={{ fontSize: "1.5rem"}}
             >
               Add Patient
             </Button>

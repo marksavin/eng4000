@@ -254,6 +254,8 @@ export default function EnhancedTable(props) {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  const [searchState, setSearchState] = useState([]);
+
   const history = useHistory();
 
   const [patients, setPatients] = useState([
@@ -270,32 +272,27 @@ export default function EnhancedTable(props) {
   ]);
 
   useEffect(() => {
-    if (props.search === "") {
-      fetch(`/nurse/viewPatients/1`)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            console.log("network response was bad");
-          }
-        })
-        .then((result) => {
-          if (result !== undefined && result.length !== 0) {
-            setPatients(result);
-          }
-        });
-    } else {
-      const searchedPatients = patients.filter((patient) =>
-        patient.patient_name
-          .toLowerCase()
-          .startsWith(props.search.toLowerCase())
-      );
-      setPatients(searchedPatients);
+    fetch(`/nurse/viewPatients/1`)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log("network response was bad");
+        }
+      })
+      .then((result) => {
+        if (result !== undefined && result.length !== 0) {
+          setPatients(result);
+          setSearchState(result);
+        }
+      });
+  }, []);
 
-      // patients
-      //   .filter((patient) => patient.patient_name.includes(props.search))
-      //   .map((filteredPatient) => setPatients(filteredPatient));
-    }
+  useEffect(() => {
+    const searchedPatients = searchState.filter((patient) =>
+      patient.patient_name.toLowerCase().startsWith(props.search.toLowerCase())
+    );
+    setPatients(searchedPatients);
   }, [props.search]);
 
   const handleRequestSort = (event, property) => {
