@@ -151,18 +151,29 @@ export default function Sbarform(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     // if (validate()) {
-    const combinedValues = {
-      ...situationValue,
-      ...backgroundValue,
-      ...assessmentValue,
-      ...recValue,
-    };
+    // const combinedValues = (
+    // {
+    //   ...situationValue,
+    //   ...backgroundValue,
+    //   ...assessmentValue,
+    //   ...recValue,
+    // });
 
-    console.log(combinedValues);
+    // console.log(combinedValues);
     // creatNewSbarNote();
     console.log("call api to make a post request");
     // }
   };
+
+  const combinedValues = (
+    {
+      ...situationValue,
+      ...backgroundValue,
+      ...assessmentValue,
+      ...recValue,
+    });
+
+    console.log(combinedValues);
 
   const creatNewSbarNote = useCallback(() => {
     fetch(`/nurse/patientId`, {
@@ -170,14 +181,14 @@ export default function Sbarform(props) {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
-      body: JSON.stringify(values),
+      body: JSON.stringify(combinedValues),
     }).then((res) => {
       if (res.ok) {
         return res.json();
       } else {
       }
     });
-  }, [values]);
+  }, [combinedValues]);
 
   situationValue.note_patient_id = props.patientName;
   useEffect(() => {

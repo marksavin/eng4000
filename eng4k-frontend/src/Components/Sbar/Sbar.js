@@ -18,7 +18,7 @@ export default function Sbar(props) {
   const classes = useStyles();
 
   return (
-    <>
+    <div>
       <Header title={`Patient: ${param.id}`} />
       <div className="paper-container">
         <Paper className={classes.pageContent} elevation={4}>
@@ -29,6 +29,6 @@ export default function Sbar(props) {
           />
         </Paper>
       </div>
-    </>
+    </div>
   );
 }
