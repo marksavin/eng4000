@@ -17,19 +17,6 @@ const theme = createMuiTheme({
   },
 });
 
-// Statelees functional component 
-const Nurse = (props) => {
-
-}
-
-class Nurse extends React.Componet {
-  render() {
-    return (
-      .............
-    )
-  }
-}
-
 export default class NursePage extends React.Component {
   state = {};
   render() {
