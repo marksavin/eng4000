@@ -7,6 +7,7 @@ import Navigation from "./Components/NavBar/NavBar.js";
 import Login from "./Components/Login/Login.js";
 import NursePage from "./Components/Nurse/NursePage.js";
 import CreatePatient from "./Components/CreatePatient/CreatePatient";
+import PhysicianPage from "./Components/Physician/PhysicianPage";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -18,6 +19,9 @@ function App() {
           <Route path="/nurse">
             <Navigation serach={search} setSearch={setSearch} />
             <NursePage search={search} />
+          </Route>
+          <Route path="/physician">
+            <PhysicianPage />
           </Route>
 
           <Route path="/">
