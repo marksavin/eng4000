@@ -4,7 +4,9 @@ import PatientTable from "../Nurse/PatientTable";
 
 class PhysicianPage extends React.Component {
   render() {
-    return <div>PhysicianPage</div>;
+    return<div>PhysicianPaaaaage</div>;
+
+    
   }
 }
 
