@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //import styles
 import "./Styles/app.scss";
@@ -6,15 +6,18 @@ import "./Styles/app.scss";
 import Navigation from "./Components/NavBar/NavBar.js";
 import Login from "./Components/Login/Login.js";
 import NursePage from "./Components/Nurse/NursePage.js";
+import CreatePatient from "./Components/CreatePatient/CreatePatient";
 
 function App() {
+  const [search, setSearch] = useState("");
+
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route path="/nurse">
-            <Navigation />
-            <NursePage />
+            <Navigation serach={search} setSearch={setSearch} />
+            <NursePage search={search} />
           </Route>
 
           <Route path="/">

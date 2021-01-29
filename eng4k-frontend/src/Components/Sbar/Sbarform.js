@@ -112,11 +112,6 @@ const recommendation = {
 //   r_problem_persist_contact: false,
 // };
 
-// const SituationMemo = React.memo(Situation);
-// const BackgroundMemo = React.memo(Background);
-// const AssessmentMemo = React.memo(Assessment);
-// const RecommendationMemo = React.memo(Recommendation);
-
 export default function Sbarform(props) {
   const validate = (fieldValues = situationValue) => {
     let temp = { ...errors };
@@ -148,9 +143,12 @@ export default function Sbarform(props) {
     recommendation
   );
 
+  const combinedValues = {};
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // if (validate()) {
+<<<<<<< HEAD
     // const combinedValues = (
     // {
     //   ...situationValue,
@@ -167,6 +165,9 @@ export default function Sbarform(props) {
 
   const combinedValues = (
     {
+=======
+    combinedValues = {
+>>>>>>> 4af5920e9e976a135ff8c2940b3c5ffb984dbfd9
       ...situationValue,
       ...backgroundValue,
       ...assessmentValue,
