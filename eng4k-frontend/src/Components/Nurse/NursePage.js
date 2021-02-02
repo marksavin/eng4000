@@ -23,7 +23,7 @@ const NursePage = (props) => {
     <div>
       <Switch>
         <Route exact path="/nurse">
-          <Link to="/nurse/add-patient">
+          <Link to="/nurse/add-patient" style={{textDecoration:'none'}}>
             <Button
               variant="contained"
               color="primary"
