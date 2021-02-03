@@ -112,7 +112,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.id !== "patient_name" ? "right" : "left"}
+            align={headCell.id !== "patient_name" ? "center" : "left"}
             padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -416,25 +416,25 @@ export default function EnhancedTable(props) {
                         >
                           {patients.patient_name}
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell align="center">
                           {patients.a_problem}
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell align="center">
                           {patients.note_room_id}
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell align="center">
                           {patients.r_priority}
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell align="center">
                           {patients.update_status}
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell align="center">
                           <Button variant="contained" color="primary">
                             View SBAR History
                           </Button>
                         </TableCell>
-                        <TableCell align="right">
-                          {patients.update_status !== "Needs update" ? (
+                        <TableCell align="center">
+                          {patients.update_status !== "Update Required" ? (
                             <Button
                               variant="contained"
                               color="primary"

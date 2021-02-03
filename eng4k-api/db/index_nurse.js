@@ -39,7 +39,7 @@ nurseApiCalls.currentPatientList = (id) => {
     pool.query(
       `SELECT   p.patient_name, sbar_note.a_problem, sbar_note.note_room_id, sbar_note.r_priority,
       CASE 
-      WHEN 5 <= (timestampDIFF(HOUR,sbar_note.date_created, CURRENT_TIMESTAMP)) THEN 'Needs update'
+      WHEN 5 <= (timestampDIFF(HOUR,sbar_note.date_created, CURRENT_TIMESTAMP)) THEN 'Update Required'
       WHEN 5 > (timestampDIFF(HOUR,sbar_note.date_created, CURRENT_TIMESTAMP)) THEN 'up to date'
       END AS update_status  
       FROM sbar_note JOIN(
