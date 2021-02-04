@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import "semantic-ui-css/semantic.min.css";
 // import NursePage from "./Components/Nurse/NursePage.js";
 
 ReactDOM.render(
