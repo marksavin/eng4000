@@ -1,5 +1,5 @@
 import React from 'react';
-import PhysicianPatientTable from './PhysicianPatientTable';
+import PhysicianPatientTable from './PatientTableTemplate';
 
 class PhysicianPatientList extends React.Component {
 

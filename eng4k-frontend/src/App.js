@@ -20,7 +20,7 @@ function App() {
             <Navigation serach={search} setSearch={setSearch} />
             <NursePage search={search} />
           </Route>
-          <Route path="/physicianDash">
+          <Route path="/physician">
            {/* <PhysicianPage search={search} /> */}
            <Navigation serach={search} setSearch={setSearch} />
            <PhysicianDashBoard />

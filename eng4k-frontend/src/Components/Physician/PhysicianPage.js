@@ -1,6 +1,6 @@
-import React from 'react';
-import NavBar from '../NavBar/NavBar';
-import PatientTable from '../Nurse/PatientTable';
+import React from "react";
+import NavBar from "../NavBar/NavBar";
+import PatientTable from "../Nurse/PatientTable";
 
 class PhysicianPage extends React.Component {
   constructor(props) {
@@ -10,8 +10,8 @@ class PhysicianPage extends React.Component {
   render() {
     return (
       <div>
-        <NavBar />
-        <PatientTable search={this.props.search} />
+        {/* <NavBar /> */}
+        {/* <PatientTable search={this.props.search} /> */}
       </div>
     );
   }

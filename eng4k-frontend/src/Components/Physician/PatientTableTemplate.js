@@ -70,17 +70,18 @@ const headCells = [
     disablePadding: false,
     label: "Last Updated",
   },
+
+  {
+    id: "nurse",
+    numeric: false,
+    disablePadding: false,
+    label: "Nurse",
+  },
   {
     id: "SBAR_history",
     numeric: false,
     disablePadding: false,
     label: "SBAR history",
-  },
-  {
-    id: "update",
-    numeric: false,
-    disablePadding: false,
-    label: "Update",
   },
 ];
 
@@ -264,8 +265,8 @@ export default function EnhancedTable(props) {
       r_priority: "-",
       update_status: "-",
       last_updated: "-",
+      nurse: "-",
       SBAR_history: "-",
-      update: "-",
     },
   ]);
 
@@ -429,32 +430,13 @@ export default function EnhancedTable(props) {
                           {patients.update_status}
                         </TableCell>
                         <TableCell align="right">
-                          <Button variant="contained" color="primary">
-                            View SBAR History
-                          </Button>
+                         --- nursename placeholder---
                         </TableCell>
                         <TableCell align="right">
-                          {patients.update_status !== "Needs update" ? (
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              onClick={(event) =>
-                                handleClick(event, patients.patient_name)
-                              }
-                            >
-                              {patients.update_status}
-                            </Button>
-                          ) : (
-                            <Button
-                              variant="contained"
-                              color="secondary"
-                              onClick={(event) =>
-                                handleClick(event, patients.patient_name)
-                              }
-                            >
-                              {patients.update_status}
-                            </Button>
-                          )}
+                        <Button variant="contained" color="primary">
+                            View SBAR History
+                          </Button>
+                        
                         </TableCell>
                       </TableRow>
                     );
