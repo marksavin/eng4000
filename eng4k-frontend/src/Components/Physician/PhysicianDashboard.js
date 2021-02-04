@@ -2,7 +2,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import { Button } from "@material-ui/core/";
 import React, { useState } from "react";
 import PhysicianPatientList from "./PhysicianPatientList";
-import ContactPhysicianCard from "../Nurse/ContactPhysicanCard"; //temperarily
+///import ContactPhysicianCard from "../Nurse/ContactPhysicanCard"; //temperarily
 
 import Header from "../Nurse/Header";
 
