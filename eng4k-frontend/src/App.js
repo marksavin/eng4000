@@ -7,6 +7,7 @@ import Navigation from "./Components/NavBar/NavBar.js";
 import Login from "./Components/Login/Login.js";
 import NursePage from "./Components/Nurse/NursePage.js";
 import CreatePatient from "./Components/CreatePatient/CreatePatient";
+import SbarHistory from "./Components/Nurse/SbarHistory";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -22,6 +23,10 @@ function App() {
 
           <Route path="/">
             <Login />
+          </Route>
+
+          <Route path="/history">
+            <SbarHistory />
           </Route>
         </Switch>
       </Router>

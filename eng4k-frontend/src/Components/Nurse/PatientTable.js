@@ -255,6 +255,7 @@ export default function EnhancedTable(props) {
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const [searchState, setSearchState] = useState([]);
+  
 
   const history = useHistory();
 

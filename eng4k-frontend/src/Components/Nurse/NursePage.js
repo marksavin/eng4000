@@ -5,6 +5,7 @@ import PatientTable from "./PatientTable.js";
 import Header from "./Header";
 import Sbar from "../Sbar/Sbar.js";
 import CreatePatient from "../CreatePatient/CreatePatient.js";
+import SbarHistory from "./SbarHistory.js";
 
 import { Button, createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
 
@@ -34,6 +35,16 @@ const NursePage = (props) => {
             </Button>
           </Link>
           <Header title="Wing Hospital Name" />
+          <Link to="/history">
+            <Button
+              variant="contained"
+              color="primary"
+              className="add_patient_button"
+              style={{ fontSize: "1.5rem"}}
+            >
+              SBAR History
+            </Button>
+          </Link>
           <MuiThemeProvider theme={theme}>
             <PatientTable search={props.search} />
           </MuiThemeProvider>
@@ -45,6 +56,10 @@ const NursePage = (props) => {
 
         <Route path="/nurse/:id">
           <Sbar nurseID="1" nurseName="Mark Apple" />
+        </Route>
+
+        <Route exact path ="/history">
+          <SbarHistory />
         </Route>
       </Switch>
     </div>
