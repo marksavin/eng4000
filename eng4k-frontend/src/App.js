@@ -24,10 +24,6 @@ function App() {
           <Route path="/">
             <Login />
           </Route>
-
-          <Route path="/history">
-            <SbarHistory />
-          </Route>
         </Switch>
       </Router>
     </div>

@@ -3,6 +3,7 @@ import { Switch, Route, Link } from "react-router-dom";
 
 
 import PatientTable from "./PatientTable.js";
+import HistoryTable from "./HistoryTable.js";
 import Header from "./Header";
 import Sbar from "../Sbar/Sbar.js";
 import CreatePatient from "../CreatePatient/CreatePatient.js";
@@ -22,16 +23,25 @@ const theme = createMuiTheme({
 //console.log("Hello World");
 const SbarHistory = (props) => {
     return (
-        <div>
+      <div>
         <Switch>
-        <Route path="/history">
-          <Header title="Insert Patient Name" />
-          <MuiThemeProvider theme={theme}>
-            <p>Hello World</p>
-            console.log("Hello World");
-          </MuiThemeProvider>
-        </Route>
-      </Switch>
+          <Route>
+            <Link to="/nurse">
+            <Button
+              variant="contained"
+              color="primary"
+              className="add_patient_button"
+              style={{ fontSize: "1.5rem"}}
+            >
+              Back
+            </Button>
+            </Link>
+              <Header title="Insert Patient Name" />
+                <MuiThemeProvider theme={theme}>
+                  <HistoryTable/>
+                </MuiThemeProvider>
+          </Route>
+        </Switch>
       </div>
     )
 }

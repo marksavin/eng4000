@@ -35,7 +35,7 @@ const NursePage = (props) => {
             </Button>
           </Link>
           <Header title="Wing Hospital Name" />
-          <Link to="/history">
+          <Link to="/nurse/history">
             <Button
               variant="contained"
               color="primary"
@@ -54,13 +54,15 @@ const NursePage = (props) => {
           <CreatePatient />
         </Route>
 
+        <Route exact path ="/nurse/history">
+          <SbarHistory />
+        </Route>
+
         <Route path="/nurse/:id">
           <Sbar nurseID="1" nurseName="Mark Apple" />
         </Route>
 
-        <Route exact path ="/history">
-          <SbarHistory />
-        </Route>
+
       </Switch>
     </div>
   );
