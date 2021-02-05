@@ -21,14 +21,30 @@ class CreatePatient extends React.Component {
     console.log(this.state);
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    fetch(`/nurse/addNewPatient`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(this.state),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+      }
+    });
+  };
+
   render() {
     return (
-      <div>
+      <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
         <div className="container">
           <div className="promptMessage">
             Please Enter the Following Information:
           </div>
-          <form className="patientForm" noValidate autoComplete="off">
+          <div className="patientForm">
             <div className="cNames">
               <div className="FirstName">
                 <div className="fname" noValidate autoComplete="off">
@@ -104,7 +120,7 @@ class CreatePatient extends React.Component {
                 </div>
               </div>
             </div>
-          </form>
+          </div>
           <div className="Buttons">
             <div className="cancBut">
               <Button variant="contained" color="secondary">
@@ -112,13 +128,13 @@ class CreatePatient extends React.Component {
               </Button>
             </div>
             <div className="subBut">
-              <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" type="submit">
                 Submit
               </Button>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     );
   }
 }

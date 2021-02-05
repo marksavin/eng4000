@@ -1,11 +1,11 @@
 const mysql = require("mysql");
 
 const pool = mysql.createPool({
-  connectionLimit: 10,
-  password: "password",
-  user: "root",
-  database: "capstonedb",
-  host: "localhost",
+  connectionLimit: 1,
+  password: "1335969a",
+  user: "b43f5e001f1663",
+  database: "heroku_c2367af0e7c5fa1",
+  host: "us-cdbr-east-03.cleardb.com",
   port: 3306,
 });
 
@@ -39,8 +39,8 @@ nurseApiCalls.currentPatientList = (id) => {
     pool.query(
       `SELECT   p.patient_name, sbar_note.a_problem, sbar_note.note_room_id, sbar_note.r_priority,
       CASE 
-      WHEN 5 <= (timestampDIFF(HOUR,sbar_note.date_created, CURRENT_TIMESTAMP)) THEN 'Needs update'
-      WHEN 5 > (timestampDIFF(HOUR,sbar_note.date_created, CURRENT_TIMESTAMP)) THEN 'up to date'
+      WHEN 5 <= (timestampDIFF(HOUR,sbar_note.date_created, CURRENT_TIMESTAMP)) THEN 'Update Required'
+      WHEN 5 > (timestampDIFF(HOUR,sbar_note.date_created, CURRENT_TIMESTAMP)) THEN 'Up to Date'
       END AS update_status  
       FROM sbar_note JOIN(
         SELECT k.date_created, note_id,note_room_id FROM sbar_note JOIN (
@@ -51,6 +51,25 @@ nurseApiCalls.currentPatientList = (id) => {
          ON sbar_note.date_created = C.date_created AND sbar_note.note_id = C.note_id AND p.patient_id = sbar_note.note_patient_id
       WHERE sbar_note.date_created = C.date_created AND sbar_note.note_id = C.note_id;`,
       [id],
+      (err, result) => {
+        if (err) {
+          return reject(err);
+        }
+        console.log(result);
+        return resolve(result);
+      }
+    );
+  });
+};
+
+nurseApiCalls.addNewPatient = (body) => {
+  const fullName = `${body.fname} ${body.lname}`;
+  const dateOfBirth = `${body.dOBYear}-${body.dOBMonth}-${body.dOBDay}`;
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `INSERT INTO heroku_c2367af0e7c5fa1.patient (patient_id, patient_name, admission_date, patient_date_of_birth, patient_weight, patient_height)
+      VALUES(defualt,?,defualt,?,?,?);`,
+      [fullName, dateOfBirth, dateOfBirth, body.weight, body.height],
       (err, result) => {
         if (err) {
           return reject(err);

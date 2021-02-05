@@ -143,7 +143,7 @@ export default function Sbarform(props) {
     recommendation
   );
 
-  const combinedValues = {};
+  let combinedValues = {};
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -201,7 +201,7 @@ export default function Sbarform(props) {
         }}
       >
         <ButtonForm label="Submit" type="submit" />
-        <ButtonForm color="default" label="Reset" type="submit" />
+        <ButtonForm color="default" label="Reset" />
       </div>
     </Form>
   );

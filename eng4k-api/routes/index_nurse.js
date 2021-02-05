@@ -26,4 +26,24 @@ router.get("/viewPatients/:nurseId", async (req, res, next) => {
   }
 });
 
+router.post("/addNewPatient", async (req, res, next) => {
+  try {
+    let queryResults = await db.addNewPatient(req.body);
+    res.json(queryResults);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
+router.post("/addNewSBAR", async (req, res, next) => {
+  try {
+    let queryResults = await db.addNewPatient(req.body);
+    res.json(queryResults);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 module.exports = router;
