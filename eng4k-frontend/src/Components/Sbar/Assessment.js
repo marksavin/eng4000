@@ -10,7 +10,7 @@ const paperStyle = makeStyles((theme) => ({
   },
 }));
 
-const Assessment = React.memo(function Assessment(props) {
+function Assessment(props) {
   const paperstyle = paperStyle();
 
   return (
@@ -92,6 +92,6 @@ const Assessment = React.memo(function Assessment(props) {
       </Paper>
     </div>
   );
-});
+};
 
 export default Assessment;

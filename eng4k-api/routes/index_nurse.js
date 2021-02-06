@@ -26,9 +26,9 @@ router.get("/viewPatients/:nurseId", async (req, res, next) => {
   }
 });
 
-router.post("/addNewPatient", async (req, res, next) => {
+router.post("/addNewSBAR/:patientId", async (req, res, next) => {
   try {
-    let queryResults = await db.addNewPatient(req.body);
+    let queryResults = await db.addNewSbar(req.params.patientId, req.body);
     res.json(queryResults);
   } catch (e) {
     console.log(e);
@@ -36,7 +36,7 @@ router.post("/addNewPatient", async (req, res, next) => {
   }
 });
 
-router.post("/addNewSBAR", async (req, res, next) => {
+router.post("/addNewPatient", async (req, res, next) => {
   try {
     let queryResults = await db.addNewPatient(req.body);
     res.json(queryResults);

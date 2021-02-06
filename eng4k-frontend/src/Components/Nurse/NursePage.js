@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 
+import Navigation from "../NavBar/NavBar.js";
 import PatientTable from "./PatientTable.js";
 import Header from "./Header";
 import Sbar from "../Sbar/Sbar.js";
@@ -21,6 +22,11 @@ const theme = createMuiTheme({
 const NursePage = (props) => {
   return (
     <div>
+      <Navigation
+        search={props.search}
+        setSearch={props.setSearch}
+        setAuthenticate={props.setAuthenticate}
+      />
       <Switch>
         <Route exact path="/nurse">
           <Link to="/nurse/add-patient">
@@ -28,7 +34,7 @@ const NursePage = (props) => {
               variant="contained"
               color="primary"
               className="add_patient_button"
-              style={{ fontSize: "1.5rem"}}
+              style={{ fontSize: "1.5rem" }}
             >
               Add Patient
             </Button>

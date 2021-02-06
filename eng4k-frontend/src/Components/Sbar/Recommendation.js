@@ -10,7 +10,7 @@ const paperStyle = makeStyles((theme) => ({
   },
 }));
 
-const Recommendation = React.memo(function Recommendation(props) {
+function Recommendation(props) {
   const paperstyle = paperStyle();
 
   return (
@@ -87,6 +87,6 @@ const Recommendation = React.memo(function Recommendation(props) {
       </Paper>
     </div>
   );
-});
+};
 
 export default Recommendation;

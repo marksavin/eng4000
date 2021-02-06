@@ -1,8 +1,7 @@
 import React from "react";
 //import DateFnsUtils from "@date-io/date-fns";
 //import { DatePicker } from "@material-ui/pickers";
-import { Box, Button, TextField } from "@material-ui/core";
-import { DriveEtaRounded } from "@material-ui/icons";
+import {Button, TextField } from "@material-ui/core";
 
 class CreatePatient extends React.Component {
   state = {

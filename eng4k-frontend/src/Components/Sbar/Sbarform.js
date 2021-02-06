@@ -154,11 +154,14 @@ export default function Sbarform(props) {
       ...assessmentValue,
       ...recValue,
     };
+
+    console.log("Submit button was pressed");
+
+    // creatNewSbarNote();
   };
-  console.log(combinedValues);
 
   const creatNewSbarNote = useCallback(() => {
-    fetch(`/nurse/patientId`, {
+    fetch(`/nurse/addNewSBAR/100`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -176,7 +179,7 @@ export default function Sbarform(props) {
   useEffect(() => {
     // Update the document title using the browser API
     console.log(situationValue);
-  });
+  }, []);
 
   return (
     <Form onSubmit={handleSubmit}>

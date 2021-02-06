@@ -1,10 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import Cookies from "js-cookie";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserMd, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 
-const Login = () => {
+const Login = (props) => {
+  const [token, setToken] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = () => {
+    if (token.token === "token" && password.password === "password") {
+      Cookies.set("token", "/nurse");
+      props.setAuthenticate(true);
+      props.setAccountType("/nurse");
+    }
+  };
+
   return (
     <section className="login">
       <div className="login-contents">
@@ -22,7 +33,12 @@ const Login = () => {
               <label className="label" htmlFor="token">
                 Token
               </label>
-              <input className="token" type="text" placeholder="token" />
+              <input
+                className="token"
+                type="text"
+                placeholder="token"
+                onChange={(e) => setToken({ token: e.target.value })}
+              />
               <FontAwesomeIcon className="user-icon" icon={faUserMd} />
             </div>
 
@@ -34,14 +50,15 @@ const Login = () => {
                 className="password"
                 type="password"
                 placeholder="password"
+                onChange={(e) => setPassword({ password: e.target.value })}
               />
               <FontAwesomeIcon className="user-icon" icon={faUnlockAlt} />
             </div>
           </div>
           <div className="login-button">
-            <Link to="/nurse">
-              <button className="button">Login</button>
-            </Link>
+            <button className="button" onClick={handleLogin}>
+              Login
+            </button>
           </div>
         </div>
       </div>

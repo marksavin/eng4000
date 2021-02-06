@@ -431,7 +431,7 @@ export default function EnhancedTable(props) {
                           {patients.note_room_id}
                         </TableCell>
                         <TableCell align="center">
-                          Doctors Name goes here
+                          {patients.r_priority}
                         </TableCell>
                         <TableCell align="center">
                           {patients.update_status}

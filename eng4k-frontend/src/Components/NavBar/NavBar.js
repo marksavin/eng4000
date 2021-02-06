@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -21,6 +21,11 @@ const NavBar = (props) => {
 
   const handleReset = (event) => {
     props.setSearch("");
+  };
+
+  const handleLogout = () => {
+    props.setAuthenticate(false);
+    Cookies.remove("token");
   };
 
   return (
@@ -65,11 +70,9 @@ const NavBar = (props) => {
               </a>
             </li>
             <li>
-              <Link to="/">
-                <button className="logout" type="button">
-                  Logout
-                </button>
-              </Link>
+              <button className="logout" onClick={handleLogout}>
+                Logout
+              </button>
             </li>
           </ul>
         </nav>

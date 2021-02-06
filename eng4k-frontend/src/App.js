@@ -1,28 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Cookies from "js-cookie";
 //import styles
 import "./Styles/app.scss";
 //import components
 import Navigation from "./Components/NavBar/NavBar.js";
 import Login from "./Components/Login/Login.js";
 import NursePage from "./Components/Nurse/NursePage.js";
-import CreatePatient from "./Components/CreatePatient/CreatePatient";
+import ProtectedRoute from "./Components/Routes/ProtectedRoute.js";
+import ProtectedLogin from "./Components/Routes/ProtectedLogin.js";
 
 function App() {
   const [search, setSearch] = useState("");
+  const [accountType, setAccountType] = useState("");
+  const [authenticate, setAuthenticate] = useState(false);
+
+  const readLoginCookie = () => {
+    const token = Cookies.get("token");
+    if (token) {
+      setAuthenticate(true);
+      setAccountType(token);
+    } else {
+      setAuthenticate(false);
+    }
+  };
+
+  useEffect(() => {
+    readLoginCookie();
+  }, []);
 
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/nurse">
-            <Navigation serach={search} setSearch={setSearch} />
+          {/* <ProtectedRoute path="/nurse" authenticate={authenticate}>
+            <Navigation search={search} setSearch={setSearch} />
             <NursePage search={search} />
-          </Route>
+          </ProtectedRoute> */}
 
-          <Route path="/">
-            <Login />
-          </Route>
+          <ProtectedRoute
+            path="/nurse"
+            component={NursePage}
+            search={search}
+            setSearch={setSearch}
+            authenticate={authenticate}
+            setAuthenticate={setAuthenticate}
+          />
+
+          <ProtectedRoute
+            path="/physican"
+            component={Navigation}
+            search={search}
+            setSearch={setSearch}
+            authenticate={authenticate}
+            setAuthenticate={setAuthenticate}
+          />
+
+          <ProtectedLogin
+            path="/"
+            component={Login}
+            authenticate={authenticate}
+            setAuthenticate={setAuthenticate}
+            accountType={accountType}
+            setAccountType={setAccountType}
+          />
         </Switch>
       </Router>
     </div>
