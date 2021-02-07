@@ -10,7 +10,8 @@ const Login = (props) => {
 
   const handleLogin = () => {
     if (token.token === "token" && password.password === "password") {
-      Cookies.set("token", "/nurse");
+      var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
+      Cookies.set("token", "/nurse", { expires: inFifteenMinutes });
       props.setAuthenticate(true);
       props.setAccountType("/nurse");
     }
