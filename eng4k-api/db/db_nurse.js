@@ -78,7 +78,7 @@ nurseApiCalls.addNewSbar = (id, body) => {
       (note_id, note_patient_id, note_room_id, date_created, s_problem, s_code_status, s_BP,  s_pulse ,  s_respiration ,  s_temperature ,  s_o2 ,  s_concern_bp ,  s_concern_pulse ,  s_concern_temp ,  s_concern_respiration ,  b_awareness_alert_oriented ,  b_awareness_confused_cooperative ,  b_awareness_non_coop_agit_combative ,  b_awareness_lethargic ,  b_awareness_stuporous ,  b_awareness_comatose ,  b_skin_warm_dry ,  b_skin_pale ,  b_skin_mottled ,  b_skin_diaphoretic ,  b_skin_extremities_cold ,  b_skin_extremities_warm ,  b_o2_time ,  b_oximeter_detection ,  a_problem ,  a_problem_cardiac , a_problem_infection ,  a_problem_neurologic ,  a_problem_respitory ,  a_problem_unsure_deterioriating ,  a_unstable ,  a_arrest ,  r_request ,  r_priority ,  r_patient_family_code_status ,  r_test_needed ,  r_change_treatment_ordered ,  r_freq_vital_signs ,  r_time_problem_will_last ,  r_problem_persist_contact ,  physician_analysis )
       
       VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);`,
-      [fullName, dateOfBirth, dateOfBirth, body.weight, body.height],
+      [],
       (err, result) => {
         if (err) {
           return reject(err);
@@ -93,11 +93,12 @@ nurseApiCalls.addNewSbar = (id, body) => {
 nurseApiCalls.addNewPatient = (body) => {
   const fullName = `${body.fname} ${body.lname}`;
   const dateOfBirth = `${body.dOBYear}-${body.dOBMonth}-${body.dOBDay}`;
+  const admissionDate = `${body.today_year}-${body.today_month}-${body.today_day}`;
   return new Promise((resolve, reject) => {
     pool.query(
       `INSERT INTO heroku_c2367af0e7c5fa1.patient (patient_id, patient_name, admission_date, patient_date_of_birth, patient_weight, patient_height)
-      VALUES(defualt,?,defualt,?,?,?);`,
-      [fullName, dateOfBirth, dateOfBirth, body.weight, body.height],
+      VALUES(defualt,?,?,?,?,?);`,
+      [fullName, admissionDate, dateOfBirth, body.weight, body.height],
       (err, result) => {
         if (err) {
           return reject(err);

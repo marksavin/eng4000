@@ -2,7 +2,9 @@ const express = require("express");
 const Joi = require("joi");
 
 const router = express.Router();
-const db = require("../db/index_nurse");
+const db = require("../db/db_nurse");
+
+
 
 router.get("/viewPatients/:nurseId", async (req, res, next) => {
   // const schema = Joi.object({
