@@ -2,6 +2,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import { Button } from "@material-ui/core/";
 import React, { useState } from "react";
 import PhysicianPatientList from "./PhysicianPatientList";
+//import PHeader from './PHeader';
 ///import ContactPhysicianCard from "../Nurse/ContactPhysicanCard"; //temperarily
 
 import Header from "../Nurse/Header";
@@ -31,6 +32,7 @@ const PhysicianDashBoard = () => {
           {/* <ContactPhysicianCard /> */}
         </Route>
         <Route exact path="/physician/patient-list">
+          <Header title='Dr. --Physician Name--'/>
           <PhysicianPatientList search={search} />
         </Route>
       </Switch>

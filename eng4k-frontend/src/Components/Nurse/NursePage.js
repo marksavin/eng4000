@@ -5,6 +5,7 @@ import PatientTable from "./PatientTable.js";
 import Header from "./Header";
 import Sbar from "../Sbar/Sbar.js";
 import CreatePatient from "../CreatePatient/CreatePatient.js";
+import ContactPhysicanCard from "./ContactPhysicianCard.js";
 
 import { Button, createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
 
@@ -38,7 +39,10 @@ const NursePage = (props) => {
             <PatientTable search={props.search} />
           </MuiThemeProvider>
         </Route>
-
+        <Route exact path="/nurse/contactPhysician"> 
+        {/* ------------------ Temporarily routed here -------------------------*/}
+          <ContactPhysicanCard /> 
+        </Route>
         <Route exact path="/nurse/add-patient">
           <CreatePatient />
         </Route>
