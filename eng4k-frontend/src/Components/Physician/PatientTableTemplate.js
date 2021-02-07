@@ -265,7 +265,7 @@ export default function EnhancedTable(props) {
       r_priority: "-",
       update_status: "-",
       last_updated: "-",
-      nurse: "-",
+      nurse: "placeholder",
       SBAR_history: "-",
     },
   ]);
@@ -430,7 +430,7 @@ export default function EnhancedTable(props) {
                           {patients.update_status}
                         </TableCell>
                         <TableCell align="right">
-                         --- nursename placeholder---
+                        {patients.nurse}
                         </TableCell>
                         <TableCell align="right">
                         <Button variant="contained" color="primary">
