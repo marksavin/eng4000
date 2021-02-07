@@ -22,10 +22,10 @@ const pool = mysql.createPool({
 
 let loginApiCall = {};
 
-loginApiCall.registerAccount = (token, hashedPassword) => {
+loginApiCall.registerAccount = (token, hashedPassword, user_type) => {
   return new Promise((resolve, reject) => {
     pool.query(
-      `INSERT INTO capstonedb.login (username_id, password, date_created, user_type) VALUES (?,?, CURRENT_DATE(),?)`,
+      `INSERT INTO capstonedb.login (token, password, date_created, user_type) VALUES (?,?, CURRENT_DATE(),?)`,
       [token, hashedPassword, user_type],
       (err, result) => {
         if (err) {
@@ -41,7 +41,7 @@ loginApiCall.registerAccount = (token, hashedPassword) => {
 loginApiCall.accountAuthentication = (body) => {
   return new Promise((resolve, reject) => {
     pool.query(
-      `SELECT * FROM capstonedb.login WHERE username_id = ? `,
+      `SELECT * FROM capstonedb.login WHERE token = ? `,
       [body.token],
       (err, result) => {
         if (err) {
