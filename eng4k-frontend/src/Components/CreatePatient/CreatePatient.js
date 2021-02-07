@@ -24,7 +24,7 @@ class CreatePatient extends React.Component {
   render() {
     return (
       <div>
-        <div className="container">
+        <div className="container-CreatePatient">
           <div className="promptMessage">
             Please Enter the Following Information:
           </div>
