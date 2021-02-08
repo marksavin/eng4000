@@ -53,12 +53,13 @@ function Situation(props) {
           </Grid>
           <Grid item xs={12} md={6}>
             <Inputgroup
-              label="Unit"
-              name="s_unit"
-              value={props.situation.s_unit}
+              label="Room Number"
+              name="note_room_id"
+              value={props.situation.note_room_id}
               onBlur={props.handleInput}
               text="I'm calling from"
-              error={props.errors.s_unit}
+              error={props.errors.note_room_id}
+              placeholder={}
             ></Inputgroup>
           </Grid>
           <Grid12>

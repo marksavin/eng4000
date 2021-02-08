@@ -61,7 +61,7 @@ export function useForm(
   // const handleInput = userCallback(() => {
   const handleInput = (event) => {
     const { name, value } = event.target;
-    if (name.charAt(0) === "s") {
+    if (name.charAt(0) === "s" || name.charAt(0) === "n") {
       setSituationValue({
         ...situationValue,
         [name]: value,

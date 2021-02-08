@@ -11,7 +11,6 @@ const situation = {
   note_room_id: "",
   date_created: new Date(),
   s_problem: "",
-  s_unit: "",
   s_code_status: "",
   s_BP: "",
   s_pulse: "",
@@ -115,8 +114,10 @@ const recommendation = {
 export default function Sbarform(props) {
   const validate = (fieldValues = situationValue) => {
     let temp = { ...errors };
-    if ("s_unit" in fieldValues)
-      temp.s_unit = fieldValues.s_unit ? "" : "This field is required";
+    if ("note_room_id" in fieldValues)
+      temp.note_room_id = fieldValues.note_room_id
+        ? ""
+        : "This field is required";
     setErrors({
       ...temp,
     });
@@ -176,6 +177,7 @@ export default function Sbarform(props) {
   }, [combinedValues]);
 
   situationValue.note_patient_id = props.patientName;
+  // situationValue.note_room_id = props.patientRoom;
   useEffect(() => {
     // Update the document title using the browser API
     console.log(situationValue);
