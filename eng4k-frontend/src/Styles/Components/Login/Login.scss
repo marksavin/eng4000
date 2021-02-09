@@ -22,7 +22,6 @@ $base-color: rgb(51, 187, 179);
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // padding: 6rem;
     background-color: $base-color;
     color: white;
     width: 50%;
@@ -32,6 +31,17 @@ $base-color: rgb(51, 187, 179);
       font-size: 3rem;
       font-weight: 500;
       padding-bottom: 2rem;
+      padding-top: 4rem;
+    }
+
+    .signup-para {
+      padding: 4rem 4rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .signup-button {
+      margin-top: 4rem;
+      text-align: center;
     }
   }
 
@@ -113,6 +123,16 @@ $base-color: rgb(51, 187, 179);
       outline: none;
     }
   }
+
+  .signup {
+    background-color: white;
+    color: $base-color;
+
+    &:hover {
+      background-color: rgb(236, 236, 236);
+      // background-color: $base-color;
+    }
+  }
 }
 
 @media screen and (max-width: 950px) {
@@ -126,16 +146,31 @@ $base-color: rgb(51, 187, 179);
       background-color: white;
       color: black;
       width: 50%;
-      height: 100%;
-      padding-top: 4rem;
+      height: 80%;
+      // padding-top: 2rem;
 
       .login-title {
         font-size: 2rem;
+        padding-top: 1rem;
       }
 
       .login-sentence {
         text-align: center;
         font-size: 1rem;
+      }
+
+      .login-sentence {
+        display: none;
+      }
+
+      .signup-para {
+        padding: 0 0 1rem 0;
+        text-align: center;
+      }
+
+      .signup-button {
+        margin-top: 1rem;
+        text-align: center;
       }
     }
 
@@ -152,12 +187,12 @@ $base-color: rgb(51, 187, 179);
       }
 
       .login-form {
-        height: 100%;
-        margin-top: 3rem;
+        height: 80%;
+        margin-top: 0rem;
       }
 
       .login-form-group {
-        margin-top: 1rem;
+        // margin-top: 1rem;
 
         label {
           margin: 1rem 0 1rem 0;
@@ -194,13 +229,13 @@ $base-color: rgb(51, 187, 179);
     }
 
     .login-button {
-      margin-top: 3rem;
-      margin-bottom: 7rem;
+      margin-top: 0rem;
+      margin-bottom: 1rem;
     }
 
     .button {
-      font-size: 1.5rem;
-      padding: 5px 30px;
+      font-size: 1.2rem;
+      padding: 3px 30px;
       border: 0;
       background-color: $base-color;
       // background-color: white;
@@ -335,5 +370,4 @@ $base-color: rgb(51, 187, 179);
   .login-form {
     margin-top: 1rem;
   }
-
 }

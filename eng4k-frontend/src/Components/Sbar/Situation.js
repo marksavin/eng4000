@@ -36,7 +36,7 @@ function Situation(props) {
   useEffect(() => {
     // Update the document title using the browser API
     console.log(testing);
-  });
+  },[]);
 
   return (
     <div className="paper-situation">
@@ -59,7 +59,6 @@ function Situation(props) {
               onBlur={props.handleInput}
               text="I'm calling from"
               error={props.errors.note_room_id}
-              placeholder={}
             ></Inputgroup>
           </Grid>
           <Grid12>

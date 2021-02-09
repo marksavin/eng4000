@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserMd, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
@@ -24,8 +25,21 @@ const Login = (props) => {
           <div className="login-title">Welcome Back</div>
           <div className="login-sentence">
             <p className="sentence">
-              Please use the token provided by the admin to login
+              Please use the token provided by the Admin to login
             </p>
+          </div>
+          <div className="signup-button">
+            <div className="signup-sentence">
+              <p className="signup-para">
+                If you're an Admin please use the button below to create an user
+                account
+              </p>
+            </div>
+            <Link to="/singup">
+              <button className="button signup" onClick={handleLogin}>
+                Create Account
+              </button>
+            </Link>
           </div>
         </div>
         <div className="login-component">

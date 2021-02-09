@@ -9,6 +9,7 @@ import Login from "./Components/Login/Login.js";
 import NursePage from "./Components/Nurse/NursePage.js";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute.js";
 import ProtectedLogin from "./Components/Routes/ProtectedLogin.js";
+import Signup from "./Components/Login/Signup.js";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -55,6 +56,8 @@ function App() {
             authenticate={authenticate}
             setAuthenticate={setAuthenticate}
           />
+
+          <Route path="/singup" component={Signup} />
 
           <ProtectedLogin
             path="/"

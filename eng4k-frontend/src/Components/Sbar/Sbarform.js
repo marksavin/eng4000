@@ -8,7 +8,7 @@ import { Form, ButtonForm, useForm } from "../Sbar/useForm.js";
 const situation = {
   note_id: "",
   note_patient_id: "",
-  note_room_id: "",
+  note_room_id: " ",
   date_created: new Date(),
   s_problem: "",
   s_code_status: "",
