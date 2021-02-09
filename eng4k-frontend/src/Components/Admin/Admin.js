@@ -25,12 +25,6 @@ const Admin = (props) => {
           <img src="https://react.semantic-ui.com/images/avatar/large/matthew.png" />
         </div>
 
-        <Navigation
-          search={props.search}
-          setSearch={props.setSearch}
-          setAuthenticate={props.setAuthenticate}
-        />
-
         <div className="content">
           <div className="header">{props.pname}</div>
           <div className="meta">
