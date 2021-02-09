@@ -9,6 +9,7 @@ import Login from "./Components/Login/Login.js";
 import NursePage from "./Components/Nurse/NursePage.js";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute.js";
 import ProtectedLogin from "./Components/Routes/ProtectedLogin.js";
+import Admin from "./Components/Admin/Admin.js";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -37,7 +38,6 @@ function App() {
             <Navigation search={search} setSearch={setSearch} />
             <NursePage search={search} />
           </ProtectedRoute> */}
-
           <ProtectedRoute
             path="/nurse"
             component={NursePage}
@@ -46,7 +46,6 @@ function App() {
             authenticate={authenticate}
             setAuthenticate={setAuthenticate}
           />
-
           <ProtectedRoute
             path="/physican"
             component={Navigation}
@@ -57,12 +56,22 @@ function App() {
           />
 
           <ProtectedLogin
+            exact
             path="/"
             component={Login}
             authenticate={authenticate}
             setAuthenticate={setAuthenticate}
             accountType={accountType}
             setAccountType={setAccountType}
+          />
+
+          <ProtectedRoute
+            path="/admin"
+            component={Admin}
+            search={search}
+            setSearch={setSearch}
+            authenticate={authenticate}
+            setAuthenticate={setAuthenticate}
           />
         </Switch>
       </Router>
