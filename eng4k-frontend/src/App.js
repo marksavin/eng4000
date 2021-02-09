@@ -65,22 +65,21 @@ function App() {
             setAccountType={setAccountType}
           />
 
-          {/* <ProtectedRoute
+          <ProtectedRoute
             path="/admin"
             component={Admin}
             search={search}
             setSearch={setSearch}
             authenticate={authenticate}
             setAuthenticate={setAuthenticate}
-          /> */}
-          <Route path="/admin">
+          >
             <Navigation serach={search} setSearch={setSearch} />
             <Admin
               pname="Dr. Geneva"
               specialty="Neurology"
               availability="Away on vacation"
             />
-          </Route>
+          </ProtectedRoute>
         </Switch>
       </Router>
     </div>
