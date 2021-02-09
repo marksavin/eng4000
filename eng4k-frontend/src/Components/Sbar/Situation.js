@@ -59,7 +59,7 @@ function Situation(props) {
               onBlur={props.handleInput}
               text="I'm calling from"
               error={props.errors.note_room_id}
-              placeholder={}
+              placeholder="hello world"
             ></Inputgroup>
           </Grid>
           <Grid12>
