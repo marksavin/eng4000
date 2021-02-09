@@ -36,7 +36,7 @@ const Login = (props) => {
               </p>
             </div>
             <Link to="/singup">
-              <button className="button signup" onClick={handleLogin}>
+              <button className="button signup-btn" onClick={handleLogin}>
                 Create Account
               </button>
             </Link>

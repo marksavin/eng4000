@@ -27,26 +27,29 @@ const FormikStepper = ({ children, ...props }) => {
         }
       }}
     >
-      <Form autoComplete="off">
-        {currentChild}
-        <Grid container spacing={2}>
-          {step > 0 ? (
+      <Form autoComplete="off" className="stepper-form">
+        <div>
+          <div className="signup-topic">{currentChild.props.topic}</div>
+          {currentChild}
+          <Grid container spacing={2}>
+            {step > 0 ? (
+              <Grid item>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => setStep((s) => s - 1)}
+                >
+                  Back
+                </Button>
+              </Grid>
+            ) : null}
             <Grid item>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => setStep((s) => s - 1)}
-              >
-                Back
+              <Button variant="contained" color="primary" type="submit">
+                {isLastStep() ? "Submit" : "Next"}
               </Button>
             </Grid>
-          ) : null}
-          <Grid item>
-            <Button variant="contained" color="primary" type="submit">
-              {isLastStep() ? "Submit" : "Next"}
-            </Button>
           </Grid>
-        </Grid>
+        </div>
         <Stepper alternativeLabel activeStep={step}>
           {childrenArray.map((child, index) => (
             <Step key={child.props.label} completed={step > index || completed}>

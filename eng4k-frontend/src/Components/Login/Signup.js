@@ -17,7 +17,7 @@ const Signup = () => {
   function generatePassword() {
     const chars =
       "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const length = 6;
+    const length = 10;
     var result = "";
     for (var i = length; i > 0; --i)
       result += chars[Math.floor(Math.random() * chars.length)];
@@ -36,136 +36,142 @@ const Signup = () => {
   });
 
   return (
-    <div className="login">
-      <ThemeProvider theme={theme}>
-        <Card>
-          <CardContent>
-            <FormikStepper
-              initialValues={{
-                accountType: "",
-                firstName: "",
-                lastName: "",
-                department: "",
-                accountRole: "",
-                password: generatePassword(),
-                token: "",
-              }}
-              onSubmit={() => {}}
-            >
-              <FormikStep
-                label="Account type"
-                validationSchema={object({
-                  accountType: string().required(
-                    "please select the account type"
-                  ),
-                })}
+    <div className="signup-container">
+      <div>
+        <ThemeProvider theme={theme}>
+          <Card className="signup" elevation={4}>
+            <CardContent className="signup-cardcontent">
+              <FormikStepper
+                initialValues={{
+                  accountType: "",
+                  firstName: "",
+                  lastName: "",
+                  department: "",
+                  accountRole: "",
+                  password: generatePassword(),
+                  token: "",
+                }}
+                onSubmit={() => {}}
               >
-                <Box paddingBottom={2}>
-                  <Field name="accountType">
-                    {(fieldObject) => (
-                      <ControlledOpenSelect
-                        option="Account Type"
-                        name="accountType"
-                        fieldObject={fieldObject}
-                      />
-                    )}
-                  </Field>
-                </Box>
-              </FormikStep>
+                <FormikStep
+                  topic="Please select the type of account you want to create"
+                  label="Account type"
+                  validationSchema={object({
+                    accountType: string().required(
+                      "please select the account type"
+                    ),
+                  })}
+                >
+                  <Box paddingBottom={2}>
+                    <Field name="accountType">
+                      {(fieldObject) => (
+                        <ControlledOpenSelect
+                          option="Account Type"
+                          name="accountType"
+                          fieldObject={fieldObject}
+                        />
+                      )}
+                    </Field>
+                  </Box>
+                </FormikStep>
 
-              <FormikStep
-                validationSchema={object({
-                  accountRole: string().required(
-                    "Please select the appropriate role for the account"
-                  ),
-                  department: string().required(
-                    "Please select the appropriate department"
-                  ),
-                })}
-                label="Role and Department"
-                style={{ display: "flex", flexDirection: "column" }}
-              >
-                <Box paddingBottom={2}>
-                  <Field name="accountRole">
-                    {(fieldObject) => (
-                      <ControlledOpenSelect
-                        option="Account Role"
-                        stage={1}
-                        name="accountRole"
-                        fieldObject={fieldObject}
-                      />
-                    )}
-                  </Field>
-                </Box>
-                <Box paddingBottom={2}>
-                  <Field name="department">
-                    {(fieldObject) => (
-                      <ControlledOpenSelect
-                        option="Department"
-                        stage={2}
-                        name="department"
-                        fieldObject={fieldObject}
-                      />
-                    )}
-                  </Field>
-                </Box>
-              </FormikStep>
+                <FormikStep
+                  topic="Please Select the appropriate role and department for the account"
+                  validationSchema={object({
+                    accountRole: string().required(
+                      "Please select the appropriate role for the account"
+                    ),
+                    department: string().required(
+                      "Please select the appropriate department"
+                    ),
+                  })}
+                  label="Role and Department"
+                  style={{ display: "flex", flexDirection: "column" }}
+                >
+                  <Box paddingBottom={2}>
+                    <Field name="accountRole">
+                      {(fieldObject) => (
+                        <ControlledOpenSelect
+                          option="Account Role"
+                          stage={1}
+                          name="accountRole"
+                          fieldObject={fieldObject}
+                        />
+                      )}
+                    </Field>
+                  </Box>
+                  <Box paddingBottom={2}>
+                    <Field name="department">
+                      {(fieldObject) => (
+                        <ControlledOpenSelect
+                          option="Department"
+                          stage={2}
+                          name="department"
+                          fieldObject={fieldObject}
+                        />
+                      )}
+                    </Field>
+                  </Box>
+                </FormikStep>
 
-              <FormikStep
-                label="Personal Information"
-                validationSchema={object({
-                  firstName: string().required(
-                    "Please enter the first name of the account holder"
-                  ),
-                  lastName: string().required(
-                    "Please enter the last name of he account holder"
-                  ),
-                })}
-              >
-                <Box paddingBottom={2}>
-                  <Field
-                    fullWidth
-                    name="firstName"
-                    label="First Name"
-                    component={TextField}
-                  />
-                </Box>
-                <Box paddingBottom={2}>
-                  <Field
-                    fullWidth
-                    name="lastName"
-                    label="Last Name"
-                    component={TextField}
-                  />
-                </Box>
-              </FormikStep>
-              <FormikStep
-                label="Token and Password"
-                validationSchema={object({
-                  password: string().required("please enter a password"),
-                })}
-              >
-                <Box paddingBottom={2}>
-                  <Field
-                    fullWidth
-                    name="token"
-                    label="Login Token"
-                    component={TextField}
-                  />
-                </Box>
-                <Box paddingBottom={2}>
-                  <Field
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    component={TextField}
-                  />
-                </Box>
-              </FormikStep>
-            </FormikStepper>
-          </CardContent>
-        </Card>
-      </ThemeProvider>
+                <FormikStep
+                  topic="First and last name of the account holder"
+                  label="Personal Information"
+                  validationSchema={object({
+                    firstName: string().required(
+                      "Please enter the first name of the account holder"
+                    ),
+                    lastName: string().required(
+                      "Please enter the last name of he account holder"
+                    ),
+                  })}
+                >
+                  <Box paddingBottom={2}>
+                    <Field
+                      halfWidth
+                      name="firstName"
+                      label="First Name"
+                      component={TextField}
+                    />
+                  </Box>
+                  <Box paddingBottom={2}>
+                    <Field
+                      halfWidth
+                      name="lastName"
+                      label="Last Name"
+                      component={TextField}
+                    />
+                  </Box>
+                </FormikStep>
+                <FormikStep
+                  topic="Please enter a token that will be used to login the account"
+                  label="Token and Password"
+                  validationSchema={object({
+                    password: string().required("please enter a password"),
+                  })}
+                >
+                  <Box paddingBottom={2}>
+                    <Field
+                      halfWidth
+                      name="token"
+                      label="Login Token"
+                      component={TextField}
+                    />
+                  </Box>
+                  <Box paddingBottom={2}>
+                    <Field
+                      halfWidth
+                      name="password"
+                      label="Password"
+                      component={TextField}
+                    />
+                  </Box>
+                </FormikStep>
+              </FormikStepper>
+            </CardContent>
+          </Card>
+        </ThemeProvider>
+      </div>
     </div>
   );
 };
