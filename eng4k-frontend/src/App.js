@@ -22,8 +22,8 @@ function App() {
           </Route>
           <Route path="/physician">
            {/* <PhysicianPage search={search} /> */}
-           <Navigation serach={search} setSearch={setSearch} />
-           <PhysicianDashBoard />
+           <Navigation search={search} setSearch={setSearch} />
+           <PhysicianDashBoard search={search} />
           </Route>
 
           <Route path="/">

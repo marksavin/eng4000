@@ -7,8 +7,7 @@ import PhysicianPatientList from "./PhysicianPatientList";
 
 import Header from "../Nurse/Header";
 
-const PhysicianDashBoard = () => {
-  const [search, setSearch] = useState("");
+const PhysicianDashBoard = (props) => {
 
   return (
     <div>
@@ -33,7 +32,7 @@ const PhysicianDashBoard = () => {
         </Route>
         <Route exact path="/physician/patient-list">
           <Header title='Dr. --Physician Name--'/>
-          <PhysicianPatientList search={search} />
+          <PhysicianPatientList search={props.search} />
         </Route>
       </Switch>
     </div>
