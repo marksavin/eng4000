@@ -10,6 +10,7 @@ import NursePage from "./Components/Nurse/NursePage.js";
 import ProtectedRoute from "./Components/Routes/ProtectedRoute.js";
 import ProtectedLogin from "./Components/Routes/ProtectedLogin.js";
 import Physician from "./Components/Physician/PhysicianDashboard.js";
+import Admin from "./Components/Admin/Admin.js";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -38,7 +39,6 @@ function App() {
             <Navigation search={search} setSearch={setSearch} />
             <NursePage search={search} />
           </ProtectedRoute> */}
-
           <ProtectedRoute
             path="/nurse"
             component={NursePage}
@@ -47,7 +47,6 @@ function App() {
             authenticate={authenticate}
             setAuthenticate={setAuthenticate}
           />
-
           <ProtectedRoute
             path="/physican"
             component={Physician}
@@ -57,7 +56,24 @@ function App() {
             setAuthenticate={setAuthenticate}
           />
 
+          <ProtectedRoute
+            path="/admin"
+            component={Admin}
+            search={search}
+            setSearch={setSearch}
+            authenticate={authenticate}
+            setAuthenticate={setAuthenticate}
+          >
+            <Navigation serach={search} setSearch={setSearch} />
+            <Admin
+              pname="Dr. Geneva"
+              specialty="Neurology"
+              availability="Away on vacation"
+            />
+          </ProtectedRoute>
+
           <ProtectedLogin
+            exact
             path="/"
             component={Login}
             authenticate={authenticate}
