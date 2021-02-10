@@ -1,0 +1,41 @@
+.contactPcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(0, 40%);
+}
+
+.extraContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.remarksText {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+}
+.MuiFormControl-root {
+  width: 80%;
+}
+
+.controlButton {
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+  transform: translate(0, 25%);
+  margin-bottom: 5%;
+}
+
+.ContactButtons {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 2%;
+  padding: 5%;
+}
+.ContactCancelButton {
+  padding-right: 10px;
+}
+
+
