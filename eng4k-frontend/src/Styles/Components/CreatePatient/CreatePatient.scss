@@ -24,7 +24,8 @@
   height: 250px;
   width: 100%;
 }
-.Buttons {
+
+.Buttons-createpatient {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -38,59 +39,59 @@
   margin: auto;
 }
 
-.Dob {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-  padding: 10px;
-  width: 100%;
-}
+// .Dob {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin: auto;
+//   padding: 10px;
+//   width: 100%;
+// }
 
-.hW {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+// .hW {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
 
-.doblabel {
-  margin-right: 10px;
-}
+// .doblabel {
+//   margin-right: 10px;
+// }
 
-.dobmonth,
-.dobday {
-  width: 65px;
-}
+// .dobmonth,
+// .dobday {
+//   width: 65px;
+// }
 
-.dobyear {
-  width: 100px;
-  text-align: center;
-}
+// .dobyear {
+//   width: 100px;
+//   text-align: center;
+// }
 
-.dobmonth,
-.dobday,
-.dobyear {
-  padding: 5px;
-}
+// .dobmonth,
+// .dobday,
+// .dobyear {
+//   padding: 5px;
+// }
 
-.weightForm,
-.heightForm {
-  width: 110px;
-}
+// .weightForm,
+// .heightForm {
+//   width: 150px;
+// }
 
-.FirstName {
-  margin-right: 5px;
-}
-.LastName {
-  margin-left: 5px;
-}
+// .FirstName {
+//   margin-right: 5px;
+// }
+// .LastName {
+//   margin-left: 5px;
+// }
 
-.subBut,
-.cancBut {
-  margin: 10px;
-}
+// .subBut,
+// .cancBut {
+//   margin: 10px;
+// }
 
-.Height,
-.Weight {
-  padding: 5px;
-}
+// // .Height,
+// // .Weight {
+// //   padding: 5px;
+// // }

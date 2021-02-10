@@ -1,7 +1,7 @@
 import React from "react";
 //import DateFnsUtils from "@date-io/date-fns";
 //import { DatePicker } from "@material-ui/pickers";
-import {Button, TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 
 class CreatePatient extends React.Component {
   state = {
@@ -39,7 +39,7 @@ class CreatePatient extends React.Component {
   render() {
     return (
       <form noValidate autoComplete="off" onSubmit={this.handleSubmit}>
-        <div className="container">
+        <div className="container-CreatePatient">
           <div className="promptMessage">
             Please Enter the Following Information:
           </div>
@@ -120,7 +120,7 @@ class CreatePatient extends React.Component {
               </div>
             </div>
           </div>
-          <div className="Buttons">
+          <div className="Buttons-createpatient">
             <div className="cancBut">
               <Button variant="contained" color="secondary">
                 Cancel
