@@ -48,7 +48,7 @@ function CreatePatient(props) {
       noValidate
       autoComplete="off"
       // validationschema={reviewSchema}
-      onSubmit={this.handleSubmit}
+      onSubmit={handleSubmit}
     >
       <div className="container-CreatePatient">
         <div className="promptMessage">
@@ -59,11 +59,11 @@ function CreatePatient(props) {
             {/* <!--    djhrjb --> */}
             <div>
               <div noValidate autoComplete="off">
-                <label>
+                <label className="cpLabel">
                   First Name
                   <input
                     placeholder="Full Name"
-                    className="firstName"
+                    className="firstName cpInput"
                     onChange={(e) => setForm({ fname: e.target.value })}
                   />
                 </label>
@@ -72,11 +72,11 @@ function CreatePatient(props) {
 
             <div>
               <div noValidate autoComplete="off">
-                <label>
+                <label className="cpLabel">
                   Last Name
                   <input
                     placeholder="Last Name"
-                    className="lastName"
+                    className="lastName cpInput"
                     onChange={(e) => setForm({ lname: e.target.value })}
                   ></input>
                 </label>
@@ -85,11 +85,11 @@ function CreatePatient(props) {
           </div>
           <div>
             <div className="aod">
-              <label>
+              <label className="cpLabel">
                 Admission Date
                 <input
                   type="date"
-                  className="admissionDate"
+                  className="admissionDate cpInput"
                   onChange={(e) => setForm({ admissionDate: e.target.value })}
                 ></input>
               </label>
@@ -98,40 +98,22 @@ function CreatePatient(props) {
           <div>
             {/* <label>Date of Birth:</label> */}
             <div className="dob">
-              <label>
+              <label className="cpLabel">
                 Date of Birth
                 <input
                   type="date"
-                  className="dateOfBirth"
+                  className="dateOfBirth cpInput"
                   onChange={(e) => setForm({ dateOfBirth: e.target.value })}
                 ></input>
               </label>
             </div>
-            {/* - */}
-            {/* <div className="dobday" noValidate autoComplete="off">
-                <TextField
-                  id="dobDayField"
-                  label="dd"
-                  variant="outlined"
-                  onChange={(e) => this.setState({ dOBDay: e.target.value })}
-                />
-              </div>
-              -
-              <div className="dobyear" noValidate autoComplete="off">
-                <TextField
-                  id="dobYearField"
-                  label="yyyy"
-                  variant="outlined"
-                  onChange={(e) => this.setState({ dOBYear: e.target.value })}
-                />
-              </div> */}
           </div>
 
           {/* <div className="hW"> */}
           <div className="cNames">
             <div>
               <div noValidate autoComplete="off">
-                <label>
+                <label className="cpLabel">
                   Weight
                   <input
                     placeholder="Weight (lbs)"
@@ -144,7 +126,7 @@ function CreatePatient(props) {
 
             <div>
               <div>
-                <label>
+                <label className="cpLabel">
                   Height
                   <input
                     placeholder="Height (in)"
