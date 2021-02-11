@@ -55,12 +55,12 @@ $base-color: rgb(51, 187, 179);
       position: relative;
       margin-top: 1rem;
 
-      .login-label {
+      label {
         margin: 1rem 0 1rem 0;
         font-size: 1.5rem;
       }
 
-      .login-input {
+      input {
         margin-top: 6px;
         min-width: 20rem;
         height: 40px;
@@ -159,12 +159,12 @@ $base-color: rgb(51, 187, 179);
       .login-form-group {
         margin-top: 1rem;
 
-        .login-label {
+        label {
           margin: 1rem 0 1rem 0;
           font-size: 1.5rem;
         }
 
-        .login-input {
+        input {
           margin-top: 6px;
           min-width: 20rem;
           height: 40px;
@@ -261,12 +261,12 @@ $base-color: rgb(51, 187, 179);
         position: relative;
         margin-top: 2rem;
 
-        .login-label {
+        label {
           margin: 1rem 0 1rem 0;
           font-size: 1.5rem;
         }
 
-        .login-input {
+        input {
           margin-top: 6px;
           min-width: 20rem;
           height: 40px;
@@ -335,4 +335,5 @@ $base-color: rgb(51, 187, 179);
   .login-form {
     margin-top: 1rem;
   }
+
 }

@@ -31,7 +31,7 @@ const Login = (props) => {
         <div className="login-component">
           <div className="login-form">
             <div className="login-form-group">
-              <label className="longin-label" htmlFor="token">
+              <label className="label" htmlFor="token">
                 Token
               </label>
               <input
@@ -44,7 +44,7 @@ const Login = (props) => {
             </div>
 
             <div className="login-form-group">
-              <label className="login-label" htmlFor="password">
+              <label className="label" htmlFor="password">
                 Password
               </label>
               <input
