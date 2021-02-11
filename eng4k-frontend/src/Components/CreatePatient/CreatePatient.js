@@ -64,11 +64,11 @@ class CreatePatient extends React.Component {
               {/* <!--    djhrjb --> */}
               <div>
                 <div noValidate autoComplete="off">
-                  <label>
+                  <label className="cpLabel">
                     First Name
                     <input
                       placeholder="Full Name"
-                      className="firstName"
+                      className="firstName cpInput"
                       onChange={(e) => this.setState({ fname: e.target.value })}
                     />
                   </label>
@@ -77,11 +77,11 @@ class CreatePatient extends React.Component {
 
               <div>
                 <div noValidate autoComplete="off">
-                  <label>
+                  <label className="cpLabel">
                     Last Name
                     <input
                       placeholder="Last Name"
-                      className="lastName"
+                      className="lastName cpInput"
                       onChange={(e) => this.setState({ lname: e.target.value })}
                     ></input>
                   </label>
@@ -90,11 +90,11 @@ class CreatePatient extends React.Component {
             </div>
             <div>
               <div className="aod">
-                <label>
+                <label className="cpLabel">
                   Admission Date
                   <input
                     type="date"
-                    className="admissionDate"
+                    className="admissionDate cpInput"
                     onChange={(e) =>
                       this.setState({ admissionDate: e.target.value })
                     }
@@ -105,42 +105,24 @@ class CreatePatient extends React.Component {
             <div>
               {/* <label>Date of Birth:</label> */}
               <div className="dob">
-                <label>
+                <label className="cpLabel">
                   Date of Birth
                   <input
                     type="date"
-                    className="dateOfBirth"
+                    className="dateOfBirth cpInput"
                     onChange={(e) =>
                       this.setState({ dateOfBirth: e.target.value })
                     }
                   ></input>
                 </label>
               </div>
-              {/* - */}
-              {/* <div className="dobday" noValidate autoComplete="off">
-                <TextField
-                  id="dobDayField"
-                  label="dd"
-                  variant="outlined"
-                  onChange={(e) => this.setState({ dOBDay: e.target.value })}
-                />
-              </div>
-              -
-              <div className="dobyear" noValidate autoComplete="off">
-                <TextField
-                  id="dobYearField"
-                  label="yyyy"
-                  variant="outlined"
-                  onChange={(e) => this.setState({ dOBYear: e.target.value })}
-                />
-              </div> */}
             </div>
 
             {/* <div className="hW"> */}
             <div className="cNames">
               <div>
                 <div noValidate autoComplete="off">
-                  <label>
+                  <label className="cpLabel">
                     Weight
                     <input
                       placeholder="Weight (lbs)"
@@ -155,7 +137,7 @@ class CreatePatient extends React.Component {
 
               <div>
                 <div>
-                  <label>
+                  <label className="cpLabel">
                     Height
                     <input
                       placeholder="Height (in)"

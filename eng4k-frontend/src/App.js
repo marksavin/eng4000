@@ -63,14 +63,10 @@ function App() {
             setSearch={setSearch}
             authenticate={authenticate}
             setAuthenticate={setAuthenticate}
-          >
-            <Navigation serach={search} setSearch={setSearch} />
-            <Admin
-              pname="Dr. Geneva"
-              specialty="Neurology"
-              availability="Away on vacation"
-            />
-          </ProtectedRoute>
+            pname="Dr. Geneva"
+            specialty="Neurology"
+            availability="Away on vacation"
+          />
 
           <ProtectedLogin
             exact
