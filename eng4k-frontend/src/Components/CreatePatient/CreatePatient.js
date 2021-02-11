@@ -1,57 +1,17 @@
 import React, { useState } from "react";
 //import DateFnsUtils from "@date-io/date-fns";
 //import { DatePicker } from "@material-ui/pickers";
-import {
-  Button,
-  TextField,
-  Grid,
-  Paper,
-  makeStyles,
-  InputLabel,
-  ThemeProvider,
-  unstable_createMuiStrictModeTheme as createMuiTheme,
-} from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
+import { Button } from "@material-ui/core";
+import * as yup from "yup";
 
-const paperStyle = makeStyles((theme) => ({
-  pageContent: {
-    marginBottom: "50px",
-    padding: "6%",
-    alighItems: "center",
-  },
-}));
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#33bbb3",
-    },
-    error: red,
-  },
+// a schema is just a place to define a set of rules
+const reviewSchema = yup.object({
+  // here we create a yup object where we will define our schema
+  fName: yup.string().required(),
+  lName: yup.string().required(),
+  weight: yup.number().required,
+  height: yup.number().required,
 });
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiFormControl-root": {
-      width: "100%",
-      margin: theme.spacing(1),
-      verticleAlighn: "center",
-    },
-    " & .MuiInputBase-input": {
-      display: "inline-block",
-      alignItems: "center",
-    },
-    "& .MuiFormLabel-root": {
-      display: "inline-block",
-      whiteSpace: "nowrap",
-    },
-    "& .MuiGrid-root": {
-      display: "flex",
-      alignItems: "center",
-      textAlign: "center",
-    },
-  },
-}));
 
 function CreatePatient(props) {
   const [form, setForm] = useState({
@@ -59,15 +19,16 @@ function CreatePatient(props) {
     fname: "",
     lname: "",
     //adDate: "", // have a function to get current date
-    dOBDay: "",
-    dOBMonth: "",
-    dOBYear: "",
+    admissionDate: "",
+    dateOfBirth: "",
     weight: 0.0,
     height: 0.0,
   });
 
   const handleSubmit = (event) => {
+    // api call
     event.preventDefault();
+    console.log(form);
     fetch(`/nurse/addNewPatient`, {
       method: "POST",
       headers: {
@@ -82,111 +43,135 @@ function CreatePatient(props) {
     });
   };
 
-  const paperstyle = paperStyle();
-  const classes = useStyles();
-
   return (
-    <ThemeProvider theme={theme}>
-      <form
-        noValidate
-        autoComplete="off"
-        onSubmit={handleSubmit}
-        className={classes.root}
-      >
-        <div className="container-CreatePatient">
-          <Paper className={paperstyle.pageContent} elevation={4}>
-            <Grid container spacing={1}>
-              <Grid item xs={12} className={classes.root}>
-                <div className="promptMessage">
-                  Please Enter the Following Information:
-                </div>
-              </Grid>
-              <Grid item xs={12} md={6} className={classes.root}>
-                <TextField
-                  id="fnameField"
-                  label="First Name"
-                  variant="outlined"
-                  onChange={(e) => setForm({ fname: e.target.value })}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} className={classes.root}>
-                <TextField
-                  id="lnameField"
-                  label="Last Name"
-                  variant="outlined"
-                  onChange={(e) => setForm({ lname: e.target.value })}
-                />
-              </Grid>
-              <Grid item xs={12} md={12} lg={3} className={classes.root}>
-                <InputLabel style={{color: "black", marginLeft: '10px'}}>
-                  Date of Birth:
-                </InputLabel>
-              </Grid>
-              <Grid item xs={12} md={3} lg={2} className={classes.root}>
-                <TextField
-                  id="dobMonthField"
-                  label="mm"
-                  variant="outlined"
-                  onChange={(e) => setForm({ dOBMonth: e.target.value })}
-                />
-              </Grid>
-              -
-              <Grid item xs={12} md={3} lg={2} className={classes.root}>
+    <form
+      noValidate
+      autoComplete="off"
+      validationschema={reviewSchema}
+      onSubmit={this.handleSubmit}
+    >
+      <div className="container-CreatePatient">
+        <div className="promptMessage">
+          Please Enter the Following Information:
+        </div>
+        <div className="patientForm">
+          <div className="cNames">
+            {/* <!--    djhrjb --> */}
+            <div>
+              <div noValidate autoComplete="off">
+                <label>
+                  First Name
+                  <input
+                    placeholder="Full Name"
+                    className="firstName"
+                    onChange={(e) => setForm({ fname: e.target.value })}
+                  />
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <div noValidate autoComplete="off">
+                <label>
+                  Last Name
+                  <input
+                    placeholder="Last Name"
+                    className="lastName"
+                    onChange={(e) => setForm({ lname: e.target.value })}
+                  ></input>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="aod">
+              <label>
+                Admission Date
+                <input
+                  type="date"
+                  className="admissionDate"
+                  onChange={(e) => setForm({ admissionDate: e.target.value })}
+                ></input>
+              </label>
+            </div>
+          </div>
+          <div>
+            {/* <label>Date of Birth:</label> */}
+            <div className="dob">
+              <label>
+                Date of Birth
+                <input
+                  type="date"
+                  className="dateOfBirth"
+                  onChange={(e) => setForm({ dateOfBirth: e.target.value })}
+                ></input>
+              </label>
+            </div>
+            {/* - */}
+            {/* <div className="dobday" noValidate autoComplete="off">
                 <TextField
                   id="dobDayField"
                   label="dd"
                   variant="outlined"
-                  onChange={(e) => setForm({ dOBDay: e.target.value })}
+                  onChange={(e) => this.setState({ dOBDay: e.target.value })}
                 />
-              </Grid>
+              </div>
               -
-              <Grid item xs={12} md={3} lg={2} className={classes.root}>
+              <div className="dobyear" noValidate autoComplete="off">
                 <TextField
                   id="dobYearField"
                   label="yyyy"
                   variant="outlined"
-                  onChange={(e) => setForm({ dOBYear: e.target.value })}
+                  onChange={(e) => this.setState({ dOBYear: e.target.value })}
                 />
-              </Grid>
-              <Grid item xs={12} md={6} className={classes.root}>
-                <TextField
-                  id="weightField"
-                  label="Weight (lbs)"
-                  variant="outlined"
-                  onChange={(e) => setForm({ weight: e.target.value })}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} className={classes.root}>
-                <TextField
-                  id="heightField"
-                  label="Height (m)"
-                  variant="outlined"
-                  onChange={(e) => setForm({ height: e.target.value })}
-                />
-              </Grid>
-            </Grid>
-            <div className="Buttons-createpatient">
-              <Button
-                variant="contained"
-                color="secondary"
-                className="cancBut"
-                style={{ margin: "10px" }}
-              >
-                Cancel
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                style={{ margin: "10px" }}
-              >
-                Submit
-              </Button>
+              </div> */}
+          </div>
+
+          {/* <div className="hW"> */}
+          <div className="cNames">
+            <div>
+              <div noValidate autoComplete="off">
+                <label>
+                  Weight
+                  <input
+                    placeholder="Weight (lbs)"
+                    className="weightField"
+                    onChange={(e) => setForm({ weight: e.target.value })}
+                  />
+                </label>
+              </div>
             </div>
-          </Paper>
+
+            <div>
+              <div>
+                <label>
+                  Height
+                  <input
+                    placeholder="Height (in)"
+                    className="heightField"
+                    onChange={(e) => setForm({ height: e.target.value })}
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
-      </form>
-    </ThemeProvider>
+
+        <div className="Buttons-createpatient">
+          <div className="cancBut">
+            <Button variant="contained" color="secondary">
+              Cancel
+            </Button>
+          </div>
+
+          <div className="subBut">
+            <Button variant="contained" color="primary" type="submit">
+              Submit
+            </Button>
+          </div>
+        </div>
+      </div>
+    </form>
   );
 }
 
