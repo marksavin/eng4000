@@ -50,49 +50,34 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "patient_name",
+    id: "nurse_name",
     numeric: false,
     disablePadding: true,
-    label: "Patient Name",
+    label: "Nurse Incharge",
   },
-  { id: "a_problem", numeric: false, disablePadding: false, label: "Type" },
+  {
+    id: "date_created",
+    numeric: false,
+    disablePadding: false,
+    label: "Date Created",
+  },
   {
     id: "note_room_id",
     numeric: true,
     disablePadding: false,
     label: "Room Number",
   },
-  { id: "r_priority", numeric: false, disablePadding: false, label: "Urgency" },
+  { id: "s_problem", numeric: false, disablePadding: false, label: "Urgency" },
   {
-    id: "date_created",
+    id: "view_sbar",
     numeric: false,
     disablePadding: false,
-    label: "Last Updated",
-  },
-  {
-    id: "SBAR_history",
-    numeric: false,
-    disablePadding: false,
-    label: "SBAR history",
-  },
-  {
-    id: "update",
-    numeric: false,
-    disablePadding: false,
-    label: "Update",
+    label: "SBAR",
   },
 ];
 
 function EnhancedTableHead(props) {
-  const {
-    classes,
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -192,7 +177,7 @@ const EnhancedTableToolbar = (props) => {
           id="tableTitle"
           component="div"
         >
-          Patient List
+          SBAR History
         </Typography>
       )}
 
@@ -255,14 +240,10 @@ export default function EnhancedTable(props) {
 
   const [searchState, setSearchState] = useState([
     {
-      patient_name: "-",
-      a_problem: "-",
+      nurse_name: "-",
+      date_created: "-",
       note_room_id: "-",
-      r_priority: "-",
-      update_status: "-",
-      last_updated: "-",
-      SBAR_history: "-",
-      update: "-",
+      s_problem: "-",
     },
   ]);
 
@@ -270,21 +251,15 @@ export default function EnhancedTable(props) {
 
   const [patients, setPatients] = useState([
     {
-      patient_name: "-",
-      patient_id: "-",
+      nurse_name: "-",
       date_created: "-",
-      a_problem: "-",
       note_room_id: "-",
-      r_priority: "-",
-      update_status: "-",
-      last_updated: "-",
-      SBAR_history: "-",
-      update: "-",
+      s_problem: "-",
     },
   ]);
 
   useEffect(() => {
-    fetch(`/nurse/viewPatients/1`)
+    fetch(`/nurse/SBARHistory/${props.patientId}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -302,7 +277,7 @@ export default function EnhancedTable(props) {
 
   useEffect(() => {
     const searchedPatients = searchState.filter((patient) =>
-      patient.patient_name.toLowerCase().startsWith(props.search.toLowerCase())
+      patient.nurse_name.toLowerCase().startsWith(props.search.toLowerCase())
     );
     setPatients(searchedPatients);
   }, [props.search]);
@@ -344,14 +319,14 @@ export default function EnhancedTable(props) {
     setSelected(newSelected);
   };
 
-  useEffect(() => {
-    if (selected.length > 0) {
-      setTimeout(function () {
-        //your code to be executed after 1 second
-        history.push(`/nurse/${patientName}`);
-      }, 1000);
-    }
-  });
+  //   useEffect(() => {
+  //     if (selected.length > 0) {
+  //       setTimeout(function () {
+  //         //your code to be executed after 1 second
+  //         history.push(`/nurse/${patientName}`);
+  //       }, 1000);
+  //     }
+  //   });
 
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
@@ -423,55 +398,28 @@ export default function EnhancedTable(props) {
                           scope="patients"
                           padding="none"
                         >
-                          {patients.patient_name}
-                        </TableCell>
-                        <TableCell align="center">
-                          {patients.a_problem}
-                        </TableCell>
-                        <TableCell align="center">
-                          {patients.note_room_id}
-                        </TableCell>
-                        <TableCell align="center">
-                          {patients.r_priority}
+                          {patients.nurse_name}
                         </TableCell>
                         <TableCell align="center">
                           {patients.date_created}
                         </TableCell>
                         <TableCell align="center">
+                          {patients.note_room_id}
+                        </TableCell>
+                        <TableCell align="center">
+                          {patients.s_problem}
+                        </TableCell>
+                        <TableCell align="center">
                           <Link
                             to={{
-                              pathname: "/nurse/SBARHistory",
+                              pathname: "/nurse/viewSBAR",
                               patientName: patients.patient_name,
-                              patientId: patients.patient_id,
                             }}
                           >
                             <Button variant="contained" color="primary">
-                              View SBAR History
+                              View SBAR
                             </Button>
                           </Link>
-                        </TableCell>
-                        <TableCell align="center">
-                          {patients.update_status !== "Update Required" ? (
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              onClick={(event) =>
-                                handleClick(event, patients.patient_name)
-                              }
-                            >
-                              {patients.update_status}
-                            </Button>
-                          ) : (
-                            <Button
-                              variant="contained"
-                              color="secondary"
-                              onClick={(event) =>
-                                handleClick(event, patients.patient_name)
-                              }
-                            >
-                              {patients.update_status}
-                            </Button>
-                          )}
                         </TableCell>
                       </TableRow>
                     );

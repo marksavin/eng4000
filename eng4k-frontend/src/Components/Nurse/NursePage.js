@@ -7,6 +7,7 @@ import Header from "./Header";
 import Sbar from "../Sbar/Sbar.js";
 import CreatePatient from "../CreatePatient/CreatePatient.js";
 import ContactPhysicanCard from "./ContactPhysicianCard.js";
+import HistoryTable from "./HistoryTable.js";
 
 import { Button, createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
 
@@ -45,9 +46,25 @@ const NursePage = (props) => {
             <PatientTable search={props.search} />
           </MuiThemeProvider>
         </Route>
-        <Route exact path="/nurse/contactPhysician"> 
-        {/* ------------------ Temporarily routed here -------------------------*/}
-          <ContactPhysicanCard pname='Dr. Geneva' specialty='Neurology' availability='Away on vacation'/> 
+
+        <Route path="/nurse/SBARhistory">
+          <Header title={`SBAR History of ${props.location.patientName}`} />
+          <MuiThemeProvider theme={theme}>
+            <HistoryTable
+              search={props.search}
+              patientName={props.location.patientName}
+              patientId={props.location.patientId}
+            />
+          </MuiThemeProvider>
+        </Route>
+
+        <Route exact path="/nurse/contactPhysician">
+          {/* ------------------ Temporarily routed here -------------------------*/}
+          <ContactPhysicanCard
+            pname="Dr. Geneva"
+            specialty="Neurology"
+            availability="Away on vacation"
+          />
         </Route>
         <Route exact path="/nurse/add-patient">
           <CreatePatient />

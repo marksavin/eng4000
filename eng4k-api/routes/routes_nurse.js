@@ -48,4 +48,14 @@ router.post("/addNewPatient", async (req, res, next) => {
   }
 });
 
+router.get("/SBARHistory/:patientId", async (req, res, next) => {
+  try {
+    let queryResults = await db.SBARHistory(req.params.patientId);
+    res.json(queryResults);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 module.exports = router;

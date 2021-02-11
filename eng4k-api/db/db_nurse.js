@@ -46,7 +46,7 @@ let nurseApiCalls = {};
 nurseApiCalls.currentPatientList = (id) => {
   return new Promise((resolve, reject) => {
     pool.query(
-      `SELECT   p.patient_name, sbar_note.a_problem, sbar_note.note_room_id, sbar_note.r_priority,
+      `SELECT   p.patient_name, p.patient_id, sbar_note.a_problem, sbar_note.note_room_id, sbar_note.r_priority, sbar_note.date_created,
       CASE 
       WHEN 5 <= (timestampDIFF(HOUR,sbar_note.date_created, CURRENT_TIMESTAMP)) THEN 'Update Required'
       WHEN 5 > (timestampDIFF(HOUR,sbar_note.date_created, CURRENT_TIMESTAMP)) THEN 'Up to Date'
@@ -99,6 +99,25 @@ nurseApiCalls.addNewPatient = (body) => {
       `INSERT INTO heroku_c2367af0e7c5fa1.patient (patient_id, patient_name, admission_date, patient_date_of_birth, patient_weight, patient_height)
       VALUES(defualt,?,?,?,?,?);`,
       [fullName, admissionDate, dateOfBirth, body.weight, body.height],
+      (err, result) => {
+        if (err) {
+          return reject(err);
+        }
+        console.log(result);
+        return resolve(result);
+      }
+    );
+  });
+};
+
+nurseApiCalls.SBARHistory = (patientId) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `SELECT C.nurse_name, A.date_created, A.note_room_id, A.s_problem 
+      FROM sbar_note AS A JOIN manage_nurse_note AS B  JOIN nurse AS C ON A.note_id = B. manage_note_id AND B.manage_by_nurse_id = C.nurse_id
+      WHERE note_patient_id = ?
+      ORDER BY date_created DESC;`,
+      [patientId],
       (err, result) => {
         if (err) {
           return reject(err);

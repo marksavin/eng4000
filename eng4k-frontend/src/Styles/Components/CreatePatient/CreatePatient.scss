@@ -1,29 +1,29 @@
 .container-CreatePatient {
   margin: auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 
   transform: translate(0, 40%);
-  box-shadow: 0px 0px 15px 10px rgba(15, 15, 15, 0.2);
+  // box-shadow: 0px 0px 15px 10px rgba(15, 15, 15, 0.2);
   width: 30%;
-  padding: 2rem;
 }
 
 .promptMessage {
-  display: flex;
-  font-size: 1.5rem;
-  justify-content: center;
+  // display: flex;
+  font-size: 2rem;
+  // justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100px;
-  width: 100%;
+  padding-bottom: 2rem;
+  // height: 100%;
+  // width: 100%;
 }
-.patientForm {
-  height: 250px;
-  width: 100%;
-}
+// .patientForm {
+//   height: 250px;
+//   width: 100%;
+// }
 
 .Buttons-createpatient {
   display: flex;
@@ -32,12 +32,12 @@
   padding: 10px;
 }
 
-.cNames {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
-}
+// .cNames {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin: auto;
+// }
 
 // .Dob {
 //   display: flex;
@@ -88,7 +88,7 @@
 
 // .subBut,
 // .cancBut {
-//   margin: 10px;
+//   margin: 50px;
 // }
 
 // // .Height,
