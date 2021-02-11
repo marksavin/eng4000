@@ -46,9 +46,11 @@ const Admin = (props) => {
         <DashboardButton title="Visitor" count="500" />
       </div>
 
-      <MuiThemeProvider theme={theme}>
-        <PatientTable search={props.search} />
-      </MuiThemeProvider>
+      <div className="adminTable">
+        <MuiThemeProvider theme={theme}>
+          <PatientTable search={props.search} />
+        </MuiThemeProvider>
+      </div>
     </div>
   );
 };
