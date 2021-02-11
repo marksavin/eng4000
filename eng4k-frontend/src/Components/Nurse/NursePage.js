@@ -47,7 +47,7 @@ const NursePage = (props) => {
         </Route>
         <Route exact path="/nurse/contactPhysician"> 
         {/* ------------------ Temporarily routed here -------------------------*/}
-          <ContactPhysicanCard pname='Dr. Geneva' specialty='Neurology' availability='Away on vacation'/> 
+          <ContactPhysicanCard pname='Dr. Borris Geneva' specialty='Neurology' availability='Away on vacation'/> 
         </Route>
         <Route exact path="/nurse/add-patient">
           <CreatePatient />

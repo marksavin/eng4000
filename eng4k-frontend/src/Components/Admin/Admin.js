@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "semantic-ui-css/semantic.min.css";
+// import "semantic-ui-css/semantic.min.css";
 import { TextField, Button, Collapse, IconButton } from "@material-ui/core";
 import ArrowDropDownCircleIcon from "@material-ui/icons/ArrowDropDownCircle";
 import Navigation from "../NavBar/NavBar.js";

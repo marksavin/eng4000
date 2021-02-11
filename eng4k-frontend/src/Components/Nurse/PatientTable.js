@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 import clsx from "clsx";
@@ -22,6 +22,7 @@ import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import Button from "@material-ui/core/Button";
+import ContactPhysicanCard from "./ContactPhysicianCard";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -437,9 +438,11 @@ export default function EnhancedTable(props) {
                           {patients.update_status}
                         </TableCell>
                         <TableCell align="center">
-                          <Button variant="contained" color="primary">
-                            View SBAR History
-                          </Button>
+                          <Link to="/nurse/contactPhysician">
+                            <Button variant="contained" color="primary">
+                              View SBAR History
+                            </Button>
+                          </Link>
                         </TableCell>
                         <TableCell align="center">
                           {patients.update_status !== "Update Required" ? (
