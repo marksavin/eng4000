@@ -2,16 +2,16 @@ import React, { useState } from "react";
 //import DateFnsUtils from "@date-io/date-fns";
 //import { DatePicker } from "@material-ui/pickers";
 import { Button } from "@material-ui/core";
-import * as yup from "yup";
+// import * as yup from "yup";
 
 // a schema is just a place to define a set of rules
-const reviewSchema = yup.object({
-  // here we create a yup object where we will define our schema
-  fName: yup.string().required(),
-  lName: yup.string().required(),
-  weight: yup.number().required,
-  height: yup.number().required,
-});
+// const reviewSchema = yup.object({
+//   // here we create a yup object where we will define our schema
+//   fName: yup.string().required(),
+//   lName: yup.string().required(),
+//   weight: yup.number().required,
+//   height: yup.number().required,
+// });
 
 function CreatePatient(props) {
   const [form, setForm] = useState({
@@ -47,7 +47,7 @@ function CreatePatient(props) {
     <form
       noValidate
       autoComplete="off"
-      validationschema={reviewSchema}
+      // validationschema={reviewSchema}
       onSubmit={this.handleSubmit}
     >
       <div className="container-CreatePatient">

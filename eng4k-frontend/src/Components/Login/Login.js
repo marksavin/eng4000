@@ -31,11 +31,11 @@ const Login = (props) => {
         <div className="login-component">
           <div className="login-form">
             <div className="login-form-group">
-              <label className="label" htmlFor="token">
+              <label className="longin-label" htmlFor="token">
                 Token
               </label>
               <input
-                className="token"
+                className="token login-input"
                 type="text"
                 placeholder="token"
                 onChange={(e) => setToken({ token: e.target.value })}
@@ -44,11 +44,11 @@ const Login = (props) => {
             </div>
 
             <div className="login-form-group">
-              <label className="label" htmlFor="password">
+              <label className="login-label" htmlFor="password">
                 Password
               </label>
               <input
-                className="password"
+                className="password login-input"
                 type="password"
                 placeholder="password"
                 onChange={(e) => setPassword({ password: e.target.value })}
