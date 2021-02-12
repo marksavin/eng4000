@@ -40,10 +40,10 @@ const Admin = (props) => {
         setAuthenticate={props.setAuthenticate}
       />
       <div className="AdminButtons">
-        <DashboardButton title="Doctor" count="500" />
-        <DashboardButton title="Nurse" count="500" />
-        <DashboardButton title="Patient" count="500" />
-        <DashboardButton title="Visitor" count="500" />
+        <DashboardButton title="Doctor" count="30" />
+        <DashboardButton title="Nurse" count="50" />
+        <DashboardButton title="Patient" count="200" />
+        <DashboardButton title="Visitor" count="320" />
       </div>
 
       <div className="adminTable">
