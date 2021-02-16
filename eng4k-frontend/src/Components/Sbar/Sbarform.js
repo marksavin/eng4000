@@ -9,7 +9,7 @@ const situation = {
   note_id: "",
   note_patient_id: "",
   note_room_id: "",
-  date_created: new Date(),
+  date_created: '',
   s_problem: "",
   s_code_status: "",
   s_BP: "",
@@ -178,6 +178,7 @@ export default function Sbarform(props) {
 
   situationValue.note_patient_id = props.patientName;
   // situationValue.note_room_id = props.patientRoom;
+  
   useEffect(() => {
     // Update the document title using the browser API
     console.log(situationValue);
