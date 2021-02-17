@@ -5,7 +5,7 @@ import Navigation from "../NavBar/NavBar.js";
 import PatientTable from "./PatientTable.js";
 import Header from "./Header";
 import Sbar from "../Sbar/Sbar.js";
-import CreatePatient from "../CreatePatient/CreatePatient.js";
+// import CreatePatient from "../CreatePatient/CreatePatient.js";
 import ContactPhysicanCard from "./ContactPhysicianCard.js";
 import HistoryTable from "./HistoryTable.js";
 
@@ -66,9 +66,9 @@ const NursePage = (props) => {
             availability="Away on vacation"
           />
         </Route>
-        <Route exact path="/nurse/add-patient">
+        {/* <Route exact path="/nurse/add-patient">
           <CreatePatient />
-        </Route>
+        </Route> */}
 
         <Route path="/nurse/:id">
           <Sbar nurseID="1" nurseName="Mark Apple" />

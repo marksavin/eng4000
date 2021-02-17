@@ -1,9 +1,23 @@
 import React, { useState } from "react";
-// import "semantic-ui-css/semantic.min.css";
-import Navigation from "../NavBar/NavBar.js";
-import PatientTable from "../Nurse/PatientTable.js";
 import { Switch, Route, Link } from "react-router-dom";
-import { Button, createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
+
+// import {  } from "@material-ui/core";
+import ArrowDropDownCircleIcon from "@material-ui/icons/ArrowDropDownCircle";
+import {
+  TextField,
+  Collapse,
+  IconButton,
+  Button,
+  createMuiTheme,
+  MuiThemeProvider,
+} from "@material-ui/core/";
+
+import Navigation from "../NavBar/NavBar.js";
+import DashboardButton from "./DashboardButton";
+import PatientTable from "../Nurse/PatientTable.js";
+import CreateNurse from "../CreatePatient/CreateNurse.js";
+import CreatePhysician from "../CreatePatient/CreatePhysician.js";
+import CreatePatient from "../CreatePatient/CreatePatient.js";
 
 const theme = createMuiTheme({
   palette: {
@@ -36,9 +50,69 @@ const Admin = (props) => {
         setSearch={props.setSearch}
         setAuthenticate={props.setAuthenticate}
       />
-      <MuiThemeProvider theme={theme}>
-        <PatientTable search={props.search} />
-      </MuiThemeProvider>
+      <Switch>
+        <Route exact path="/admin">
+          <Link to="/admin/add-patient">
+            <Button
+              variant="contained"
+              color="primary"
+              className="add_patient_button"
+              style={{ fontSize: "1.5rem" }}
+            >
+              Add Patient
+            </Button>
+          </Link>
+          <Link to="/admin/add-nurse">
+            <Button
+              variant="contained"
+              color="primary"
+              className="add_patient_button"
+              style={{ fontSize: "1.5rem" }}
+            >
+              Add Nurse
+            </Button>
+          </Link>
+
+          <Link to="/admin/add-physician">
+            <Button
+              variant="contained"
+              color="primary"
+              className="add_patient_button"
+              style={{ fontSize: "1.5rem" }}
+            >
+              Add Physician
+            </Button>
+          </Link>
+
+          <MuiThemeProvider theme={theme}>
+            <PatientTable search={props.search} />
+          </MuiThemeProvider>
+        </Route>
+
+        <Route exact path="/admin/add-patient">
+          <CreatePatient />
+        </Route>
+
+        <Route exact path="/admin/add-nurse">
+          <CreateNurse />
+        </Route>
+
+        <Route exact path="/admin/add-physician">
+          <CreatePhysician />
+        </Route>
+      </Switch>
+      <div className="AdminButtons">
+        <DashboardButton title="Doctor" count="30" />
+        <DashboardButton title="Nurse" count="50" />
+        <DashboardButton title="Patient" count="200" />
+        <DashboardButton title="Visitor" count="320" />
+      </div>
+
+      <div className="adminTable">
+        <MuiThemeProvider theme={theme}>
+          <PatientTable search={props.search} />
+        </MuiThemeProvider>
+      </div>
     </div>
   );
 };

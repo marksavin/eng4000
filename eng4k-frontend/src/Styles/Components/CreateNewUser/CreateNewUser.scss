@@ -1,0 +1,266 @@
+.form {
+  margin: auto;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  // position: relative;
+
+  transform: translate(0, 25%);
+  // left: 700px;
+  box-shadow: 0px 0px 15px 10px rgba(15, 15, 15, 0.2);
+  width: 30%;
+  padding: 1rem;
+}
+
+.patientForm {
+  height: 500px;
+  width: 100%;
+}
+
+.form-n {
+  margin: auto;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  // position: relative;
+
+  transform: translate(0, 40%);
+  // left: 700px;
+  box-shadow: 0px 0px 15px 10px rgba(15, 15, 15, 0.2);
+  width: 30%;
+  padding: 1rem;
+}
+
+.patientForm-n {
+  height: 380px;
+  width: 100%;
+}
+
+.form-p {
+  margin: auto;
+  transform: translate(0, 60%);
+  box-shadow: 0px 0px 15px 10px rgba(15, 15, 15, 0.2);
+  width: 30%;
+  padding: 1rem;
+}
+
+.patientForm-p {
+  height: 300px;
+  width: 100%;
+}
+
+/* unvisited link */
+a:link {
+  text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+  text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+  text-decoration: none;
+}
+
+/* selected link */
+a:active {
+  text-decoration: none;
+}
+
+.cNames,
+.weightField,
+.heightField,
+.dateOfBirth,
+.admissionDate,
+.department,
+.specialty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.firstName,
+.lastName {
+  padding: 1.2rem 1.6rem; // padding: top-bottom 1.2, right-left
+  width: 95%;
+  border-radius: 6px;
+  border: 1px solid silver;
+  margin-top: 2px;
+  margin-left: 1px;
+}
+
+.weightField,
+.heightField {
+  padding: 1.2rem 1.4rem;
+  padding-right: 2rem;
+  width: 95%;
+  border-radius: 6px;
+  border: 1px solid silver;
+  margin-top: 2px;
+  margin-left: -1px;
+}
+
+.dob,
+.aod {
+  display: flex;
+  justify-content: center;
+  padding-right: 200px;
+}
+
+.dateOfBirth,
+.admissionDate,
+.department,
+.specialty {
+  padding: 1.2rem 1.2rem;
+  border-radius: 6px;
+  border: 1px solid silver;
+  width: 206%;
+  margin-top: 2px;
+  margin-right: 2.4px;
+}
+
+@media (max-width: 1000px) {
+  .dateOfBirth,
+  .admissionDate {
+    padding: 1.2rem 1.2rem;
+    width: 140%;
+    margin-top: 1px;
+    margin-right: 2px;
+  }
+  .dob,
+  .aod {
+    display: flex;
+    justify-content: center;
+    padding-right: 95px;
+  }
+  .Buttons-createpatient {
+    // display: flex;
+    justify-content: center;
+    // align-items: center;
+    // transform: translate(-10, 10%);
+    left: 200px;
+    // border: 1px solid silver;
+  }
+  .subBut,
+  .cancBut {
+    width: 30%;
+    padding-right: 100px;
+  }
+}
+
+// Style Heading
+.promptMessage {
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100px;
+  width: 100%;
+}
+
+.Buttons-createpatient {
+  display: flex;
+  padding-left: 160px;
+  // // padding-top: -250px;
+  // width: 100%;
+  // // position: absolute;
+  // left: 200px;
+}
+
+.subBut,
+.cancBut {
+  // display: flex;
+  // padding-left: 140px;
+  // // padding-top: -250px;
+  width: 30%;
+  // // position: absolute;
+  // left: 200px;
+  // padding: 20px;
+  padding-top: 10px;
+  // margin: auto;
+}
+
+.cpLabel,
+.cpInput {
+  display: block;
+  // padding: 2px;
+}
+
+.cpLabel {
+  margin-bottom: 20px;
+  // padding: 0.5px;
+}
+
+// .CreatePatient {
+//   text-align: center;
+// }
+
+// .input-wrapper {
+//   margin-top: 30px;
+// }
+
+.error {
+  color: red;
+}
+
+.Button-text {
+  color: white;
+}
+
+// .Dob {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin: auto;
+//   padding: 10px;
+//   width: 100%;
+// }
+
+// .hW {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .doblabel {
+//   margin-right: 10px;
+// }
+
+// .dobmonth,
+// .dobday {
+//   width: 65px;
+// }
+
+// .dobyear {
+//   width: 100px;
+//   text-align: center;
+// }
+
+// .dobmonth,
+// .dobday,
+// .dobyear {
+//   padding: 5px;
+// }
+
+// .weightForm,
+// .heightForm {
+//   width: 150px;
+// }
+
+// .FirstName {
+//   margin-right: 5px;
+// }
+// .LastName {
+//   margin-left: 5px;
+// }
+
+// // .Height,
+// // .Weight {
+// //   padding: 5px;
+// // }
