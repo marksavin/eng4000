@@ -1,9 +1,13 @@
 import React, { useState } from "react";
+import { Switch, Route, Link } from "react-router-dom";
+
+import { TextField, Button, Collapse, IconButton } from "@material-ui/core";
+import ArrowDropDownCircleIcon from "@material-ui/icons/ArrowDropDownCircle";
+import { Button, createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
 
 import Navigation from "../NavBar/NavBar.js";
+import DashboardButton from "./DashboardButton";
 import PatientTable from "../Nurse/PatientTable.js";
-import { Switch, Route, Link } from "react-router-dom";
-import { Button, createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
 import CreateNurse from "../CreatePatient/CreateNurse.js";
 import CreatePhysician from "../CreatePatient/CreatePhysician.js";
 import CreatePatient from "../CreatePatient/CreatePatient.js";
@@ -90,6 +94,18 @@ const Admin = (props) => {
           <CreatePhysician />
         </Route>
       </Switch>
+      <div className="AdminButtons">
+        <DashboardButton title="Doctor" count="30" />
+        <DashboardButton title="Nurse" count="50" />
+        <DashboardButton title="Patient" count="200" />
+        <DashboardButton title="Visitor" count="320" />
+      </div>
+
+      <div className="adminTable">
+        <MuiThemeProvider theme={theme}>
+          <PatientTable search={props.search} />
+        </MuiThemeProvider>
+      </div>
     </div>
   );
 };
