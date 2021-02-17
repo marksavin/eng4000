@@ -15,9 +15,9 @@ import {
 import Navigation from "../NavBar/NavBar.js";
 import DashboardButton from "./DashboardButton";
 import PatientTable from "../Nurse/PatientTable.js";
-import CreateNurse from "../CreatePatient/CreateNurse.js";
-import CreatePhysician from "../CreatePatient/CreatePhysician.js";
-import CreatePatient from "../CreatePatient/CreatePatient.js";
+import CreateNurse from "../createNewUser/CreateNurse.js";
+import CreatePhysician from "../createNewUser/CreatePhysician.js";
+import CreatePatient from "../createNewUser/CreatePatient.js";
 
 const theme = createMuiTheme({
   palette: {
@@ -52,37 +52,22 @@ const Admin = (props) => {
       />
       <Switch>
         <Route exact path="/admin">
-          <Link to="/admin/add-patient">
-            <Button
-              variant="contained"
-              color="primary"
-              className="add_patient_button"
-              style={{ fontSize: "1.5rem" }}
-            >
-              Add Patient
-            </Button>
-          </Link>
-          <Link to="/admin/add-nurse">
-            <Button
-              variant="contained"
-              color="primary"
-              className="add_patient_button"
-              style={{ fontSize: "1.5rem" }}
-            >
-              Add Nurse
-            </Button>
-          </Link>
+          <div className="AdminButtons">
+            <Link to="/admin/add-patient">
+              <DashboardButton title="Patient" count="200" />
+            </Link>
+            <Link to="/admin/add-nurse">
+              <DashboardButton title="Nurse" count="50" />
+            </Link>
 
-          <Link to="/admin/add-physician">
-            <Button
-              variant="contained"
-              color="primary"
-              className="add_patient_button"
-              style={{ fontSize: "1.5rem" }}
-            >
-              Add Physician
-            </Button>
-          </Link>
+            <Link to="/admin/add-physician">
+              <DashboardButton title="Doctor" count="30" />
+            </Link>
+
+            <Link to="/admin/add-visitor">
+              <DashboardButton title="Visitor" count="320" />
+            </Link>
+          </div>
 
           <MuiThemeProvider theme={theme}>
             <PatientTable search={props.search} />
@@ -101,18 +86,6 @@ const Admin = (props) => {
           <CreatePhysician />
         </Route>
       </Switch>
-      <div className="AdminButtons">
-        <DashboardButton title="Doctor" count="30" />
-        <DashboardButton title="Nurse" count="50" />
-        <DashboardButton title="Patient" count="200" />
-        <DashboardButton title="Visitor" count="320" />
-      </div>
-
-      <div className="adminTable">
-        <MuiThemeProvider theme={theme}>
-          <PatientTable search={props.search} />
-        </MuiThemeProvider>
-      </div>
     </div>
   );
 };

@@ -51,25 +51,25 @@
   width: 100%;
 }
 
-/* unvisited link */
-a:link {
-  text-decoration: none;
-}
+// /* unvisited link */
+// a:link {
+//   text-decoration: none;
+// }
 
-/* visited link */
-a:visited {
-  text-decoration: none;
-}
+// /* visited link */
+// a:visited {
+//   text-decoration: none;
+// }
 
-/* mouse over link */
-a:hover {
-  text-decoration: none;
-}
+// /* mouse over link */
+// a:hover {
+//   text-decoration: none;
+// }
 
-/* selected link */
-a:active {
-  text-decoration: none;
-}
+// /* selected link */
+// a:active {
+//   text-decoration: none;
+// }
 
 .cNames,
 .weightField,
@@ -124,7 +124,7 @@ a:active {
   margin-right: 2.4px;
 }
 
-@media (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
   .dateOfBirth,
   .admissionDate {
     padding: 1.2rem 1.2rem;
