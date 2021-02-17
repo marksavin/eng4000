@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import "semantic-ui-css/semantic.min.css";
+import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
 import { TextField, Button, Collapse, IconButton } from "@material-ui/core";
 import ArrowDropDownCircleIcon from "@material-ui/icons/ArrowDropDownCircle";
 
@@ -19,18 +19,27 @@ const ContactPhysicanCard = (props) => {
 
   return (
     <div className="contactPcontainer">
-      <div className="ui card">
-        <div className="image">
-          <img src="https://react.semantic-ui.com/images/avatar/large/matthew.png" />
+      <div className="cardContainer">
+        <div className="imageSpace">
+          <div className="imageSpaceColBlock" color="primary"></div>
+
+          <div className="imageDiv">
+            <img
+              className="AvImage"
+              src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+            />
+          </div>
         </div>
 
-        <div className="content">
-          <div className="header">{props.pname}</div>
-          <div className="meta">
-            <span className="date">{props.specialty}</span>
+        <div className="ContactContent">
+          <div className="ContactText">
+            <div className="ContactHeader">{props.pname}</div>
+            <div className="ContactSpecialty">
+              <span className="date">{props.specialty}</span>
+            </div>
+            <div className="description">{props.availability}</div>
           </div>
-          <div className="description">{props.availability}</div>
-          <div className="controlButton">
+          <div className="ContactControlButton">
             <Collapse in={!expanded}>
               <Button
                 variant="outlined"
@@ -51,7 +60,7 @@ const ContactPhysicanCard = (props) => {
                   id="outlined-multiline-static"
                   label="Additional Remarks"
                   multiline
-                  rows={2}
+                  rows={3}
                   variant="outlined"
                   onChange={handleChange}
                 />
@@ -60,6 +69,12 @@ const ContactPhysicanCard = (props) => {
               <div className="ContactButtons">
                 <div className="ContactCancelButton">
                   <Button
+                    style={{
+                      maxWidth: "90px",
+                      maxHeight: "30px",
+                      minWidth: "25px",
+                      minHeight: "25px",
+                    }}
                     variant="contained"
                     color="secondary"
                     onClick={handleExpandClick}
@@ -68,7 +83,16 @@ const ContactPhysicanCard = (props) => {
                   </Button>
                 </div>
                 <div className="ContactSubmitButton">
-                  <Button variant="contained" color="primary">
+                  <Button
+                    style={{
+                      maxWidth: "90px",
+                      maxHeight: "30px",
+                      minWidth: "25px",
+                      minHeight: "25px",
+                    }}
+                    variant="contained"
+                    color="primary"
+                  >
                     Submit
                   </Button>
                 </div>

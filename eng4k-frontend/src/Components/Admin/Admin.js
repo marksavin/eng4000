@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import "semantic-ui-css/semantic.min.css";
 import Navigation from "../NavBar/NavBar.js";
 import PatientTable from "../Nurse/PatientTable.js";
 import { Switch, Route, Link } from "react-router-dom";
