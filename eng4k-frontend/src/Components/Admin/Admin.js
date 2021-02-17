@@ -4,6 +4,9 @@ import Navigation from "../NavBar/NavBar.js";
 import PatientTable from "../Nurse/PatientTable.js";
 import { Switch, Route, Link } from "react-router-dom";
 import { Button, createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
+import CreateNurse from "../CreatePatient/CreateNurse.js";
+import CreatePhysician from "../CreatePatient/CreatePhysician.js";
+import CreatePatient from "../CreatePatient/CreatePatient.js";
 
 const theme = createMuiTheme({
   palette: {
@@ -36,9 +39,57 @@ const Admin = (props) => {
         setSearch={props.setSearch}
         setAuthenticate={props.setAuthenticate}
       />
-      <MuiThemeProvider theme={theme}>
-        <PatientTable search={props.search} />
-      </MuiThemeProvider>
+      <Switch>
+        <Route exact path="/admin">
+          <Link to="/admin/add-patient">
+            <Button
+              variant="contained"
+              color="primary"
+              className="add_patient_button"
+              style={{ fontSize: "1.5rem" }}
+            >
+              Add Patient
+            </Button>
+          </Link>
+          <Link to="/admin/add-nurse">
+            <Button
+              variant="contained"
+              color="primary"
+              className="add_patient_button"
+              style={{ fontSize: "1.5rem" }}
+            >
+              Add Nurse
+            </Button>
+          </Link>
+
+          <Link to="/admin/add-physician">
+            <Button
+              variant="contained"
+              color="primary"
+              className="add_patient_button"
+              style={{ fontSize: "1.5rem" }}
+            >
+              Add Physician
+            </Button>
+          </Link>
+
+          <MuiThemeProvider theme={theme}>
+            <PatientTable search={props.search} />
+          </MuiThemeProvider>
+        </Route>
+
+        <Route exact path="/admin/add-patient">
+          <CreatePatient />
+        </Route>
+
+        <Route exact path="/admin/add-nurse">
+          <CreateNurse />
+        </Route>
+
+        <Route exact path="/admin/add-physician">
+          <CreatePhysician />
+        </Route>
+      </Switch>
     </div>
   );
 };
