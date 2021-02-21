@@ -4,7 +4,7 @@ import * as yup from "yup";
 import GeneralCreatePage from "./GeneralCreatePage.js";
 import { Link } from "react-router-dom";
 
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, Grid } from "@material-ui/core";
 
 const formSchema = yup.object().shape({
   fname: yup
@@ -60,72 +60,98 @@ class CreatePatient extends React.Component {
                 Please Enter the Following Information:
               </div>
               <div className="patientForm">
-                <div className="cNames">
-                  <GeneralCreatePage
-                    title={"First Name"}
-                    name={"fname"}
-                    placeholder={"First Name"}
-                    className="firstName cpInput"
-                  />
+                <div style={{ margin: "3rem" }}>
+                  <Grid container justify="space-around" spacing={2}>
+                    <Grid item xs={12} md={6} direction="row" justify="center">
+                      <GeneralCreatePage
+                        title={"First Name"}
+                        name={"fname"}
+                        placeholder={"First Name"}
+                        className="firstName cpInput"
+                      />
+                    </Grid>
 
-                  <GeneralCreatePage
-                    title={"Last Name"}
-                    name={"lname"}
-                    placeholder={"Last Name"}
-                    className="lastName cpInput"
-                  />
-                </div>
+                    <Grid item xs={12} md={6}>
+                      <GeneralCreatePage
+                        title={"Last Name"}
+                        name={"lname"}
+                        placeholder={"Last Name"}
+                        className="lastName cpInput"
+                      />
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      md={12}
+                      lg={12}
+                      direction="row"
+                      justify="center"
+                    >
+                      <GeneralCreatePage
+                        title={"Admission Date"}
+                        name={"admissionDate"}
+                        type="date"
+                        className="admissionDate cpInput"
+                      />
+                    </Grid>
 
-                <div className="aod">
-                  <GeneralCreatePage
-                    title={"Admission Date"}
-                    name={"admissionDate"}
-                    type="date"
-                    className="admissionDate cpInput"
-                  />
-                </div>
+                    <Grid
+                      item
+                      xs={12}
+                      md={12}
+                      lg={12}
+                      direction="row"
+                      justify="center"
+                      direction="row"
+                    >
+                      <GeneralCreatePage
+                        title={"Date of Birth"}
+                        name={"dateOfBirth"}
+                        type="date"
+                        className="dateOfBirth cpInput"
+                      />
+                    </Grid>
 
-                <div className="dob">
-                  <GeneralCreatePage
-                    title={"Date of Birth"}
-                    name={"dateOfBirth"}
-                    type="date"
-                    className="dateOfBirth cpInput"
-                  />
-                </div>
+                    <Grid item xs={12} md={6}>
+                      <GeneralCreatePage
+                        title={"Weight"}
+                        name={"weight"}
+                        placeholder={"0.0"}
+                        type="number"
+                        className="weightField cpInput"
+                      />
+                    </Grid>
 
-                <div className="cNames">
-                  <GeneralCreatePage
-                    title={"Weight"}
-                    name={"weight"}
-                    placeholder={"0.0"}
-                    type="number"
-                    className="weightField cpInput"
-                  />
+                    <Grid item xs={12} md={6} justify="center">
+                      <GeneralCreatePage
+                        title={"Height"}
+                        name={"height"}
+                        placeholder={"0.0"}
+                        type="number"
+                        className="weightField cpInput"
+                      />
+                    </Grid>
 
-                  <GeneralCreatePage
-                    title={"Height"}
-                    name={"height"}
-                    placeholder={"0.0"}
-                    type="number"
-                    className="weightField cpInput"
-                  />
-                </div>
+                    <div className="Buttons-createpatient">
+                      <div className="cancBut">
+                        <Button variant="contained" color="secondary">
+                          <Link to="/admin" className="Button-text">
+                            Cancel
+                          </Link>
+                        </Button>
+                      </div>
 
-                <div className="Buttons-createpatient">
-                  <div className="cancBut">
-                    <Button variant="contained" color="secondary">
-                      <Link to="/admin" className="Button-text">
-                        Cancel
-                      </Link>
-                    </Button>
-                  </div>
-
-                  <div className="subBut">
-                    <Button variant="contained" color="primary" type="submit">
-                      <a className="Button-text">Submit</a>
-                    </Button>
-                  </div>
+                      <div className="subBut">
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          type="submit"
+                        >
+                          <a className="Button-text">Submit</a>
+                        </Button>
+                      </div>
+                    </div>
+                  </Grid>
                 </div>
               </div>
             </form>

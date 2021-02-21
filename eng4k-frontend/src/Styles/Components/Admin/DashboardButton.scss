@@ -1,19 +1,21 @@
 .adminDashboardButtonContainer {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
+  // display: flex;
+  // justify-content: center;
+  // align-content: center;
+  // flex-direction: column;
+  //width: auto;
+  //float: left;
+  //adding: 200px;
+  //height: 100%;
+  margin: 30px;
   width: 350px;
-  float: left;
-  padding: 200px;
-  // height: 200px;
 }
 
 .adminbuttonContainer {
   // -webkit-box-shadow: 0px 0px 12px 0px rgba(15, 15, 15, 0.75);
   // -moz-box-shadow: 0px 0px 12px 0px rgba(15, 15, 15, 0.75);
   box-shadow: 0px 0px 7px 0px rgba(15, 15, 15, 0.75);
-  width: 350px;
+  // width: 350px;
   height: 100px;
   display: flex;
   flex-direction: row;
@@ -61,4 +63,72 @@
 .adminDashboardButtonName {
   font-size: 22px;
   font-weight: 600;
+}
+
+@media screen and (max-width: 850px) {
+  .adminDashboardButtonContainer {
+    margin: 20px;
+    width: 300px;
+    height: 50px;
+  }
+
+  .DashboardButtonicon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .adminuser-icon {
+    transform: translate(0, 20%);
+    -webkit-transform: translate(0, 20%);
+    -moz-transform: translate(0, 20%); // Mozilla /
+    -o-transform: translate(0, 20%); // Opera /
+    -ms-transform: translate(0, 20%); // Internet Explorer /
+    font-size: 35px;
+  }
+
+  .adminDashboardButtonName {
+    font-size: 16px;
+  }
+
+  .accountCounter {
+    font-size: 10px;
+  }
+
+  .adminbuttonContainer {
+    height: 60px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .adminDashboardButtonContainer {
+    margin: 20px;
+    width: 250px;
+    height: 50px;
+  }
+
+  .DashboardButtonicon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .adminuser-icon {
+    transform: translate(0, 15%);
+    -webkit-transform: translate(0, 20%);
+    -moz-transform: translate(0, 20%); // Mozilla /
+    -o-transform: translate(0, 20%); // Opera /
+    -ms-transform: translate(0, 20%); // Internet Explorer /
+    font-size: 35px;
+  }
+
+  .adminDashboardButtonName {
+    font-size: 16px;
+  }
+
+  .accountCounter {
+    font-size: 10px;
+  }
+
+  .adminbuttonContainer {
+    height: 60px;
+  }
 }

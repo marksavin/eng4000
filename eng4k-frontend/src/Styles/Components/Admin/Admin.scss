@@ -1,14 +1,29 @@
 .AdminButtons {
-  transform: translate(0, 15%);
-  direction: flex;
-  justify-content: center;
+  text-decoration: none;
+  //transform: translate(0, 50%);
+  margin-top: 9rem;
+  display: flex;
+
+  justify-content: space-around;
   align-content: center;
   flex-direction: row;
+  flex-wrap: wrap;
 
-  height: 100px;
+  height: 200px;
   width: 100%;
 }
 
-.adminTable {
-  transform: translate(0, 15%);
+.AdminPageTableContainer {
+  margin-top: 3rem;
+}
+@media screen and (max-width: 1230px) {
+  .AdminButtons {
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .AdminButtons {
+    margin-top: 10rem;
+  }
 }
