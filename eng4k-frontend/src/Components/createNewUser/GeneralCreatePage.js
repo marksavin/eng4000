@@ -8,7 +8,11 @@ const GeneralCreatePage = (props) => {
       <label className="cpLabel">
         {props.title}
         <input {...field} {...props} />
-        {meta.error && meta.touched && <p className={"error"}>{meta.error}</p>}
+        <div>
+          {meta.error && meta.touched && (
+            <p className={"error"}>{meta.error}</p>
+          )}
+        </div>
       </label>
     </div>
   );
