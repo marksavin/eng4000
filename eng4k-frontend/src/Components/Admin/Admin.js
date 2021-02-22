@@ -53,25 +53,27 @@ const Admin = (props) => {
       <Switch>
         <Route exact path="/admin">
           <div className="AdminButtons">
-            <Link to="/admin/add-patient">
+            <Link to="/admin/add-patient" style={{ textDecoration: "none" }}>
               <DashboardButton title="Patient" count="200" />
             </Link>
-            <Link to="/admin/add-nurse">
+            <Link to="/admin/add-nurse" style={{ textDecoration: "none" }}>
               <DashboardButton title="Nurse" count="50" />
             </Link>
 
-            <Link to="/admin/add-physician">
+            <Link to="/admin/add-physician" style={{ textDecoration: "none" }}>
               <DashboardButton title="Doctor" count="30" />
             </Link>
 
-            <Link to="/admin/add-visitor">
+            <Link to="/admin/add-visitor" style={{ textDecoration: "none" }}>
               <DashboardButton title="Visitor" count="320" />
             </Link>
           </div>
 
-          <MuiThemeProvider theme={theme}>
-            <PatientTable search={props.search} />
-          </MuiThemeProvider>
+          <div className="AdminPageTableContainer">
+            <MuiThemeProvider theme={theme}>
+              <PatientTable search={props.search} />
+            </MuiThemeProvider>
+          </div>
         </Route>
 
         <Route exact path="/admin/add-patient">
