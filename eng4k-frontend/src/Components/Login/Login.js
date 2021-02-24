@@ -11,9 +11,9 @@ const Login = (props) => {
   const handleLogin = () => {
     if (token.token === "token" && password.password === "password") {
       var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
-      Cookies.set("token", "/admin", { expires: inFifteenMinutes });
+      Cookies.set("token", "/nurse", { expires: inFifteenMinutes });
       props.setAuthenticate(true);
-      props.setAccountType("/admin");
+      props.setAccountType("/nurse");
     }
   };
 

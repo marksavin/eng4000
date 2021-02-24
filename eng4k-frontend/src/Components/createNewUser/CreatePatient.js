@@ -56,100 +56,78 @@ class CreatePatient extends React.Component {
         {({ handleSubmit }) => {
           return (
             <form onSubmit={handleSubmit} className="form">
-              <div className="patientForm">
-                <div style={{ margin: "3rem" }}>
-                  <Grid container justify="center" spacing={1}>
-                    <div className="promptMessage">
-                      Please Enter the Following Information:
-                    </div>
-                    <Grid item xs={12} md={6} direction="row" justify="center">
-                      <GeneralCreatePage
-                        title={"First Name"}
-                        name={"fname"}
-                        placeholder={"First Name"}
-                        className="firstName cpInput"
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={6} direction="row" justify="center">
-                      <GeneralCreatePage
-                        title={"Last Name"}
-                        name={"lname"}
-                        placeholder={"Last Name"}
-                        className="lastName cpInput"
-                      />
-                    </Grid>
-                    <Grid item xs={12} direction="row" justify="center">
-                      <GeneralCreatePage
-                        title={"Admission Date"}
-                        name={"admissionDate"}
-                        type="date"
-                        className="admissionDate cpInput"
-                      />
-                    </Grid>
-                    <Grid item xs={12} direction="row" justify="center">
-                      <GeneralCreatePage
-                        title={"Date of Birth"}
-                        name={"dateOfBirth"}
-                        type="date"
-                        className="dateOfBirth cpInput"
-                      />
-                    </Grid>
-
-                    <Grid item xs={12} md={6} direction="row" justify="center">
-                      <GeneralCreatePage
-                        title={"Weight"}
-                        name={"weight"}
-                        placeholder={"0.0"}
-                        type="number"
-                        className="weightField cpInput"
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={6} direction="row" justify="center">
-                      <GeneralCreatePage
-                        title={"Height"}
-                        name={"height"}
-                        placeholder={"0.0"}
-                        type="number"
-                        className="weightField cpInput"
-                      />
-                    </Grid>
-                    {/* <Grid md={3}></Grid> */}
-                    <Grid
-                      item
-                      // xs={12}
-                      // md={3}
-                      direction="row"
-                      // justify="center"
-                      // alignItems="center"
-                    >
-                      <Button variant="contained" color="secondary">
-                        <Link to="/admin" className="Button-text cancBut">
-                          Cancel
-                        </Link>
-                      </Button>
-                    </Grid>
-                    <Grid
-                      item
-                      // xs={12}
-                      // md={3}
-                      direction="row"
-                      style={{ alignItems: "center" }}
-                      // justify="center"
-                      // alignItems="center"
-                    >
-                      <Button variant="contained" color="primary" type="submit">
-                        <a
-                          className="Button-text"
-                          className="Button-text subBut"
-                        >
-                          Submit
-                        </a>
-                      </Button>
-                    </Grid>
-                    {/* <Grid md={3}></Grid> */}
-                  </Grid>
+              <section className="patientForm">
+                <div className="promptMessage">
+                  <h3>Please Enter the Following Information:</h3>
                 </div>
-              </div>
+                <div class="full-name">
+                  <div class="first-name">
+                    <GeneralCreatePage
+                      title={"First Name"}
+                      name={"fname"}
+                      placeholder={"First Name"}
+                      className="firstName cpInput"
+                    />
+                  </div>
+                  <div class="last-name">
+                    <GeneralCreatePage
+                      title={"Last Name"}
+                      name={"lname"}
+                      placeholder={"Last Name"}
+                      className="lastName cpInput"
+                    />
+                  </div>
+                </div>
+                <GeneralCreatePage
+                  title={"Admission Date"}
+                  name={"admissionDate"}
+                  type="date"
+                  className="admissionDate cpInput"
+                />
+                <GeneralCreatePage
+                  title={"Date of Birth"}
+                  name={"dateOfBirth"}
+                  type="date"
+                  className="dateOfBirth cpInput"
+                />
+                <div class="weight-height">
+                  <div class="weight">
+                    <GeneralCreatePage
+                      title={"Weight"}
+                      name={"weight"}
+                      placeholder={"0.0"}
+                      type="number"
+                      className="weightField cpInput"
+                    />
+                  </div>
+                  <div class="height">
+                    <GeneralCreatePage
+                      title={"Height"}
+                      name={"height"}
+                      placeholder={"0.0"}
+                      type="number"
+                      className="weightField cpInput"
+                    />
+                  </div>
+                </div>
+
+                <div class="buttons">
+                  <div class="buttons-submit">
+                    <Button variant="contained" color="primary" type="submit">
+                      <a className="Button-text" className="Button-text subBut">
+                        Submit
+                      </a>
+                    </Button>
+                  </div>
+                  <div class="buttons-cancel">
+                    <Button variant="contained" color="secondary">
+                      <Link to="/admin" className="Button-text cancBut">
+                        Cancel
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </section>
             </form>
           );
         }}

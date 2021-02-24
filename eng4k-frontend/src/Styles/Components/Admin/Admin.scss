@@ -1,29 +1,17 @@
-.AdminButtons {
-  text-decoration: none;
-  //transform: translate(0, 50%);
-  margin-top: 9rem;
+.page {
   display: flex;
-
-  justify-content: space-around;
-  align-content: center;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.admin-button {
+  display: flex;
   flex-wrap: wrap;
+  margin-top: 8rem;
+  justify-content: center;
+}
 
-  height: 200px;
+.admin-table {
   width: 100%;
-}
-
-.AdminPageTableContainer {
-  margin-top: 3rem;
-}
-@media screen and (max-width: 1230px) {
-  .AdminButtons {
-    justify-content: space-around;
-  }
-}
-
-@media screen and (max-width: 580px) {
-  .AdminButtons {
-    margin-top: 10rem;
-  }
+  margin-top: -15rem;
 }

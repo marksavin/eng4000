@@ -366,7 +366,9 @@ export default function EnhancedTable(props) {
   return (
     <div
       style={{
-        position: "absolute",
+        // position: "absolute",
+        margin: "auto",
+        marginTop: "15rem",
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
