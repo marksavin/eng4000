@@ -56,52 +56,49 @@ class CreatePatient extends React.Component {
       >
         {({ handleSubmit }) => {
           return (
-            <form onSubmit={handleSubmit} className="form-p">
-              <div className="promptMessage">
-                Please Enter the Following Information:
-              </div>
-              <div className="patientForm-p">
-                <div className="cNames">
-                  <GeneralCreatePage
-                    title={"First Name"}
-                    name={"fname"}
-                    placeholder={"First Name"}
-                    className="firstName cpInput"
-                  />
-
-                  <GeneralCreatePage
-                    title={"Last Name"}
-                    name={"lname"}
-                    placeholder={"Last Name"}
-                    className="lastName cpInput"
-                  />
+            <form onSubmit={handleSubmit} className="form">
+              <section className="patientForm">
+                <div className="promptMessage">
+                  <h3>Please Enter the Following Information:</h3>
                 </div>
+                <GeneralCreatePage
+                  title={"First Name"}
+                  name={"fname"}
+                  placeholder={"First Name"}
+                  className="firstName cpInput"
+                />
 
-                <div className="aod">
-                  <GeneralCreatePage
-                    title={"Specialty"}
-                    name={"specialty"}
-                    placeholder={"Specialty"}
-                    className="specialty cpInput"
-                  />
-                </div>
+                <GeneralCreatePage
+                  title={"Last Name"}
+                  name={"lname"}
+                  placeholder={"Last Name"}
+                  className="lastName cpInput"
+                />
 
-                <div className="Buttons-createpatient">
-                  <div className="cancBut">
+                <GeneralCreatePage
+                  title={"Specialty"}
+                  name={"specialty"}
+                  placeholder={"Specialty"}
+                  className="specialty cpInput"
+                />
+
+                <div class="buttons">
+                  <div class="buttons-submit">
+                    <Button variant="contained" color="primary" type="submit">
+                      <a className="Button-text" className="Button-text subBut">
+                        Submit
+                      </a>
+                    </Button>
+                  </div>
+                  <div class="buttons-cancel">
                     <Button variant="contained" color="secondary">
-                      <Link to="/admin" className="Button-text">
+                      <Link to="/admin" className="Button-text cancBut">
                         Cancel
                       </Link>
                     </Button>
                   </div>
-
-                  <div className="subBut">
-                    <Button variant="contained" color="primary" type="submit">
-                      <a className="Button-text">Submit</a>
-                    </Button>
-                  </div>
                 </div>
-              </div>
+              </section>
             </form>
           );
         }}

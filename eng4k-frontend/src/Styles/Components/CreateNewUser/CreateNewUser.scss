@@ -1,58 +1,68 @@
 .form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1), 0px 20px 20px rgba(0, 0, 0, 0.1);
   margin: auto;
-  transform: translate(0, 25%);
-  box-shadow: 0px 0px 15px 10px rgba(15, 15, 15, 0.2);
-  width: 30%;
-  padding: 1rem;
+  margin-top: 12rem;
+  width: 600px;
+  min-height: 60vh;
 }
 
 .patientForm {
-  height: 500px;
-  width: 100%;
+  // display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
 }
 
-.form-n {
-  margin: auto;
-  transform: translate(0, 40%);
-  box-shadow: 0px 0px 15px 10px rgba(15, 15, 15, 0.2);
-  width: 30%;
-  padding: 1rem;
-}
-
-.patientForm-n {
-  height: 380px;
-  width: 100%;
-}
-
-.form-p {
-  margin: auto;
-  transform: translate(0, 60%);
-  box-shadow: 0px 0px 15px 10px rgba(15, 15, 15, 0.2);
-  width: 30%;
-  padding: 1rem;
-}
-
-.patientForm-p {
-  height: 300px;
-  width: 100%;
-}
-
-.dateOfBirth,
-.department,
-.specialty {
+.promptMessage {
   display: flex;
+  font-size: 1.5rem;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.full-name,
+.weight-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.first-name,
+.weight {
+  flex-grow: 1;
+  margin-right: 1rem;
+}
+
+.last-name,
+.height {
+  flex-grow: 1;
 }
 
 .firstName,
 .lastName,
 .weightField,
 .heightField {
-  padding: 1.2rem 1.6rem; // padding: top-bottom 1.2, right-left
+  padding: 1.2rem 1.6rem;
   width: 100%;
   border-radius: 6px;
   border: 1px solid silver;
+}
+
+.buttons,
+.subBut,
+.cancBut {
+  display: flex;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+}
+
+.buttons-submit {
+  margin-right: 2rem;
 }
 
 .dateOfBirth,
@@ -63,37 +73,17 @@
   border-radius: 6px;
   border: 1px solid silver;
   width: 100%;
+  margin-top: 2px;
+  margin-right: 2.4px;
 }
 
-.Buttons-createpatient {
-  justify-content: center;
+.cpLabel,
+.cpInput {
+  display: block;
 }
 
-.subBut,
-.cancBut {
-  width: 30%;
-  padding-right: 100px;
-}
-
-// Style Heading
-.promptMessage {
-  display: flex;
-  font-size: 1.5rem;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100px;
-  width: 100%;
-}
-
-.Buttons-createpatient {
-  display: flex;
-}
-
-.subBut,
-.cancBut {
-  width: 30%;
-  padding-top: 10px;
+.cpLabel {
+  margin-bottom: 20px;
 }
 
 .error {
@@ -102,4 +92,15 @@
 
 .Button-text {
   color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .form {
+    width: 80%;
+  }
+
+  .first-name,
+  .weight {
+    margin-right: 0;
+  }
 }
