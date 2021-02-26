@@ -19,13 +19,14 @@ export default function Sbar(props) {
 
   return (
     <div>
-      <Header title={`Patient: ${param.id}`} />
+      <Header title={`Patient: ${param.patientName}`} />
       <div className="paper-container">
         <Paper className={classes.pageContent} elevation={4}>
           <Sbarfrom
             nurseID={props.nurseID}
             nurseName={props.nurseName}
-            patientName={param.id}
+            patientName={param.patientName}
+            patientId={param.patientId}
           />
         </Paper>
       </div>

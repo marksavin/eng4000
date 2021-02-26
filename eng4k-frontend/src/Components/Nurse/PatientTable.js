@@ -250,6 +250,7 @@ export default function EnhancedTable(props) {
   const [orderBy, setOrderBy] = React.useState("patient_name");
   const [selected, setSelected] = React.useState([]);
   const [patientName, setPatientName] = React.useState("");
+  const [patientId, setPatientId] = React.useState(0);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -272,10 +273,10 @@ export default function EnhancedTable(props) {
   const [patients, setPatients] = useState([
     {
       patient_name: "-",
-      patient_id: "-",
+      patient_id: null,
       date_created: "-",
       a_problem: "-",
-      note_room_id: "-",
+      note_room_id: null,
       r_priority: "-",
       update_status: "-",
       last_updated: "-",
@@ -323,7 +324,7 @@ export default function EnhancedTable(props) {
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
+  const handleClick = (event, name, id) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
     setPatientName(name);
@@ -342,6 +343,7 @@ export default function EnhancedTable(props) {
     }
 
     setPatientName(name);
+    setPatientId(id);
     setSelected(newSelected);
   };
 
@@ -349,7 +351,7 @@ export default function EnhancedTable(props) {
     if (selected.length > 0) {
       setTimeout(function () {
         //your code to be executed after 1 second
-        history.push(`/nurse/${patientName}`);
+        history.push(`/nurse/${patientName}/${patientId}`);
       }, 1000);
     }
   });
@@ -457,7 +459,11 @@ export default function EnhancedTable(props) {
                               variant="contained"
                               color="primary"
                               onClick={(event) =>
-                                handleClick(event, patients.patient_name)
+                                handleClick(
+                                  event,
+                                  patients.patient_name,
+                                  patients.patient_id
+                                )
                               }
                             >
                               {patients.update_status}
@@ -467,7 +473,11 @@ export default function EnhancedTable(props) {
                               variant="contained"
                               color="secondary"
                               onClick={(event) =>
-                                handleClick(event, patients.patient_name)
+                                handleClick(
+                                  event,
+                                  patients.patient_name,
+                                  patients.patient_id
+                                )
                               }
                             >
                               {patients.update_status}

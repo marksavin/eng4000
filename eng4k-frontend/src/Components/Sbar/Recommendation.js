@@ -28,12 +28,13 @@ function Recommendation(props) {
             ></Inputgroup>
           </Grid12>
           <Grid12>
-            <Checkbox
-              label="Come to see the patient at this time"
+            <Inputgroup
+              label="Priority scale"
               name="r_priority"
               value={props.recommendation.r_priority}
               onBlur={props.handleInput}
-            ></Checkbox>
+              text="Priority of the condition from a scale of 1-3, 1 being the least and 3 being the most "
+            ></Inputgroup>
           </Grid12>
           <Grid12>
             <Checkbox
@@ -60,12 +61,13 @@ function Recommendation(props) {
             </InputLabel>
           </Grid12>
           <Grid12>
-            <Checkbox
-              label="How often do you want vital signs?"
+            <Inputgroup
+              label="frequency"
               name="r_freq_vital_signs"
               value={props.recommendation.r_freq_vital_signs}
               onBlur={props.handleInput}
-            ></Checkbox>
+              text="How often do you want vital signs taken?"
+            ></Inputgroup>
           </Grid12>
           <Grid12>
             <Checkbox
@@ -87,6 +89,6 @@ function Recommendation(props) {
       </Paper>
     </div>
   );
-};
+}
 
 export default Recommendation;

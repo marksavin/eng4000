@@ -66,7 +66,7 @@ function Situation(props) {
             <Inputgroup
               label="Patient name and location"
               name="note_patient_id"
-              defaultValue={props.situation.note_patient_id}
+              defaultValue={props.patientName}
               onBlur={props.handleInput}
               text="I'm calling about: "
               error={props.errors.note_patient_id}

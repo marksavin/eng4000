@@ -1,5 +1,5 @@
 const mysql = require("mysql");
-
+const pool = require("../dbPool.js");
 const bcrypt = require("bcrypt");
 
 // const pool = mysql.createPool({
@@ -11,14 +11,14 @@ const bcrypt = require("bcrypt");
 //   port: 3306,
 // });
 
-const pool = mysql.createPool({
-  connectionLimit: 10,
-  password: "password",
-  user: "root",
-  database: "capstonedb",
-  host: "localhost",
-  port: 3306,
-});
+// const pool = mysql.createPool({
+//   connectionLimit: 10,
+//   password: "password",
+//   user: "root",
+//   database: "capstonedb",
+//   host: "localhost",
+//   port: 3306,
+// });
 
 let loginApiCall = {};
 
