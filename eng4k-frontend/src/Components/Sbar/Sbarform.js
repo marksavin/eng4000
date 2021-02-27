@@ -4,6 +4,7 @@ import Situation from "./Situation.js";
 import Assessment from "./Assessment.js";
 import Recommendation from "./Recommendation.js";
 import { Form, ButtonForm, useForm } from "../Sbar/useForm.js";
+import { faLaptopHouse } from "@fortawesome/free-solid-svg-icons";
 
 const situation = {
   note_id: "",
@@ -12,15 +13,16 @@ const situation = {
   date_created: "",
   s_problem: "",
   s_code_status: "",
-  s_BP: "",
-  s_pulse: "",
-  s_respiration: "",
-  s_temperature: "",
-  s_o2: "",
+  s_BP: null,
+  s_pulse: null,
+  s_respiration: null,
+  s_temperature: null,
+  s_o2: null,
   s_concern_bp: false,
   s_concern_pulse: false,
   s_concern_temperature: false,
   s_concern_o2: false,
+  s_concern_respiration: false,
 };
 
 const background = {
@@ -36,7 +38,7 @@ const background = {
   b_skin_diaphoretic: false,
   b_skin_extremities_cold: false,
   b_skin_extremities_warm: false,
-  b_o2_time: "",
+  b_o2_time: 0,
   b_oximeter_detection: false,
 };
 
@@ -105,6 +107,7 @@ export default function Sbarform(props) {
       ...assessmentValue,
       ...recValue,
     };
+    console.log(combinedValues);
 
     console.log("Submit button was pressed");
     creatNewSbarNote();
@@ -121,6 +124,7 @@ export default function Sbarform(props) {
       if (res.ok) {
         return res.json();
       } else {
+        console.log("submitting was unsuccessful");
       }
     });
   }, [combinedValues]);

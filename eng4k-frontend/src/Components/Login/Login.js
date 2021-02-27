@@ -8,13 +8,39 @@ const Login = (props) => {
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    if (token.token === "token" && password.password === "password") {
-      var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
-      Cookies.set("token", "/nurse", { expires: inFifteenMinutes });
-      props.setAuthenticate(true);
-      props.setAccountType("/nurse");
+  const returnKey = (event) => {
+    if (event.which === 13) {
+      handleLogin();
     }
+  };
+
+  const handleLogin = () => {
+    fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({ token, password }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log("network response was bad");
+        }
+      })
+      .then((result) => {
+        props.setAccountType(`/${result.user_type}`);
+        props.setAuthenticate(true);
+      });
+
+    // if (token.token === "token" && password.password === "password") {
+    //   var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
+    //   //     Cookies.set("token", "/", { expires: inFifteenMinutes });
+    //   //     props.setAuthenticate(true);
+    //   props.setAccountType("/");
+    // }
+
   };
 
   return (
@@ -39,6 +65,7 @@ const Login = (props) => {
                 type="text"
                 placeholder="token"
                 onChange={(e) => setToken({ token: e.target.value })}
+                onKeyPress={returnKey}
               />
               <FontAwesomeIcon className="user-icon" icon={faUserMd} />
             </div>
@@ -52,6 +79,7 @@ const Login = (props) => {
                 type="password"
                 placeholder="password"
                 onChange={(e) => setPassword({ password: e.target.value })}
+                onKeyPress={returnKey}
               />
               <FontAwesomeIcon className="user-icon" icon={faUnlockAlt} />
             </div>

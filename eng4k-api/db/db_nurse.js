@@ -40,7 +40,7 @@ nurseApiCalls.currentPatientList = (id) => {
          SELECT max(date_created) AS date_created, note_patient_id
          FROM manage_nurse_note AS a JOIN sbar_note AS b ON a.manage_note_id = b.note_id 
          WHERE manage_by_nurse_id = ? GROUP BY note_patient_id) AS k ON sbar_note.date_created = k.date_created AND sbar_note.note_patient_id = k.note_patient_id
-         WHERE sbar_note.date_created = k.date_created AND sbar_note.note_patient_id = k.note_patient_id) AS c JOIN patient AS p 
+         WHERE sbar_note.date_created = k.date_created AND sbar_note.note_patient_id = k.note_patient_id) AS C JOIN patient AS p 
          ON sbar_note.date_created = C.date_created AND sbar_note.note_id = C.note_id AND p.patient_id = sbar_note.note_patient_id
       WHERE sbar_note.date_created = C.date_created AND sbar_note.note_id = C.note_id;`,
       [id],
@@ -65,17 +65,17 @@ nurseApiCalls.addNewSbar = (id, body) => {
     a_problem_infection, a_problem_neurologic, a_problem_respitory, a_problem_unsure_deterioriating,a_unstable, a_arrest, r_request, r_priority, r_patient_family_code_status, r_test_needed,
     r_change_treatment_ordered, r_freq_vital_signs, r_time_problem_will_last, r_problem_persist_contact)
 
-    VALUES(DEFAULT,?,?,CURRENT_TIMESTAMP(),?,?,?,?,?,?, ?" mmHg",?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?,? " mins",?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);`,
+    VALUES(DEFAULT,?,?,CURRENT_TIMESTAMP(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);`,
       [
         body.note_patient_id,
-        body.note_room_id,
+        parseInt(body.note_room_id),
         body.s_problem,
         body.s_code_status,
         body.s_BP,
         body.s_pulse,
         body.s_respiration,
         body.s_temperature,
-        body.s_o2,
+        `${body.s_o2} mmHg`,
         body.s_concern_bp,
         body.s_concern_pulse,
         body.s_concern_temperature,
@@ -92,7 +92,7 @@ nurseApiCalls.addNewSbar = (id, body) => {
         body.b_skin_diaphoretic,
         body.b_skin_extremities_cold,
         body.b_skin_extremities_warm,
-        body.b_o2_time,
+        `${body.b_o2_time} mins`,
         body.b_oximeter_detection,
         body.a_problem,
         body.a_problem_cardiac,

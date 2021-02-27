@@ -21,16 +21,17 @@ loginApiCall.registerAccount = (token, hashedPassword, user_type) => {
 };
 
 loginApiCall.accountAuthentication = (body) => {
+  console.log(body.token.token);
   return new Promise((resolve, reject) => {
     pool.query(
       `SELECT * FROM capstonedb.login WHERE token = ? `,
-      [body.token],
+      [body.token.token],
       (err, result) => {
         if (err) {
           return reject(err);
         } else if (result.length > 0) {
           bcrypt.compare(
-            body.password,
+            body.password.password,
             result[0].password,
             (error, response) => {
               if (response) {

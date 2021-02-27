@@ -1,6 +1,8 @@
 const express = require("express");
 const session = require("express-session");
+var passport = require("passport");
 var MySQLStore = require("express-mysql-session")(session);
+var cookieParser = require("cookie-parser");
 
 const nurseRouter = require("./routes/routes_nurse");
 const loginRouter = require("./routes/routes_login");
@@ -22,6 +24,7 @@ const {
 const IN_PROD = NODE_ENV === "production";
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(
   session({
@@ -38,10 +41,17 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  req.session.init = "init";
-  console.log(req.session);
-  res.send("hello");
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get("/isAuthenticated", function (req, res) {
+  console.log("req.user", req.user);
+  console.log("req.isAuthenticated", req.isAuthenticated());
+  if (req.isAuthenticated()) {
+    res.json(req.user.path);
+  } else {
+    res.json("");
+  }
 });
 
 app.use("/nurse", nurseRouter);

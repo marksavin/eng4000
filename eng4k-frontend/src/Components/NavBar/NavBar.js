@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
+import { useHistory} from "react-router-dom";
 import Cookies from "js-cookie";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +11,8 @@ import {
 
 const NavBar = (props) => {
   const [open, setOpen] = useState(false);
+
+  const history = useHistory();
 
   const handleClick = () => {
     setOpen(!open);
@@ -24,6 +27,14 @@ const NavBar = (props) => {
   };
 
   const handleLogout = () => {
+    fetch("/login/logout").then((res) => {
+      if (res.ok) {
+        history.push("/");
+        return res.json();
+      } else {
+        console.log("logout was unsuccessfull");
+      }
+    });
     props.setAuthenticate(false);
     Cookies.remove("token");
   };
