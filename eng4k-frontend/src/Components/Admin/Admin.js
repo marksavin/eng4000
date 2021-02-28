@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 // import {  } from "@material-ui/core";
 import ArrowDropDownCircleIcon from "@material-ui/icons/ArrowDropDownCircle";
@@ -52,41 +52,30 @@ const Admin = (props) => {
       />
       <Switch>
         <Route exact path="/admin">
-          <section class="page">
+          <section className="page">
             <div className="admin-button">
-              <Link to="/admin/add-patient" style={{ textDecoration: "none" }}>
-                <DashboardButton title="Patient" count="200" />
-              </Link>
-              <Link to="/admin/add-nurse" style={{ textDecoration: "none" }}>
-                <DashboardButton title="Nurse" count="50" />
-              </Link>
-              <Link
-                to="/admin/add-physician"
-                style={{ textDecoration: "none" }}
-              >
-                <DashboardButton title="Doctor" count="30" />
-              </Link>
-              <Link to="/admin/add-visitor" style={{ textDecoration: "none" }}>
-                <DashboardButton title="Visitor" count="320" />
-              </Link>
+              <DashboardButton title="Patient" count="200" />
+              <DashboardButton title="Nurse" count="50" />
+              <DashboardButton title="Physician" count="30" />
+              <DashboardButton title="Visitor" count="320" />
             </div>
-            <div class="admin-table">
+            {/* <div className="admin-table">
               <MuiThemeProvider theme={theme}>
                 <PatientTable search={props.search} />
               </MuiThemeProvider>
-            </div>
+            </div> */}
           </section>
         </Route>
 
-        <Route exact path="/admin/add-patient">
+        <Route exact path="/admin/addPatient">
           <CreatePatient />
         </Route>
 
-        <Route exact path="/admin/add-nurse">
+        <Route exact path="/admin/addNurse">
           <CreateNurse />
         </Route>
 
-        <Route exact path="/admin/add-physician">
+        <Route exact path="/admin/addPhysician">
           <CreatePhysician />
         </Route>
       </Switch>

@@ -18,30 +18,21 @@ const formSchema = yup.object().shape({
   specialty: yup.string().required("Specialty is required*"),
 });
 class CreatePatient extends React.Component {
-  // handleSubmit = (event) => {
-  // api call
-  // event.preventDefault();
-  // console.log("hello world");
-  // console.log(this.state);
-  // fetch(`/nurse/addNewPatient`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json;charset=utf-8",
-  //   },
-  //   body: JSON.stringify(this.state),
-  // }).then((res) => {
-  //   if (res.ok) {
-  //     return res.json();
-  //   } else {
-  //   }
-  // });
-  // };
-  // handleClick = () => {
-  //   console.log("hello world");
-  //   <Switch>
-  //     <Link to="/admin"></Link>
-  //   </Switch>;
-  // };
+  handleSubmit = (data) => {
+    fetch(`/admin/addPhysician`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(this.data),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+      }
+    });
+  };
+
   render() {
     return (
       <Formik
@@ -82,15 +73,15 @@ class CreatePatient extends React.Component {
                   className="specialty cpInput"
                 />
 
-                <div class="buttons">
-                  <div class="buttons-submit">
+                <div className="buttons">
+                  <div className="buttons-submit">
                     <Button variant="contained" color="primary" type="submit">
                       <a className="Button-text" className="Button-text subBut">
                         Submit
                       </a>
                     </Button>
                   </div>
-                  <div class="buttons-cancel">
+                  <div className="buttons-cancel">
                     <Button variant="contained" color="secondary">
                       <Link to="/admin" className="Button-text cancBut">
                         Cancel
