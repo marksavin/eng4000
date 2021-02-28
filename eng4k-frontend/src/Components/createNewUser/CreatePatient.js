@@ -21,24 +21,21 @@ const formSchema = yup.object().shape({
   height: yup.number().required("Height is required*"),
 });
 class CreatePatient extends React.Component {
-  // handleSubmit = (event) => {
-  // api call
-  // event.preventDefault();
-  // console.log("hello world");
-  // console.log(this.state);
-  // fetch(`/nurse/addNewPatient`, {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json;charset=utf-8",
-  //   },
-  //   body: JSON.stringify(this.state),
-  // }).then((res) => {
-  //   if (res.ok) {
-  //     return res.json();
-  //   } else {
-  //   }
-  // });
-  // };
+  handleSubmit = (data) => {
+    fetch(`/admin/addPatient`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+      }
+    });
+  };
+
   render() {
     return (
       <Formik
@@ -51,7 +48,7 @@ class CreatePatient extends React.Component {
           height: "",
         }}
         validationSchema={formSchema}
-        onSubmit={(data) => console.log(data)}
+        onSubmit={(data) => this.handleSubmit(data)}
       >
         {({ handleSubmit }) => {
           return (
@@ -60,8 +57,8 @@ class CreatePatient extends React.Component {
                 <div className="promptMessage">
                   <h3>Please Enter the Following Information:</h3>
                 </div>
-                <div class="full-name">
-                  <div class="first-name">
+                <div className="full-name">
+                  <div className="first-name">
                     <GeneralCreatePage
                       title={"First Name"}
                       name={"fname"}
@@ -69,7 +66,7 @@ class CreatePatient extends React.Component {
                       className="firstName cpInput"
                     />
                   </div>
-                  <div class="last-name">
+                  <div className="last-name">
                     <GeneralCreatePage
                       title={"Last Name"}
                       name={"lname"}
@@ -90,8 +87,8 @@ class CreatePatient extends React.Component {
                   type="date"
                   className="dateOfBirth cpInput"
                 />
-                <div class="weight-height">
-                  <div class="weight">
+                <div className="weight-height">
+                  <div className="weight">
                     <GeneralCreatePage
                       title={"Weight"}
                       name={"weight"}
@@ -100,7 +97,7 @@ class CreatePatient extends React.Component {
                       className="weightField cpInput"
                     />
                   </div>
-                  <div class="height">
+                  <div className="height">
                     <GeneralCreatePage
                       title={"Height"}
                       name={"height"}
@@ -111,15 +108,15 @@ class CreatePatient extends React.Component {
                   </div>
                 </div>
 
-                <div class="buttons">
-                  <div class="buttons-submit">
+                <div className="buttons">
+                  <div className="buttons-submit">
                     <Button variant="contained" color="primary" type="submit">
                       <a className="Button-text" className="Button-text subBut">
                         Submit
                       </a>
                     </Button>
                   </div>
-                  <div class="buttons-cancel">
+                  <div className="buttons-cancel">
                     <Button variant="contained" color="secondary">
                       <Link to="/admin" className="Button-text cancBut">
                         Cancel

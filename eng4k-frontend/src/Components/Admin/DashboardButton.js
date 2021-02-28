@@ -1,8 +1,7 @@
-import react, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUserMd,
-  faUnlockAlt,
   faStethoscope,
   faUserNurse,
   faUserInjured,
@@ -14,20 +13,15 @@ const DashboardButton = (props) => {
   const [iconUsed, setIconUsed] = useState("");
 
   var bgColors = {
-    Doctor: "#81b71a",
+    Physician: "#81b71a",
     Nurse: "#00B1E1",
     Patient: "#37BC9B",
     Family: "#E18029",
   };
 
-  const iconD = "fas fa-stethoscope";
-  const iconN = "fas fa-user-nurse";
-  const iconP = "fas fa-user-injured";
-  const iconF = "fas fa-child";
-
   const choose = () => {
-    if (props.title === "Doctor") {
-      setColor(bgColors.Doctor);
+    if (props.title === "Physician") {
+      setColor(bgColors.Physician);
       setIconUsed(faStethoscope);
     } else if (props.title === "Nurse") {
       setColor(bgColors.Nurse);
@@ -43,30 +37,32 @@ const DashboardButton = (props) => {
 
   useEffect(() => {
     choose();
-  });
+  }, []);
 
   return (
     <div className="adminDashboardButtonContainer">
-      <div
-        className="adminbuttonContainer"
-        style={{ backgroundColor: `${color}` }}
-      >
-        <div className="containerbuttonicon">
-          <div className="DashboardButtonicon">
-            <FontAwesomeIcon
-              className="adminuser-icon"
-              icon={iconUsed}
-              color={color}
-            />
+      <Link to={`/admin/add${props.title}`} style={{ textDecoration: "none" }}>
+        <div
+          className="adminbuttonContainer"
+          style={{ backgroundColor: `${color}` }}
+        >
+          <div className="containerbuttonicon">
+            <div className="DashboardButtonicon">
+              <FontAwesomeIcon
+                className="adminuser-icon"
+                icon={iconUsed}
+                color={color}
+              />
+            </div>
+          </div>
+          <div className="adminDashboardButtonContent">
+            <div className="adminDashboardButtonName">{`Create ${props.title} Account`}</div>
+            <div className="accountCounter">
+              <div className="adminDashboardButtonCount">{`${props.count} ${props.title}s`}</div>
+            </div>
           </div>
         </div>
-        <div className="adminDashboardButtonContent">
-          <div className="adminDashboardButtonName">{`Create ${props.title} Account`}</div>
-          <div className="accountCounter">
-            <div className="adminDashboardButtonCount">{`${props.count} ${props.title}s`}</div>
-          </div>
-        </div>
-      </div>
+      </Link>
     </div>
   );
 };

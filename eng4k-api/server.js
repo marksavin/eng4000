@@ -5,6 +5,7 @@ var MySQLStore = require("express-mysql-session")(session);
 var cookieParser = require("cookie-parser");
 
 const nurseRouter = require("./routes/routes_nurse");
+const adminRouter = require("./routes/routes_admin");
 const loginRouter = require("./routes/routes_login");
 
 const pool = require("./dbPool.js");
@@ -55,6 +56,7 @@ app.get("/isAuthenticated", function (req, res) {
 });
 
 app.use("/nurse", nurseRouter);
+app.use("/admin", adminRouter);
 app.use("/login", loginRouter);
 
 app.listen(PORT, () => {
