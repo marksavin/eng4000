@@ -6,6 +6,9 @@ import Recommendation from "./Recommendation.js";
 import { Form, ButtonForm, useForm } from "../Sbar/useForm.js";
 import { faLaptopHouse } from "@fortawesome/free-solid-svg-icons";
 
+
+
+//CHECK NULL FIELDS TO SEE IF YOU CAN JUST MAKE THEM EMPTY STRINGS. MYSQL DOESNT LIKE NULL
 const situation = {
   note_id: "",
   note_patient_id: null,
