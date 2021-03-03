@@ -214,6 +214,7 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 750,
     fontSize: "5rem",
+    tableLayout: "fixed",
   },
   visuallyHidden: {
     border: 0,
