@@ -31,16 +31,6 @@ const NursePage = (props) => {
       />
       <Switch>
         <Route exact path="/nurse">
-          <Link to="/nurse/add-patient">
-            <Button
-              variant="contained"
-              color="primary"
-              className="add_patient_button"
-              style={{ fontSize: "1.5rem" }}
-            >
-              Add Patient
-            </Button>
-          </Link>
           <Header title="Wing Hospital Name" />
           <MuiThemeProvider theme={theme}>
             <PatientTable search={props.search} />
