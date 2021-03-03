@@ -39,13 +39,20 @@ const NursePage = (props) => {
 
         <Route path="/nurse/SBARhistory">
           <Header title={`SBAR History of ${props.location.patientName}`} />
-          <MuiThemeProvider theme={theme}>
-            <HistoryTable
-              search={props.search}
-              patientName={props.location.patientName}
-              patientId={props.location.patientId}
+          <div className="historyContainer">
+            <MuiThemeProvider theme={theme}>
+              <HistoryTable
+                search={props.search}
+                patientName={props.location.patientName}
+                patientId={props.location.patientId}
+              />
+            </MuiThemeProvider>
+            <ContactPhysicanCard
+              pname="Dr. Geneva"
+              specialty="Neurology"
+              availability="Away on vacation"
             />
-          </MuiThemeProvider>
+          </div>
         </Route>
 
         <Route exact path="/nurse/contactPhysician">

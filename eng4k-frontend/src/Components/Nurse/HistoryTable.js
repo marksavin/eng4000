@@ -270,6 +270,7 @@ export default function EnhancedTable(props) {
       })
       .then((result) => {
         if (result !== undefined && result.length !== 0) {
+          console.log(result);
           setPatients(result);
           setSearchState(result);
         }
@@ -341,7 +342,6 @@ export default function EnhancedTable(props) {
   return (
     <div
       style={{
-        position: "absolute",
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
@@ -389,7 +389,7 @@ export default function EnhancedTable(props) {
                         role={"checkbox"}
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={patients.patient_name}
+                        key={index}
                         selected={isItemSelected}
                       >
                         <TableCell padding="checkbox"></TableCell>
