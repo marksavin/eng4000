@@ -35,7 +35,7 @@ const PhysicianDashBoard = (props) => {
             </Link>
           </div>
           {/* <ContactPhysicianCard /> */}
-        {/* </Route> */} */}
+        {/* </Route> */} */
         <Route exact path="/physician">
           <Header title="Dr. --Physician Name--" />
           <PhysicianPatientList search={props.search} />
