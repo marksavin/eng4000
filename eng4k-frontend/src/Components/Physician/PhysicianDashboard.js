@@ -2,17 +2,23 @@ import { Switch, Route, Link } from "react-router-dom";
 import { Button } from "@material-ui/core/";
 import React, { useState } from "react";
 import PhysicianPatientList from "./PhysicianPatientList";
+import Navigation from "../NavBar/NavBar.js";
+
 //import PHeader from './PHeader';
 ///import ContactPhysicianCard from "../Nurse/ContactPhysicanCard"; //temperarily
 
 import Header from "../Nurse/Header";
 
 const PhysicianDashBoard = (props) => {
-
   return (
     <div>
+      <Navigation
+        search={props.search}
+        setSearch={props.setSearch}
+        setAuthenticate={props.setAuthenticate}
+      />
       <Switch>
-        <Route exact path="/physician">
+        {/* <Route exact path="/physician">
           <Header title="DashBoard" />
           <div className="dButtons">
             <Link to="/physician/patient-list">
@@ -29,9 +35,9 @@ const PhysicianDashBoard = (props) => {
             </Link>
           </div>
           {/* <ContactPhysicianCard /> */}
-        </Route>
-        <Route exact path="/physician/patient-list">
-          <Header title='Dr. --Physician Name--'/>
+        {/* </Route> */} */}
+        <Route exact path="/physician">
+          <Header title="Dr. --Physician Name--" />
           <PhysicianPatientList search={props.search} />
         </Route>
       </Switch>
