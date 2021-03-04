@@ -31,16 +31,6 @@ const NursePage = (props) => {
       />
       <Switch>
         <Route exact path="/nurse">
-          <Link to="/nurse/add-patient">
-            <Button
-              variant="contained"
-              color="primary"
-              className="add_patient_button"
-              style={{ fontSize: "1.5rem" }}
-            >
-              Add Patient
-            </Button>
-          </Link>
           <Header title="Wing Hospital Name" />
           <MuiThemeProvider theme={theme}>
             <PatientTable search={props.search} />
@@ -49,13 +39,20 @@ const NursePage = (props) => {
 
         <Route path="/nurse/SBARhistory">
           <Header title={`SBAR History of ${props.location.patientName}`} />
-          <MuiThemeProvider theme={theme}>
-            <HistoryTable
-              search={props.search}
-              patientName={props.location.patientName}
-              patientId={props.location.patientId}
+          <div className="historyContainer">
+            <MuiThemeProvider theme={theme}>
+              <HistoryTable
+                search={props.search}
+                patientName={props.location.patientName}
+                patientId={props.location.patientId}
+              />
+            </MuiThemeProvider>
+            <ContactPhysicanCard
+              pname="Dr. Geneva"
+              specialty="Neurology"
+              availability="Away on vacation"
             />
-          </MuiThemeProvider>
+          </div>
         </Route>
 
         <Route exact path="/nurse/contactPhysician">

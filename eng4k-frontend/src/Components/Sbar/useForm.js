@@ -64,7 +64,7 @@ export function useForm(
     if (name.charAt(0) === "s" || name.charAt(0) === "n") {
       setSituationValue({
         ...situationValue,
-        [name]: value,
+        [name]: value.trim(),
       });
       console.log(situationValue);
     } else if (name.charAt(0) === "b") {
