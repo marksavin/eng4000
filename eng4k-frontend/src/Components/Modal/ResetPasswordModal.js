@@ -1,0 +1,146 @@
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import {
+  InputLabel,
+  TextField,
+  createMuiTheme,
+  MuiThemeProvider,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import Avatar from "@material-ui/core/Avatar";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemText from "@material-ui/core/ListItemText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Dialog from "@material-ui/core/Dialog";
+import PersonIcon from "@material-ui/icons/Person";
+import AddIcon from "@material-ui/icons/Add";
+import Typography from "@material-ui/core/Typography";
+import { blue } from "@material-ui/core/colors";
+
+const emails = ["username@gmail.com", "user02@gmail.com"];
+const inputStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
+}));
+
+const buttonStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: "#5bc8c2",
+      main: "#33bbb3",
+      dark: "#23827d",
+    },
+  },
+});
+
+function ResetPasswordModal(props) {
+  const inputClass = inputStyles();
+  const buttonClass = buttonStyles();
+  const { onClose, selectedValue, open } = props;
+
+  const [token, setToken] = useState();
+  const [newPassword, setNewPassword] = useState();
+
+  const handleClose = () => {
+    onClose(selectedValue);
+  };
+
+  const handleToken = (event) => {
+    setToken(event.target.value);
+  };
+
+  const handlePassword = (event) => {
+    setNewPassword(event.target.value);
+  };
+
+  const handleReset = (event) => {
+    console.log(token, newPassword);
+    fetch(`/login/resetPassword`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        token: token,
+        newPassword: newPassword,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        handleClose();
+        return res.json();
+      } else {
+      }
+    });
+  };
+
+  return (
+    <Dialog
+      onClose={handleClose}
+      aria-labelledby="simple-dialog-title"
+      open={open}
+    >
+      <form className="resetPassword-form">
+        <DialogTitle id="simple-dialog-title">Reset Password</DialogTitle>
+        <InputLabel>Please type in your token and new password</InputLabel>
+        <MuiThemeProvider theme={theme}>
+          <div className={`resetPassword-inputFields ${inputClass.root}`}>
+            <TextField
+              className="token"
+              id="outlined-basic"
+              label="Token"
+              variant="outlined"
+              onChange={handleToken}
+            />
+            <TextField
+              className="newPassword"
+              id="outlined-basic"
+              label="New Password"
+              variant="outlined"
+              onChange={handlePassword}
+            />
+          </div>
+          <div className={`resetPassword-buttons ${buttonClass.root}`}>
+            <Button
+              color="primary"
+              variant="contained"
+              label="Submit"
+              onClick={handleReset}
+            >
+              Submit
+            </Button>
+            <Button
+              color="default"
+              variant="contained"
+              label="close"
+              onClick={handleClose}
+            >
+              Close
+            </Button>
+          </div>
+        </MuiThemeProvider>
+      </form>
+    </Dialog>
+  );
+}
+
+// Modal.propTypes = {
+//   onClose: PropTypes.func.isRequired,
+//   open: PropTypes.bool.isRequired,
+// };
+
+export default ResetPasswordModal;

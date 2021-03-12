@@ -20,6 +20,24 @@ loginApiCall.registerAccount = (token, hashedPassword, user_type) => {
   });
 };
 
+loginApiCall.resetPassword = (token, newPassword) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `UPDATE capstonedb.login
+      SET password = ?
+      WHERE token = ?; `,
+      [newPassword, token],
+      (err, result) => {
+        if (err) {
+          return reject(err);
+        }
+        console.log(result);
+        return resolve(result);
+      }
+    );
+  });
+};
+
 loginApiCall.accountAuthentication = (body) => {
   console.log(body.token.token);
   return new Promise((resolve, reject) => {

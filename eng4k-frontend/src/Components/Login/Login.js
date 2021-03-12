@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Cookies from "js-cookie";
+import ResetPasswordModal from "../Modal/ResetPasswordModal";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserMd, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +7,15 @@ import { faUserMd, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 const Login = (props) => {
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
+  const [open, setOpen] = useState(false); //for modal
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  };
 
   const returnKey = (event) => {
     if (event.which === 13) {
@@ -33,14 +42,6 @@ const Login = (props) => {
         props.setAccountType(`/${result.user_type}`);
         props.setAuthenticate(true);
       });
-
-    // if (token.token === "token" && password.password === "password") {
-    //   var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
-    //   //     Cookies.set("token", "/", { expires: inFifteenMinutes });
-    //   //     props.setAuthenticate(true);
-    //   props.setAccountType("/");
-    // }
-
   };
 
   return (
@@ -88,6 +89,18 @@ const Login = (props) => {
             <button className="button" onClick={handleLogin}>
               Login
             </button>
+          </div>
+          <div>
+            <label
+              style={{ cursor: "pointer", color: "#33bbb3" }}
+              type="button"
+              variant="outlined"
+              color="primary"
+              onClick={handleClickOpen}
+            >
+              Reset Password
+            </label>
+            <ResetPasswordModal open={open} onClose={handleClose} />
           </div>
         </div>
       </div>

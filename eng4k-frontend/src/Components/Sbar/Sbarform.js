@@ -6,21 +6,19 @@ import Recommendation from "./Recommendation.js";
 import { Form, ButtonForm, useForm } from "../Sbar/useForm.js";
 import { faLaptopHouse } from "@fortawesome/free-solid-svg-icons";
 
-
-
 //CHECK NULL FIELDS TO SEE IF YOU CAN JUST MAKE THEM EMPTY STRINGS. MYSQL DOESNT LIKE NULL
 const situation = {
   note_id: "",
-  note_patient_id: null,
-  note_room_id: null,
+  note_patient_id: 0,
+  note_room_id: -1,
   date_created: "",
   s_problem: "",
   s_code_status: "",
-  s_BP: null,
-  s_pulse: null,
-  s_respiration: null,
-  s_temperature: null,
-  s_o2: null,
+  s_BP: -1,
+  s_pulse: -1,
+  s_respiration: -1,
+  s_temperature: -1,
+  s_o2: -1,
   s_concern_bp: false,
   s_concern_pulse: false,
   s_concern_temperature: false,
@@ -41,7 +39,7 @@ const background = {
   b_skin_diaphoretic: false,
   b_skin_extremities_cold: false,
   b_skin_extremities_warm: false,
-  b_o2_time: 0,
+  b_o2_time: -1,
   b_oximeter_detection: false,
 };
 
