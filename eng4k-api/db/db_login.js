@@ -7,13 +7,12 @@ let loginApiCall = {};
 loginApiCall.registerAccount = (token, hashedPassword, user_type) => {
   return new Promise((resolve, reject) => {
     pool.query(
-      `INSERT INTO capstonedb.login (token, password, date_created, user_type) VALUES (?,?, CURRENT_DATE(),?)`,
+      `INSERT INTO capstonedb.login VALUES (?,?, CURRENT_DATE(),?, 0, 0)`,
       [token, hashedPassword, user_type],
       (err, result) => {
         if (err) {
           return reject(err);
         }
-        console.log(result);
         return resolve(result);
       }
     );
@@ -31,8 +30,27 @@ loginApiCall.resetPassword = (token, newPassword) => {
         if (err) {
           return reject(err);
         }
-        console.log(result);
         return resolve(result);
+      }
+    );
+  });
+};
+
+//make sure the query is correct
+loginApiCall.tokenExists = (token) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `SELECT token FROM capstonedb.login WHERE token = ? `,
+      [token],
+      (err, result) => {
+        console.log(result);
+        if (err) {
+          return reject(err);
+        } else if (result.length == 0) {
+          return resolve("User doesnt exist");
+        } else if (result[0].token == token) {
+          return resolve("User exist");
+        }
       }
     );
   });

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 
 import Navigation from "../NavBar/NavBar.js";
@@ -22,6 +22,25 @@ const theme = createMuiTheme({
 });
 
 const NursePage = (props) => {
+  const [nurseId, setNurseId] = useState("");
+
+  useEffect(() => {
+    fetch(`/nurse/getId/${props.token}`)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log("network response was bad");
+        }
+      })
+      .then((result) => {
+        if (result !== undefined && result.length !== 0) {
+          console.log(result);
+          setNurseId(result);
+        }
+      });
+  }, []);
+
   return (
     <div>
       <Navigation
@@ -43,6 +62,7 @@ const NursePage = (props) => {
             <MuiThemeProvider theme={theme}>
               <HistoryTable
                 search={props.search}
+                nurseId={nurseId}
                 patientName={props.location.patientName}
                 patientId={props.location.patientId}
               />

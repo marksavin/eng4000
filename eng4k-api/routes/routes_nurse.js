@@ -4,8 +4,6 @@ const Joi = require("joi");
 const router = express.Router();
 const db = require("../db/db_nurse");
 
-
-
 router.get("/viewPatients/:nurseId", async (req, res, next) => {
   // const schema = Joi.object({
   //   nurseId: Joi.string().required(),
@@ -38,9 +36,10 @@ router.post("/addNewSBAR/:patientId", async (req, res, next) => {
   }
 });
 
-router.post("/addNewPatient", async (req, res, next) => {
+
+router.get("/SBARHistory/:nurseId/:patientId", async (req, res, next) => {
   try {
-    let queryResults = await db.addNewPatient(req.body);
+    let queryResults = await db.SBARHistory(req.params.patientId);
     res.json(queryResults);
   } catch (e) {
     console.log(e);
@@ -48,9 +47,9 @@ router.post("/addNewPatient", async (req, res, next) => {
   }
 });
 
-router.get("/SBARHistory/:patientId", async (req, res, next) => {
+router.get("/getId/:token", async (req, res, next) => {
   try {
-    let queryResults = await db.SBARHistory(req.params.patientId);
+    let queryResults = await db.getId(req.params.token);
     res.json(queryResults);
   } catch (e) {
     console.log(e);

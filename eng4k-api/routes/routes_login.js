@@ -36,10 +36,8 @@ router.post("/resetPassword", async (req, res, next) => {
       console.log(err);
     }
     try {
-      let queryResults = db.resetPassword(
-        req.body.token,
-        hashedPassword,
-      );
+      let queryResults = db.resetPassword(req.body.token, hashedPassword);
+
       res.json(queryResults);
     } catch (e) {
       console.log(e);
@@ -48,8 +46,17 @@ router.post("/resetPassword", async (req, res, next) => {
   });
 });
 
+router.get("/tokenExists/:id", async (req, res, next) => {
+  try {
+    let queryResults = await db.tokenExists(req.params.id);
+    res.json(queryResults);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 router.post("/", async (req, res, next) => {
-  console.log(req.body);
   try {
     let queryResults = await db.accountAuthentication(req.body);
     console.log(queryResults);

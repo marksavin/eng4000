@@ -41,6 +41,7 @@ const Login = (props) => {
       .then((result) => {
         props.setAccountType(`/${result.user_type}`);
         props.setAuthenticate(true);
+        props.setUserToken(token);
       });
   };
 

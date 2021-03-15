@@ -40,12 +40,15 @@ class CreatePatient extends React.Component {
     return (
       <Formik
         initialValues={{
+          patient_id: "",
           fname: "",
           lname: "",
           admissionDate: "",
           dateOfBirth: "",
           weight: "",
           height: "",
+          nurse_id: "",
+          room_id: "",
         }}
         validationSchema={formSchema}
         onSubmit={(data) => this.handleSubmit(data)}

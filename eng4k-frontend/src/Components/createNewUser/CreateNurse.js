@@ -42,6 +42,8 @@ class CreatePatient extends React.Component {
           lname: "",
           department: "",
           specialty: "",
+          token: "",
+          password: "",
         }}
         validationSchema={formSchema}
         onSubmit={(data) => console.log(data)}

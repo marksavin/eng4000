@@ -53,8 +53,10 @@ function ResetPasswordModal(props) {
   const buttonClass = buttonStyles();
   const { onClose, selectedValue, open } = props;
 
-  const [token, setToken] = useState();
+  const [token, setToken] = useState("");
   const [newPassword, setNewPassword] = useState();
+  const [errorStatus, setErrorStatus] = useState(false);
+  const [errorText, setErrorText] = useState("");
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -68,6 +70,32 @@ function ResetPasswordModal(props) {
     setNewPassword(event.target.value);
   };
 
+  const returnKey = (event) => {
+    if (event.which === 13) {
+      handleReset();
+    }
+  };
+
+  const handleTokenCheck = (event) => {
+    fetch(`/login/tokenExists/${event.target.value}`)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log("network response was bad");
+        }
+      })
+      .then((result) => {
+        if (result !== "User exist") {
+          setErrorStatus(true);
+          setErrorText(result);
+        } else {
+          setErrorStatus(false);
+          setErrorText("");
+        }
+      });
+  };
+
   const handleReset = (event) => {
     console.log(token, newPassword);
     fetch(`/login/resetPassword`, {
@@ -79,13 +107,17 @@ function ResetPasswordModal(props) {
         token: token,
         newPassword: newPassword,
       }),
-    }).then((res) => {
-      if (res.ok) {
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log("network response was bad");
+        }
+      })
+      .then((result) => {
         handleClose();
-        return res.json();
-      } else {
-      }
-    });
+      });
   };
 
   return (
@@ -105,6 +137,9 @@ function ResetPasswordModal(props) {
               label="Token"
               variant="outlined"
               onChange={handleToken}
+              onBlur={handleTokenCheck}
+              error={errorStatus}
+              helperText={errorText}
             />
             <TextField
               className="newPassword"
@@ -128,6 +163,7 @@ function ResetPasswordModal(props) {
               variant="contained"
               label="close"
               onClick={handleClose}
+              onKeyPress={returnKey}
             >
               Close
             </Button>

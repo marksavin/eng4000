@@ -31,6 +31,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [accountType, setAccountType] = useState("");
   const [authenticate, setAuthenticate] = useState(false);
+  const [userToken, setUserToken] = useState("");
 
   console.log(accountType);
   console.log(authenticate);
@@ -89,6 +90,7 @@ function App() {
               authenticate={authenticate}
               setAuthenticate={setAuthenticate}
               accountType={accountType}
+              userToken={userToken}
             />
             <ProtectedRoute
               path="/physician"
@@ -98,6 +100,7 @@ function App() {
               authenticate={authenticate}
               setAuthenticate={setAuthenticate}
               accountType={accountType}
+              userToken={userToken}
             />
             <ProtectedRoute
               path="/admin"
@@ -119,6 +122,7 @@ function App() {
               setAuthenticate={setAuthenticate}
               accountType={accountType}
               setAccountType={setAccountType}
+              setUserToken={setUserToken}
             />
           </Switch>
         ) : (
