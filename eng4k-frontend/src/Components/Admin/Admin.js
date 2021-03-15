@@ -66,18 +66,19 @@ const Admin = (props) => {
             </div> */}
           </section>
         </Route>
+        <MuiThemeProvider theme={theme}>
+          <Route exact path="/admin/addPatient">
+            <CreatePatient />
+          </Route>
 
-        <Route exact path="/admin/addPatient">
-          <CreatePatient />
-        </Route>
+          <Route exact path="/admin/addNurse">
+            <CreateNurse />
+          </Route>
 
-        <Route exact path="/admin/addNurse">
-          <CreateNurse />
-        </Route>
-
-        <Route exact path="/admin/addPhysician">
-          <CreatePhysician />
-        </Route>
+          <Route exact path="/admin/addPhysician">
+            <CreatePhysician />
+          </Route>
+        </MuiThemeProvider>
       </Switch>
     </div>
   );
