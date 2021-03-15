@@ -19,6 +19,9 @@ const formSchema = yup.object().shape({
   dateOfBirth: yup.string().required("Date of Birth is required*"),
   weight: yup.number().required("Weight is required*"),
   height: yup.number().required("Height is required*"),
+  patient_id: yup.number().required("Patient ID is required*"),
+  nurse_id: yup.number().required("Nurse ID is required*"),
+  room_id: yup.number().required("Room number is required*"),
 });
 class CreatePatient extends React.Component {
   handleSubmit = (data) => {
@@ -110,6 +113,28 @@ class CreatePatient extends React.Component {
                     />
                   </div>
                 </div>
+
+                <GeneralCreatePage
+                  title={"Patient ID"}
+                  name={"patient_id"}
+                  type="text"
+                  className="patient_id cpInput"
+                  placeholder="Patient ID"
+                />
+                <GeneralCreatePage
+                  title={"Nurse ID"}
+                  name={"nurse_id"}
+                  type="text"
+                  className="nurse_id cpInput"
+                  placeholder="Nurse ID"
+                />
+                <GeneralCreatePage
+                  title={"Room Number"}
+                  name={"room_id"}
+                  type="text"
+                  className="room_id cpInput"
+                  placeholder="Room Number"
+                />
 
                 <div className="buttons">
                   <div className="buttons-submit">

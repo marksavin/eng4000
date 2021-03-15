@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { Button, TextField } from "@material-ui/core";
 
 const formSchema = yup.object().shape({
+  token: yup.string().required("Token is required*"),
+  password: yup.string().required("Password is required*"),
   fname: yup
     .string()
     .matches(/^[a-zA-Z ]+$/, "Name cannot contain a number")
@@ -38,12 +40,12 @@ class CreatePatient extends React.Component {
     return (
       <Formik
         initialValues={{
+          token: "",
+          password: "",
           fname: "",
           lname: "",
           department: "",
           specialty: "",
-          token: "",
-          password: "",
         }}
         validationSchema={formSchema}
         onSubmit={(data) => console.log(data)}
@@ -55,6 +57,21 @@ class CreatePatient extends React.Component {
                 <div className="promptMessage">
                   <h3>Please Enter the Following Information:</h3>
                 </div>
+
+                <GeneralCreatePage
+                  title={"Token"}
+                  name={"token"}
+                  placeholder={"Token"}
+                  className="token cpInput"
+                />
+
+                <GeneralCreatePage
+                  title={"Password"}
+                  name={"password"}
+                  placeholder={"Password"}
+                  className="password cpInput"
+                />
+
                 <div className="full-name">
                   <div class="first-name">
                     <GeneralCreatePage
