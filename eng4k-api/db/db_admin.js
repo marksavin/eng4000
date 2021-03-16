@@ -31,62 +31,57 @@ adminApiCall.addPatient = (body) => {
   });
 };
 
-adminApiCall.addNurse = (body) => {
+adminApiCall.addNurse = (body, hashedPassword, user_type) => {
   const fullName = `${body.fname} ${body.lname}`;
   return new Promise((resolve, reject) => {
-    pool
-      .query("begin")
-      .then((res) => {
-        return pool.query(
+    pool.query(
+      `INSERT INTO capstonedb.login
+      VALUES (?,?, CURRENT_DATE(),?, 0, 0);`,
+      [body.token, hashedPassword, user_type],
+      function (error, results, fields) {
+        if (error) {
+          return reject(error);
+        }
+        pool.query(
           `INSERT INTO capstonedb.nurse
-      VALUES(DEFUALT,?,?,?,?);`,
-          [fullName, body.department, body.specialty, body.token]
+          VALUES(DEFAULT,?,?,?,?);`,
+          [fullName, body.department, body.specialty, body.token],
+          function (error, results, fields) {
+            if (error) {
+              return reject(error);
+            }
+            console.log(log);
+            return resolve(results);
+          }
         );
-      })
-      .then((res) => {
-        return pool.query(
-          `INSERT INTO capstone.login
-      VALUES(?,?,CURRENT_TIMESTAMP(), "nurse" ,0,0);`,
-          [body.token, body.password]
-        );
-      })
-      .then((res) => {
-        // once that's done, run the commit statement to
-        // complete the transaction
-        return client.query("commit");
-      })
-      .then((res) => {
-        // if the transaction completes successfully
-        // log a confirmation statement
-        console.log("transaction completed");
-        return resolve("completed");
-      })
-      .catch((err) => {
-        // incase there are any errors encountered
-        // rollback the transaction
-        console.error("error while querying:", err);
-        pool.query("rollback");
-        return reject(err);
-      })
-      .catch((err) => {
-        // incase there is an error when rolling back, log it
-        console.error("error while rolling back transaction:", err);
-      });
+      }
+    );
   });
 };
 
 adminApiCall.addPhysician = (body) => {
+  const fullName = `${body.fname} ${body.lname}`;
   return new Promise((resolve, reject) => {
     pool.query(
-      `INSERT INTO capstonesdb.physician
-      VALUES(DEFUALT,?,?,?);`,
-      [],
-      (err, result) => {
-        if (err) {
-          return reject(err);
+      `INSERT INTO capstonedb.login
+      VALUES (?,?, CURRENT_DATE(),?, 0, 0);`,
+      [body.token, hashedPassword, user_type],
+      function (error, results, fields) {
+        if (error) {
+          return reject(error);
         }
-        console.log(result);
-        return resolve(result);
+        pool.query(
+          `INSERT INTO capstonedb.physician
+          VALUES(DEFUALT,?,?,?,?);`,
+          [fullName, body.department, body.specialty, body.token],
+          function (error, results, fields) {
+            if (error) {
+              return reject(error);
+            }
+            console.log(log);
+            return resolve(results);
+          }
+        );
       }
     );
   });

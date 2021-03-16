@@ -70,7 +70,7 @@ class CreatePatient extends React.Component {
                   placeholder={"Password"}
                   className="password cpInput"
                 />
-                
+
                 <GeneralCreatePage
                   title={"First Name"}
                   name={"fname"}
@@ -83,6 +83,13 @@ class CreatePatient extends React.Component {
                   name={"lname"}
                   placeholder={"Last Name"}
                   className="lastName cpInput"
+                />
+
+                <GeneralCreatePage
+                  title={"Department"}
+                  name={"department"}
+                  placeholder={"Department"}
+                  className="department cpInput"
                 />
 
                 <GeneralCreatePage
