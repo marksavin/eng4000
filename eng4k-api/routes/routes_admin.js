@@ -17,7 +17,6 @@ router.post("/addPatient", async (req, res, next) => {
 });
 
 router.post("/addNurse", (req, res, next) => {
-  //console.log("addNurse body ", req.body.fname);
   bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
     if (err) {
       console.log(err);
@@ -33,13 +32,12 @@ router.post("/addNurse", (req, res, next) => {
 });
 
 router.post("/addPhysician", (req, res, next) => {
-  //console.log("addNurse body ", req.body.fname);
   bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
     if (err) {
       console.log(err);
     }
     try {
-      let addPHysician = db.addNurse(req.body, hashedPassword, "physician");
+      let addPHysician = db.addPhysician(req.body, hashedPassword, "physician");
       res.json(addPHysician);
     } catch (e) {
       console.log(e);
@@ -49,13 +47,12 @@ router.post("/addPhysician", (req, res, next) => {
 });
 
 router.post("/addFamily", (req, res, next) => {
-  //console.log("addNurse body ", req.body.fname);
   bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
     if (err) {
       console.log(err);
     }
     try {
-      let addFamily = db.addNurse(req.body, hashedPassword, "family");
+      let addFamily = db.addFamily(req.body, hashedPassword, "family");
       res.json(addFamily);
     } catch (e) {
       console.log(e);

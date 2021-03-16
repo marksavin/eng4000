@@ -21,12 +21,13 @@ const formSchema = yup.object().shape({
 });
 class CreatePatient extends React.Component {
   handleSubmit = (data) => {
+    console.log("feth is called?");
     fetch(`/admin/addPhysician`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
-      body: JSON.stringify(this.data),
+      body: JSON.stringify(data),
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -47,7 +48,7 @@ class CreatePatient extends React.Component {
           specialty: "",
         }}
         validationSchema={formSchema}
-        onSubmit={(data) => console.log(data)}
+        onSubmit={(data) => this.handleSubmit(data)}
       >
         {({ handleSubmit }) => {
           return (
@@ -83,13 +84,6 @@ class CreatePatient extends React.Component {
                   name={"lname"}
                   placeholder={"Last Name"}
                   className="lastName cpInput"
-                />
-
-                <GeneralCreatePage
-                  title={"Department"}
-                  name={"department"}
-                  placeholder={"Department"}
-                  className="department cpInput"
                 />
 
                 <GeneralCreatePage

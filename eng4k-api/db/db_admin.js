@@ -3,22 +3,21 @@ const pool = require("../dbPool.js");
 let adminApiCall = {};
 
 adminApiCall.addPatient = (body) => {
+  console.log(body);
   const fullName = `${body.fname} ${body.lname}`;
-  const dateOfBirth = `${body.dOBYear}-${body.dOBMonth}-${body.dOBDay}`;
-  const admissionDate = `${body.today_year}-${body.today_month}-${body.today_day}`;
   return new Promise((resolve, reject) => {
     pool.query(
       `INSERT INTO capstonedb.patient
       VALUES(?,?,?,?,?,?,?,?);`,
       [
-        body.id,
+        body.patient_id,
         fullName,
-        dateOfBirth,
-        admissionDate,
+        body.dateOfBirth,
+        body.admissionDate,
         body.weight,
         body.height,
         body.nurse_id,
-        body.patient_room_id,
+        body.room_id,
       ],
       (err, result) => {
         if (err) {
@@ -50,7 +49,6 @@ adminApiCall.addNurse = (body, hashedPassword, user_type) => {
             if (error) {
               return reject(error);
             }
-            console.log(log);
             return resolve(results);
           }
         );
@@ -59,7 +57,7 @@ adminApiCall.addNurse = (body, hashedPassword, user_type) => {
   });
 };
 
-adminApiCall.addPhysician = (body) => {
+adminApiCall.addPhysician = (body, hashedPassword, user_type) => {
   const fullName = `${body.fname} ${body.lname}`;
   return new Promise((resolve, reject) => {
     pool.query(
@@ -72,13 +70,12 @@ adminApiCall.addPhysician = (body) => {
         }
         pool.query(
           `INSERT INTO capstonedb.physician
-          VALUES(DEFUALT,?,?,?,?);`,
-          [fullName, body.department, body.specialty, body.token],
+          VALUES(DEFAULT,?,?,?);`,
+          [fullName, body.specialty, body.token],
           function (error, results, fields) {
             if (error) {
               return reject(error);
             }
-            console.log(log);
             return resolve(results);
           }
         );
@@ -87,17 +84,6 @@ adminApiCall.addPhysician = (body) => {
   });
 };
 
-adminApiCall.addFamily = () => {
-  console.log("this is the body: ", body);
-  return new Promise((resolve, reject) => {
-    pool.query(``, [], (err, result) => {
-      if (err) {
-        return reject(err);
-      }
-      console.log(result);
-      return resolve(result);
-    });
-  });
-};
+adminApiCall.addFamily = (body, hashedPassword, user_type) => {};
 
 module.exports = adminApiCall;
