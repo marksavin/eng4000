@@ -113,6 +113,7 @@ nurseApiCalls.addNewSbar = (id, body) => {
 };
 
 nurseApiCalls.SBARHistory = (nurseId, patientId) => {
+  console.log("SBAR HISTORRY", nurseId, patientId);
   return new Promise((resolve, reject) => {
     pool.query(
       `SELECT *
@@ -131,7 +132,6 @@ nurseApiCalls.SBARHistory = (nurseId, patientId) => {
 };
 
 nurseApiCalls.getId = (token) => {
-  console.log("token", token.token);
   return new Promise((resolve, reject) => {
     pool.query(
       `SELECT nurse_id
@@ -142,7 +142,6 @@ nurseApiCalls.getId = (token) => {
         if (err) {
           return reject(err);
         }
-        console.log("this is the id", result);
         return resolve(result);
       }
     );

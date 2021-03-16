@@ -260,6 +260,7 @@ export default function EnhancedTable(props) {
   ]);
 
   useEffect(() => {
+    console.log(props.nurseId, props.patientId);
     fetch(`/nurse/SBARHistory/${props.nurseId}/${props.patientId}`)
       .then((res) => {
         if (res.ok) {

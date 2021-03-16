@@ -36,10 +36,12 @@ router.post("/addNewSBAR/:patientId", async (req, res, next) => {
   }
 });
 
-
 router.get("/SBARHistory/:nurseId/:patientId", async (req, res, next) => {
   try {
-    let queryResults = await db.SBARHistory(req.params.patientId);
+    let queryResults = await db.SBARHistory(
+      req.params.nurseId,
+      req.params.patientId
+    );
     res.json(queryResults);
   } catch (e) {
     console.log(e);

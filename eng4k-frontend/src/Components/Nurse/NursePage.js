@@ -26,7 +26,6 @@ const NursePage = (props) => {
 
   useEffect(() => {
     // setNurseId(props.userToken);
-    console.log(props.userToken);
     fetch(`/nurse/getId/${props.userToken}`)
       .then((res) => {
         if (res.ok) {
@@ -37,7 +36,6 @@ const NursePage = (props) => {
       })
       .then((result) => {
         if (result !== undefined && result.length !== 0) {
-          console.log(result[0].nurse_id);
           setNurseId(result[0].nurse_id);
         }
       });
