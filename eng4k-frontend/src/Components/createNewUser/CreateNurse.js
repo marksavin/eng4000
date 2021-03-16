@@ -27,7 +27,7 @@ class CreatePatient extends React.Component {
       headers: {
         "Content-Type": "application/json;charset=utf-8",
       },
-      body: JSON.stringify(this.data),
+      body: JSON.stringify(data),
     }).then((res) => {
       if (res.ok) {
         return res.json();
@@ -48,7 +48,7 @@ class CreatePatient extends React.Component {
           specialty: "",
         }}
         validationSchema={formSchema}
-        onSubmit={(data) => console.log(data)}
+        onSubmit={(data) => this.handleSubmit(data)}
       >
         {({ handleSubmit }) => {
           return (
