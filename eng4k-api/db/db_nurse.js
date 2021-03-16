@@ -30,10 +30,10 @@ let nurseApiCalls = {};
 nurseApiCalls.currentPatientList = (id) => {
   return new Promise((resolve, reject) => {
     pool.query(
-      `SELECT A.patient_id, A.patient_name, A.a_problem, B.note_room_id, A.r_priority, A.date_created,
+      `SELECT A.note_patient_id, B.patient_name, A.a_problem, B.patient_room_id, A.r_priority, A.date_created,
       CASE 
-      WHEN 5 <= (timestampDIFF(HOUR,sbar_note.date_created, CURRENT_TIMESTAMP)) THEN 'Update Required'
-      WHEN 5 > (timestampDIFF(HOUR,sbar_note.date_created, CURRENT_TIMESTAMP)) THEN 'Up to Date'
+      WHEN 5 <= (timestampDIFF(HOUR, A.date_created, CURRENT_TIMESTAMP)) THEN 'Update Required'
+      WHEN 5 > (timestampDIFF(HOUR,A.date_created, CURRENT_TIMESTAMP)) THEN 'Up to Date'
       END AS update_status  
       FROM
       sbar_note as A INNER JOIN patient as B ON A.note_patient_id = B.patient_id
@@ -131,6 +131,7 @@ nurseApiCalls.SBARHistory = (nurseId, patientId) => {
 };
 
 nurseApiCalls.getId = (token) => {
+  console.log("token", token.token);
   return new Promise((resolve, reject) => {
     pool.query(
       `SELECT nurse_id
@@ -141,7 +142,7 @@ nurseApiCalls.getId = (token) => {
         if (err) {
           return reject(err);
         }
-        console.log(result);
+        console.log("this is the id", result);
         return resolve(result);
       }
     );

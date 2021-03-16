@@ -287,7 +287,8 @@ export default function EnhancedTable(props) {
   ]);
 
   useEffect(() => {
-    fetch(`/nurse/viewPatients/1`)
+    console.log(props.nurseId);
+    fetch(`/nurse/viewPatients/${props.nurseId}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -301,7 +302,7 @@ export default function EnhancedTable(props) {
           setSearchState(result);
         }
       });
-  }, []);
+  }, [props]);
 
   useEffect(() => {
     const searchedPatients = searchState.filter((patient) =>
@@ -435,7 +436,7 @@ export default function EnhancedTable(props) {
                           {patients.a_problem}
                         </TableCell>
                         <TableCell align="center">
-                          {patients.note_room_id}
+                          {patients.patient_room_id}
                         </TableCell>
                         <TableCell align="center">
                           {patients.r_priority}

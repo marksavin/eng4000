@@ -33,9 +33,6 @@ function App() {
   const [authenticate, setAuthenticate] = useState(false);
   const [userToken, setUserToken] = useState("");
 
-  console.log(accountType);
-  console.log(authenticate);
-
   useEffect(() => {
     fetch("/isAuthenticated")
       .then((res) => {
@@ -47,11 +44,13 @@ function App() {
       })
       .then((result) => {
         if (result !== "") {
-          setAccountType(result);
+          setAccountType(result.path);
           setAuthenticate(true);
+          setUserToken(result.user);
         } else {
           setAuthenticate(false);
           setAccountType("/");
+          setUserToken("");
         }
       });
   }, [accountType, authenticate]);
