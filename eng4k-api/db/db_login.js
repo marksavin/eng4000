@@ -98,7 +98,7 @@ loginApiCall.accountAuthentication = (body) => {
                         return reject(err);
                       }
                       return resolve(
-                        "Maximum 3 login attempts reached. Please contact your administrator to restore access."
+                        "Maximum of 3 login attempts reached. Please contact your administrator to restore access."
                       );
                     }
                   );
