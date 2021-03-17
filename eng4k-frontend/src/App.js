@@ -26,6 +26,8 @@ import ProtectedRoute from "./Components/Routes/ProtectedRoute.js";
 import ProtectedLogin from "./Components/Routes/ProtectedLogin.js";
 import Physician from "./Components/Physician/PhysicianDashboard.js";
 import Admin from "./Components/Admin/Admin.js";
+import "./Components/firebase/firebase.js";
+
 
 function App() {
   const [search, setSearch] = useState("");
