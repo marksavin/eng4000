@@ -28,7 +28,6 @@ import Physician from "./Components/Physician/PhysicianDashboard.js";
 import Admin from "./Components/Admin/Admin.js";
 // import "./Components/firebase/firebase.js";
 
-
 function App() {
   const [search, setSearch] = useState("");
   const [accountType, setAccountType] = useState("");
@@ -80,63 +79,63 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
-        {accountType !== "" ? (
-          <Switch>
-            <ProtectedRoute
-              path="/nurse"
-              component={NursePage}
-              search={search}
-              setSearch={setSearch}
-              authenticate={authenticate}
-              setAuthenticate={setAuthenticate}
-              accountType={accountType}
-              userToken={userToken}
-            />
-            <ProtectedRoute
-              path="/physician"
-              component={Physician}
-              search={search}
-              setSearch={setSearch}
-              authenticate={authenticate}
-              setAuthenticate={setAuthenticate}
-              accountType={accountType}
-              userToken={userToken}
-            />
-            <ProtectedRoute
-              path="/admin"
-              component={Admin}
-              search={search}
-              setSearch={setSearch}
-              authenticate={authenticate}
-              setAuthenticate={setAuthenticate}
-              accountType={accountType}
-              pname="Dr. Geneva"
-              specialty="Neurology"
-              availability="Away on vacation"
-            />
-            <ProtectedLogin
-              exact
-              path="/"
-              component={Login}
-              authenticate={authenticate}
-              setAuthenticate={setAuthenticate}
-              accountType={accountType}
-              setAccountType={setAccountType}
-              setUserToken={setUserToken}
-            />
-          </Switch>
-        ) : (
-          <div className={classes.root}>
-            <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={theme}>
+        <Router>
+          {accountType !== "" ? (
+            <Switch>
+              <ProtectedRoute
+                path="/nurse"
+                component={NursePage}
+                search={search}
+                setSearch={setSearch}
+                authenticate={authenticate}
+                setAuthenticate={setAuthenticate}
+                accountType={accountType}
+                userToken={userToken}
+              />
+              <ProtectedRoute
+                path="/physician"
+                component={Physician}
+                search={search}
+                setSearch={setSearch}
+                authenticate={authenticate}
+                setAuthenticate={setAuthenticate}
+                accountType={accountType}
+                userToken={userToken}
+              />
+              <ProtectedRoute
+                path="/admin"
+                component={Admin}
+                search={search}
+                setSearch={setSearch}
+                authenticate={authenticate}
+                setAuthenticate={setAuthenticate}
+                accountType={accountType}
+                pname="Dr. Geneva"
+                specialty="Neurology"
+                availability="Away on vacation"
+              />
+              <ProtectedLogin
+                exact
+                path="/"
+                component={Login}
+                authenticate={authenticate}
+                setAuthenticate={setAuthenticate}
+                accountType={accountType}
+                setAccountType={setAccountType}
+                setUserToken={setUserToken}
+              />
+            </Switch>
+          ) : (
+            <div className={classes.root}>
               <CircularProgress
                 style={{ position: "fixed", top: "30%", left: "50%" }}
                 size={200}
               />
-            </MuiThemeProvider>
-          </div>
-        )}
-      </Router>
+            </div>
+          )}
+        </Router>
+      </MuiThemeProvider>
     </div>
   );
 }

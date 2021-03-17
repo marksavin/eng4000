@@ -37,16 +37,6 @@ const buttonStyles = makeStyles((theme) => ({
   },
 }));
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: "#5bc8c2",
-      main: "#33bbb3",
-      dark: "#23827d",
-    },
-  },
-});
-
 function ResetPasswordModal(props) {
   const inputClass = inputStyles();
   const buttonClass = buttonStyles();
@@ -128,46 +118,44 @@ function ResetPasswordModal(props) {
       <form className="resetPassword-form">
         <DialogTitle id="simple-dialog-title">Reset Password</DialogTitle>
         <InputLabel>Please type in your token and new password</InputLabel>
-        <MuiThemeProvider theme={theme}>
-          <div className={`resetPassword-inputFields ${inputClass.root}`}>
-            <TextField
-              className="token"
-              id="outlined-basic"
-              label="Token"
-              variant="outlined"
-              onChange={handleToken}
-              onBlur={handleTokenCheck}
-              error={errorStatus}
-              helperText={errorText}
-            />
-            <TextField
-              className="newPassword"
-              id="outlined-basic"
-              label="New Password"
-              variant="outlined"
-              onChange={handlePassword}
-            />
-          </div>
-          <div className={`resetPassword-buttons ${buttonClass.root}`}>
-            <Button
-              color="primary"
-              variant="contained"
-              label="Submit"
-              onClick={handleReset}
-            >
-              Submit
-            </Button>
-            <Button
-              color="default"
-              variant="contained"
-              label="close"
-              onClick={handleClose}
-              onKeyPress={returnKey}
-            >
-              Close
-            </Button>
-          </div>
-        </MuiThemeProvider>
+        <div className={`resetPassword-inputFields ${inputClass.root}`}>
+          <TextField
+            className="token"
+            id="outlined-basic"
+            label="Token"
+            variant="outlined"
+            onChange={handleToken}
+            onBlur={handleTokenCheck}
+            error={errorStatus}
+            helperText={errorText}
+          />
+          <TextField
+            className="newPassword"
+            id="outlined-basic"
+            label="New Password"
+            variant="outlined"
+            onChange={handlePassword}
+          />
+        </div>
+        <div className={`resetPassword-buttons ${buttonClass.root}`}>
+          <Button
+            color="primary"
+            variant="contained"
+            label="Submit"
+            onClick={handleReset}
+          >
+            Submit
+          </Button>
+          <Button
+            color="default"
+            variant="contained"
+            label="close"
+            onClick={handleClose}
+            onKeyPress={returnKey}
+          >
+            Close
+          </Button>
+        </div>
       </form>
     </Dialog>
   );

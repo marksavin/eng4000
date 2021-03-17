@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStethoscope,
@@ -8,6 +9,8 @@ import {
   faChild,
   faUnlockAlt,
 } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faStethoscope, faUserNurse, faUserInjured, faChild, faUnlockAlt);
 
 const DashboardButton = (props) => {
   const [color, setColor] = useState("");
@@ -46,7 +49,7 @@ const DashboardButton = (props) => {
 
   return (
     <div className="adminDashboardButtonContainer">
-      <Link to={`/admin/add${props.title}`} style={{ textDecoration: "none" }}>
+      <Link to={`/admin/${props.title}`} style={{ textDecoration: "none" }}>
         <div
           className="adminbuttonContainer"
           style={{ backgroundColor: `${color}` }}

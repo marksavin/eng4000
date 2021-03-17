@@ -85,7 +85,7 @@ loginApiCall.accountAuthentication = (body) => {
                       return resolve(
                         `Password is incorrect. ${
                           3 - login_attempts_reminaing
-                        } attempt(s) remaining`
+                        } attempt(s) remaining.`
                       );
                     }
                   );
@@ -98,7 +98,7 @@ loginApiCall.accountAuthentication = (body) => {
                         return reject(err);
                       }
                       return resolve(
-                        "Maximum 3 login attempts reached. Please contact admin to restore account"
+                        "Maximum 3 login attempts reached. Please contact your administrator to restore access."
                       );
                     }
                   );

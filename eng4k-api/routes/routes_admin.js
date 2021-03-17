@@ -61,4 +61,14 @@ router.post("/addFamily", (req, res, next) => {
   });
 });
 
+router.post("/unlockAccount", async (req, res, next) => {
+  try {
+    let queryResults = await db.unlockAccount(req.body.token);
+    res.json(queryResults);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 module.exports = router;

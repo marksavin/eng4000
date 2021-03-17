@@ -1,33 +1,13 @@
 import React, { useState } from "react";
 import { Switch, Route } from "react-router-dom";
 
-// import {  } from "@material-ui/core";
-import ArrowDropDownCircleIcon from "@material-ui/icons/ArrowDropDownCircle";
-import {
-  TextField,
-  Collapse,
-  IconButton,
-  Button,
-  createMuiTheme,
-  MuiThemeProvider,
-} from "@material-ui/core/";
-
 import Navigation from "../NavBar/NavBar.js";
 import DashboardButton from "./DashboardButton";
 import PatientTable from "../Nurse/PatientTable.js";
 import CreateNurse from "../createNewUser/CreateNurse.js";
 import CreatePhysician from "../createNewUser/CreatePhysician.js";
 import CreatePatient from "../createNewUser/CreatePatient.js";
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: "#5bc8c2",
-      main: "#33bbb3",
-      dark: "#23827d",
-    },
-  },
-});
+import UnlockAccount from "../createNewUser/UnlockAccount.js";
 
 const Admin = (props) => {
   const handleExpandClick = () => {
@@ -67,23 +47,22 @@ const Admin = (props) => {
             </div> */}
           </section>
         </Route>
-        <MuiThemeProvider theme={theme}>
-          <Route exact path="/admin/addPatient">
-            <CreatePatient />
-          </Route>
 
-          <Route exact path="/admin/addNurse">
-            <CreateNurse />
-          </Route>
+        <Route exact path="/admin/Patient">
+          <CreatePatient />
+        </Route>
 
-          <Route exact path="/admin/addPhysician">
-            <CreatePhysician />
-          </Route>
+        <Route exact path="/admin/Nurse">
+          <CreateNurse />
+        </Route>
 
-          <Route exact path="/admin/unlockAccounts">
-            <CreatePhysician />
-          </Route>
-        </MuiThemeProvider>
+        <Route exact path="/admin/Physician">
+          <CreatePhysician />
+        </Route>
+
+        <Route exact path="/admin/unlock">
+          <UnlockAccount />
+        </Route>
       </Switch>
     </div>
   );

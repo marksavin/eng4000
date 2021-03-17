@@ -18,16 +18,6 @@ const buttonStyles = makeStyles((theme) => ({
   },
 }));
 
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: "#5bc8c2",
-      main: "#33bbb3",
-      dark: "#23827d",
-    },
-  },
-});
-
 function SubmitDone(props) {
   const buttonClass = buttonStyles();
   const { onClose, selectedValue, open } = props;
@@ -60,36 +50,35 @@ function SubmitDone(props) {
       >
         <DialogTitle id="simple-dialog-title">Submission Status</DialogTitle>
         <InputLabel>{props.statusMessage}</InputLabel>
-        <MuiThemeProvider theme={theme}>
-          <div
-            className={`submitDone-buttons ${buttonClass.root}`}
-            style={{ margin: "1rem" }}
-          >
-            {props.status ? (
-              <Link to={"/"}>
-                <Button
-                  color="primary"
-                  variant="contained"
-                  label="Submit"
-                  onClick={hanldeReturnToHome}
-                  onKeyPress={returnKey}
-                >
-                  Return To Home Page
-                </Button>
-              </Link>
-            ) : (
+
+        <div
+          className={`submitDone-buttons ${buttonClass.root}`}
+          style={{ margin: "1rem" }}
+        >
+          {props.status ? (
+            <Link to={"/"}>
               <Button
-                color="secondary"
+                color="primary"
                 variant="contained"
-                label="close"
-                onClick={handleClose}
+                label="Submit"
+                onClick={hanldeReturnToHome}
                 onKeyPress={returnKey}
               >
-                Retry
+                Return To Home Page
               </Button>
-            )}
-          </div>
-        </MuiThemeProvider>
+            </Link>
+          ) : (
+            <Button
+              color="secondary"
+              variant="contained"
+              label="close"
+              onClick={handleClose}
+              onKeyPress={returnKey}
+            >
+              Retry
+            </Button>
+          )}
+        </div>
       </Dialog>
     </div>
   );

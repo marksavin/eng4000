@@ -107,4 +107,34 @@ adminApiCall.addPhysician = (body, hashedPassword, user_type) => {
 
 adminApiCall.addFamily = (body, hashedPassword, user_type) => {};
 
+adminApiCall.unlockAccount = (token) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `SELECT COUNT(*) AS count FROM capstonedb.login WHERE token = ?;`,
+      [token],
+      function (error, results, fields) {
+        if (error) {
+          return reject(error);
+        }
+        if (results[0].count > 0) {
+          pool.query(
+            `UPDATE capstonedb.login SET login_login_attempts = 0, login_locked = 0 WHERE token = ?; `,
+            [token],
+            function (error, results, fields) {
+              if (error) {
+                return reject(error);
+              }
+              return resolve(
+                `Successfully unlocked account with token ${token}!!`
+              );
+            }
+          );
+        } else {
+          return resolve(`Account with token ${token} does not exist!!`);
+        }
+      }
+    );
+  });
+};
+
 module.exports = adminApiCall;

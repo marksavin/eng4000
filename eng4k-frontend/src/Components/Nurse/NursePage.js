@@ -9,18 +9,6 @@ import Sbar from "../Sbar/Sbar.js";
 import ContactPhysicanCard from "./ContactPhysicianCard.js";
 import HistoryTable from "./HistoryTable.js";
 
-import { Button, createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      light: "#5bc8c2",
-      main: "#33bbb3",
-      dark: "#23827d",
-    },
-  },
-});
-
 const NursePage = (props) => {
   const [nurseId, setNurseId] = useState("");
 
@@ -51,22 +39,18 @@ const NursePage = (props) => {
       <Switch>
         <Route exact path="/nurse">
           <Header title="Wing Hospital Name" />
-          <MuiThemeProvider theme={theme}>
-            <PatientTable search={props.search} nurseId={nurseId} />
-          </MuiThemeProvider>
+          <PatientTable search={props.search} nurseId={nurseId} />
         </Route>
 
         <Route path="/nurse/SBARhistory">
           <Header title={`SBAR History of ${props.location.patientName}`} />
           <div className="historyContainer">
-            <MuiThemeProvider theme={theme}>
-              <HistoryTable
-                search={props.search}
-                nurseId={nurseId}
-                patientName={props.location.patientName}
-                patientId={props.location.patientId}
-              />
-            </MuiThemeProvider>
+            <HistoryTable
+              search={props.search}
+              nurseId={nurseId}
+              patientName={props.location.patientName}
+              patientId={props.location.patientId}
+            />
             <ContactPhysicanCard
               pname="Dr. Geneva"
               specialty="Neurology"

@@ -104,7 +104,7 @@ class CreatePatient extends React.Component {
                 />
 
                 <div className="full-name">
-                  <div class="first-name">
+                  <div className="first-name">
                     <GeneralCreatePage
                       title={"First Name"}
                       name={"fname"}
