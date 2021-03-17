@@ -58,6 +58,7 @@ const Admin = (props) => {
               <DashboardButton title="Nurse" count="50" />
               <DashboardButton title="Physician" count="30" />
               <DashboardButton title="Visitor" count="320" />
+              <DashboardButton title="Unlock" count="-" />
             </div>
             {/* <div className="admin-table">
               <MuiThemeProvider theme={theme}>
@@ -76,6 +77,10 @@ const Admin = (props) => {
           </Route>
 
           <Route exact path="/admin/addPhysician">
+            <CreatePhysician />
+          </Route>
+
+          <Route exact path="/admin/unlockAccounts">
             <CreatePhysician />
           </Route>
         </MuiThemeProvider>

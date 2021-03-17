@@ -68,10 +68,41 @@ loginApiCall.accountAuthentication = (body) => {
             body.password.password,
             result[0].password,
             (error, response) => {
-              if (response) {
+              if (response && result[0].login_locked != 1) {
                 return resolve(result);
               } else {
-                return resolve("Password is incorrect!");
+                const login_attempts = result[0].login_login_attempts;
+                const login_attempts_reminaing =
+                  result[0].login_login_attempts + 1;
+                if (login_attempts < 3) {
+                  pool.query(
+                    `UPDATE capstonedb.login SET login_login_attempts = ? WHERE token = ?; `,
+                    [login_attempts_reminaing, body.token.token],
+                    (err, result) => {
+                      if (err) {
+                        return reject(err);
+                      }
+                      return resolve(
+                        `Password is incorrect. ${
+                          3 - login_attempts_reminaing
+                        } attempt(s) remaining`
+                      );
+                    }
+                  );
+                } else {
+                  pool.query(
+                    `UPDATE capstonedb.login SET login_locked = 1 WHERE token = ?; `,
+                    [body.token.token, body.token.token],
+                    (err, result) => {
+                      if (err) {
+                        return reject(err);
+                      }
+                      return resolve(
+                        "Maximum 3 login attempts reached. Please contact admin to restore account"
+                      );
+                    }
+                  );
+                }
               }
             }
           );

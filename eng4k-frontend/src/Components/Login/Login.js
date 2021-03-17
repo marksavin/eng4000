@@ -93,7 +93,7 @@ const Login = (props) => {
               <FontAwesomeIcon className="user-icon" icon={faUnlockAlt} />
             </div>
           </div>
-          <div>
+          <div className="login-error" style={{ textAlign: "center" }}>
             <label style={{ color: "red" }}>{statusMessage}</label>
           </div>
           <div />

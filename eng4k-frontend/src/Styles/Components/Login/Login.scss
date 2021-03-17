@@ -90,8 +90,12 @@ $base-color: rgb(51, 187, 179);
   }
 
   .login-button {
-    margin-top: 3rem;
+    margin-top: 2rem;
     margin-bottom: 1rem;
+  }
+
+  .login-error {
+    width: 70%;
   }
 
   .button {
@@ -120,14 +124,14 @@ $base-color: rgb(51, 187, 179);
     flex-direction: column;
     justify-content: space-between;
     width: 30rem;
-    height: 40rem;
+    height: 45rem;
 
     .login-title-sentence {
       background-color: white;
       color: black;
       width: 50%;
-      height: 100%;
-      padding-top: 4rem;
+      height: 40%;
+      padding-top: 0rem;
 
       .login-title {
         font-size: 2rem;
@@ -152,11 +156,112 @@ $base-color: rgb(51, 187, 179);
       }
 
       .login-form {
-        height: 100%;
-        margin-top: 3rem;
+        height: 50%;
+        margin-top: 1rem;
       }
 
       .login-form-group {
+        margin-top: 1rem;
+
+        label {
+          margin: 0rem 0 0rem 0;
+          font-size: 1.5rem;
+        }
+
+        input {
+          margin-top: 6px;
+          min-width: 20rem;
+          height: 40px;
+          padding: 0 40px;
+          font-size: 1rem;
+          font-weight: 700;
+          background-color: #f3f3f3;
+          border: 0;
+          border-radius: 4px;
+          margin-bottom: 30px;
+          transition: all 250ms ease-in-out;
+
+          &:focus {
+            outline: none;
+            box-shadow: 0 0 10px 1px rgb(26, 70, 65);
+          }
+        }
+
+        .user-icon {
+          position: absolute;
+          left: 1%;
+          top: 51%;
+          transform: translateX(50%);
+          color: $base-color;
+        }
+      }
+    }
+
+    .login-error {
+      width: 100%;
+    }
+
+    .button {
+      font-size: 1.5rem;
+      padding: 5px 30px;
+      border: 0;
+      background-color: $base-color;
+      // background-color: white;
+      color: black;
+      border-radius: 3px;
+      transition: all 250ms ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(47, 165, 157);
+        // background-color: $base-color;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .login-contents {
+    width: 25rem;
+
+    .login-title-sentence {
+      text-align: center;
+      width: 60%;
+      height: 40%;
+
+      .login-title {
+        font-size: 2rem;
+        padding-bottom: 2rem;
+      }
+
+      .login-sentence {
+        text-align: center;
+        font-size: 1rem;
+      }
+    }
+
+    .login-component {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 50%;
+      height: 100%;
+
+      .label {
+        display: block;
+      }
+
+      .login-form {
+        height: 55%;
+      }
+
+      .login-form-group {
+        position: relative;
         margin-top: 1rem;
 
         label {
@@ -193,111 +298,8 @@ $base-color: rgb(51, 187, 179);
       }
     }
 
-    .login-button {
-      margin-top: 3rem;
-      margin-bottom: 7rem;
-    }
-
-    .button {
-      font-size: 1.5rem;
-      padding: 5px 30px;
-      border: 0;
-      background-color: $base-color;
-      // background-color: white;
-      color: black;
-      border-radius: 3px;
-      transition: all 250ms ease-in-out;
-      cursor: pointer;
-
-      &:hover {
-        background-color: rgb(47, 165, 157);
-        // background-color: $base-color;
-      }
-
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .login-contents {
-    width: 25rem;
-
-    .login-title-sentence {
-      text-align: center;
-      width: 60%;
-      height: 60%;
-
-      .login-title {
-        font-size: 2rem;
-        padding-bottom: 2rem;
-      }
-
-      .login-sentence {
-        text-align: center;
-        font-size: 1rem;
-      }
-    }
-
-    .login-component {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 50%;
-      height: 100%;
-
-      .label {
-        display: block;
-      }
-
-      .login-form {
-        height: 100%;
-      }
-
-      .login-form-group {
-        position: relative;
-        margin-top: 2rem;
-
-        label {
-          margin: 1rem 0 1rem 0;
-          font-size: 1.5rem;
-        }
-
-        input {
-          margin-top: 6px;
-          min-width: 20rem;
-          height: 40px;
-          padding: 0 40px;
-          font-size: 1rem;
-          font-weight: 700;
-          background-color: #f3f3f3;
-          border: 0;
-          border-radius: 4px;
-          margin-bottom: 30px;
-          transition: all 250ms ease-in-out;
-
-          &:focus {
-            outline: none;
-            box-shadow: 0 0 10px 1px rgb(26, 70, 65);
-          }
-        }
-
-        .user-icon {
-          position: absolute;
-          left: 1%;
-          top: 51%;
-          transform: translateX(50%);
-          color: $base-color;
-        }
-      }
-    }
-
-    .login-button {
-      margin-top: 3rem;
-      margin-bottom: 7rem;
+    .login-error {
+      width: 100%;
     }
 
     .button {
@@ -334,5 +336,9 @@ $base-color: rgb(51, 187, 179);
 
   .login-form {
     margin-top: 1rem;
+  }
+
+  .login-error {
+    width: 100%;
   }
 }

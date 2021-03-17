@@ -6,6 +6,7 @@ import {
   faUserNurse,
   faUserInjured,
   faChild,
+  faUnlockAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 const DashboardButton = (props) => {
@@ -17,6 +18,7 @@ const DashboardButton = (props) => {
     Nurse: "#00B1E1",
     Patient: "#37BC9B",
     Family: "#E18029",
+    Unlock: "#B22E44",
   };
 
   const choose = () => {
@@ -29,9 +31,12 @@ const DashboardButton = (props) => {
     } else if (props.title === "Patient") {
       setColor(bgColors.Patient);
       setIconUsed(faUserInjured);
-    } else {
+    } else if (props.title === "Visitor") {
       setColor(bgColors.Family);
       setIconUsed(faChild);
+    } else {
+      setColor(bgColors.Unlock);
+      setIconUsed(faUnlockAlt);
     }
   };
 
@@ -55,12 +60,18 @@ const DashboardButton = (props) => {
               />
             </div>
           </div>
-          <div className="adminDashboardButtonContent">
-            <div className="adminDashboardButtonName">{`Create ${props.title} Account`}</div>
-            <div className="accountCounter">
-              <div className="adminDashboardButtonCount">{`${props.count} ${props.title}s`}</div>
+          {props.title !== "Unlock" ? (
+            <div className="adminDashboardButtonContent">
+              <div className="adminDashboardButtonName">{`Create ${props.title} Account`}</div>
+              <div className="accountCounter">
+                <div className="adminDashboardButtonCount">{`${props.count} ${props.title}s`}</div>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="adminDashboardButtonContent">
+              <div className="adminDashboardButtonName">{`${props.title} Accounts`}</div>
+            </div>
+          )}
         </div>
       </Link>
     </div>
