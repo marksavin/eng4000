@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import GeneralCreatePage from "./GeneralCreatePage.js";
 import { Link } from "react-router-dom";
+import SubmitDone from "../Modal/SubmitDone";
 
 import { Button, TextField } from "@material-ui/core";
 
@@ -20,6 +21,26 @@ const formSchema = yup.object().shape({
   specialty: yup.string().required("Specialty is required*"),
 });
 class CreatePatient extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClickOpen = this.handleClickOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.state = {
+      open: false,
+      status: 0,
+      statusMessage: "",
+    };
+  }
+
+  handleClickOpen = () => {
+    this.setState(() => ({ open: true }));
+    // this.setState.open = true;
+  };
+
+  handleClose = (value) => {
+    this.setState(() => ({ open: false }));
+  };
+
   handleSubmit = (data) => {
     console.log("feth is called?");
     fetch(`/admin/addPhysician`, {
@@ -30,8 +51,18 @@ class CreatePatient extends React.Component {
       body: JSON.stringify(data),
     }).then((res) => {
       if (res.ok) {
+        this.handleClickOpen();
+        this.setState(() => ({ status: 0 }));
+        this.setState(() => ({
+          statusMessage: "Physician account was successfully created",
+        }));
         return res.json();
       } else {
+        this.handleClickOpen();
+        this.setState(() => ({ status: 1 }));
+        this.setState(() => ({
+          statusMessage: "There was an error creating the physician account",
+        }));
       }
     });
   };
@@ -108,6 +139,14 @@ class CreatePatient extends React.Component {
                       </Link>
                     </Button>
                   </div>
+                </div>
+                <div>
+                  <SubmitDone
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    status={this.state.status}
+                    statusMessage={this.state.statusMessage}
+                  />
                 </div>
               </section>
             </form>

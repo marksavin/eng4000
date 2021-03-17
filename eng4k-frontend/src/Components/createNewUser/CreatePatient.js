@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import GeneralCreatePage from "./GeneralCreatePage.js";
 import { Link } from "react-router-dom";
+import SubmitDone from "../Modal/SubmitDone";
 
 import { Button, Grid, TextField } from "@material-ui/core";
 
@@ -20,10 +21,31 @@ const formSchema = yup.object().shape({
   weight: yup.number().required("Weight is required*"),
   height: yup.number().required("Height is required*"),
   patient_id: yup.number().required("Patient ID is required*"),
+  physician_id: yup.number().required("Physician ID is required*"),
   nurse_id: yup.number().required("Nurse ID is required*"),
   room_id: yup.number().required("Room number is required*"),
 });
 class CreatePatient extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClickOpen = this.handleClickOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.state = {
+      open: false,
+      status: 0,
+      statusMessage: "",
+    };
+  }
+
+  handleClickOpen = () => {
+    this.setState(() => ({ open: true }));
+    // this.setState.open = true;
+  };
+
+  handleClose = (value) => {
+    this.setState(() => ({ open: false }));
+  };
+
   handleSubmit = (data) => {
     fetch(`/admin/addPatient`, {
       method: "POST",
@@ -33,8 +55,18 @@ class CreatePatient extends React.Component {
       body: JSON.stringify(data),
     }).then((res) => {
       if (res.ok) {
+        this.handleClickOpen();
+        this.setState(() => ({ status: 0 }));
+        this.setState(() => ({
+          statusMessage: "Patient account was successfully created",
+        }));
         return res.json();
       } else {
+        this.handleClickOpen();
+        this.setState(() => ({ status: 1 }));
+        this.setState(() => ({
+          statusMessage: "There was an error creating the patient account",
+        }));
       }
     });
   };
@@ -159,6 +191,14 @@ class CreatePatient extends React.Component {
                       </Link>
                     </Button>
                   </div>
+                </div>
+                <div>
+                  <SubmitDone
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    status={this.state.status}
+                    statusMessage={this.state.statusMessage}
+                  />
                 </div>
               </section>
             </form>
