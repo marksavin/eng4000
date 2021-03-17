@@ -52,14 +52,14 @@ class CreatePatient extends React.Component {
     }).then((res) => {
       if (res.ok) {
         this.handleClickOpen();
-        this.setState(() => ({ status: 0 }));
+        this.setState(() => ({ status: 1 }));
         this.setState(() => ({
           statusMessage: "Physician account was successfully created",
         }));
         return res.json();
       } else {
         this.handleClickOpen();
-        this.setState(() => ({ status: 1 }));
+        this.setState(() => ({ status: 0 }));
         this.setState(() => ({
           statusMessage: "There was an error creating the physician account",
         }));
