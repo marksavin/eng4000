@@ -49,7 +49,7 @@ app.get("/isAuthenticated", function (req, res) {
   console.log("req.user", req.user);
   console.log("req.isAuthenticated", req.isAuthenticated());
   if (req.isAuthenticated()) {
-    res.json(req.user.path);
+    res.json(req.user);
   } else {
     res.json("");
   }

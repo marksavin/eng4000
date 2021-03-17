@@ -96,7 +96,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.id !== "patient_name" ? "center" : "left"}
+            align={headCell.id !== "nurse_name" ? "center" : "left"}
             padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -260,6 +260,7 @@ export default function EnhancedTable(props) {
   ]);
 
   useEffect(() => {
+    console.log(props.nurseId, props.patientId);
     fetch(`/nurse/SBARHistory/${props.nurseId}/${props.patientId}`)
       .then((res) => {
         if (res.ok) {
@@ -402,13 +403,13 @@ export default function EnhancedTable(props) {
                           {patients.nurse_name}
                         </TableCell>
                         <TableCell align="center">
-                          {patients.date_created}
+                          {patients.sbar_note_archive_date_created}
                         </TableCell>
                         <TableCell align="center">
-                          {patients.note_room_id}
+                          {patients.sbar_note_archive_room_id}
                         </TableCell>
                         <TableCell align="center">
-                          {patients.s_problem}
+                          {patients.r_priority}
                         </TableCell>
                         <TableCell align="center">
                           <Link

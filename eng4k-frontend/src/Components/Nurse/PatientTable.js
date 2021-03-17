@@ -58,7 +58,7 @@ const headCells = [
   },
   { id: "a_problem", numeric: false, disablePadding: false, label: "Type" },
   {
-    id: "note_room_id",
+    id: "patient_room_id",
     numeric: true,
     disablePadding: false,
     label: "Room Number",
@@ -260,7 +260,7 @@ export default function EnhancedTable(props) {
     {
       patient_name: "-",
       a_problem: "-",
-      note_room_id: "-",
+      patient_room_id: "-",
       r_priority: "-",
       update_status: "-",
       last_updated: "-",
@@ -274,10 +274,10 @@ export default function EnhancedTable(props) {
   const [patients, setPatients] = useState([
     {
       patient_name: "-",
-      patient_id: null,
+      note_patient_id: null,
       date_created: "-",
       a_problem: "-",
-      note_room_id: null,
+      patient_room_id: null,
       r_priority: "-",
       update_status: "-",
       last_updated: "-",
@@ -287,7 +287,7 @@ export default function EnhancedTable(props) {
   ]);
 
   useEffect(() => {
-    fetch(`/nurse/viewPatients/1`)
+    fetch(`/nurse/viewPatients/${props.nurseId}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -301,7 +301,7 @@ export default function EnhancedTable(props) {
           setSearchState(result);
         }
       });
-  }, []);
+  }, [props]);
 
   useEffect(() => {
     const searchedPatients = searchState.filter((patient) =>
@@ -435,7 +435,7 @@ export default function EnhancedTable(props) {
                           {patients.a_problem}
                         </TableCell>
                         <TableCell align="center">
-                          {patients.note_room_id}
+                          {patients.patient_room_id}
                         </TableCell>
                         <TableCell align="center">
                           {patients.r_priority}
@@ -448,7 +448,7 @@ export default function EnhancedTable(props) {
                             to={{
                               pathname: "/nurse/SBARHistory",
                               patientName: patients.patient_name,
-                              patientId: patients.patient_id,
+                              patientId: patients.note_patient_id,
                             }}
                           >
                             <Button variant="contained" color="primary">
@@ -465,7 +465,7 @@ export default function EnhancedTable(props) {
                                 handleClick(
                                   event,
                                   patients.patient_name,
-                                  patients.patient_id
+                                  patients.note_patient_id
                                 )
                               }
                             >
@@ -479,7 +479,7 @@ export default function EnhancedTable(props) {
                                 handleClick(
                                   event,
                                   patients.patient_name,
-                                  patients.patient_id
+                                  patients.note_patient_id
                                 )
                               }
                             >

@@ -43,7 +43,6 @@ loginApiCall.tokenExists = (token) => {
       `SELECT token FROM capstonedb.login WHERE token = ? `,
       [token],
       (err, result) => {
-        console.log(result);
         if (err) {
           return reject(err);
         } else if (result.length == 0) {
@@ -57,7 +56,6 @@ loginApiCall.tokenExists = (token) => {
 };
 
 loginApiCall.accountAuthentication = (body) => {
-  console.log(body.token.token);
   return new Promise((resolve, reject) => {
     pool.query(
       `SELECT * FROM capstonedb.login WHERE token = ? `,

@@ -25,7 +25,8 @@ const NursePage = (props) => {
   const [nurseId, setNurseId] = useState("");
 
   useEffect(() => {
-    fetch(`/nurse/getId/${props.token}`)
+    // setNurseId(props.userToken);
+    fetch(`/nurse/getId/${props.userToken}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -35,11 +36,10 @@ const NursePage = (props) => {
       })
       .then((result) => {
         if (result !== undefined && result.length !== 0) {
-          console.log(result);
-          setNurseId(result);
+          setNurseId(result[0].nurse_id);
         }
       });
-  }, []);
+  }, [props]);
 
   return (
     <div>
@@ -52,7 +52,7 @@ const NursePage = (props) => {
         <Route exact path="/nurse">
           <Header title="Wing Hospital Name" />
           <MuiThemeProvider theme={theme}>
-            <PatientTable search={props.search} />
+            <PatientTable search={props.search} nurseId={nurseId} />
           </MuiThemeProvider>
         </Route>
 
@@ -88,7 +88,7 @@ const NursePage = (props) => {
         </Route> */}
 
         <Route path="/nurse/:patientName/:patientId">
-          <Sbar nurseID="1" nurseName="Mark Apple" />
+          <Sbar nurseId={nurseId} nurseName="Mark Apple" />
         </Route>
       </Switch>
     </div>

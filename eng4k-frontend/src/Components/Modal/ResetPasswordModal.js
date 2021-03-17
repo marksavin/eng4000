@@ -20,7 +20,6 @@ import AddIcon from "@material-ui/icons/Add";
 import Typography from "@material-ui/core/Typography";
 import { blue } from "@material-ui/core/colors";
 
-const emails = ["username@gmail.com", "user02@gmail.com"];
 const inputStyles = makeStyles((theme) => ({
   root: {
     "& > *": {

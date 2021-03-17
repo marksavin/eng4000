@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Background from "./Background.js";
 import Situation from "./Situation.js";
 import Assessment from "./Assessment.js";
@@ -6,10 +6,13 @@ import Recommendation from "./Recommendation.js";
 import { Form, ButtonForm, useForm } from "../Sbar/useForm.js";
 import { faLaptopHouse } from "@fortawesome/free-solid-svg-icons";
 
+import SubmitDone from "../Modal/SubmitDone";
+
 //CHECK NULL FIELDS TO SEE IF YOU CAN JUST MAKE THEM EMPTY STRINGS. MYSQL DOESNT LIKE NULL
 const situation = {
   note_id: "",
   note_patient_id: 0,
+  note_nurse_id: 0,
   note_room_id: -1,
   date_created: "",
   s_problem: "",
@@ -59,13 +62,24 @@ const recommendation = {
   r_priority: false,
   r_patient_family_code_status: false,
   r_test_needed: "",
-  r_change_treatment_ordered: "",
   r_freq_vital_signs: "",
   r_time_problem_will_last: false,
   r_problem_persist_contact: false,
 };
 
 export default function Sbarform(props) {
+  const [open, setOpen] = useState(false); //for modal
+  const [status, setStatus] = useState(null);
+  const [statusMessage, setStatusMessage] = useState("");
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  };
+
   const validate = (fieldValues = situationValue) => {
     let temp = { ...errors };
     if ("note_room_id" in fieldValues)
@@ -123,9 +137,14 @@ export default function Sbarform(props) {
       body: JSON.stringify(combinedValues),
     }).then((res) => {
       if (res.ok) {
+        setStatus(1);
+        setStatusMessage("SBAR was successfully submitted");
+        handleClickOpen();
         return res.json();
       } else {
-        console.log("submitting was unsuccessful");
+        setStatus(0);
+        setStatusMessage("SBAR was not submitted");
+        handleClickOpen();
       }
     });
   }, [combinedValues]);
@@ -133,7 +152,7 @@ export default function Sbarform(props) {
   useEffect(() => {
     // Update the document title using the browser API
     situationValue.note_patient_id = parseInt(props.patientId);
-    console.log(situationValue);
+    situationValue.note_nurse_id = parseInt(props.nurseId);
   }, []);
 
   return (
@@ -160,6 +179,14 @@ export default function Sbarform(props) {
       >
         <ButtonForm label="Submit" type="submit" />
         <ButtonForm color="default" label="Reset" />
+        <div>
+          <SubmitDone
+            open={open}
+            onClose={handleClose}
+            status={status}
+            statusMessage={statusMessage}
+          />
+        </div>
       </div>
     </Form>
   );
