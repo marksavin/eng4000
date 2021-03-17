@@ -148,7 +148,7 @@ class CreatePatient extends React.Component {
                 </div>
 
                 <GeneralCreatePage
-                  title={"Patient ID"}
+                  title={"Patient ID (Personal ID)"}
                   name={"patient_id"}
                   type="text"
                   className="patient_id cpInput"
