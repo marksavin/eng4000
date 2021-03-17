@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ResetPasswordModal from "../Modal/ResetPasswordModal";
+import SubmitDone from "../Modal/SubmitDone";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserMd, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
@@ -8,6 +9,7 @@ const Login = (props) => {
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
   const [open, setOpen] = useState(false); //for modal
+  const [statusMessage, setStatusMessage] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -39,9 +41,14 @@ const Login = (props) => {
         }
       })
       .then((result) => {
-        props.setAccountType(`/${result.user_type}`);
-        props.setAuthenticate(true);
-        props.setUserToken(token);
+        console.log(result);
+        if (result.user_type === undefined) {
+          setStatusMessage(result);
+        } else {
+          props.setAccountType(`/${result.user_type}`);
+          props.setAuthenticate(true);
+          props.setUserToken(token);
+        }
       });
   };
 
@@ -86,6 +93,10 @@ const Login = (props) => {
               <FontAwesomeIcon className="user-icon" icon={faUnlockAlt} />
             </div>
           </div>
+          <div>
+            <label style={{ color: "red" }}>{statusMessage}</label>
+          </div>
+          <div />
           <div className="login-button">
             <button className="button" onClick={handleLogin}>
               Login

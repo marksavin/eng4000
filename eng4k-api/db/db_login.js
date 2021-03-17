@@ -4,20 +4,20 @@ const bcrypt = require("bcrypt");
 
 let loginApiCall = {};
 
-loginApiCall.registerAccount = (token, hashedPassword, user_type) => {
-  return new Promise((resolve, reject) => {
-    pool.query(
-      `INSERT INTO capstonedb.login VALUES (?,?, CURRENT_DATE(),?, 0, 0)`,
-      [token, hashedPassword, user_type],
-      (err, result) => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(result);
-      }
-    );
-  });
-};
+// loginApiCall.registerAccount = (token, hashedPassword, user_type) => {
+//   return new Promise((resolve, reject) => {
+//     pool.query(
+//       `INSERT INTO capstonedb.login VALUES (?,?, CURRENT_DATE(),?, 0, 0)`,
+//       [token, hashedPassword, user_type],
+//       (err, result) => {
+//         if (err) {
+//           return reject(err);
+//         }
+//         return resolve(result);
+//       }
+//     );
+//   });
+// };
 
 loginApiCall.resetPassword = (token, newPassword) => {
   return new Promise((resolve, reject) => {
@@ -71,12 +71,12 @@ loginApiCall.accountAuthentication = (body) => {
               if (response) {
                 return resolve(result);
               } else {
-                return resolve("password incorrect");
+                return resolve("Password is incorrect!");
               }
             }
           );
         } else {
-          return resolve("User doesnt exist");
+          return resolve("User doesnt exist!");
         }
       }
     );
