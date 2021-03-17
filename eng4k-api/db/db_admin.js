@@ -23,8 +23,29 @@ adminApiCall.addPatient = (body) => {
         if (err) {
           return reject(err);
         }
-        console.log(result);
-        return resolve(result);
+
+        pool.query(
+          `INSERT INTO capstonedb.treats_physician_patient
+          VALUES(?,?);`,
+          [body.patient_id, body.physician_id],
+          (err, result) => {
+            if (err) {
+              return reject(err);
+            }
+
+            pool.query(
+              `INSERT INTO capstonedb.sbar_note 
+          VALUES(DEFAULT,CURRENT_TIMESTAMP(),?,?,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT, DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT,DEFAULT, DEFAULT);`,
+              [body.patient_id, body.nurse_id],
+              function (error, results, fields) {
+                if (error) {
+                  return reject(error);
+                }
+                return resolve(results);
+              }
+            );
+          }
+        );
       }
     );
   });

@@ -51,6 +51,7 @@ class CreatePatient extends React.Component {
           weight: "",
           height: "",
           nurse_id: "",
+          physician_id: "",
           room_id: "",
         }}
         validationSchema={formSchema}
@@ -120,6 +121,13 @@ class CreatePatient extends React.Component {
                   type="text"
                   className="patient_id cpInput"
                   placeholder="Patient ID"
+                />
+                <GeneralCreatePage
+                  title={"Physician ID"}
+                  name={"physician_id"}
+                  type="text"
+                  className="physician_id cpInput"
+                  placeholder="Physician ID"
                 />
                 <GeneralCreatePage
                   title={"Nurse ID"}

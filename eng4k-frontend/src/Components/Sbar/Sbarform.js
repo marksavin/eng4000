@@ -10,6 +10,7 @@ import { faLaptopHouse } from "@fortawesome/free-solid-svg-icons";
 const situation = {
   note_id: "",
   note_patient_id: 0,
+  note_nurse_id: 0,
   note_room_id: -1,
   date_created: "",
   s_problem: "",
@@ -59,7 +60,6 @@ const recommendation = {
   r_priority: false,
   r_patient_family_code_status: false,
   r_test_needed: "",
-  r_change_treatment_ordered: "",
   r_freq_vital_signs: "",
   r_time_problem_will_last: false,
   r_problem_persist_contact: false,
@@ -133,6 +133,7 @@ export default function Sbarform(props) {
   useEffect(() => {
     // Update the document title using the browser API
     situationValue.note_patient_id = parseInt(props.patientId);
+    situationValue.note_nurse_id = parseInt(props.nurseId);
     console.log(situationValue);
   }, []);
 

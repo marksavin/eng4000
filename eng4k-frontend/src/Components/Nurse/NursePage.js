@@ -88,7 +88,7 @@ const NursePage = (props) => {
         </Route> */}
 
         <Route path="/nurse/:patientName/:patientId">
-          <Sbar nurseID="1" nurseName="Mark Apple" />
+          <Sbar nurseId={nurseId} nurseName="Mark Apple" />
         </Route>
       </Switch>
     </div>

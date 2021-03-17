@@ -23,7 +23,7 @@ export default function Sbar(props) {
       <div className="paper-container">
         <Paper className={classes.pageContent} elevation={4}>
           <Sbarfrom
-            nurseID={props.nurseID}
+            nurseId={props.nurseId}
             nurseName={props.nurseName}
             patientName={param.patientName}
             patientId={param.patientId}
