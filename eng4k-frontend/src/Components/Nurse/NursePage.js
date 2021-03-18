@@ -52,24 +52,13 @@ const NursePage = (props) => {
               patientId={props.location.patientId}
             />
             <ContactPhysicanCard
-              pname="Dr. Geneva"
-              specialty="Neurology"
-              availability="Away on vacation"
+              patientId={props.location.patientId}
+              patientName={props.location.patientName}
+              nurseId={nurseId}
+              
             />
           </div>
         </Route>
-
-        <Route exact path="/nurse/contactPhysician">
-          {/* ------------------ Temporarily routed here -------------------------*/}
-          <ContactPhysicanCard
-            pname="Dr. Geneva"
-            specialty="Neurology"
-            availability="Away on vacation"
-          />
-        </Route>
-        {/* <Route exact path="/nurse/add-patient">
-          <CreatePatient />
-        </Route> */}
 
         <Route path="/nurse/:patientName/:patientId">
           <Sbar nurseId={nurseId} nurseName="Mark Apple" />

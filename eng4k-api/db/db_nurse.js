@@ -259,4 +259,21 @@ nurseApiCalls.getId = (token) => {
   });
 };
 
+nurseApiCalls.getPhysInfo = (patientId) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `SELECT *
+      FROM treats_physician_patient AS A INNER JOIN physician as B ON A.treats_physician_id = B.physician_id
+      WHERE A.treats_patient_id=?;`,
+      [patientId],
+      (err, result) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(result);
+      }
+    );
+  });
+};
+
 module.exports = nurseApiCalls;

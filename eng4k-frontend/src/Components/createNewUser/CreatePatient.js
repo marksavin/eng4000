@@ -28,8 +28,8 @@ const formSchema = yup.object().shape({
 class CreatePatient extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClickOpen = this.handleClickOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    //this.handleClickOpen = this.handleClickOpen.bind(this);
+    //this.handleClose = this.handleClose.bind(this);
     this.state = {
       open: false,
       status: 0,
@@ -53,22 +53,29 @@ class CreatePatient extends React.Component {
         "Content-Type": "application/json;charset=utf-8",
       },
       body: JSON.stringify(data),
-    }).then((res) => {
-      if (res.ok) {
-        this.handleClickOpen();
-        this.setState(() => ({ status: 1 }));
-        this.setState(() => ({
-          statusMessage: "Patient account was successfully created",
-        }));
-        return res.json();
-      } else {
-        this.handleClickOpen();
-        this.setState(() => ({ status: 0 }));
-        this.setState(() => ({
-          statusMessage: "There was an error creating the patient account",
-        }));
-      }
-    });
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((result) => {
+        console.log(result);
+
+        if (result !== undefined && result.affectedRows === 1) {
+          this.handleClickOpen();
+          this.setState(() => ({ status: 1 }));
+          this.setState(() => ({
+            statusMessage: "Patient account was successfully created",
+          }));
+        } else {
+          this.handleClickOpen();
+          this.setState(() => ({ status: 0 }));
+          this.setState(() => ({
+            statusMessage: "There was an error creating the patient account",
+          }));
+        }
+      });
   };
 
   render() {

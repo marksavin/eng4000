@@ -1,9 +1,39 @@
-import React, { useState } from "react";
-import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
-import { TextField, Button, Collapse, IconButton } from "@material-ui/core";
-import ArrowDropDownCircleIcon from "@material-ui/icons/ArrowDropDownCircle";
+import React, { useState, useEffect } from "react";
+import { TextField, Button, Collapse } from "@material-ui/core";
+
+import firebase from "../firebase/firebase";
+import { formatRelative } from "../firebase/fireHooks";
 
 const ContactPhysicanCard = (props) => {
+  const [physName, setPhysName] = useState("");
+  const [physician_id, setPhysicianId] = useState("");
+  const [specialty, setSpecialty] = useState("");
+  const [availability, setAvailability] = useState("Available");
+
+  const [expanded, setExpanded] = useState(false);
+  const [remarks, setRemarks] = useState("");
+
+  useEffect(() => {
+    // setNurseId(props.userToken);
+    console.log("CALLING QUERY 2");
+    fetch(`/nurse/getPhysInfo/${props.patientId}`)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log("network response was bad");
+        }
+      })
+      .then((result) => {
+        if (result !== undefined && result.length !== 0) {
+          console.log("QUERY2: WOKRED", result);
+          setPhysName(result[0].physician_name);
+          setPhysicianId(result[0].physician_id);
+          setSpecialty(result[0].physician_specialty);
+        }
+      });
+  }, [props]);
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -13,9 +43,31 @@ const ContactPhysicanCard = (props) => {
     console.log(remarks);
   };
 
-  const [loading, setLoading] = useState(false);
-  const [expanded, setExpanded] = useState(false);
-  const [remarks, setRemarks] = useState("");
+  const handleSubmitClick = (e) => {
+    e.preventDefault();
+    var d = new Date();
+    var n = d.toString();
+    const item = {
+      physician_id: physician_id,
+      data: [
+        {
+          physician_name: physName,
+          nurse_id: props.nurseId,
+          patient_id: props.patientId,
+          patient_name: props.patientName,
+          date_submitted: n,
+          text: remarks,
+        },
+      ],
+    };
+    const fitem = firebase.database().ref("Nurse Remarks");
+
+    fitem.push(item);
+
+    //trimmedMessage = remarks.trim();
+  };
+
+  //const [loading, setLoading] = useState(false);
 
   return (
     <div className="contactPcontainer">
@@ -33,11 +85,11 @@ const ContactPhysicanCard = (props) => {
 
         <div className="ContactContent">
           <div className="ContactText">
-            <div className="ContactHeader">{props.pname}</div>
+            <div className="ContactHeader">Dr. {`${physName}`}</div>
             <div className="ContactSpecialty">
-              <span className="date">{props.specialty}</span>
+              <span className="date">{specialty}</span>
             </div>
-            <div className="description">{props.availability}</div>
+            <div className="description">{availability}</div>
           </div>
           <div className="ContactControlButton">
             <Collapse in={!expanded}>
@@ -92,6 +144,7 @@ const ContactPhysicanCard = (props) => {
                     }}
                     variant="contained"
                     color="primary"
+                    onClick={handleSubmitClick}
                   >
                     Submit
                   </Button>

@@ -27,7 +27,7 @@ adminApiCall.addPatient = (body) => {
         pool.query(
           `INSERT INTO capstonedb.treats_physician_patient
           VALUES(?,?);`,
-          [body.patient_id, body.physician_id],
+          [body.physician_id, body.patient_id],
           (err, result) => {
             if (err) {
               return reject(err);
