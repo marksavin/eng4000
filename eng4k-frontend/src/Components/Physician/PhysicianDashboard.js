@@ -16,12 +16,8 @@ import Header from "../Nurse/Header";
 firebase
   .database()
   .ref("Nurse Remarks")
-  .once("value")
-  .then((snapshot) => {
-    console.log("success", snapshot);
-  })
-  .catch((error) => {
-    console.log(error);
+  .on("value", (snapshot) => {
+    console.log("success", snapshot.val());
   }); //}
 
 const PhysicianDashBoard = (props) => {

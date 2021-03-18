@@ -48,19 +48,18 @@ const ContactPhysicanCard = (props) => {
     var d = new Date();
     var n = d.toString();
     const item = {
-      physician_id: physician_id,
-      data: [
-        {
-          physician_name: physName,
-          nurse_id: props.nurseId,
-          patient_id: props.patientId,
-          patient_name: props.patientName,
-          date_submitted: n,
-          text: remarks,
-        },
-      ],
+      // data: [
+      //{
+      physician_name: physName,
+      nurse_id: props.nurseId,
+      patient_id: props.patientId,
+      patient_name: props.patientName,
+      date_submitted: n,
+      text: remarks,
     };
-    const fitem = firebase.database().ref("Nurse Remarks");
+    // ],
+    //};
+    const fitem = firebase.database().ref(`Nurse Remarks/${physician_id}`);
 
     fitem.push(item);
 
