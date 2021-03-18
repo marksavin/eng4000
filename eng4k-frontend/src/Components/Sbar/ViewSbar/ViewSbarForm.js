@@ -158,19 +158,6 @@ export default function ViewSbarForm(props) {
             <Background background={backgroundValue} />
             <Assessment assessment={assessmentValue} />
             <Recommendation recommendation={recValue} />
-
-            <div
-              className="button-styles"
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                width: "100%",
-              }}
-            >
-              <ButtonForm label="Submit" type="submit" />
-              <ButtonForm color="default" label="Reset" />
-            </div>
           </div>
         </Form>
       )}

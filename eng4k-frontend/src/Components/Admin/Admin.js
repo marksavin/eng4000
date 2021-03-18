@@ -9,6 +9,17 @@ import CreatePhysician from "../createNewUser/CreatePhysician.js";
 import CreatePatient from "../createNewUser/CreatePatient.js";
 import UnlockAccount from "../createNewUser/UnlockAccount.js";
 
+const themes = createMuiTheme({
+  palette: {
+    primary: {
+      light: "#5bc8c2",
+      main: "#33bbb3",
+      dark: "#23827d",
+    },
+  },
+});
+
+
 const Admin = (props) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);

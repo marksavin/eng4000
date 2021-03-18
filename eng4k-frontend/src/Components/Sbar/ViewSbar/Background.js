@@ -122,7 +122,7 @@ function Background(props) {
             <Inputgroup
               label="(%)"
               name="s_o2"
-              defaultValue={props.background.b_o2}
+              defaultValue={props.background.b_o2_percent}
               text="The patient has been on "
             ></Inputgroup>
             <Inputgroup
