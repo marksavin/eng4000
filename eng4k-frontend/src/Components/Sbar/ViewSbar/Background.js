@@ -1,6 +1,6 @@
 import React from "react";
 import { Paper, Grid, makeStyles, InputLabel } from "@material-ui/core";
-import { Grid12, Checkbox, Inputgroup } from "../Sbar/useForm.js";
+import { Grid12, Checkbox, Inputgroup } from "./UseFormView.js";
 
 const paperStyle = makeStyles((theme) => ({
   pageContent: {
@@ -29,40 +29,37 @@ function Background(props) {
             <Checkbox
               label="Alert and oriented to person place and time."
               name="b_awareness_alert_oriented"
-              value={props.background.b_awareness_alert_oriented}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_awareness_alert_oriented}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={6}>
             <Checkbox
               label="Confused and cooperative."
               name="b_awareness_confused_cooperative"
-              value={props.background.b_awareness_confused_cooperative}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_awareness_confused_cooperative}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={6}>
             <Checkbox
               label="non-cooperative, agitated or combative."
               name="b_awareness_non_coop_agit_combative"
-              value={props.background.b_awareness_non_coop_agit_combative}
-              onBlur={props.handleInput}
+              defaultValue={
+                props.background.b_awareness_non_coop_agit_combative
+              }
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={6}>
             <Checkbox
               label="Stuporous and not talking clearly and possibly not able to swallow."
               name="b_awareness_stuporous"
-              value={props.background.b_awareness_stuporous}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_awareness_stuporous}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={6}>
             <Checkbox
               label="Comatose. Eyes closed. Not responding to stimulation."
               name="b_awareness_comatose"
-              value={props.background.b_awareness_comatose}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_awareness_comatose}
             ></Checkbox>
           </Grid>
           <Grid12>
@@ -76,48 +73,42 @@ function Background(props) {
             <Checkbox
               label="Warm and dry"
               name="b_skin_warm_dry"
-              value={props.background.b_skin_warm_dry}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_skin_warm_dry}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={4}>
             <Checkbox
               label="Pale"
               name="b_skin_pale"
-              value={props.background.b_skin_pale}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_skin_pale}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={4}>
             <Checkbox
               label="Mottled"
               name="b_skin_mottled"
-              value={props.background.b_skin_mottled}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_skin_mottled}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={4}>
             <Checkbox
               label="Diaphoretic"
               name="b_skin_diaphoretic"
-              value={props.background.b_skin_diaphoretic}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_skin_diaphoretic}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={4}>
             <Checkbox
               label="Extremities are cold"
               name="b_skin_extremities_cold"
-              value={props.background.b_skin_extremities_cold}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_skin_extremities_cold}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={4}>
             <Checkbox
               label="Extremities are warm"
               name="b_skin_extremities_warm"
-              value={props.background.b_skin_extremities_warm}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_skin_extremities_warm}
             ></Checkbox>
           </Grid>
           <Grid12>
@@ -131,15 +122,13 @@ function Background(props) {
             <Inputgroup
               label="(%)"
               name="s_o2"
-              value={props.background.s_o2}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_o2}
               text="The patient has been on "
             ></Inputgroup>
             <Inputgroup
               label="(hours)"
               name="b_o2_time"
-              value={props.background.b_o2_time}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_o2_time}
               text="For how long:"
             ></Inputgroup>
           </Grid12>
@@ -147,8 +136,7 @@ function Background(props) {
             <Checkbox
               label="The oximeter does not detect a good puslse and is giving erratic readings."
               name="b_oximeter_detection"
-              value={props.background.b_oximeter_detection}
-              onBlur={props.handleInput}
+              defaultValue={props.background.b_oximeter_detection}
             ></Checkbox>
           </Grid12>
         </Grid>

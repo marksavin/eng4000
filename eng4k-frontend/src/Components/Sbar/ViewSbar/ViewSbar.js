@@ -2,8 +2,8 @@ import React from "react";
 import { Paper, makeStyles } from "@material-ui/core";
 import { useParams } from "react-router-dom";
 
-import Header from "../Nurse/Header";
-import Sbarfrom from "./Sbarform.js";
+import Header from "../../Nurse/Header";
+import ViewSbarForm from "./ViewSbarForm.js";
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
@@ -13,21 +13,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Sbar(props) {
-  const param = useParams();
+export default function ViewSbar(props) {
   const classes = useStyles();
 
   return (
     <div>
-      <Header title={`Patient: ${param.patientName}`} />
-      <div className="paper-container">
+      <Header title={`Patient: ${props.patientName}`} />
+      <Header title={`Created on: ${props.dateCreated}`} />
+      <div className="paper-container-1">
         <Paper className={classes.pageContent} elevation={4}>
-          <Sbarfrom
-            nurseId={props.nurseId}
+          <ViewSbarForm
+            patientId={props.patientId}
             nurseName={props.nurseName}
-            patientName={param.patientName}
-            patientId={param.patientId}
-            roomId={param.patientRoom}
+            dateCreated={props.dateCreated}
           />
         </Paper>
       </div>

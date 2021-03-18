@@ -30,7 +30,7 @@ let nurseApiCalls = {};
 nurseApiCalls.currentPatientList = (id) => {
   return new Promise((resolve, reject) => {
     pool.query(
-      `SELECT A.note_patient_id, B.patient_name, A.a_problem, B.patient_room_id, A.r_priority, A.date_created, A.sbar_note_initial,
+      `SELECT A.note_patient_id, B.patient_name, A.a_problem, B.patient_room_id, A.r_priority,  DATE_FORMAT(A.date_created, '%Y-%m-%d %H:%i:%s') AS  date_created, A.sbar_note_initial,
       CASE 
       WHEN 5 <= (timestampDIFF(HOUR, A.date_created, CURRENT_TIMESTAMP)) OR A.sbar_note_initial = 1 THEN 'Update Required'
       WHEN 5 > (timestampDIFF(HOUR,A.date_created, CURRENT_TIMESTAMP)) AND A.sbar_note_initial = 0 THEN 'Up to Date'
@@ -80,6 +80,7 @@ nurseApiCalls.addNewSbar = (id, body) => {
         b_skin_diaphoretic = ?,
         b_skin_extremities_cold = ?,
         b_skin_extremities_warm = ?,
+        b_o2_percent = ?,
         b_o2_time = ?,
         b_oximeter_detection = ?,
         a_problem = ?,
@@ -124,6 +125,7 @@ nurseApiCalls.addNewSbar = (id, body) => {
         body.b_skin_diaphoretic,
         body.b_skin_extremities_cold,
         body.b_skin_extremities_warm,
+        `${body.b_o2_percent} %`,
         `${body.b_o2_time} hours`,
         body.b_oximeter_detection,
         body.a_problem,
@@ -160,7 +162,7 @@ nurseApiCalls.addNewSbar = (id, body) => {
             console.log("These are the results: ", results);
             pool.query(
               `INSERT INTO capstonedb.sbar_note_archive
-              VALUES(CURRENT_TIMESTAMP(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);`,
+              VALUES(CURRENT_TIMESTAMP(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);`,
               [
                 body.note_patient_id,
                 results[0].patient_name,
@@ -191,6 +193,7 @@ nurseApiCalls.addNewSbar = (id, body) => {
                 body.b_skin_diaphoretic,
                 body.b_skin_extremities_cold,
                 body.b_skin_extremities_warm,
+                `${body.b_o2_percent} %`,
                 `${body.b_o2_time} hours`,
                 body.b_oximeter_detection,
                 body.a_problem,
@@ -223,19 +226,36 @@ nurseApiCalls.addNewSbar = (id, body) => {
   });
 };
 
-nurseApiCalls.SBARHistory = (nurseId, patientId) => {
-  console.log("SBAR HISTORRY", nurseId, patientId);
+nurseApiCalls.SBARHistory = (patientId) => {
   return new Promise((resolve, reject) => {
     pool.query(
-      `SELECT *
+      `SELECT A.sbar_note_archive_patient_name, A.sbar_note_archive_patient_id, B.nurse_name, DATE_FORMAT(A.sbar_note_archive_date_created, '%Y-%m-%d %H:%i:%s') AS sbar_note_archive_date_created,  A.sbar_note_archive_room_id, A.s_problem
       FROM sbar_note_archive as A INNER JOIN nurse as B ON A.sbar_note_archive_nurse_id = B.nurse_id
-      WHERE A.sbar_note_archive_nurse_id = ? AND A.sbar_note_archive_patient_id=?;`,
-      [nurseId, patientId],
+      WHERE A.sbar_note_archive_patient_id = ?;`,
+      [patientId],
       (err, result) => {
         if (err) {
           return reject(err);
         }
-        console.log(result);
+        return resolve(result);
+      }
+    );
+  });
+};
+
+nurseApiCalls.getSBARHistoryFields = (dateCreated, patientId) => {
+  console.log(dateCreated);
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `SELECT *
+      FROM sbar_note_archive as A
+      WHERE A.sbar_note_archive_date_created = ? AND  A.sbar_note_archive_patient_id = ?;`,
+      [dateCreated, patientId],
+      (err, result) => {
+        if (err) {
+          return reject(err);
+        }
+        console.log("SBAR history fields:", result);
         return resolve(result);
       }
     );
@@ -245,7 +265,7 @@ nurseApiCalls.SBARHistory = (nurseId, patientId) => {
 nurseApiCalls.getId = (token) => {
   return new Promise((resolve, reject) => {
     pool.query(
-      `SELECT nurse_id
+      `SELECT nurse_id, nurse_name
       FROM nurse
       WHERE nurse_token=?; `,
       [token],

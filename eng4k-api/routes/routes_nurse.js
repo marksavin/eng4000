@@ -36,18 +36,31 @@ router.post("/addNewSBAR/:patientId", async (req, res, next) => {
   }
 });
 
-router.get("/SBARHistory/:nurseId/:patientId", async (req, res, next) => {
+router.get("/SBARHistory/:patientId", async (req, res, next) => {
   try {
-    let queryResults = await db.SBARHistory(
-      req.params.nurseId,
-      req.params.patientId
-    );
+    let queryResults = await db.SBARHistory(req.params.patientId);
     res.json(queryResults);
   } catch (e) {
     console.log(e);
     res.sendStatus(500);
   }
 });
+
+router.get(
+  "/getSBARHistoryFields/:dateCreated/:patientId",
+  async (req, res, next) => {
+    try {
+      let queryResults = await db.getSBARHistoryFields(
+        req.params.dateCreated,
+        req.params.patientId
+      );
+      res.json(queryResults);
+    } catch (e) {
+      console.log(e);
+      res.sendStatus(500);
+    }
+  }
+);
 
 router.get("/getId/:token", async (req, res, next) => {
   try {

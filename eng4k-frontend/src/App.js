@@ -56,7 +56,7 @@ function App() {
       });
   }, [accountType, authenticate]);
 
-  const theme = createMuiTheme({
+  const themes = createMuiTheme({
     palette: {
       primary: {
         light: "#5bc8c2",
@@ -79,63 +79,63 @@ function App() {
 
   return (
     <div className="App">
-      <MuiThemeProvider theme={theme}>
-        <Router>
-          {accountType !== "" ? (
-            <Switch>
-              <ProtectedRoute
-                path="/nurse"
-                component={NursePage}
-                search={search}
-                setSearch={setSearch}
-                authenticate={authenticate}
-                setAuthenticate={setAuthenticate}
-                accountType={accountType}
-                userToken={userToken}
-              />
-              <ProtectedRoute
-                path="/physician"
-                component={Physician}
-                search={search}
-                setSearch={setSearch}
-                authenticate={authenticate}
-                setAuthenticate={setAuthenticate}
-                accountType={accountType}
-                userToken={userToken}
-              />
-              <ProtectedRoute
-                path="/admin"
-                component={Admin}
-                search={search}
-                setSearch={setSearch}
-                authenticate={authenticate}
-                setAuthenticate={setAuthenticate}
-                accountType={accountType}
-                pname="Dr. Geneva"
-                specialty="Neurology"
-                availability="Away on vacation"
-              />
-              <ProtectedLogin
-                exact
-                path="/"
-                component={Login}
-                authenticate={authenticate}
-                setAuthenticate={setAuthenticate}
-                accountType={accountType}
-                setAccountType={setAccountType}
-                setUserToken={setUserToken}
-              />
-            </Switch>
-          ) : (
-            <div className={classes.root}>
+      <Router>
+        {accountType !== "" ? (
+          <Switch>
+            <ProtectedRoute
+              path="/nurse"
+              component={NursePage}
+              search={search}
+              setSearch={setSearch}
+              authenticate={authenticate}
+              setAuthenticate={setAuthenticate}
+              accountType={accountType}
+              userToken={userToken}
+            />
+            <ProtectedRoute
+              path="/physician"
+              component={Physician}
+              search={search}
+              setSearch={setSearch}
+              authenticate={authenticate}
+              setAuthenticate={setAuthenticate}
+              accountType={accountType}
+              userToken={userToken}
+            />
+            <ProtectedRoute
+              path="/admin"
+              component={Admin}
+              search={search}
+              setSearch={setSearch}
+              authenticate={authenticate}
+              setAuthenticate={setAuthenticate}
+              accountType={accountType}
+              pname="Dr. Geneva"
+              specialty="Neurology"
+              availability="Away on vacation"
+            />
+            <ProtectedLogin
+              exact
+              path="/"
+              component={Login}
+              authenticate={authenticate}
+              setAuthenticate={setAuthenticate}
+              accountType={accountType}
+              setAccountType={setAccountType}
+              setUserToken={setUserToken}
+            />
+          </Switch>
+        ) : (
+          <div className={classes.root}>
+            <MuiThemeProvider theme={themes}>
               <CircularProgress
                 style={{ position: "fixed", top: "30%", left: "50%" }}
                 size={200}
               />
-            </div>
-          )}
-        </Router>
-      </MuiThemeProvider>
+            </MuiThemeProvider>
+          </div>
+        )}
+      </Router>
     </div>
   );
 }

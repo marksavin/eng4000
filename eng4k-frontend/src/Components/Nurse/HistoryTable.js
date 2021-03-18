@@ -16,8 +16,6 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import Button from "@material-ui/core/Button";
@@ -85,14 +83,7 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          {/* <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ "aria-label": "select all desserts" }}
-          /> */}
-        </TableCell>
+        <TableCell padding="checkbox"></TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -236,32 +227,32 @@ export default function EnhancedTable(props) {
   const [selected, setSelected] = React.useState([]);
   const [patientName, setPatientName] = React.useState("");
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const [searchState, setSearchState] = useState([
     {
+      sbar_note_archive_patient_id: "-",
       nurse_name: "-",
-      date_created: "-",
-      note_room_id: "-",
+      sbar_note_archive_date_created: "-",
+      sbar_note_archive_room_id: "-",
       s_problem: "-",
     },
   ]);
 
-  const history = useHistory();
-
   const [patients, setPatients] = useState([
     {
+      sbar_note_archive_patient_name: "-",
+      sbar_note_archive_patient_id: "-",
       nurse_name: "-",
-      date_created: "-",
-      note_room_id: "-",
+      sbar_note_archive_date_created: "-",
+      sbar_note_archive_room_id: "-",
       s_problem: "-",
     },
   ]);
 
   useEffect(() => {
     console.log(props.nurseId, props.patientId);
-    fetch(`/nurse/SBARHistory/${props.nurseId}/${props.patientId}`)
+    fetch(`/nurse/SBARHistory/${props.patientId}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -300,43 +291,6 @@ export default function EnhancedTable(props) {
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-    setPatientName(name);
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setPatientName(name);
-    setSelected(newSelected);
-  };
-
-  //   useEffect(() => {
-  //     if (selected.length > 0) {
-  //       setTimeout(function () {
-  //         //your code to be executed after 1 second
-  //         history.push(`/nurse/${patientName}`);
-  //       }, 1000);
-  //     }
-  //   });
-
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
-
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, patients.length - page * rowsPerPage);
 
@@ -366,7 +320,7 @@ export default function EnhancedTable(props) {
             <Table
               className={classes.table}
               aria-labelledby="tableTitle"
-              size={dense ? "small" : "medium"}
+              size={"medium"}
               aria-label="enhanced table"
             >
               <EnhancedTableHead
@@ -381,17 +335,14 @@ export default function EnhancedTable(props) {
               <TableBody>
                 {stableSort(patients, getComparator(order, orderBy)).map(
                   (patients, index) => {
-                    const isItemSelected = isSelected(patients.patient_name);
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
                       <TableRow
                         hover
                         role={"checkbox"}
-                        aria-checked={isItemSelected}
                         tabIndex={-1}
                         key={index}
-                        selected={isItemSelected}
                       >
                         <TableCell padding="checkbox"></TableCell>
                         <TableCell
@@ -409,13 +360,18 @@ export default function EnhancedTable(props) {
                           {patients.sbar_note_archive_room_id}
                         </TableCell>
                         <TableCell align="center">
-                          {patients.r_priority}
+                          {patients.s_problem}
                         </TableCell>
                         <TableCell align="center">
                           <Link
                             to={{
                               pathname: "/nurse/viewSBAR",
-                              patientName: patients.patient_name,
+                              patientName:
+                                patients.sbar_note_archive_patient_name,
+                              nurseName: patients.nurse_name,
+                              patientId: patients.sbar_note_archive_patient_id,
+                              dateCreated:
+                                patients.sbar_note_archive_date_created,
                             }}
                           >
                             <Button variant="contained" color="primary">
@@ -428,7 +384,7 @@ export default function EnhancedTable(props) {
                   }
                 )}
                 {emptyRows > 0 && (
-                  <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                  <TableRow style={{ height: 25 * emptyRows }}>
                     <TableCell colSpan={6} />
                   </TableRow>
                 )}
@@ -436,10 +392,6 @@ export default function EnhancedTable(props) {
             </Table>
           </TableContainer>
         </Paper>
-        <FormControlLabel
-          control={<Switch checked={dense} onChange={handleChangeDense} />}
-          label="Dense padding"
-        />
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import Situation from "./Situation.js";
 import Assessment from "./Assessment.js";
 import Recommendation from "./Recommendation.js";
 import { Form, ButtonForm, useForm } from "../Sbar/useForm.js";
-import { faLaptopHouse } from "@fortawesome/free-solid-svg-icons";
 
 import SubmitDone from "../Modal/SubmitDone";
 
@@ -42,6 +41,7 @@ const background = {
   b_skin_diaphoretic: false,
   b_skin_extremities_cold: false,
   b_skin_extremities_warm: false,
+  b_o2_percent: "",
   b_o2_time: -1,
   b_oximeter_detection: false,
 };
@@ -129,7 +129,7 @@ export default function Sbarform(props) {
   };
 
   const creatNewSbarNote = useCallback(() => {
-    fetch(`/nurse/addNewSBAR/4`, {
+    fetch(`/nurse/addNewSBAR/${props.location.patientId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",

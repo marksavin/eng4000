@@ -44,56 +44,6 @@ const theme = createMuiTheme({
   },
 });
 
-export function useForm(
-  validateOnChange = false,
-  validate,
-  situation,
-  background,
-  assessment,
-  recommendation
-) {
-  const [situationValue, setSituationValue] = useState(situation);
-  const [backgroundValue, setBackgroundValue] = useState(background);
-  const [assessmentValue, setAssessmentValue] = useState(assessment);
-  const [recValue, setRecValue] = useState(recommendation);
-  const [errors, setErrors] = useState({});
-
-  // const handleInput = userCallback(() => {
-  const handleInput = (event) => {
-    const { name, value } = event.target;
-    if (name.charAt(0) === "s" || name.charAt(0) === "n") {
-      setSituationValue({
-        ...situationValue,
-        [name]: value,
-      });
-    } else if (name.charAt(0) === "b") {
-      setBackgroundValue({
-        ...backgroundValue,
-        [name]: value,
-      });
-    } else if (name.charAt(0) === "a") {
-      setAssessmentValue({
-        ...assessmentValue,
-        [name]: value,
-      });
-    } else if (name.charAt(0) === "r") {
-      setRecValue({
-        ...recValue,
-        [name]: value,
-      });
-    }
-  };
-  return {
-    situationValue,
-    backgroundValue,
-    assessmentValue,
-    recValue,
-    errors,
-    setErrors,
-    handleInput,
-  };
-}
-
 export function Form(props) {
   const classes = useStyles();
   const { children, ...other } = props;
@@ -125,7 +75,7 @@ export function Grid6(props) {
 }
 
 export function TextFieldSingle(props) {
-  const { name, label, defaultValue, onBlur } = props;
+  const { name, label, defaultValue } = props;
   return (
     <TextField
       size="small"
@@ -133,13 +83,12 @@ export function TextFieldSingle(props) {
       label={label}
       name={name}
       value={defaultValue}
-      onBlur={onBlur}
     />
   );
 }
 
 export function Inputgroup(props) {
-  const { name, label, defaultValue, onBlur, text, error = null } = props;
+  const { name, label, defaultValue, text } = props;
   return (
     <>
       <InputLabel>{text}</InputLabel>
@@ -149,34 +98,23 @@ export function Inputgroup(props) {
         label={label}
         name={name}
         value={defaultValue}
-        onBlur={onBlur}
-        {...(error && { error: true, helperText: error })}
       />
     </>
   );
 }
 
 export function Checkbox(props) {
-  const { name, label, value, onBlur } = props;
-
-  const convertToEventFromCheckbox = (name, value) => ({
-    target: {
-      name,
-      value,
-    },
-  });
+  const { name, label, defaultValue } = props;
 
   return (
     <FormControl>
       <FormControlLabel
+        disabled={defaultValue === 1 ? false : true}
         control={
           <MuiCheckbox
             name={name}
             color="primary"
-            checked={value}
-            onChange={(event) =>
-              onBlur(convertToEventFromCheckbox(name, event.target.checked))
-            }
+            checked={defaultValue === 1 ? true : false}
           />
         }
         label={label}

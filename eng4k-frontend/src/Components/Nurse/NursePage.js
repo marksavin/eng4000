@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link, useHistory, useParams } from "react-router-dom";
 
 import Navigation from "../NavBar/NavBar.js";
 import PatientTable from "./PatientTable.js";
@@ -9,8 +9,21 @@ import Sbar from "../Sbar/Sbar.js";
 import ContactPhysicanCard from "./ContactPhysicianCard.js";
 import HistoryTable from "./HistoryTable.js";
 
+import { Button, createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
+
+import ViewSbar from "../Sbar/ViewSbar/ViewSbar.js";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#33bbb3",
+    },
+  },
+});
+
 const NursePage = (props) => {
   const [nurseId, setNurseId] = useState("");
+  const [nurseName, setNurseName] = useState("");
 
   useEffect(() => {
     // setNurseId(props.userToken);
@@ -25,6 +38,7 @@ const NursePage = (props) => {
       .then((result) => {
         if (result !== undefined && result.length !== 0) {
           setNurseId(result[0].nurse_id);
+          setNurseName(result[0].nurse_name);
         }
       });
   }, [props]);
@@ -38,25 +52,29 @@ const NursePage = (props) => {
       />
       <Switch>
         <Route exact path="/nurse">
-          <Header title="Wing Hospital Name" />
-          <PatientTable search={props.search} nurseId={nurseId} />
+          <Header title={`Hi ${nurseName}`} />
+          <MuiThemeProvider theme={theme}>
+            <PatientTable search={props.search} nurseId={nurseId} />
+          </MuiThemeProvider>
         </Route>
 
-        <Route path="/nurse/SBARhistory">
+        <Route path="/nurse/SBARhistory/:patientName">
           <Header title={`SBAR History of ${props.location.patientName}`} />
-          <div className="historyContainer">
-            <HistoryTable
-              search={props.search}
-              nurseId={nurseId}
-              patientName={props.location.patientName}
-              patientId={props.location.patientId}
-            />
-            <ContactPhysicanCard
-              pname="Dr. Geneva"
-              specialty="Neurology"
-              availability="Away on vacation"
-            />
-          </div>
+          <MuiThemeProvider theme={theme}>
+            <div className="historyContainer">
+              <HistoryTable
+                search={props.search}
+                nurseId={nurseId}
+                patientName={props.location.patientName}
+                patientId={props.location.patientId}
+              />
+              <ContactPhysicanCard
+                pname="Dr. Geneva"
+                specialty="Neurology"
+                availability="Away on vacation"
+              />
+            </div>
+          </MuiThemeProvider>
         </Route>
 
         <Route exact path="/nurse/contactPhysician">
@@ -72,7 +90,16 @@ const NursePage = (props) => {
         </Route> */}
 
         <Route path="/nurse/:patientName/:patientId">
-          <Sbar nurseId={nurseId} nurseName="Mark Apple" />
+          <Sbar nurseId={nurseId} nurseName={nurseName} />
+        </Route>
+
+        <Route path="/nurse/viewSBAR">
+          <ViewSbar
+            nurseName={props.location.nurseName}
+            patientId={props.location.patientId}
+            patientName={props.location.patientName}
+            dateCreated={props.location.dateCreated}
+          />
         </Route>
       </Switch>
     </div>

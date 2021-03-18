@@ -5,7 +5,7 @@ import {
   TextFieldSingle,
   Inputgroup,
   Checkbox,
-} from "../Sbar/useForm.js";
+} from "./UseFormView.js";
 
 const paperStyle = makeStyles((theme) => ({
   pageContent: {
@@ -16,14 +16,7 @@ const paperStyle = makeStyles((theme) => ({
 }));
 
 function Situation(props) {
-  const {
-    values,
-    handleInput,
-    errors,
-    nurseName,
-    patientName,
-    situation,
-  } = props;
+  const { nurseName } = props;
 
   const paperstyle = paperStyle();
 
@@ -44,29 +37,23 @@ function Situation(props) {
             <Inputgroup
               label="Room Number"
               name="note_room_id"
-              value={props.situation.note_room_id}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.sbar_note_archive_room_id}
               text="I'm calling from"
-              error={props.errors.note_room_id}
-              placeholder="hello world"
             ></Inputgroup>
           </Grid>
           <Grid12>
             <Inputgroup
               label="Patient name and location"
               name="note_patient_id"
-              defaultValue={props.patientName}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.sbar_note_archive_patient_name}
               text="I'm calling about: "
-              error={props.errors.note_patient_id}
             ></Inputgroup>
           </Grid12>
           <Grid12>
             <Inputgroup
               label="Code status"
               name="s_code_status"
-              value={props.situation.s_code_status}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.s_code_status}
               text="The Patient's code status is: "
             ></Inputgroup>
           </Grid12>
@@ -74,8 +61,7 @@ function Situation(props) {
             <Inputgroup
               label="Problem"
               name="s_problem"
-              value={props.situation.s_problem}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.s_problem}
               text="The problem I am calling about is: "
             ></Inputgroup>
           </Grid12>
@@ -88,40 +74,35 @@ function Situation(props) {
             <TextFieldSingle
               label="Blood Pressure"
               name="s_BP"
-              value={props.situation.s_BP}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.s_BP}
             />
           </Grid>
           <Grid item lg={4} xl={2}>
             <TextFieldSingle
               label="Pulse"
               name="s_pulse"
-              value={props.situation.s_pulse}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.s_pulse}
             />
           </Grid>
           <Grid item lg={4} xl={2}>
             <TextFieldSingle
               label="Respiration"
               name="s_respiration"
-              value={props.situation.s_respiration}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.s_respiration}
             />
           </Grid>
           <Grid item lg={4} xl={2}>
             <TextFieldSingle
               label="Temperature"
               name="s_temperature"
-              value={props.situation.s_temperature}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.s_temperature}
             />
           </Grid>
           <Grid item lg={4} xl={3}>
             <TextFieldSingle
               label="O2 sat"
               name="s_o2"
-              value={props.situation.s_o2}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.s_o2}
             />
           </Grid>
           <Grid12>
@@ -135,40 +116,35 @@ function Situation(props) {
             <Checkbox
               label="Blood pressure because it is less than 90 or 30 mmHg below usual."
               name="s_concern_bp"
-              value={props.situation.s_concern_bp}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.s_concern_bp}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={6}>
             <Checkbox
               label="Pulse because it is over 125 or less than 45."
               name="s_concern_pulse"
-              value={props.situation.s_concern_pulse}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.s_concern_pulse}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={6}>
             <Checkbox
               label="Respiration because it is less than 10 or over 30."
               name="s_concern_respiration"
-              value={props.situation.s_concern_respiration}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.s_concern_respiration}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={6}>
             <Checkbox
               label="Temperature because it is less than 96 or over 104."
               name="s_concern_temperature"
-              value={props.situation.s_concern_temperature}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.s_concern_temperature}
             ></Checkbox>
           </Grid>
           <Grid item xs={12} md={6}>
             <Checkbox
               label="O2 Sat because it is <90% despite oxygen."
               name="s_concern_o2"
-              value={props.situation.s_concern_o2}
-              onBlur={props.handleInput}
+              defaultValue={props.situation.s_concern_o2}
             ></Checkbox>
           </Grid>
         </Grid>

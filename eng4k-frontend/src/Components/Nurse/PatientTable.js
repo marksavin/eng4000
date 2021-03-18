@@ -16,12 +16,9 @@ import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import Button from "@material-ui/core/Button";
-import ContactPhysicanCard from "./ContactPhysicianCard";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -68,7 +65,7 @@ const headCells = [
     id: "date_created",
     numeric: false,
     disablePadding: false,
-    label: "Last Updated",
+    label: "Last Updated (Date and Time)",
   },
   {
     id: "SBAR_history",
@@ -85,15 +82,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const {
-    classes,
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -252,8 +241,8 @@ export default function EnhancedTable(props) {
   const [selected, setSelected] = React.useState([]);
   const [patientName, setPatientName] = React.useState("");
   const [patientId, setPatientId] = React.useState(0);
+  const [patientRoom, setPatientRoom] = React.useState("");
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const [searchState, setSearchState] = useState([
@@ -325,7 +314,7 @@ export default function EnhancedTable(props) {
     setSelected([]);
   };
 
-  const handleClick = (event, name, id) => {
+  const handleClick = (event, name, id, room_id) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
     setPatientName(name);
@@ -345,6 +334,7 @@ export default function EnhancedTable(props) {
 
     setPatientName(name);
     setPatientId(id);
+    setPatientRoom(room_id);
     setSelected(newSelected);
   };
 
@@ -352,16 +342,10 @@ export default function EnhancedTable(props) {
     if (selected.length > 0) {
       setTimeout(function () {
         //your code to be executed after 1 second
-        history.push(`/nurse/${patientName}/${patientId}`);
+        history.push(`/nurse/${patientName}/${patientId}/${patientRoom}`);
       }, 1000);
     }
   });
-
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, patients.length - page * rowsPerPage);
@@ -395,7 +379,7 @@ export default function EnhancedTable(props) {
             <Table
               className={classes.table}
               aria-labelledby="tableTitle"
-              size={dense ? "small" : "medium"}
+              size={"medium"}
               aria-label="enhanced table"
             >
               <EnhancedTableHead
@@ -410,17 +394,14 @@ export default function EnhancedTable(props) {
               <TableBody>
                 {stableSort(patients, getComparator(order, orderBy)).map(
                   (patients, index) => {
-                    const isItemSelected = isSelected(patients.patient_name);
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
                       <TableRow
                         hover
                         role={"checkbox"}
-                        aria-checked={isItemSelected}
                         tabIndex={-1}
                         key={patients.patient_name}
-                        selected={isItemSelected}
                       >
                         <TableCell padding="checkbox"></TableCell>
                         <TableCell
@@ -446,7 +427,7 @@ export default function EnhancedTable(props) {
                         <TableCell align="center">
                           <Link
                             to={{
-                              pathname: "/nurse/SBARHistory",
+                              pathname: `/nurse/SBARHistory/${patients.patient_name}`,
                               patientName: patients.patient_name,
                               patientId: patients.note_patient_id,
                             }}
@@ -465,7 +446,8 @@ export default function EnhancedTable(props) {
                                 handleClick(
                                   event,
                                   patients.patient_name,
-                                  patients.note_patient_id
+                                  patients.note_patient_id,
+                                  patients.patient_room_id
                                 )
                               }
                             >
@@ -492,7 +474,7 @@ export default function EnhancedTable(props) {
                   }
                 )}
                 {emptyRows > 0 && (
-                  <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                  <TableRow style={{ height: 25 * emptyRows }}>
                     <TableCell colSpan={6} />
                   </TableRow>
                 )}
@@ -500,10 +482,6 @@ export default function EnhancedTable(props) {
             </Table>
           </TableContainer>
         </Paper>
-        <FormControlLabel
-          control={<Switch checked={dense} onChange={handleChangeDense} />}
-          label="Dense padding"
-        />
       </div>
     </div>
   );
