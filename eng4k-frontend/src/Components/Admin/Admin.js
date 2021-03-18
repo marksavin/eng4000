@@ -9,7 +9,9 @@ import CreatePhysician from "../createNewUser/CreatePhysician.js";
 import CreatePatient from "../createNewUser/CreatePatient.js";
 import UnlockAccount from "../createNewUser/UnlockAccount.js";
 
-const themes = createMuiTheme({
+import { Button, createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
+
+const theme = createMuiTheme({
   palette: {
     primary: {
       light: "#5bc8c2",
@@ -18,7 +20,6 @@ const themes = createMuiTheme({
     },
   },
 });
-
 
 const Admin = (props) => {
   const handleExpandClick = () => {
@@ -58,22 +59,23 @@ const Admin = (props) => {
             </div> */}
           </section>
         </Route>
+        <MuiThemeProvider theme={theme}>
+          <Route exact path="/admin/Patient">
+            <CreatePatient />
+          </Route>
 
-        <Route exact path="/admin/Patient">
-          <CreatePatient />
-        </Route>
+          <Route exact path="/admin/Nurse">
+            <CreateNurse />
+          </Route>
 
-        <Route exact path="/admin/Nurse">
-          <CreateNurse />
-        </Route>
+          <Route exact path="/admin/Physician">
+            <CreatePhysician />
+          </Route>
 
-        <Route exact path="/admin/Physician">
-          <CreatePhysician />
-        </Route>
-
-        <Route exact path="/admin/unlock">
-          <UnlockAccount />
-        </Route>
+          <Route exact path="/admin/unlock">
+            <UnlockAccount />
+          </Route>
+        </MuiThemeProvider>
       </Switch>
     </div>
   );
