@@ -8,8 +8,7 @@ const salt = 10;
 router.post("/addPatient", async (req, res, next) => {
   try {
     let queryResults = await db.addPatient(req.body);
-    console.log(queryResults);
-    //   res.json(queryResults);
+    res.json(queryResults);
   } catch (e) {
     console.log(e);
     res.sendStatus(500);

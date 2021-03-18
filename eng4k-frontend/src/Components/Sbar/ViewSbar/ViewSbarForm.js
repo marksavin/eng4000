@@ -109,7 +109,7 @@ export default function ViewSbarForm(props) {
       })
       .then((result) => {
         //console.log(result);
-        if (result[0] !== undefined && result[0] !== 0) {
+        if (result !== undefined && result[0] !== 0) {
           for (let [key, value] of Object.entries(result[0])) {
             //console.log(`${key}: ${value}`);
             if (key.charAt(0) === "s") {
