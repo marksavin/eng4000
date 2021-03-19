@@ -7,16 +7,11 @@ import firebase from "../firebase/firebase";
 
 import Header from "../Nurse/Header";
 
-//const [data, SetDate] = useState("");
-
-//const firedata = () => {
-//}
 
 const PhysicianDashBoard = (props) => {
   const [physicianId, setPhysicianId] = useState("");
   const [physician_name, setPhysicianName] = useState("");
 
-  //////////////////temperarily here
   function getRemarks(id) {
     console.log(physicianId);
     firebase
@@ -27,7 +22,6 @@ const PhysicianDashBoard = (props) => {
       });
   }
 
-  ///////////////////////
 
   useEffect(() => {
     fetch(`/physician/getId/${props.userToken}`)
@@ -56,24 +50,6 @@ const PhysicianDashBoard = (props) => {
         setAuthenticate={props.setAuthenticate}
       />
       <Switch>
-        {/* <Route exact path="/physician">
-          <Header title="DashBoard" />
-          <div className="dButtons">
-            <Link to="/physician/patient-list">
-              <div className="patientList_button">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className="pl_button"
-                  style={{ fontSize: "1.5rem" }}
-                >
-                  Patient List
-                </Button>
-              </div>
-            </Link>
-          </div>
-          {/* <ContactPhysicianCard /> */}
-        {/* </Route> */} */
         <Route exact path="/physician">
           <Header title={physician_name} />
           <PhysicianPatientList search={props.search} />
