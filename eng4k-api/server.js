@@ -7,6 +7,7 @@ var cookieParser = require("cookie-parser");
 const nurseRouter = require("./routes/routes_nurse");
 const adminRouter = require("./routes/routes_admin");
 const loginRouter = require("./routes/routes_login");
+const physicianRouter = require("./routes/routes_physician");
 
 const pool = require("./dbPool.js");
 
@@ -58,6 +59,7 @@ app.get("/isAuthenticated", function (req, res) {
 app.use("/nurse", nurseRouter);
 app.use("/admin", adminRouter);
 app.use("/login", loginRouter);
+app.use("/physician", physicianRouter);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
