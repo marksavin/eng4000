@@ -1,6 +1,6 @@
 import { Switch, Route, Link } from "react-router-dom";
 import { Button } from "@material-ui/core/";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PhysicianPatientList from "./PhysicianPatientList";
 import Navigation from "../NavBar/NavBar.js";
 import firebase from "../firebase/firebase";
@@ -21,6 +21,14 @@ firebase
   }); //}
 
 const PhysicianDashBoard = (props) => {
+  useEffect(() => {
+    const database = firebase.database();
+
+    database.ref('Nurse Remarks/1/-MW772spG8yktTVXpaUT/text').on('value', (snapshot) => {
+      alert(snapshot.val());
+    })
+  })
+
   return (
     <div>
       <Navigation
