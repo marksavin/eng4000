@@ -35,7 +35,7 @@ const PhysicianDashBoard = (props) => {
         if (res.ok) {
           return res.json();
         } else {
-          console.log("network response was bad, can't get idd");
+          console.log("network response was bad, can't get id");
         }
       })
       .then((result) => {
