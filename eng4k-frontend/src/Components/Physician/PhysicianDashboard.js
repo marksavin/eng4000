@@ -42,7 +42,7 @@ const PhysicianDashBoard = (props) => {
         inbox.forEach((element) =>
           console.log("heres a new message:", element)
         );
-        console.log("the other attempt:", inbox);
+        //console.log("the other attempt:", inbox);
       });
   }
 
