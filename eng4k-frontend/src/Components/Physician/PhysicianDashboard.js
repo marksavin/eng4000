@@ -6,22 +6,45 @@ import Navigation from "../NavBar/NavBar.js";
 import firebase from "../firebase/firebase";
 
 import Header from "../Nurse/Header";
+import Message from "./notifications/Message";
 
+/**
+ * 
+ *  {date_sub
+    nurse_id
+    patient_id
+    patient_name
+    Physician_name
+    msg}  
+ *  
+ */
 
 const PhysicianDashBoard = (props) => {
   const [physicianId, setPhysicianId] = useState("");
   const [physician_name, setPhysicianName] = useState("");
+  const inbox = [];
 
   function getRemarks(id) {
-    console.log(physicianId);
     firebase
       .database()
       .ref(`Nurse Remarks/${id}`)
       .on("value", (snapshot) => {
-        console.log("success", snapshot.val());
+        //store json into 'inbox'
+        var temp = snapshot.val();
+        var keys = Object.keys(temp);
+        for (var i = 0; i < keys.length; i++) {
+          var k = keys[i];
+          inbox[i] = temp[k];
+        }
+
+        //for each element in inbox, console log it
+        //each element is a message
+        inbox.forEach((element) =>
+          console.log("heres a new message:", element)
+        );
+        console.log("the other attempt:", inbox);
       });
   }
-
 
   useEffect(() => {
     fetch(`/physician/getId/${props.userToken}`)
@@ -29,14 +52,13 @@ const PhysicianDashBoard = (props) => {
         if (res.ok) {
           return res.json();
         } else {
-          console.log("network response was bad, can't get id");
+          console.log("network response was bad, can't get phys id");
         }
       })
       .then((result) => {
         if (result !== undefined && result.length !== 0) {
           setPhysicianId(result[0].physician_id);
           setPhysicianName(`Dr. ${result[0].physician_name}`);
-          //console.log(result);
           getRemarks(result[0].physician_id);
         }
       });
@@ -53,6 +75,14 @@ const PhysicianDashBoard = (props) => {
         <Route exact path="/physician">
           <Header title={physician_name} />
           <PhysicianPatientList search={props.search} />
+          <div className="messageList">
+            <Message inb_list={inbox} />
+            {/* <ul>
+            <li>top</li>
+            {inbox.map(item =>{return <li>{inbox}</li>})}
+            <li>bottom</li>
+          </ul> */}
+          </div>
         </Route>
       </Switch>
     </div>
