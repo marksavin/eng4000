@@ -90,7 +90,10 @@ const ContactPhysicanCard = (props) => {
             </div>
             <div className="description">{availability}</div>
           </div>
-          <div className="ContactControlButton">
+          <div
+            className="ContactControlButton"
+            style={expanded ? { padding: "5px" } : { padding: "25px" }}
+          >
             <Collapse in={!expanded}>
               <Button
                 variant="outlined"
