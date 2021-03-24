@@ -65,3 +65,17 @@
 .ContactSpecialty {
   color: rgb(148, 148, 148);
 }
+
+.remarksForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.ContactButtons {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 20px;
+}
