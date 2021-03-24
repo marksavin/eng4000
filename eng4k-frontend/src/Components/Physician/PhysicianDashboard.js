@@ -6,7 +6,7 @@ import Navigation from "../NavBar/NavBar.js";
 import firebase from "../firebase/firebase";
 
 import Header from "../Nurse/Header";
-import Message from "./notifications/Message";
+//import Message from "./notifications/Message";
 
 /**
  * 
@@ -76,7 +76,7 @@ const PhysicianDashBoard = (props) => {
           <Header title={physician_name} />
           <PhysicianPatientList search={props.search} />
           <div className="messageList">
-            <Message inb_list={inbox} />
+            {/* <Message inb_list={inbox} /> */}
             {/* <ul>
             <li>top</li>
             {inbox.map(item =>{return <li>{inbox}</li>})}
