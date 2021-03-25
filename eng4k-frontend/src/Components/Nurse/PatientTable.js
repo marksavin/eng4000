@@ -332,6 +332,7 @@ export default function EnhancedTable(props) {
       );
     }
 
+    console.log(name, id, room_id);
     setPatientName(name);
     setPatientId(id);
     setPatientRoom(room_id);
@@ -393,7 +394,7 @@ export default function EnhancedTable(props) {
               />
               <TableBody>
                 {stableSort(patients, getComparator(order, orderBy)).map(
-                  (patients, index) => {
+                  (patient, index) => {
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
@@ -401,7 +402,7 @@ export default function EnhancedTable(props) {
                         hover
                         role={"checkbox"}
                         tabIndex={-1}
-                        key={patients.patient_name}
+                        key={patient.patient_name}
                       >
                         <TableCell padding="checkbox"></TableCell>
                         <TableCell
@@ -410,26 +411,27 @@ export default function EnhancedTable(props) {
                           scope="patients"
                           padding="none"
                         >
-                          {patients.patient_name}
+                          {patient.patient_name}
                         </TableCell>
                         <TableCell align="center">
-                          {patients.a_problem}
+                          {patient.a_problem}
                         </TableCell>
                         <TableCell align="center">
-                          {patients.patient_room_id}
+                          {patient.patient_room_id}
                         </TableCell>
                         <TableCell align="center">
-                          {patients.r_priority}
+                          {patient.r_priority}
                         </TableCell>
                         <TableCell align="center">
-                          {patients.date_created}
+                          {patient.date_created}
                         </TableCell>
                         <TableCell align="center">
                           <Link
                             to={{
-                              pathname: `/nurse/SBARHistory/${patients.patient_name}`,
-                              patientName: patients.patient_name,
-                              patientId: patients.note_patient_id,
+                              pathname: `/nurse/SBARHistory/${patient.patient_name}`,
+                              patientName: patient.patient_name,
+                              patientId: patient.note_patient_id,
+                              roomId: patient.patient_room_id,
                             }}
                           >
                             <Button variant="contained" color="primary">
@@ -438,20 +440,20 @@ export default function EnhancedTable(props) {
                           </Link>
                         </TableCell>
                         <TableCell align="center">
-                          {patients.update_status !== "Update Required" ? (
+                          {patient.update_status !== "Update Required" ? (
                             <Button
                               variant="contained"
                               color="primary"
                               onClick={(event) =>
                                 handleClick(
                                   event,
-                                  patients.patient_name,
-                                  patients.note_patient_id,
-                                  patients.patient_room_id
+                                  patient.patient_name,
+                                  patient.note_patient_id,
+                                  patient.patient_room_id
                                 )
                               }
                             >
-                              {patients.update_status}
+                              {patient.update_status}
                             </Button>
                           ) : (
                             <Button
@@ -460,12 +462,13 @@ export default function EnhancedTable(props) {
                               onClick={(event) =>
                                 handleClick(
                                   event,
-                                  patients.patient_name,
-                                  patients.note_patient_id
+                                  patient.patient_name,
+                                  patient.note_patient_id,
+                                  patient.patient_room_id
                                 )
                               }
                             >
-                              {patients.update_status}
+                              {patient.update_status}
                             </Button>
                           )}
                         </TableCell>

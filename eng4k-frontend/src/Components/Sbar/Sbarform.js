@@ -82,8 +82,10 @@ export default function Sbarform(props) {
 
   const validate = (fieldValues = situationValue) => {
     let temp = { ...errors };
-    if ("note_room_id" in fieldValues)
-      temp.note_room_id = fieldValues.note_room_id
+    if ("s_problem" in fieldValues)
+      temp.s_problem = fieldValues.s_problem ? "" : "This field is required";
+    if ("s_code_status" in fieldValues)
+      temp.s_code_status = fieldValues.s_code_status
         ? ""
         : "This field is required";
     setErrors({
@@ -102,6 +104,7 @@ export default function Sbarform(props) {
     errors,
     setErrors,
     handleInput,
+    handleReset,
   } = useForm(
     true,
     validate,
@@ -115,21 +118,26 @@ export default function Sbarform(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // if (validate()) {
-    combinedValues = {
-      ...situationValue,
-      ...backgroundValue,
-      ...assessmentValue,
-      ...recValue,
-    };
-    console.log(combinedValues);
+    if (validate()) {
+      combinedValues = {
+        ...situationValue,
+        ...backgroundValue,
+        ...assessmentValue,
+        ...recValue,
+      };
+      console.log(combinedValues);
 
-    console.log("Submit button was pressed");
-    creatNewSbarNote();
+      console.log("Submit button was pressed");
+      creatNewSbarNote();
+    } else {
+      setStatus(0);
+      setStatusMessage(`Required fields are emtpy`);
+      handleClickOpen();
+    }
   };
 
   const creatNewSbarNote = useCallback(() => {
-    fetch(`/nurse/addNewSBAR/${props.location.patientId}`, {
+    fetch(`/nurse/addNewSBAR/${props.patientId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -153,6 +161,7 @@ export default function Sbarform(props) {
     // Update the document title using the browser API
     situationValue.note_patient_id = parseInt(props.patientId);
     situationValue.note_nurse_id = parseInt(props.nurseId);
+    situationValue.note_room_id = parseInt(props.roomId);
   }, []);
 
   return (
@@ -163,6 +172,7 @@ export default function Sbarform(props) {
         nurseName={props.nurseName}
         patientName={props.patientName}
         situation={situationValue}
+        roomId={props.roomId}
       />
       <Background handleInput={handleInput} background={backgroundValue} />
       <Assessment handleInput={handleInput} assessment={assessmentValue} />
@@ -178,7 +188,7 @@ export default function Sbarform(props) {
         }}
       >
         <ButtonForm label="Submit" type="submit" />
-        <ButtonForm color="default" label="Reset" />
+        <ButtonForm color="default" label="Reset" type="reset" />
         <div>
           <SubmitDone
             open={open}

@@ -16,14 +16,7 @@ const paperStyle = makeStyles((theme) => ({
 }));
 
 function Situation(props) {
-  const {
-    values,
-    handleInput,
-    errors,
-    nurseName,
-    patientName,
-    situation,
-  } = props;
+  const { nurseName } = props;
 
   const paperstyle = paperStyle();
 
@@ -44,11 +37,8 @@ function Situation(props) {
             <Inputgroup
               label="Room Number"
               name="note_room_id"
-              value={props.situation.note_room_id}
-              onBlur={props.handleInput}
+              defaultValue={props.roomId}
               text="I'm calling from"
-              error={props.errors.note_room_id}
-              placeholder="hello world"
             ></Inputgroup>
           </Grid>
           <Grid12>
@@ -58,7 +48,6 @@ function Situation(props) {
               defaultValue={props.patientName}
               onBlur={props.handleInput}
               text="I'm calling about: "
-              error={props.errors.note_patient_id}
             ></Inputgroup>
           </Grid12>
           <Grid12>
@@ -67,6 +56,7 @@ function Situation(props) {
               name="s_code_status"
               value={props.situation.s_code_status}
               onBlur={props.handleInput}
+              error={props.errors.s_code_status}
               text="The Patient's code status is: "
             ></Inputgroup>
           </Grid12>
@@ -76,6 +66,7 @@ function Situation(props) {
               name="s_problem"
               value={props.situation.s_problem}
               onBlur={props.handleInput}
+              error={props.errors.s_problem}
               text="The problem I am calling about is: "
             ></Inputgroup>
           </Grid12>

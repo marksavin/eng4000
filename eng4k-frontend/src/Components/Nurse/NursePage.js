@@ -89,7 +89,7 @@ const NursePage = (props) => {
           <CreatePatient />
         </Route> */}
 
-        <Route path="/nurse/:patientName/:patientId">
+        <Route exact path="/nurse/:patientName/:patientId/:roomId">
           <Sbar nurseId={nurseId} nurseName={nurseName} />
         </Route>
 

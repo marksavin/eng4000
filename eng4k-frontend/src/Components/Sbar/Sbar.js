@@ -27,7 +27,7 @@ export default function Sbar(props) {
             nurseName={props.nurseName}
             patientName={param.patientName}
             patientId={param.patientId}
-            roomId={param.patientRoom}
+            roomId={param.roomId}
           />
         </Paper>
       </div>

@@ -59,6 +59,14 @@ export function useForm(
   const [errors, setErrors] = useState({});
 
   // const handleInput = userCallback(() => {
+
+  const handleReset = (event) => {
+    setAssessmentValue(situation);
+    setBackgroundValue(background);
+    setAssessmentValue(assessment);
+    setRecValue(recommendation);
+  };
+
   const handleInput = (event) => {
     const { name, value } = event.target;
     if (name.charAt(0) === "s" || name.charAt(0) === "n") {
@@ -91,6 +99,7 @@ export function useForm(
     errors,
     setErrors,
     handleInput,
+    handleReset,
   };
 }
 
