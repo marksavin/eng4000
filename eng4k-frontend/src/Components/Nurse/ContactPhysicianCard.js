@@ -14,9 +14,8 @@ const ContactPhysicanCard = (props) => {
   const [remarks, setRemarks] = useState("");
 
   useEffect(() => {
-    // setNurseId(props.userToken);
-    console.log("CALLING QUERY 2");
-    fetch(`/nurse/getPhysInfo/${props.patientId}`)
+    
+     fetch(`/nurse/getPhysInfo/${props.patientId}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -47,26 +46,32 @@ const ContactPhysicanCard = (props) => {
     e.preventDefault();
     var d = new Date();
     var n = d.toString();
+
+    console.log(d.toLocaleString()); // might have to change this
     const item = {
-      // data: [
-      //{
       physician_name: physName,
       nurse_id: props.nurseId,
+      nurse_name: props.nurseName,
       patient_id: props.patientId,
       patient_name: props.patientName,
-      date_submitted: n,
+      date_submitted: d.toLocaleString(),
       text: remarks,
     };
-    // ],
-    //};
-    const fitem = firebase.database().ref(`Nurse Remarks/${physician_id}`);
+
+    const fitem = firebase
+      .database()
+      .ref(`Nurse Remarks/${physician_id}/unread`);
 
     fitem.push(item);
-
-    //trimmedMessage = remarks.trim();
+    handleExpandClick();
+    props.onDialogSubmitChange(true);
+    setRemarks("");
   };
 
-  //const [loading, setLoading] = useState(false);
+  const handleCancelClick = () => {
+    handleExpandClick();
+    setRemarks("");
+  };
 
   return (
     <div className="contactPcontainer">
@@ -108,8 +113,15 @@ const ContactPhysicanCard = (props) => {
 
         <div className="extraContent">
           <Collapse in={expanded}>
-            <form className="remarksForm">
-              <div className="remarksText">
+            <form
+              className="remarksForm"
+              onSubmit={handleSubmitClick}
+              onReset={handleCancelClick}
+            >
+              <div
+                className="remarksText"
+                style={({ width: "90%" }, { display: "flex" })}
+              >
                 <TextField
                   id="outlined-multiline-static"
                   label="Additional Remarks"
@@ -117,6 +129,8 @@ const ContactPhysicanCard = (props) => {
                   rows={3}
                   variant="outlined"
                   onChange={handleChange}
+                  style={{ width: 210 }}
+                  value={remarks}
                 />
               </div>
 
@@ -131,7 +145,8 @@ const ContactPhysicanCard = (props) => {
                     }}
                     variant="contained"
                     color="secondary"
-                    onClick={handleExpandClick}
+                    //onClick={handleExpandClick}
+                    type="reset"
                   >
                     Cancel
                   </Button>
@@ -146,7 +161,7 @@ const ContactPhysicanCard = (props) => {
                     }}
                     variant="contained"
                     color="primary"
-                    onClick={handleSubmitClick}
+                    type="submit"
                   >
                     Submit
                   </Button>

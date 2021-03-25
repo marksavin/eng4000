@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 
 import Navigation from "../NavBar/NavBar.js";
@@ -8,9 +8,13 @@ import Sbar from "../Sbar/Sbar.js";
 // import CreatePatient from "../CreatePatient/CreatePatient.js";
 import ContactPhysicanCard from "./ContactPhysicianCard.js";
 import HistoryTable from "./HistoryTable.js";
+import DialogTest from "./notify/DialogBox";
 
 const NursePage = (props) => {
   const [nurseId, setNurseId] = useState("");
+  const [nurseName, setNurseName] = useState("");
+  const [showDialog, setShowDialog] = useState(false);
+  //const ref = useRef();
 
   useEffect(() => {
     // setNurseId(props.userToken);
@@ -25,9 +29,19 @@ const NursePage = (props) => {
       .then((result) => {
         if (result !== undefined && result.length !== 0) {
           setNurseId(result[0].nurse_id);
+          setNurseName(result[0].nurse_name);
         }
       });
   }, [props]);
+
+  function handleDialogChange(e) {
+    console.log("thetset", e);
+
+    setShowDialog(e);
+    console.log("thedialog", showDialog);
+  }
+
+  const onBodyClick = (event) => {};
 
   return (
     <div>
@@ -44,7 +58,11 @@ const NursePage = (props) => {
 
         <Route path="/nurse/SBARhistory">
           <Header title={`SBAR History of ${props.location.patientName}`} />
-          <div className="historyContainer">
+          <div
+            className="historyContainer"
+            //ref={ref}
+            //onClick={showDialog ? setShowDialog(false) : null}
+          >
             <HistoryTable
               search={props.search}
               nurseId={nurseId}
@@ -55,8 +73,16 @@ const NursePage = (props) => {
               patientId={props.location.patientId}
               patientName={props.location.patientName}
               nurseId={nurseId}
-              
+              nurseName={nurseName}
+              onDialogSubmitChange={handleDialogChange}
             />
+            <div className="sbarHistoryDialog">
+              <DialogTest
+                openDiag={showDialog}
+                handleChange={handleDialogChange}
+              />
+              {/* <DialogTest openDiag="true" /> */}
+            </div>
           </div>
         </Route>
 

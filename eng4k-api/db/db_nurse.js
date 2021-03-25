@@ -245,7 +245,7 @@ nurseApiCalls.SBARHistory = (nurseId, patientId) => {
 nurseApiCalls.getId = (token) => {
   return new Promise((resolve, reject) => {
     pool.query(
-      `SELECT nurse_id
+      `SELECT nurse_id, nurse_name
       FROM nurse
       WHERE nurse_token=?; `,
       [token],

@@ -29,6 +29,7 @@ const PhysicianDashBoard = (props) => {
       .database()
       .ref(`Nurse Remarks/${id}`)
       .on("value", (snapshot) => {
+
         //store json into 'inbox'
         var temp = snapshot.val();
         var keys = Object.keys(temp);
@@ -37,12 +38,10 @@ const PhysicianDashBoard = (props) => {
           inbox[i] = temp[k];
         }
 
-        //for each element in inbox, console log it
-        //each element is a message
+        //for each element in inbox, console log it each element is a message
         inbox.forEach((element) =>
           console.log("heres a new message:", element)
         );
-        //console.log("the other attempt:", inbox);
       });
   }
 
