@@ -12,6 +12,7 @@ const ContactPhysicanCard = (props) => {
 
   const [expanded, setExpanded] = useState(false);
   const [remarks, setRemarks] = useState("");
+  
 
   useEffect(() => {
     fetch(`/nurse/getPhysInfo/${props.patientId}`)

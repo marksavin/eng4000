@@ -74,7 +74,7 @@ const PhysicianNavBar = (props) => {
           <ul className={open ? "navbar-menu active" : "navbar-menu"}>
             <li style={{ listStyle: "none", display: "inline-block" }}>
               <div className="msgListContainer">
-                <InboxList messageList={props.messageList} />
+                <InboxList physicianID={props.physicianID} />
               </div>
             </li>
             <li className="navBar-li">
