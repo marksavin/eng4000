@@ -8,6 +8,7 @@ import MenuList from "@material-ui/core/MenuList";
 import { makeStyles } from "@material-ui/core/styles";
 import firebase from "../../firebase/firebase";
 import MessageTile from "./MessageTile";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,33 +24,32 @@ export default function InboxList(props) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const [colo, setColo] = useState(false);
-  const [inbox, setInbox] = useState([]);
-  const db = firebase.database();
-  let temp = [];
-  let item = [];
-  console.log("yo dawg", props.physicianID);
+  // const [inbox, setInbox] = useState([]);
+  // const db = firebase.database();
+  // let temp = [];
+  // let item = [];
 
-  useEffect(() => {
-    //setInbox([]);
-    console.log("another one");
-    const ref = db.ref(`Nurse Remarks/${props.physicianID}`);
-    ref.on("value", (snapshot) => {
-      snapshot.forEach((childSnapshot) => {
-        item = childSnapshot.val();
-        item.key = childSnapshot.key;
-        temp.push(item);
-      });
+  // useEffect(() => {
+  //   setInbox([]);
+  //   console.log("useEffect Updated");
+  //   const ref = db.ref(`Nurse Remarks/${props.physicianID}`);
+  //   ref.on("value", (snapshot) => {
+  //     snapshot.forEach((childSnapshot) => {
+  //       item = childSnapshot.val();
+  //       item.key = childSnapshot.key;
+  //       temp.push(item);
+  //     });
 
-      if (!temp) return <div>No Messages</div>;
-      setInbox(temp);
-    });
+  //     if (!temp) return <div>No Messages</div>;
+  //     setInbox(temp);
+  //   });
 
-    return () => ref.off();
-  }, [props.physicianID]);
+  //   return () => ref.off();
+  // }, [props.physicianID]);
 
-  useEffect(() => {
-    console.log("newChange:", inbox);
-  }, [inbox]);
+  // useEffect(() => {
+  //   console.log("newChange:", inbox);
+  // }, [inbox]);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -86,6 +86,7 @@ export default function InboxList(props) {
     prevOpen.current = open;
   }, [open]);
 
+  //console.log("heres the inbox:", props.inbox);
   return (
     <div className={classes.root}>
       <div>
@@ -121,17 +122,22 @@ export default function InboxList(props) {
                       id="menu-list-grow"
                       onKeyDown={handleListKeyDown}
                     >
-                      {inbox.map((details, index) => (
-                        <div className="messages" key={index}>
-                          <MessageTile
-                            keyval={details.key} // this is the firebase key for that msg
-                            patient_name={details.patient_name}
-                            nurse_name={details.nurse_name}
-                            date={details.date_submitted}
-                            text={details.text}
-                          />
-                        </div>
-                      ))}
+                      {props.inbox.length > 0 ? (
+                        props.inbox.map((details, index) => (
+                          <div className="messages" key={index}>
+                            <MessageTile
+                              keyval={details.key} // this is the firebase key for that msg
+                              patient_name={details.patient_name}
+                              nurse_name={details.nurse_name}
+                              date={details.date_submitted}
+                              text={details.text}
+                              readFlag={details.read}
+                            />
+                          </div>
+                        ))
+                      ) : (
+                        <MenuItem>No Messages!</MenuItem>
+                      )}
                     </MenuList>
                   </div>
                 </ClickAwayListener>

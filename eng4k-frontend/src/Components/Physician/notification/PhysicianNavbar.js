@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 //import icons
@@ -8,13 +8,41 @@ import {
   faSearch,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
+import firebase from "../../firebase/firebase";
 
 import InboxList from "./InboxList";
 
 const PhysicianNavBar = (props) => {
   const [open, setOpen] = useState(false);
+  const [inbox, setInbox] = useState([]);
+  const [physID, setPhysID] = useState(props.physicianID);
+  const db = firebase.database();
+  let temp = [];
+  let item = [];
 
   const history = useHistory();
+
+  useEffect(() => {
+    setInbox([]);
+
+    console.log("above IF statement", physID);
+    if (props.physicianID !== undefined && props.physicianID !== "") {
+      const ref = db.ref(`Nurse Remarks/${props.physicianID}`);
+      console.log("ref:", ref.on);
+      ref.on("value", (snapshot) => {
+        console.log("snapshot", snapshot);
+        snapshot.forEach((childSnapshot) => {
+          item = childSnapshot.val();
+          item.key = childSnapshot.key;
+          temp.push(item);
+          console.log("temp:", temp);
+        });
+      });
+      setInbox(temp);
+    }
+
+    //return () => ref.off();
+  }, [props.physicianID]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -40,7 +68,7 @@ const PhysicianNavBar = (props) => {
     props.setAuthenticate(false);
     Cookies.remove("token");
   };
-
+  console.log("physNavbar Inbox:", inbox, "  Phys Id: ", props.physicianID);
   return (
     <header className="main-navbar">
       <div className="navbar-contents">
@@ -74,7 +102,7 @@ const PhysicianNavBar = (props) => {
           <ul className={open ? "navbar-menu active" : "navbar-menu"}>
             <li style={{ listStyle: "none", display: "inline-block" }}>
               <div className="msgListContainer">
-                <InboxList physicianID={props.physicianID} />
+                <InboxList physicianID={props.physicianID} inbox={inbox} />
               </div>
             </li>
             <li className="navBar-li">

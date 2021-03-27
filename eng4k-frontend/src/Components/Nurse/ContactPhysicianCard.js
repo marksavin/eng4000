@@ -12,7 +12,6 @@ const ContactPhysicanCard = (props) => {
 
   const [expanded, setExpanded] = useState(false);
   const [remarks, setRemarks] = useState("");
-  
 
   useEffect(() => {
     fetch(`/nurse/getPhysInfo/${props.patientId}`)
@@ -56,10 +55,11 @@ const ContactPhysicanCard = (props) => {
       patient_name: props.patientName,
       date_submitted: d.toLocaleString(),
       text: remarks,
+      read: false,
     };
 
     const fitem = firebase.database().ref(`Nurse Remarks/${physician_id}`);
-
+    console.log("push to fb");
     fitem.push(item);
     handleExpandClick();
     props.onDialogSubmitChange(true);

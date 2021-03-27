@@ -4,19 +4,18 @@ import PhysicianPatientList from "./PhysicianPatientList";
 import PhysicianNavBar from "./notification/PhysicianNavbar";
 import Header from "../Nurse/Header";
 
-
 const PhysicianDashBoard = (props) => {
   const [physicianId, setPhysicianId] = useState("");
   const [physician_name, setPhysicianName] = useState("");
-  const [inbox, setInbox] = useState([
-    {
-      date_submitted: "",
-      nure_id: 0,
-      patient_id: "",
-      physician_name: "",
-      text: "test",
-    },
-  ]);
+  // const [inbox, setInbox] = useState([
+  //   {
+  //     date_submitted: "",
+  //     nure_id: 0,
+  //     patient_id: "",
+  //     physician_name: "",
+  //     text: "test",
+  //   },
+  // ]);
 
   let temp2 = [];
 
@@ -61,17 +60,16 @@ const PhysicianDashBoard = (props) => {
           //getRemarks(result[0].physician_id);
         }
       });
-  }, [props]);
+  }, [props.userToken]);
 
-
-
+  console.log("phys id:", physicianId);
   return (
     <div>
       <PhysicianNavBar
         search={props.search}
         setSearch={props.setSearch}
         setAuthenticate={props.setAuthenticate}
-        messageList={inbox}
+        // messageList={inbox}
         physicianID={physicianId}
       />
       <Switch>
