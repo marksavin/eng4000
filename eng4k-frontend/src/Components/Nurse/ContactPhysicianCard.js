@@ -14,8 +14,7 @@ const ContactPhysicanCard = (props) => {
   const [remarks, setRemarks] = useState("");
 
   useEffect(() => {
-    
-     fetch(`/nurse/getPhysInfo/${props.patientId}`)
+    fetch(`/nurse/getPhysInfo/${props.patientId}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -58,9 +57,7 @@ const ContactPhysicanCard = (props) => {
       text: remarks,
     };
 
-    const fitem = firebase
-      .database()
-      .ref(`Nurse Remarks/${physician_id}/unread`);
+    const fitem = firebase.database().ref(`Nurse Remarks/${physician_id}`);
 
     fitem.push(item);
     handleExpandClick();

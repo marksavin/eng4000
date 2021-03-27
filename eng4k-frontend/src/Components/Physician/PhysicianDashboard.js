@@ -2,46 +2,59 @@ import { Switch, Route, Link } from "react-router-dom";
 import { Button } from "@material-ui/core/";
 import React, { useState, useEffect } from "react";
 import PhysicianPatientList from "./PhysicianPatientList";
-import Navigation from "../NavBar/NavBar.js";
+import PhysicianNavBar from "./notification/PhysicianNavbar";
 import firebase from "../firebase/firebase";
 
+import InboxList from "./notification/InboxList";
 import Header from "../Nurse/Header";
 //import Message from "./notifications/Message";
-
-/**
- * 
- *  {date_sub
-    nurse_id
-    patient_id
-    patient_name
-    Physician_name
-    msg}  
- *  
- */
 
 const PhysicianDashBoard = (props) => {
   const [physicianId, setPhysicianId] = useState("");
   const [physician_name, setPhysicianName] = useState("");
-  const inbox = [];
+  const [inbox, setInbox] = useState([
+    {
+      date_submitted: "",
+      nure_id: 0,
+      patient_id: "",
+      physician_name: "",
+      text: "test",
+    },
+  ]);
+  //let inbox = [];
+  let temp = [];
+  let temp2 = [];
+
 
   function getRemarks(id) {
+    setInbox([]);
     firebase
       .database()
       .ref(`Nurse Remarks/${id}`)
       .on("value", (snapshot) => {
-
         //store json into 'inbox'
-        var temp = snapshot.val();
-        var keys = Object.keys(temp);
-        for (var i = 0; i < keys.length; i++) {
-          var k = keys[i];
-          inbox[i] = temp[k];
-        }
+        //console.log(snapshot.val());
+        snapshot.forEach((childSnapshot) => {
+          let item = childSnapshot.val();
+          item.key = childSnapshot.key;
+          temp2.push(item);
+        });
+        setInbox(temp2);
+
+        // temp = snapshot.val();
+        // console.log(temp);
+        // //setInbox(temp);
+        // var keys = Object.keys(temp);
+        // //setInbox([]);
+        // for (var i = 0; i < keys.length; i++) {
+        //   let k = keys[i];
+        //   console.log(temp[k]);
+        //   setInbox((oldInbox) => [...oldInbox, temp[k]]);
+        // }
 
         //for each element in inbox, console log it each element is a message
-        inbox.forEach((element) =>
-          console.log("heres a new message:", element)
-        );
+        // inbox.forEach((element) =>
+        //   console.log("heres a new message:", element));
       });
   }
 
@@ -51,7 +64,7 @@ const PhysicianDashBoard = (props) => {
         if (res.ok) {
           return res.json();
         } else {
-          console.log("network response was bad, can't get phys id");
+          console.log("network response was bad, phys id");
         }
       })
       .then((result) => {
@@ -63,24 +76,34 @@ const PhysicianDashBoard = (props) => {
       });
   }, [props]);
 
+  useEffect(() => {}, [inbox, temp2]);
+
   return (
     <div>
-      <Navigation
+      <PhysicianNavBar
         search={props.search}
         setSearch={props.setSearch}
         setAuthenticate={props.setAuthenticate}
+        messageList={inbox}
       />
       <Switch>
         <Route exact path="/physician">
           <Header title={physician_name} />
           <PhysicianPatientList search={props.search} />
-          <div className="messageList">
-            {/* <Message inb_list={inbox} /> */}
-            {/* <ul>
-            <li>top</li>
-            {inbox.map(item =>{return <li>{inbox}</li>})}
-            <li>bottom</li>
-          </ul> */}
+          <div className="stuff">
+            {/* {inbox[0].date_submitted} */}
+            {/* {inbox.map((details, index) => (
+              <div className="messages">
+                <div className="messagePatientName">
+                  <h3 key={index}>
+                    Patient: {details.patient_name} Nurse:{details.nurse_name}
+                    {"    "}
+                    date: {details.date_submitted}
+                  </h3>
+                  <p key={index}> Message: {details.text}</p>
+                </div>
+              </div>
+            ))} */}
           </div>
         </Route>
       </Switch>

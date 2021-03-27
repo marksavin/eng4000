@@ -17,7 +17,7 @@ const NursePage = (props) => {
   //const ref = useRef();
 
   useEffect(() => {
-    // setNurseId(props.userToken);
+    
     fetch(`/nurse/getId/${props.userToken}`)
       .then((res) => {
         if (res.ok) {
@@ -41,8 +41,6 @@ const NursePage = (props) => {
     console.log("thedialog", showDialog);
   }
 
-  const onBodyClick = (event) => {};
-
   return (
     <div>
       <Navigation
@@ -60,8 +58,6 @@ const NursePage = (props) => {
           <Header title={`SBAR History of ${props.location.patientName}`} />
           <div
             className="historyContainer"
-            //ref={ref}
-            //onClick={showDialog ? setShowDialog(false) : null}
           >
             <HistoryTable
               search={props.search}
@@ -81,7 +77,6 @@ const NursePage = (props) => {
                 openDiag={showDialog}
                 handleChange={handleDialogChange}
               />
-              {/* <DialogTest openDiag="true" /> */}
             </div>
           </div>
         </Route>
