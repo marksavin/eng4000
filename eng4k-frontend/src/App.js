@@ -124,10 +124,12 @@ function App() {
           </Switch>
         ) : (
           <div className={classes.root}>
-            <CircularProgress
-              style={{ position: "fixed", top: "30%", left: "50%" }}
-              size={200}
-            />
+            <MuiThemeProvider theme={themes}>
+              <CircularProgress
+                style={{ position: "fixed", top: "30%", left: "50%" }}
+                size={200}
+              />
+            </MuiThemeProvider>
           </div>
         )}
       </Router>
