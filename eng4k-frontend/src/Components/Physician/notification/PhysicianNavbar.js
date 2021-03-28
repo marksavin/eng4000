@@ -19,30 +19,34 @@ const PhysicianNavBar = (props) => {
   const db = firebase.database();
   let temp = [];
   let item = [];
+  let flag = 0;
 
   const history = useHistory();
 
   useEffect(() => {
-    setInbox([]);
-
-    console.log("above IF statement", physID);
     if (props.physicianID !== undefined && props.physicianID !== "") {
       const ref = db.ref(`Nurse Remarks/${props.physicianID}`);
-      console.log("ref:", ref.on);
+      // console.log("ref:", ref.on);
       ref.on("value", (snapshot) => {
-        console.log("snapshot", snapshot);
+        // console.log("snapshot", snapshot);
+        // setInbox([]);
+        temp = [];
         snapshot.forEach((childSnapshot) => {
           item = childSnapshot.val();
           item.key = childSnapshot.key;
+          console.log("key", item.key);
           temp.push(item);
           console.log("temp:", temp);
         });
+        // setInbox([]);
+        setInbox(temp);
       });
-      setInbox(temp);
     }
-
-    //return () => ref.off();
   }, [props.physicianID]);
+
+  // useEffect(() => {
+  //   console.log("rerender");
+  // }, [temp, inbox]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -62,13 +66,14 @@ const PhysicianNavBar = (props) => {
         history.push("/");
         return res.json();
       } else {
-        console.log("logout was unsuccessfull");
+        // console.log("logout was unsuccessfull");
       }
     });
     props.setAuthenticate(false);
     Cookies.remove("token");
   };
-  console.log("physNavbar Inbox:", inbox, "  Phys Id: ", props.physicianID);
+
+  // console.log("physNavbar Inbox:", inbox, "  Phys Id: ", props.physicianID);
   return (
     <header className="main-navbar">
       <div className="navbar-contents">

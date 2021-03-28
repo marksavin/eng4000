@@ -1,5 +1,5 @@
-import React, { useState} from "react";
-import { useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 //import icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -70,17 +70,17 @@ const NavBar = (props) => {
         </div>
         <nav className="navbar">
           <ul className={open ? "navbar-menu active" : "navbar-menu"}>
-            <li>
+            <li className="navBar-li">
               <a href="#" className="navbar-links">
                 Select Wing
               </a>
             </li>
-            <li>
+            <li className="navBar-li">
               <a href="#" className="navbar-links">
                 Help
               </a>
             </li>
-            <li>
+            <li className="navBar-li">
               <button className="logout" onClick={handleLogout}>
                 Logout
               </button>

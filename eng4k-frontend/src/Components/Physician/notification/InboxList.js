@@ -48,8 +48,8 @@ export default function InboxList(props) {
   // }, [props.physicianID]);
 
   // useEffect(() => {
-  //   console.log("newChange:", inbox);
-  // }, [inbox]);
+  //   this.forceUpdate();
+  // }, [props.inbox]);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -122,6 +122,7 @@ export default function InboxList(props) {
                       id="menu-list-grow"
                       onKeyDown={handleListKeyDown}
                     >
+                      {console.log("anyone home", props.inbox)}
                       {props.inbox.length > 0 ? (
                         props.inbox.map((details, index) => (
                           <div className="messages" key={index}>
