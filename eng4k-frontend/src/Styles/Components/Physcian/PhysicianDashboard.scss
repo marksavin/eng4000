@@ -1,25 +1,40 @@
-.dButtons{
-    direction: flex;
-    transform: translate(0, 100%);
-    height: 300px;
-    width: 50%;
-    justify-content: center;
-    align-items: center;
+.dButtons {
+  direction: flex;
+  transform: translate(0, 100%);
+  height: 300px;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
 }
 
-.dButtons{
-    margin:auto;
-    direction: flex;
-    justify-content: center;
-    align-content: center; 
-
-    
-
+.dButtons {
+  margin: auto;
+  direction: flex;
+  justify-content: center;
+  align-content: center;
 }
 
-.patientList_button{
-      direction: flex;
-    justify-content: center;
-    align-content: center; 
+.patientList_button {
+  direction: flex;
+  justify-content: center;
+  align-content: center;
+}
 
+// .messageList{
+//     margin-top:800px;
+//     width:100%;
+//     height:300px;
+//     display:flex;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+.stuff {
+  padding: 50px;
+  margin-top: 750px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column-reverse;
+  width: 100%;
 }

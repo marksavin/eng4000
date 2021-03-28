@@ -110,9 +110,6 @@ function App() {
               authenticate={authenticate}
               setAuthenticate={setAuthenticate}
               accountType={accountType}
-              pname="Dr. Geneva"
-              specialty="Neurology"
-              availability="Away on vacation"
             />
             <ProtectedLogin
               exact
@@ -127,15 +124,14 @@ function App() {
           </Switch>
         ) : (
           <div className={classes.root}>
-            <MuiThemeProvider theme={themes}>
-              <CircularProgress
-                style={{ position: "fixed", top: "30%", left: "50%" }}
-                size={200}
-              />
-            </MuiThemeProvider>
+            <CircularProgress
+              style={{ position: "fixed", top: "30%", left: "50%" }}
+              size={200}
+            />
           </div>
         )}
       </Router>
+      {/* </MuiThemeProvider> */}
     </div>
   );
 }
