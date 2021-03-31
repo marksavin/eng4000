@@ -1,0 +1,115 @@
+*:focus {
+  outline: 0;
+}
+
+.PhysMsgTileMenuItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.msgDate {
+  font-size: 10px;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.msgTextHeader {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  background-color: #badedc;
+  border-radius: 3px 3px 0px 0px;
+  color: white;
+}
+
+.msgText {
+  text-align: center;
+  word-wrap: break-word;
+  width: 190px;
+  background-color: #badedc;
+  color: white;
+  border-radius: 0px 0px 3px 3px;
+  padding: 10px;
+}
+
+.physicianMsgSection {
+  display: flex;
+  flex-direction: row;
+  transition-duration: 150ms;
+
+  transition-property: all;
+  z-index: -1;
+}
+
+.PhysicianMsgContents {
+  width: 100%;
+  z-index: 1;
+}
+.PhysicianMsgUnreadContainer,
+.PhysicianMsgDeleteContainer,
+.PhysicianAcknowledgeContainer {
+  width: 100%;
+}
+
+.PhysicianMsgUnreadContainer,
+.PhysicianMsgDeleteContainer,
+.PhysicianAcknowledgeContainer,
+.acknowledgeButton,
+.MarkAsUnreadButton,
+.MsgDeleteButton {
+  z-index: 0;
+
+  transform: translate(-95px, 0px);
+}
+.MarkAsUnreadButton,
+.MsgDeleteButton,
+.acknowledgeButton {
+  border: none;
+  font-size: 14px;
+  font-weight: 450;
+  height: 100%;
+  word-wrap: break-word;
+  transition-duration: 110ms;
+  transition-property: all;
+}
+
+.MarkAsUnreadButton {
+  background-color: #005fa8;
+  color: #ffffff;
+  width: 70px;
+}
+
+.MsgDeleteButton {
+  width: 55px;
+  border-radius: 0px 10px 10px 0px;
+  color: white;
+  background-color: rgb(179, 0, 0);
+}
+
+.acknowledgeButton {
+  width: 60px;
+  background-color: #77b471;
+  border: none;
+}
+
+.physicianMsgSection:hover {
+  .PhysicianAcknowledgeContainer,
+  .acknowledgeButton,
+  .PhysicianMsgUnreadContainer,
+  .PhysicianMsgDeleteContainer,
+  .MarkAsUnreadButton,
+  .MsgDeleteButton {
+    transform: translate(0px, 0px);
+  }
+}
+.MsgDeleteButton:hover {
+  background-color: rgb(128, 0, 0);
+}
+
+.MarkAsUnreadButton:hover {
+  background-color: #004d88;
+}
+
+.acknowledgeButton:hover {
+  background-color: #0c6d01;
+}

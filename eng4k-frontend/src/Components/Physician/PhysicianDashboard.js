@@ -7,41 +7,6 @@ import Header from "../Nurse/Header";
 const PhysicianDashBoard = (props) => {
   const [physicianId, setPhysicianId] = useState("");
   const [physician_name, setPhysicianName] = useState("");
-  // const [inbox, setInbox] = useState([
-  //   {
-  //     date_submitted: "",
-  //     nure_id: 0,
-  //     patient_id: "",
-  //     physician_name: "",
-  //     text: "test",
-  //   },
-  // ]);
-
-  let temp2 = [];
-
-  // function getRemarks(id) {
-  //   setInbox([]);
-  //   firebase
-  //     .database()
-  //     .ref(`Nurse Remarks/${id}`)
-  //     .on("value", (snapshot) => {
-
-  //       // temp = snapshot.val();
-  //       // console.log(temp);
-  //       // //setInbox(temp);
-  //       // var keys = Object.keys(temp);
-  //       // //setInbox([]);
-  //       // for (var i = 0; i < keys.length; i++) {
-  //       //   let k = keys[i];
-  //       //   console.log(temp[k]);
-  //       //   setInbox((oldInbox) => [...oldInbox, temp[k]]);
-  //       // }
-
-  //       //for each element in inbox, console log it each element is a message
-  //       // inbox.forEach((element) =>
-  //       //   console.log("heres a new message:", element));
-  //     });
-  // }
 
   useEffect(() => {
     fetch(`/physician/getId/${props.userToken}`)
@@ -57,7 +22,6 @@ const PhysicianDashBoard = (props) => {
           setPhysicianId(result[0].physician_id);
           setPhysicianName(`Dr. ${result[0].physician_name}`);
           console.log("here", physicianId);
-          //getRemarks(result[0].physician_id);
         }
       });
   }, [props.userToken]);
@@ -69,7 +33,6 @@ const PhysicianDashBoard = (props) => {
         search={props.search}
         setSearch={props.setSearch}
         setAuthenticate={props.setAuthenticate}
-        // messageList={inbox}
         physicianID={physicianId}
       />
       <Switch>

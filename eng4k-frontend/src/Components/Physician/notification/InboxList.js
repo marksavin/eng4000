@@ -23,37 +23,9 @@ export default function InboxList(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  const [colo, setColo] = useState(false);
-  // const [inbox, setInbox] = useState([]);
-  // const db = firebase.database();
-  // let temp = [];
-  // let item = [];
-
-  // useEffect(() => {
-  //   setInbox([]);
-  //   console.log("useEffect Updated");
-  //   const ref = db.ref(`Nurse Remarks/${props.physicianID}`);
-  //   ref.on("value", (snapshot) => {
-  //     snapshot.forEach((childSnapshot) => {
-  //       item = childSnapshot.val();
-  //       item.key = childSnapshot.key;
-  //       temp.push(item);
-  //     });
-
-  //     if (!temp) return <div>No Messages</div>;
-  //     setInbox(temp);
-  //   });
-
-  //   return () => ref.off();
-  // }, [props.physicianID]);
-
-  // useEffect(() => {
-  //   this.forceUpdate();
-  // }, [props.inbox]);
 
   const handleToggle = () => {
     setOpen((prevOpen) => !prevOpen);
-    //renderMsg();
   };
 
   const handleClose = (event) => {
@@ -62,13 +34,8 @@ export default function InboxList(props) {
     }
 
     setOpen(false);
-    setColo(false);
   };
 
-  const handleExpand = () => {
-    console.log("colo", colo);
-    setColo(!colo);
-  };
   function handleListKeyDown(event) {
     if (event.key === "Tab") {
       event.preventDefault();
@@ -86,19 +53,32 @@ export default function InboxList(props) {
     prevOpen.current = open;
   }, [open]);
 
-  //console.log("heres the inbox:", props.inbox);
   return (
     <div className={classes.root}>
       <div>
-        <Button
-          ref={anchorRef}
-          aria-controls={open ? "menu-list-grow" : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
-          style={{ color: "white" }}
-        >
-          Inbox
-        </Button>
+        <div className="PhysInboxButton">
+          <Button
+            ref={anchorRef}
+            aria-controls={open ? "menu-list-grow" : undefined}
+            aria-haspopup="true"
+            onClick={handleToggle}
+            style={{ color: "white" }}
+          >
+            <div
+              className="PhysInboxLabel"
+              style={{
+                //margin: "4px",
+                fontSize: "1.5rem",
+                textTransform: "lowercase",
+              }}
+            >
+              Inbox
+            </div>
+            <div className="physInboxNumIcon">
+              <div className="PinboxNumText">{props.inbox.length}</div>
+            </div>
+          </Button>
+        </div>
         <Popper
           open={open}
           anchorEl={anchorRef.current}
@@ -133,6 +113,7 @@ export default function InboxList(props) {
                               date={details.date_submitted}
                               text={details.text}
                               readFlag={details.read}
+                              pID={props.physicianID}
                             />
                           </div>
                         ))

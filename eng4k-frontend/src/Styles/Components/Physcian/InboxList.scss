@@ -1,0 +1,26 @@
+.PinboxNumText {
+  font-size: 0.8rem;
+  transform: translate(0px, -3px);
+}
+.physInboxNumIcon {
+  margin-right: 5px;
+  background-color: #c23f3f;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  border: solid;
+  border-color: #ffffff;
+  border-width: 1.7px;
+}
+
+.PhysInboxButton {
+  display: flex;
+}
+
+.inboxContainer {
+  width: 200px;
+}
+
+.physInboxNumIcon {
+  transform: translate(-5px, -12px);
+}

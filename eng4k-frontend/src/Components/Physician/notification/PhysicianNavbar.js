@@ -19,34 +19,27 @@ const PhysicianNavBar = (props) => {
   const db = firebase.database();
   let temp = [];
   let item = [];
-  let flag = 0;
 
   const history = useHistory();
 
   useEffect(() => {
     if (props.physicianID !== undefined && props.physicianID !== "") {
       const ref = db.ref(`Nurse Remarks/${props.physicianID}`);
-      // console.log("ref:", ref.on);
       ref.on("value", (snapshot) => {
-        // console.log("snapshot", snapshot);
-        // setInbox([]);
         temp = [];
         snapshot.forEach((childSnapshot) => {
           item = childSnapshot.val();
           item.key = childSnapshot.key;
           console.log("key", item.key);
           temp.push(item);
+
           console.log("temp:", temp);
         });
-        // setInbox([]);
+        temp.reverse();
         setInbox(temp);
       });
     }
   }, [props.physicianID]);
-
-  // useEffect(() => {
-  //   console.log("rerender");
-  // }, [temp, inbox]);
 
   const handleClick = () => {
     setOpen(!open);
