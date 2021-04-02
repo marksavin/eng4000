@@ -5,12 +5,12 @@ import Navigation from "../NavBar/NavBar.js";
 import PatientTable from "./PatientTable.js";
 import Header from "./Header";
 import Sbar from "../Sbar/Sbar.js";
-// import CreatePatient from "../CreatePatient/CreatePatient.js";
+
 import ContactPhysicanCard from "./ContactPhysicianCard.js";
 import HistoryTable from "./HistoryTable.js";
 import DialogTest from "./notify/DialogBox";
 
-import { Button, createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
+import {createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
 
 import ViewSbar from "../Sbar/ViewSbar/ViewSbar.js";
 
@@ -26,7 +26,7 @@ const NursePage = (props) => {
   const [nurseId, setNurseId] = useState("");
   const [nurseName, setNurseName] = useState("");
   const [showDialog, setShowDialog] = useState(false);
-  //const ref = useRef();
+
 
   useEffect(() => {
     fetch(`/nurse/getId/${props.userToken}`)
@@ -46,10 +46,8 @@ const NursePage = (props) => {
   }, [props]);
 
   function handleDialogChange(e) {
-    console.log("thetset", e);
 
     setShowDialog(e);
-    console.log("thedialog", showDialog);
   }
 
   return (
@@ -58,6 +56,7 @@ const NursePage = (props) => {
         search={props.search}
         setSearch={props.setSearch}
         setAuthenticate={props.setAuthenticate}
+        nurseId={nurseId}
       />
       <Switch>
         <Route exact path="/nurse">
@@ -93,10 +92,6 @@ const NursePage = (props) => {
             </div>
           </MuiThemeProvider>
         </Route>
-
-        {/* <Route exact path="/nurse/add-patient">
-          <CreatePatient />
-        </Route> */}
 
         <Route exact path="/nurse/:patientName/:patientId/:roomId">
           <Sbar nurseId={nurseId} nurseName={nurseName} />

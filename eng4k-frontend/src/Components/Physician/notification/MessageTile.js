@@ -1,8 +1,7 @@
-import react, { useState } from "react";
+import react, { useState, useEffect } from "react";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Collapse } from "@material-ui/core";
-import { faAlignJustify } from "@fortawesome/free-solid-svg-icons";
-import { Slide, Fade } from "@material-ui/core";
+import {  Fade } from "@material-ui/core";
 import firebase from "../../firebase/firebase";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import CheckIcon from "@material-ui/icons/Check";
@@ -10,34 +9,55 @@ import CheckIcon from "@material-ui/icons/Check";
 const MessageFile = (props) => {
   const [open, setOpen] = useState(false);
   const [fadeIn, setFadeIn] = useState(true);
-  const [buttonHover, setButtonHover] = useState(false);
-  const db = firebase.database();
+
+  const db = firebase.firestore();
+  const [isAck, setIsAck] = useState();
+  let res = [];
+
+  useEffect(() => {
+    const g = async () => {
+      const ref = db.collection(`msg`).doc(props.keyval);
+      res = await ref.get();
+      const b = await res.get("ack");
+      setIsAck(b);
+    };
+
+    g();
+  }, [props.pID, res]);
 
   const handleClick = () => {
-    console.log("key:", props.keyval);
     setOpen(!open);
   };
   const markread = () => {
-    const ref = db.ref(`Nurse Remarks/${props.pID}/${props.keyval}`);
+    const ref = db.collection(`msg`).doc(props.keyval);
     ref.update({ read: true });
   };
   const markUnread = () => {
+    const ch = db.collection(`msg`).doc(props.keyval).update({ ack: false });
     setOpen(false);
-    const ref = db.ref(`Nurse Remarks/${props.pID}/${props.keyval}`);
+    const ref = db.collection(`msg`).doc(props.keyval);
     ref.update({ read: false });
   };
 
+  const markAcknowledge = async () => {
+    setOpen(false);
+    const ref = db.collection(`msg`).doc(props.keyval);
+    const doc = await ref.get();
+    const set = !doc.data().ack;
+    ref.update({ ack: set });
+  };
+
   const deleteMsg = () => {
-    //handleHoverOff();
     setOpen(false);
     setTimeout(() => {
       setFadeIn(false);
     }, 300);
 
     setTimeout(() => {
-      const ref = db.ref(`Nurse Remarks/${props.pID}/${props.keyval}`).remove();
+      const ref = db.collection(`msg`).doc(props.keyval).delete();
     }, 350);
   };
+
 
   return (
     <Fade in={fadeIn}>
@@ -48,7 +68,11 @@ const MessageFile = (props) => {
             style={{
               fontWeight: `${props.readFlag === false ? "650" : "450"}`,
               backgroundColor: `${
-                props.readFlag === false ? "#fff0fd" : "#ffffff"
+                isAck === true
+                  ? "#dcf2e2"
+                  : props.readFlag === false
+                  ? "#fff0fd"
+                  : "#ffffff"
               }`,
             }}
             onClick={markread}
@@ -74,13 +98,13 @@ const MessageFile = (props) => {
               </div>
             </div>
             <div className="PhysicianAcknowledgeContainer">
-              <button className="acknowledgeButton">
+              <button className="acknowledgeButton" onClick={markAcknowledge}>
                 <CheckIcon style={{ Color: "#007a23" }} />
               </button>
             </div>
             <div className="PhysicianMsgUnreadContainer">
               <button className="MarkAsUnreadButton" onClick={markUnread}>
-                Mark as Read
+                Mark Unread
               </button>
             </div>
             <div className="PhysicianMsgDeleteContainer">

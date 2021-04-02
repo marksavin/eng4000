@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button, Collapse } from "@material-ui/core";
 
 import firebase from "../firebase/firebase";
-import { formatRelative } from "../firebase/fireHooks";
 
 const ContactPhysicanCard = (props) => {
   const [physName, setPhysName] = useState("");
@@ -12,6 +11,7 @@ const ContactPhysicanCard = (props) => {
 
   const [expanded, setExpanded] = useState(false);
   const [remarks, setRemarks] = useState("");
+  const dbf = firebase.firestore();
 
   useEffect(() => {
     fetch(`/nurse/getPhysInfo/${props.patientId}`)
@@ -44,10 +44,9 @@ const ContactPhysicanCard = (props) => {
   const handleSubmitClick = (e) => {
     e.preventDefault();
     var d = new Date();
-    var n = d.toString();
 
-    console.log(d.toLocaleString()); // might have to change this
     const item = {
+      physician_id: physician_id,
       physician_name: physName,
       nurse_id: props.nurseId,
       nurse_name: props.nurseName,
@@ -56,11 +55,11 @@ const ContactPhysicanCard = (props) => {
       date_submitted: d.toLocaleString(),
       text: remarks,
       read: false,
+      ack: false,
+      timestamp:firebase.firestore.FieldValue.serverTimestamp()
     };
 
-    const fitem = firebase.database().ref(`Nurse Remarks/${physician_id}`);
-    console.log("push to fb");
-    fitem.push(item);
+    const res = dbf.collection(`msg`).add(item);
     handleExpandClick();
     props.onDialogSubmitChange(true);
     setRemarks("");
@@ -70,6 +69,8 @@ const ContactPhysicanCard = (props) => {
     handleExpandClick();
     setRemarks("");
   };
+
+
 
   return (
     <div className="contactPcontainer">

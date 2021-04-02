@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
 //import icons
@@ -8,11 +8,36 @@ import {
   faSearch,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
+import firebase from "../firebase/firebase";
 
 const NavBar = (props) => {
   const [open, setOpen] = useState(false);
+  const [nurseInbox, setNurseInbox] = useState([]);
 
   const history = useHistory();
+
+  let temp = [];
+  let item = [];
+  const db = firebase.firestore();
+
+  useEffect(() => {
+    if (props.nurseId !== undefined && props.nurseId !== "") {
+      const ref = db.collection("msg");
+      const q = ref
+        .where("nurse_id", "==", props.nurseId)
+        .onSnapshot((querySnapshot) => {
+          temp = [];
+          querySnapshot.forEach((doc) => {
+            item = doc.data();
+            item.key = doc.id;
+            temp.push(item);
+          });
+          setNurseInbox(temp);
+        });
+    }
+  }, [props.nurseId]);
+
+
 
   const handleClick = () => {
     setOpen(!open);
@@ -39,6 +64,7 @@ const NavBar = (props) => {
     Cookies.remove("token");
   };
 
+  console.log(nurseInbox);
   return (
     <header className="main-navbar">
       <div className="navbar-contents">

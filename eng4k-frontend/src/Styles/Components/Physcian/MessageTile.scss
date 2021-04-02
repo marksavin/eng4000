@@ -18,7 +18,7 @@
   justify-content: center;
   padding: 5px;
   background-color: #badedc;
-  border-radius: 3px 3px 0px 0px;
+  border-radius: 5px 5px 0px 0px;
   color: white;
 }
 
@@ -28,7 +28,7 @@
   width: 190px;
   background-color: #badedc;
   color: white;
-  border-radius: 0px 0px 3px 3px;
+  border-radius: 0px 0px 5px 5px;
   padding: 10px;
 }
 
@@ -42,12 +42,14 @@
 }
 
 .PhysicianMsgContents {
+  padding-top: 2px;
   width: 100%;
   z-index: 1;
 }
 .PhysicianMsgUnreadContainer,
 .PhysicianMsgDeleteContainer,
 .PhysicianAcknowledgeContainer {
+  padding-top: 2px;
   width: 100%;
 }
 
@@ -87,7 +89,8 @@
 }
 
 .acknowledgeButton {
-  width: 60px;
+  width: 55px;
+  border-radius: 10px 0px 0px 10px;
   background-color: #77b471;
   border: none;
 }
@@ -99,7 +102,7 @@
   .PhysicianMsgDeleteContainer,
   .MarkAsUnreadButton,
   .MsgDeleteButton {
-    transform: translate(0px, 0px);
+    transform: translate(3px, 0px);
   }
 }
 .MsgDeleteButton:hover {

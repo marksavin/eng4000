@@ -16,7 +16,7 @@ const PhysicianNavBar = (props) => {
   const [open, setOpen] = useState(false);
   const [inbox, setInbox] = useState([]);
   const [physID, setPhysID] = useState(props.physicianID);
-  const db = firebase.database();
+  const db = firebase.firestore();
   let temp = [];
   let item = [];
 
@@ -24,20 +24,21 @@ const PhysicianNavBar = (props) => {
 
   useEffect(() => {
     if (props.physicianID !== undefined && props.physicianID !== "") {
-      const ref = db.ref(`Nurse Remarks/${props.physicianID}`);
-      ref.on("value", (snapshot) => {
-        temp = [];
-        snapshot.forEach((childSnapshot) => {
-          item = childSnapshot.val();
-          item.key = childSnapshot.key;
-          console.log("key", item.key);
-          temp.push(item);
+      const ref = db.collection("msg");
+      const q = ref
+        .orderBy("timestamp", "desc")
+        .where("physician_id", "==", props.physicianID)
 
-          console.log("temp:", temp);
+        .onSnapshot((snapshot) => {
+          temp = [];
+          snapshot.forEach((childSnapshot) => {
+            item = childSnapshot.data();
+            item.key = childSnapshot.id;
+            temp.push(item);
+          });
+
+          setInbox(temp);
         });
-        temp.reverse();
-        setInbox(temp);
-      });
     }
   }, [props.physicianID]);
 
@@ -66,7 +67,6 @@ const PhysicianNavBar = (props) => {
     Cookies.remove("token");
   };
 
-  // console.log("physNavbar Inbox:", inbox, "  Phys Id: ", props.physicianID);
   return (
     <header className="main-navbar">
       <div className="navbar-contents">

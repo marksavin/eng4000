@@ -1,4 +1,6 @@
-import * as firebase from "firebase";
+import firebase  from "firebase/app";
+import 'firebase/firestore';
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyCf3hsES6yZFc6a8tY24ZMUHPb-iRcijPc",
@@ -13,13 +15,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig); // firebase.initializeApp gives us access to our database by passing in firebaseConfig as the argument
 
-//const database = firebase.database();
 
 
 export default firebase;
 
-// database.ref().set({
-//     name: "Mark"
-// }).then(() => {
-//     console.log('Resolved!');
-// });
