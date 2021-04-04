@@ -1,0 +1,82 @@
+.NurseMsgDeleteButton,
+.NurseMsgDeleteContainer {
+  z-index: 0;
+  transform: translate(-55px, 0px);
+}
+
+.NurseMsgDeleteContainer {
+  padding-top: 2px;
+  width: 50px;
+}
+
+.PhysicianMsgSection {
+  z-index: 1;
+}
+
+.NurseMsgDeleteButton {
+  width: 55px;
+  height: 100%;
+  border-radius: 0px 10px 10px 0px;
+  color: white;
+  background-color: rgb(179, 0, 0);
+  border: none;
+  transition-duration: 110ms;
+  transition-property: all;
+  margin-left: 5px;
+}
+
+.NurseMsgDeleteButton:hover {
+  background-color: rgb(128, 0, 0);
+}
+
+.physicianMsgSection:hover,
+.NurseMsgDeleteContainer :hover,
+.NurseMsgDeleteButton:hover {
+  .NurseMsgDeleteButton,
+  .NurseMsgDeleteContainer {
+    transform: translate(0px, 0px);
+  }
+}
+
+.NurseMsgText {
+  text-align: center;
+  word-wrap: break-word;
+  width: 190px;
+  background-color: #c1d4ec;
+  color: white;
+  padding: 10px;
+}
+
+.NurseMsgIconSection {
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+  width: 100%;
+  height: 22px;
+  background-color: #c1d4ec;
+  border-radius: 0px 0px 20px 20px;
+}
+
+.NurseMsgIconContainer {
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-content: flex-end;
+  background-color: #33bbb3;
+  border-radius: 13px;
+  margin-right: 10px;
+}
+
+.NurseMsgIcon {
+  margin-right: 6px;
+}
+
+.NurseMsgIconText {
+  margin-top: 2px;
+  text-align: center;
+  font-size: 10px;
+  margin-right: 5px;
+  margin-left: 8px;
+  font-weight: 350;
+  color: #ffffff;
+}

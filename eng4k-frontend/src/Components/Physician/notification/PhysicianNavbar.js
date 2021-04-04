@@ -67,6 +67,7 @@ const PhysicianNavBar = (props) => {
     Cookies.remove("token");
   };
 
+  console.log("heres the inbox:", inbox);
   return (
     <header className="main-navbar">
       <div className="navbar-contents">

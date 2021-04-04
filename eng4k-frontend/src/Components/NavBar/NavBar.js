@@ -9,6 +9,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import firebase from "../firebase/firebase";
+import NurseMsgList from "../Nurse/notify/NurseMsgList";
 
 const NavBar = (props) => {
   const [open, setOpen] = useState(false);
@@ -36,8 +37,6 @@ const NavBar = (props) => {
         });
     }
   }, [props.nurseId]);
-
-
 
   const handleClick = () => {
     setOpen(!open);
@@ -97,9 +96,7 @@ const NavBar = (props) => {
         <nav className="navbar">
           <ul className={open ? "navbar-menu active" : "navbar-menu"}>
             <li className="navBar-li">
-              <a href="#" className="navbar-links">
-                Select Wing
-              </a>
+              <NurseMsgList inbox={nurseInbox} />
             </li>
             <li className="navBar-li">
               <a href="#" className="navbar-links">

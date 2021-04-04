@@ -6,8 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuList from "@material-ui/core/MenuList";
 import { makeStyles } from "@material-ui/core/styles";
-import firebase from "../../firebase/firebase";
-import MessageTile from "./MessageTile";
+import NurseMsgTile from "./NurseMsgTile";
 import MenuItem from "@material-ui/core/MenuItem";
 
 const useStyles = makeStyles((theme) => ({
@@ -72,7 +71,7 @@ export default function NurseMsgList(props) {
                 textTransform: "lowercase",
               }}
             >
-              Inbox
+              Outbox
             </div>
             <div className="physInboxNumIcon">
               <div className="PinboxNumText">{props.inbox.length}</div>
@@ -105,9 +104,10 @@ export default function NurseMsgList(props) {
                       {props.inbox.length > 0 ? (
                         props.inbox.map((details, index) => (
                           <div className="messages" key={index}>
-                            <MessageTile
+                            <NurseMsgTile
                               keyval={details.key} // this is the firebase key for that msg
                               patient_name={details.patient_name}
+                              physician_name={details.physician_name}
                               nurse_name={details.nurse_name}
                               date={details.date_submitted}
                               text={details.text}

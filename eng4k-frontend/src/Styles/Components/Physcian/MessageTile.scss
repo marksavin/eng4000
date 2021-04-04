@@ -17,16 +17,15 @@
   display: flex;
   justify-content: center;
   padding: 5px;
-  background-color: #badedc;
-  border-radius: 5px 5px 0px 0px;
+  //border-radius: 5px 5px 0px 0px;
   color: white;
+  background-color: #95b3d8;
 }
 
 .msgText {
   text-align: center;
   word-wrap: break-word;
   width: 190px;
-  background-color: #badedc;
   color: white;
   border-radius: 0px 0px 5px 5px;
   padding: 10px;
@@ -36,15 +35,16 @@
   display: flex;
   flex-direction: row;
   transition-duration: 150ms;
-
+  margin-top: 3px;
   transition-property: all;
   z-index: -1;
 }
 
 .PhysicianMsgContents {
-  padding-top: 2px;
   width: 100%;
   z-index: 1;
+  background-color: #c1d4ec;
+  border-radius: 0px 0px 20px 20px;
 }
 .PhysicianMsgUnreadContainer,
 .PhysicianMsgDeleteContainer,
@@ -59,9 +59,9 @@
 .acknowledgeButton,
 .MarkAsUnreadButton,
 .MsgDeleteButton {
-  z-index: 0;
+  z-index: -2;
 
-  transform: translate(-95px, 0px);
+  transform: translate(-93px, 0px);
 }
 .MarkAsUnreadButton,
 .MsgDeleteButton,
@@ -72,7 +72,7 @@
   height: 100%;
   word-wrap: break-word;
   transition-duration: 110ms;
-  transition-property: all;
+  transition-property: background-color, transform, margin-left;
 }
 
 .MarkAsUnreadButton {
@@ -93,6 +93,7 @@
   border-radius: 10px 0px 0px 10px;
   background-color: #77b471;
   border: none;
+  margin-left:5px;
 }
 
 .physicianMsgSection:hover {
@@ -102,7 +103,7 @@
   .PhysicianMsgDeleteContainer,
   .MarkAsUnreadButton,
   .MsgDeleteButton {
-    transform: translate(3px, 0px);
+    transform: translate(0px, 0px);
   }
 }
 .MsgDeleteButton:hover {
