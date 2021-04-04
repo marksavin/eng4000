@@ -66,7 +66,6 @@ export default function NurseMsgList(props) {
             <div
               className="PhysInboxLabel"
               style={{
-                //margin: "4px",
                 fontSize: "1.5rem",
                 textTransform: "lowercase",
               }}
