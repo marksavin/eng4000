@@ -54,7 +54,7 @@ const headCells = [
     label: "Patient Name",
   },
   {
-    id: "a_problem",
+    id: "s_problem",
     numeric: false,
     disablePadding: false,
     label: "Diagnosis",
@@ -253,7 +253,7 @@ export default function EnhancedTable(props) {
   const [searchState, setSearchState] = useState([
     {
       patient_name: "-",
-      a_problem: "-",
+      s_problem: "-",
       patient_room_id: "-",
       r_priority: "-",
       update_status: "-",
@@ -270,7 +270,7 @@ export default function EnhancedTable(props) {
       patient_name: "-",
       note_patient_id: null,
       date_created: "-",
-      a_problem: "-",
+      s_problem: "-",
       patient_room_id: null,
       r_priority: "-",
       update_status: "-",
@@ -421,7 +421,7 @@ export default function EnhancedTable(props) {
                           {patient.patient_name}
                         </TableCell>
                         <TableCell align="center">
-                          {patient.a_problem}
+                          {patient.s_problem}
                         </TableCell>
                         <TableCell align="center">
                           {patient.patient_room_id}

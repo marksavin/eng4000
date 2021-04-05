@@ -9,7 +9,10 @@ class PhysicianPatientList extends React.Component {
   render() {
     return (
       <div>
-        <PhysicianPatientTable search={this.props.search} />
+        <PhysicianPatientTable
+          physicianID={this.props.physicianID}
+          search={this.props.search}
+        />
       </div>
     );
   }

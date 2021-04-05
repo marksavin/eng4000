@@ -54,7 +54,7 @@ const headCells = [
     label: "Patient Name",
   },
   {
-    id: "a_problem",
+    id: "s_problem",
     numeric: false,
     disablePadding: false,
     label: "Diagnosis",
@@ -77,12 +77,6 @@ const headCells = [
     numeric: false,
     disablePadding: false,
     label: "SBAR history",
-  },
-  {
-    id: "update",
-    numeric: false,
-    disablePadding: false,
-    label: "Update",
   },
 ];
 
@@ -253,7 +247,7 @@ export default function EnhancedTable(props) {
   const [searchState, setSearchState] = useState([
     {
       patient_name: "-",
-      a_problem: "-",
+      s_problem: "-",
       patient_room_id: "-",
       r_priority: "-",
       update_status: "-",
@@ -268,20 +262,19 @@ export default function EnhancedTable(props) {
   const [patients, setPatients] = useState([
     {
       patient_name: "-",
-      note_patient_id: null,
-      date_created: "-",
-      a_problem: "-",
+      patient_id: "-",
+      s_problem: "-",
       patient_room_id: null,
       r_priority: "-",
-      update_status: "-",
-      last_updated: "-",
+      date_created: "-",
+
       SBAR_history: "-",
-      update: "-",
     },
   ]);
 
   useEffect(() => {
-    fetch(`/nurse/viewPatients/${props.physicianID}`)
+    console.log("TABLE", props.physicianID);
+    fetch(`/physician/getPatientList/${props.physicianID}`)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -355,7 +348,6 @@ export default function EnhancedTable(props) {
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, patients.length - page * rowsPerPage);
-
   return (
     <div
       style={{
@@ -419,7 +411,7 @@ export default function EnhancedTable(props) {
                           {patient.patient_name}
                         </TableCell>
                         <TableCell align="center">
-                          {patient.a_problem}
+                          {patient.s_problem}
                         </TableCell>
                         <TableCell align="center">
                           {patient.patient_room_id}
@@ -435,7 +427,7 @@ export default function EnhancedTable(props) {
                             to={{
                               pathname: `/physician/SBARHistory/${patient.patient_name}`,
                               patientName: patient.patient_name,
-                              patientId: patient.note_patient_id,
+                              patientId: patient.patient_id,
                               roomId: patient.patient_room_id,
                             }}
                           >
@@ -443,39 +435,6 @@ export default function EnhancedTable(props) {
                               View SBAR History
                             </Button>
                           </Link>
-                        </TableCell>
-                        <TableCell align="center">
-                          {patient.update_status !== "Update Required" ? (
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              onClick={(event) =>
-                                handleClick(
-                                  event,
-                                  patient.patient_name,
-                                  patient.note_patient_id,
-                                  patient.patient_room_id
-                                )
-                              }
-                            >
-                              {patient.update_status}
-                            </Button>
-                          ) : (
-                            <Button
-                              variant="contained"
-                              color="secondary"
-                              onClick={(event) =>
-                                handleClick(
-                                  event,
-                                  patient.patient_name,
-                                  patient.note_patient_id,
-                                  patient.patient_room_id
-                                )
-                              }
-                            >
-                              {patient.update_status}
-                            </Button>
-                          )}
                         </TableCell>
                       </TableRow>
                     );

@@ -13,4 +13,14 @@ router.get("/getId/:token", async (req, res, next) => {
   }
 });
 
+router.get("/getPatientList/:token", async (req, res, next) => {
+  try {
+    let queryResults = await db.getPatientList(req.params.token);
+    res.json(queryResults);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 module.exports = router;
