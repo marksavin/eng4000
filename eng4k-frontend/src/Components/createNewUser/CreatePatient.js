@@ -131,9 +131,9 @@ export default function CreatePatient(props) {
                     className="weightField cpInput"
                   />
                 </div>
-                <div className="height (cm)">
+                <div className="height">
                   <GeneralCreatePage
-                    title={"Height"}
+                    title={"Height (cm)"}
                     name={"height"}
                     placeholder={"0.0 cm"}
                     type="number"

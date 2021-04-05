@@ -10,6 +10,12 @@ import { Button, TextField } from "@material-ui/core";
 const formSchema = yup.object().shape({
   token: yup.string().required("Token is required*"),
   password: yup.string().required("Password is required*"),
+  verifyPassword: yup.string().when("password", {
+    is: (val) => (val && val.length > 0 ? true : false),
+    then: yup
+      .string()
+      .oneOf([yup.ref("password")], "Both passwords need to be the same"),
+  }),
   fname: yup
     .string()
     .matches(/^[a-zA-Z ]+$/, "Name cannot contain a number")
@@ -77,6 +83,7 @@ class CreatePatient extends React.Component {
           lname: "",
           department: "",
           specialty: "",
+          verifyPassword: "",
         }}
         validationSchema={formSchema}
         onSubmit={(data) => this.handleSubmit(data)}
@@ -99,6 +106,15 @@ class CreatePatient extends React.Component {
                 <GeneralCreatePage
                   title={"Password"}
                   name={"password"}
+                  type="password"
+                  placeholder={"Password"}
+                  className="password cpInput"
+                />
+
+                <GeneralCreatePage
+                  title={"Verify Password"}
+                  name={"verifyPassword"}
+                  type="password"
                   placeholder={"Password"}
                   className="password cpInput"
                 />
