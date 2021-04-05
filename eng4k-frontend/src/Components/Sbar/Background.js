@@ -16,8 +16,8 @@ function Background(props) {
   return (
     <div className="paper-situation">
       <div className="background">B</div>
-      <Paper className={paperstyle.pageContent} elevation={5}>
-        <Grid container>
+      <Paper className={paperstyle.pageContent} elevation={6}>
+        <Grid container align="left">
           <Grid12>
             <InputLabel
               style={{ fontSize: "1.2rem", fontWeight: "700", margin: "20px" }}
@@ -127,7 +127,7 @@ function Background(props) {
               The Patient is not or is on oxygen:
             </InputLabel>
           </Grid12>
-          <Grid12>
+          <Grid item xs={12} md={6}>
             <Inputgroup
               label="(%)"
               name="s_o2"
@@ -135,6 +135,8 @@ function Background(props) {
               onBlur={props.handleInput}
               text="The patient has been on "
             ></Inputgroup>
+          </Grid>
+          <Grid item xs={12} md={6}>
             <Inputgroup
               label="(hours)"
               name="b_o2_time"
@@ -142,7 +144,7 @@ function Background(props) {
               onBlur={props.handleInput}
               text="For how long:"
             ></Inputgroup>
-          </Grid12>
+          </Grid>
           <Grid12>
             <Checkbox
               label="The oximeter does not detect a good puslse and is giving erratic readings."

@@ -23,8 +23,8 @@ function Situation(props) {
   return (
     <div className="paper-situation">
       <div className="situation">S</div>
-      <Paper className={paperstyle.pageContent} elevation={5}>
-        <Grid container>
+      <Paper className={paperstyle.pageContent} elevation={6}>
+        <Grid container align="left">
           <Grid item xs={12} md={6}>
             <Inputgroup
               label="Nurse Name"
@@ -70,12 +70,12 @@ function Situation(props) {
               text="The problem I am calling about is: "
             ></Inputgroup>
           </Grid12>
-          <Grid item lg={4} xl={4}>
+          <Grid item xs={12} lg={4} xl={4} align="left">
             <InputLabel style={{ width: "100%" }}>
               I have assessed the patient personaly: Vital signs are:
             </InputLabel>
           </Grid>
-          <Grid item lg={4} xl={2}>
+          <Grid item xs={12} lg={4} xl={2}>
             <TextFieldSingle
               label="Blood Pressure"
               name="s_BP"
@@ -83,7 +83,7 @@ function Situation(props) {
               onBlur={props.handleInput}
             />
           </Grid>
-          <Grid item lg={4} xl={2}>
+          <Grid item xs={12} lg={4} xl={2}>
             <TextFieldSingle
               label="Pulse"
               name="s_pulse"
@@ -91,7 +91,7 @@ function Situation(props) {
               onBlur={props.handleInput}
             />
           </Grid>
-          <Grid item lg={4} xl={2}>
+          <Grid item xs={12} lg={4} xl={2}>
             <TextFieldSingle
               label="Respiration"
               name="s_respiration"
@@ -99,7 +99,7 @@ function Situation(props) {
               onBlur={props.handleInput}
             />
           </Grid>
-          <Grid item lg={4} xl={2}>
+          <Grid item xs={12} lg={4} xl={2}>
             <TextFieldSingle
               label="Temperature"
               name="s_temperature"
@@ -107,7 +107,7 @@ function Situation(props) {
               onBlur={props.handleInput}
             />
           </Grid>
-          <Grid item lg={4} xl={3}>
+          <Grid item xs={12} lg={4} xl={3}>
             <TextFieldSingle
               label="O2 sat"
               name="s_o2"

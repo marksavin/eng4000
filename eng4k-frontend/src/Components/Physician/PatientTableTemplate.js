@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import PropTypes from "prop-types";
 import clsx from "clsx";
@@ -14,11 +14,8 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import Button from "@material-ui/core/Button";
@@ -58,24 +55,17 @@ const headCells = [
   },
   { id: "a_problem", numeric: false, disablePadding: false, label: "Type" },
   {
-    id: "note_room_id",
+    id: "patient_room_id",
     numeric: true,
     disablePadding: false,
     label: "Room Number",
   },
   { id: "r_priority", numeric: false, disablePadding: false, label: "Urgency" },
   {
-    id: "view_history",
+    id: "date_created",
     numeric: false,
     disablePadding: false,
-    label: "Last Updated",
-  },
-
-  {
-    id: "nurse",
-    numeric: false,
-    disablePadding: false,
-    label: "Nurse",
+    label: "Last Updated (Date and Time)",
   },
   {
     id: "SBAR_history",
@@ -83,18 +73,16 @@ const headCells = [
     disablePadding: false,
     label: "SBAR history",
   },
+  {
+    id: "update",
+    numeric: false,
+    disablePadding: false,
+    label: "Update",
+  },
 ];
 
 function EnhancedTableHead(props) {
-  const {
-    classes,
-    onSelectAllClick,
-    order,
-    orderBy,
-    numSelected,
-    rowCount,
-    onRequestSort,
-  } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -113,7 +101,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.id !== "patient_name" ? "right" : "left"}
+            align={headCell.id !== "patient_name" ? "center" : "left"}
             padding={headCell.disablePadding ? "none" : "default"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -231,6 +219,7 @@ const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 750,
     fontSize: "5rem",
+    tableLayout: "fixed",
   },
   visuallyHidden: {
     border: 0,
@@ -251,52 +240,64 @@ export default function EnhancedTable(props) {
   const [orderBy, setOrderBy] = React.useState("patient_name");
   const [selected, setSelected] = React.useState([]);
   const [patientName, setPatientName] = React.useState("");
+  const [patientId, setPatientId] = React.useState(0);
+  const [patientRoom, setPatientRoom] = React.useState("");
   const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+  const [searchState, setSearchState] = useState([
+    {
+      patient_name: "-",
+      a_problem: "-",
+      patient_room_id: "-",
+      r_priority: "-",
+      update_status: "-",
+      last_updated: "-",
+      SBAR_history: "-",
+      update: "-",
+    },
+  ]);
 
   const history = useHistory();
 
   const [patients, setPatients] = useState([
     {
       patient_name: "-",
+      note_patient_id: null,
+      date_created: "-",
       a_problem: "-",
-      note_room_id: "-",
+      patient_room_id: null,
       r_priority: "-",
       update_status: "-",
       last_updated: "-",
-      nurse: "placeholder",
       SBAR_history: "-",
+      update: "-",
     },
   ]);
 
   useEffect(() => {
-    if (props.search === "") {
-      fetch(`/nurse/viewPatients/1`)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          } else {
-            console.log("network response was bad");
-          }
-        })
-        .then((result) => {
-          if (result !== undefined && result.length !== 0) {
-            setPatients(result);
-          }
-        });
-    } else {
-      const searchedPatients = patients.filter((patient) =>
-        patient.patient_name
-          .toLowerCase()
-          .startsWith(props.search.toLowerCase())
-      );
-      setPatients(searchedPatients);
+    fetch(`/nurse/viewPatients/${props.nurseId}`)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          console.log("network response was bad");
+        }
+      })
+      .then((result) => {
+        if (result !== undefined && result.length !== 0) {
+          setPatients(result);
+          setSearchState(result);
+        }
+      });
+  }, []);
 
-      // patients
-      //   .filter((patient) => patient.patient_name.includes(props.search))
-      //   .map((filteredPatient) => setPatients(filteredPatient));
-    }
+  useEffect(() => {
+    const searchedPatients = searchState.filter((patient) =>
+      patient.patient_name.toLowerCase().startsWith(props.search.toLowerCase())
+    );
+    console.log(searchedPatients);
+    setPatients(searchedPatients);
   }, [props.search]);
 
   const handleRequestSort = (event, property) => {
@@ -314,7 +315,7 @@ export default function EnhancedTable(props) {
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
+  const handleClick = (event, name, id, room_id) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
     setPatientName(name);
@@ -332,7 +333,10 @@ export default function EnhancedTable(props) {
       );
     }
 
+    console.log(name, id, room_id);
     setPatientName(name);
+    setPatientId(id);
+    setPatientRoom(room_id);
     setSelected(newSelected);
   };
 
@@ -340,16 +344,10 @@ export default function EnhancedTable(props) {
     if (selected.length > 0) {
       setTimeout(function () {
         //your code to be executed after 1 second
-        history.push(`/nurse/${patientName}`);
+        history.push(`/nurse/${patientName}/${patientId}/${patientRoom}`);
       }, 1000);
     }
   });
-
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, patients.length - page * rowsPerPage);
@@ -357,7 +355,9 @@ export default function EnhancedTable(props) {
   return (
     <div
       style={{
-        position: "absolute",
+        // position: "absolute",
+        margin: "auto",
+        marginTop: "15rem",
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
@@ -381,7 +381,7 @@ export default function EnhancedTable(props) {
             <Table
               className={classes.table}
               aria-labelledby="tableTitle"
-              size={dense ? "small" : "medium"}
+              size={"medium"}
               aria-label="enhanced table"
             >
               <EnhancedTableHead
@@ -395,18 +395,15 @@ export default function EnhancedTable(props) {
               />
               <TableBody>
                 {stableSort(patients, getComparator(order, orderBy)).map(
-                  (patients, index) => {
-                    const isItemSelected = isSelected(patients.patient_name);
+                  (patient, index) => {
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
                       <TableRow
                         hover
                         role={"checkbox"}
-                        aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={patients.patient_name}
-                        selected={isItemSelected}
+                        key={patient.patient_name}
                       >
                         <TableCell padding="checkbox"></TableCell>
                         <TableCell
@@ -415,35 +412,73 @@ export default function EnhancedTable(props) {
                           scope="patients"
                           padding="none"
                         >
-                          {patients.patient_name}
+                          {patient.patient_name}
                         </TableCell>
-                        <TableCell align="right">
-                          {patients.a_problem}
+                        <TableCell align="center">
+                          {patient.a_problem}
                         </TableCell>
-                        <TableCell align="right">
-                          {patients.note_room_id}
+                        <TableCell align="center">
+                          {patient.patient_room_id}
                         </TableCell>
-                        <TableCell align="right">
-                          {patients.r_priority}
+                        <TableCell align="center">
+                          {patient.r_priority}
                         </TableCell>
-                        <TableCell align="right">
-                          {patients.update_status}
+                        <TableCell align="center">
+                          {patient.date_created}
                         </TableCell>
-                        <TableCell align="right">
-                        {patients.nurse}
+                        <TableCell align="center">
+                          <Link
+                            to={{
+                              pathname: `/nurse/SBARHistory/${patient.patient_name}`,
+                              patientName: patient.patient_name,
+                              patientId: patient.note_patient_id,
+                              roomId: patient.patient_room_id,
+                            }}
+                          >
+                            <Button variant="contained" color="primary">
+                              View SBAR History
+                            </Button>
+                          </Link>
                         </TableCell>
-                        <TableCell align="right">
-                        <Button variant="contained" color="primary">
-                            View SBAR History
-                          </Button>
-                        
+                        <TableCell align="center">
+                          {patient.update_status !== "Update Required" ? (
+                            <Button
+                              variant="contained"
+                              color="primary"
+                              onClick={(event) =>
+                                handleClick(
+                                  event,
+                                  patient.patient_name,
+                                  patient.note_patient_id,
+                                  patient.patient_room_id
+                                )
+                              }
+                            >
+                              {patient.update_status}
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="contained"
+                              color="secondary"
+                              onClick={(event) =>
+                                handleClick(
+                                  event,
+                                  patient.patient_name,
+                                  patient.note_patient_id,
+                                  patient.patient_room_id
+                                )
+                              }
+                            >
+                              {patient.update_status}
+                            </Button>
+                          )}
                         </TableCell>
                       </TableRow>
                     );
                   }
                 )}
                 {emptyRows > 0 && (
-                  <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
+                  <TableRow style={{ height: 25 * emptyRows }}>
                     <TableCell colSpan={6} />
                   </TableRow>
                 )}
@@ -451,10 +486,6 @@ export default function EnhancedTable(props) {
             </Table>
           </TableContainer>
         </Paper>
-        <FormControlLabel
-          control={<Switch checked={dense} onChange={handleChangeDense} />}
-          label="Dense padding"
-        />
       </div>
     </div>
   );

@@ -107,6 +107,37 @@ adminApiCall.addPhysician = (body, hashedPassword, user_type) => {
 
 adminApiCall.addFamily = (body, hashedPassword, user_type) => {};
 
+adminApiCall.getNurseList = (token) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `SELECT nurse_id FROM capstonedb.nurse;`,
+      [token],
+      function (error, results, fields) {
+        if (error) {
+          return reject(error);
+        }
+        return resolve(results);
+      }
+    );
+  });
+};
+
+adminApiCall.getPhysicianList = (token) => {
+  return new Promise((resolve, reject) => {
+    pool.query(
+      `SELECT physician_id FROM capstonedb.physician;`,
+      [token],
+      function (error, results, fields) {
+        console.log(results);
+        if (error) {
+          return reject(error);
+        }
+        return resolve(results);
+      }
+    );
+  });
+};
+
 adminApiCall.unlockAccount = (token) => {
   return new Promise((resolve, reject) => {
     pool.query(

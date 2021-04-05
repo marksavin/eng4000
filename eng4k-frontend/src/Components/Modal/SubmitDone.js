@@ -22,8 +22,6 @@ function SubmitDone(props) {
   const buttonClass = buttonStyles();
   const { onClose, selectedValue, open } = props;
 
-  console.log(props);
-
   const handleClose = () => {
     onClose(selectedValue);
   };

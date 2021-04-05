@@ -10,25 +10,25 @@ const salt = 10;
 var passport = require("passport");
 
 // //NEED TO CHECK IF USER ALREADY EXISTS BEFORE REGISTERING
-// router.post("/register", async (req, res, next) => {
-//   console.log(req.body);
-//   bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     try {
-//       let queryResults = db.registerAccount(
-//         req.body.token,
-//         hashedPassword,
-//         req.body.user_type
-//       );
-//       res.json(queryResults);
-//     } catch (e) {
-//       console.log(e);
-//       res.sendStatus(500);
-//     }
-//   });
-// });
+router.post("/register", async (req, res, next) => {
+  console.log(req.body);
+  bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
+    if (err) {
+      console.log(err);
+    }
+    try {
+      let queryResults = db.registerAccount(
+        req.body.token,
+        hashedPassword,
+        req.body.user_type
+      );
+      res.json(queryResults);
+    } catch (e) {
+      console.log(e);
+      res.sendStatus(500);
+    }
+  });
+});
 
 router.post("/resetPassword", async (req, res, next) => {
   bcrypt.hash(req.body.newPassword, salt, (err, hashedPassword) => {

@@ -17,7 +17,7 @@ function Recommendation(props) {
     <div className="paper-situation">
       <div className="recommendation">R</div>
       <Paper className={paperstyle.pageContent} elevation={6}>
-        <Grid container>
+        <Grid container align="left">
           <Grid12>
             <Inputgroup
               label="What needs to be done"
@@ -46,7 +46,7 @@ function Recommendation(props) {
           </Grid12>
           <Grid12>
             <Inputgroup
-              label="CXR, ABG, EKG, CBC, or BMP"
+              label="(i.e CXR, ABG, EKG, CBC, BMP)"
               name="r_test_needed"
               value={props.recommendation.r_test_needed}
               onBlur={props.handleInput}
@@ -55,7 +55,11 @@ function Recommendation(props) {
           </Grid12>
           <Grid12>
             <InputLabel
-              style={{ fontSize: "1.2rem", fontWeight: "700", margin: "20px" }}
+              style={{
+                fontSize: "1.2rem",
+                fontWeight: "700",
+                margin: "20px 0",
+              }}
             >
               If a change in treatment is ordered then ask:
             </InputLabel>

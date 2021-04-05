@@ -15,9 +15,9 @@ function Assessment(props) {
 
   return (
     <div className="paper-situation">
-    <div className="assessment">A</div>
-      <Paper className={paperstyle.pageContent} elevation={5}>
-        <Grid container>
+      <div className="assessment">A</div>
+      <Paper className={paperstyle.pageContent} elevation={6}>
+        <Grid container justify="flex-start" align="left">
           <Grid item xs={12}>
             <Inputgroup
               label="Problem"
@@ -27,12 +27,12 @@ function Assessment(props) {
               text="This is what I think the problem is:"
             ></Inputgroup>
           </Grid>
-          <Grid item lg={4} xl={2}>
+          <Grid item xs={12} lg={4} xl={2} align="left">
             <InputLabel style={{ width: "100%" }}>
               The problem seems to be:
             </InputLabel>
           </Grid>
-          <Grid item lg={4} xl={2}>
+          <Grid item xs={6} lg={4} xl={2}>
             <Checkbox
               label="Cardiac"
               name="a_problem_cardiac"
@@ -40,7 +40,7 @@ function Assessment(props) {
               onBlur={props.handleInput}
             ></Checkbox>
           </Grid>
-          <Grid item lg={4} xl={2}>
+          <Grid item xs={6} lg={4} xl={2}>
             <Checkbox
               label="Infection"
               name="a_problem_infection"
@@ -48,7 +48,7 @@ function Assessment(props) {
               onBlur={props.handleInput}
             ></Checkbox>
           </Grid>
-          <Grid item lg={4} xl={2}>
+          <Grid item xs={6} lg={4} xl={2}>
             <Checkbox
               label="Neurologic"
               name="a_problem_neurologic"
@@ -56,7 +56,7 @@ function Assessment(props) {
               onBlur={props.handleInput}
             ></Checkbox>
           </Grid>
-          <Grid item lg={4} xl={2}>
+          <Grid item xs={6} lg={4} xl={2}>
             <Checkbox
               label="Respitory"
               name="a_problem_respitory"
@@ -92,6 +92,6 @@ function Assessment(props) {
       </Paper>
     </div>
   );
-};
+}
 
 export default Assessment;

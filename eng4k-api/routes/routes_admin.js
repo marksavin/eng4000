@@ -60,6 +60,26 @@ router.post("/addFamily", (req, res, next) => {
   });
 });
 
+router.get("/getNurseList", async (req, res, next) => {
+  try {
+    let getNurseList = await db.getNurseList();
+    res.json(getNurseList);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
+router.get("/getPhysicianList", async (req, res, next) => {
+  try {
+    let getPhysicialList = await db.getPhysicianList();
+    res.json(getPhysicialList);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 router.post("/unlockAccount", async (req, res, next) => {
   try {
     let queryResults = await db.unlockAccount(req.body.token);

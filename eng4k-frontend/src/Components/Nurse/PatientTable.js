@@ -290,12 +290,13 @@ export default function EnhancedTable(props) {
           setSearchState(result);
         }
       });
-  }, [props]);
+  }, []);
 
   useEffect(() => {
     const searchedPatients = searchState.filter((patient) =>
       patient.patient_name.toLowerCase().startsWith(props.search.toLowerCase())
     );
+    console.log(searchedPatients);
     setPatients(searchedPatients);
   }, [props.search]);
 
