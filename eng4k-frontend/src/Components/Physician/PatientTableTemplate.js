@@ -241,8 +241,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnhancedTable(props) {
   const classes = useStyles();
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("patient_name");
+  const [order, setOrder] = React.useState("desc");
+  const [orderBy, setOrderBy] = React.useState("r_priority");
   const [selected, setSelected] = React.useState([]);
   const [patientName, setPatientName] = React.useState("");
   const [patientId, setPatientId] = React.useState(0);
