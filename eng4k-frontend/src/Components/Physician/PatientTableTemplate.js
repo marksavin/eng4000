@@ -295,7 +295,7 @@ export default function EnhancedTable(props) {
           setSearchState(result);
         }
       });
-  }, []);
+  }, [props]);
 
   useEffect(() => {
     const searchedPatients = searchState.filter((patient) =>

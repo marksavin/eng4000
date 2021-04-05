@@ -281,6 +281,7 @@ export default function EnhancedTable(props) {
   ]);
 
   useEffect(() => {
+    console.log(props.nurseId);
     fetch(`/nurse/viewPatients/${props.nurseId}`)
       .then((res) => {
         if (res.ok) {
@@ -295,7 +296,7 @@ export default function EnhancedTable(props) {
           setSearchState(result);
         }
       });
-  }, []);
+  }, [props]);
 
   useEffect(() => {
     const searchedPatients = searchState.filter((patient) =>

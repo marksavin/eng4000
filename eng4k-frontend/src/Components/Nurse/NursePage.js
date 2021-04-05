@@ -10,7 +10,7 @@ import ContactPhysicanCard from "./ContactPhysicianCard.js";
 import HistoryTable from "./HistoryTable.js";
 import DialogTest from "./notify/DialogBox";
 
-import {createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/";
 
 import ViewSbar from "../Sbar/ViewSbar/ViewSbar.js";
 
@@ -26,7 +26,6 @@ const NursePage = (props) => {
   const [nurseId, setNurseId] = useState("");
   const [nurseName, setNurseName] = useState("");
   const [showDialog, setShowDialog] = useState(false);
-
 
   useEffect(() => {
     fetch(`/nurse/getId/${props.userToken}`)
@@ -46,7 +45,6 @@ const NursePage = (props) => {
   }, [props]);
 
   function handleDialogChange(e) {
-
     setShowDialog(e);
   }
 
