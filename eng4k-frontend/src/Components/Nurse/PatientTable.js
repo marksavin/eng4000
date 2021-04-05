@@ -53,7 +53,12 @@ const headCells = [
     disablePadding: true,
     label: "Patient Name",
   },
-  { id: "a_problem", numeric: false, disablePadding: false, label: "Type" },
+  {
+    id: "a_problem",
+    numeric: false,
+    disablePadding: false,
+    label: "Diagnosis",
+  },
   {
     id: "patient_room_id",
     numeric: true,
@@ -236,8 +241,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnhancedTable(props) {
   const classes = useStyles();
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("patient_name");
+  const [order, setOrder] = React.useState("desc");
+  const [orderBy, setOrderBy] = React.useState("r_priority");
   const [selected, setSelected] = React.useState([]);
   const [patientName, setPatientName] = React.useState("");
   const [patientId, setPatientId] = React.useState(0);

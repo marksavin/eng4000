@@ -97,11 +97,7 @@ const NavBar = (props) => {
             <li className="navBar-li">
               <NurseMsgList inbox={nurseInbox} />
             </li>
-            <li className="navBar-li">
-              <a href="#" className="navbar-links">
-                Help
-              </a>
-            </li>
+
             <li className="navBar-li">
               <button className="logout" onClick={handleLogout}>
                 Logout

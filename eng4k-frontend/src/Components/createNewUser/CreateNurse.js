@@ -4,12 +4,17 @@ import * as yup from "yup";
 import GeneralCreatePage from "./GeneralCreatePage.js";
 import { Link } from "react-router-dom";
 import SubmitDone from "../Modal/SubmitDone";
-
 import { Button, TextField } from "@material-ui/core";
 
 const formSchema = yup.object().shape({
   token: yup.string().required("Token is required*"),
   password: yup.string().required("Password is required*"),
+  verifyPassword: yup.string().when("password", {
+    is: (val) => (val && val.length > 0 ? true : false),
+    then: yup
+      .string()
+      .oneOf([yup.ref("password")], "Both passwords need to be the same"),
+  }),
   fname: yup
     .string()
     .matches(/^[a-zA-Z ]+$/, "Name cannot contain a number")
@@ -21,6 +26,7 @@ const formSchema = yup.object().shape({
   department: yup.string().required("Department is required*"),
   specialty: yup.string().required("Specialty is required*"),
 });
+
 class CreatePatient extends React.Component {
   constructor(props) {
     super(props);
@@ -73,6 +79,7 @@ class CreatePatient extends React.Component {
         initialValues={{
           token: "",
           password: "",
+          verifyPassword: "",
           fname: "",
           lname: "",
           department: "",
@@ -99,6 +106,15 @@ class CreatePatient extends React.Component {
                 <GeneralCreatePage
                   title={"Password"}
                   name={"password"}
+                  type="password"
+                  placeholder={"Password"}
+                  className="password cpInput"
+                />
+
+                <GeneralCreatePage
+                  title={"Verify Password"}
+                  name={"verifyPassword"}
+                  type="password"
                   placeholder={"Password"}
                   className="password cpInput"
                 />
