@@ -2,10 +2,9 @@ import React from "react";
 import PhysicianPatientTable from "./PatientTableTemplate";
 
 class PhysicianPatientList extends React.Component {
-
-constructor(props){
-  super(props);
-}
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (

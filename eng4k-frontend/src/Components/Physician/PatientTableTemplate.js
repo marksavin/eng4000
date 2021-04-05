@@ -53,7 +53,12 @@ const headCells = [
     disablePadding: true,
     label: "Patient Name",
   },
-  { id: "a_problem", numeric: false, disablePadding: false, label: "Type" },
+  {
+    id: "a_problem",
+    numeric: false,
+    disablePadding: false,
+    label: "Diagnosis",
+  },
   {
     id: "patient_room_id",
     numeric: true,
