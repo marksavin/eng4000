@@ -67,7 +67,7 @@ export default function NurseMsgList(props) {
               className="PhysInboxLabel"
               style={{
                 fontSize: "1.5rem",
-                textTransform: "lowercase",
+                textTransform: "none",
               }}
             >
               Outbox
