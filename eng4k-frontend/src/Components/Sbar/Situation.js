@@ -23,7 +23,7 @@ function Situation(props) {
   return (
     <div className="paper-situation">
       <div className="situation">S</div>
-      <Paper className={paperstyle.pageContent} elevation={6}>
+      <Paper className={paperstyle.pageContent} elevation={0}>
         <Grid container align="left">
           <Grid item xs={12} md={6}>
             <Inputgroup

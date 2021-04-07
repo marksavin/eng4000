@@ -67,7 +67,7 @@ const PhysicianDashBoard = (props) => {
         <Route path="/physician/SBARhistory/:patientName">
           <Header title={`SBAR History of ${props.location.patientName}`} />
           <MuiThemeProvider theme={theme}>
-            <div className="historyContainer">
+            <div className="historyContainer" style={{ width: "100%" }}>
               <HistoryTable
                 search={props.search}
                 nurseId={physicianId}

@@ -14,10 +14,6 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
 import Button from "@material-ui/core/Button";
 
 function descendingComparator(a, b, orderBy) {
@@ -364,7 +360,7 @@ export default function EnhancedTable(props) {
           width: "80%",
         }}
       >
-        <Paper className={classes.paper} elevation={4}>
+        <Paper className={classes.paper} elevation={0}>
           <EnhancedTableToolbar
             numSelected={selected.length}
             name={patientName}

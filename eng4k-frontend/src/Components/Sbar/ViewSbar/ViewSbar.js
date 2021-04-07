@@ -21,13 +21,13 @@ export default function ViewSbar(props) {
       <Header title={`Patient: ${props.patientName}`} />
       <Header title={`Created on: ${props.dateCreated}`} />
       <div className="paper-container-1">
-        <Paper className={classes.pageContent} elevation={4}>
-          <ViewSbarForm
-            patientId={props.patientId}
-            nurseName={props.nurseName}
-            dateCreated={props.dateCreated}
-          />
-        </Paper>
+        {/* <Paper className={classes.pageContent} elevation={4}> */}
+        <ViewSbarForm
+          patientId={props.patientId}
+          nurseName={props.nurseName}
+          dateCreated={props.dateCreated}
+        />
+        {/* </Paper> */}
       </div>
     </div>
   );

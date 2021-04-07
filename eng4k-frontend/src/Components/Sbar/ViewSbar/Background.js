@@ -16,7 +16,7 @@ function Background(props) {
   return (
     <div className="paper-situation">
       <div className="background">B</div>
-      <Paper className={paperstyle.pageContent} elevation={5}>
+      <Paper className={paperstyle.pageContent} elevation={0}>
         <Grid container>
           <Grid12>
             <InputLabel

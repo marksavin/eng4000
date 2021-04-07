@@ -85,7 +85,10 @@ export default function CreatePatient(props) {
     >
       {({ handleSubmit }) => {
         return (
-          <form onSubmit={handleSubmit} className="form">
+          <form
+            onSubmit={handleSubmit}
+            className="form"
+          >
             <section className="patientForm">
               <div className="promptMessage">
                 <h3>Please Enter the Following Information:</h3>

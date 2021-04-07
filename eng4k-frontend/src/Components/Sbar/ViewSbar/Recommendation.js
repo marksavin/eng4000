@@ -16,7 +16,7 @@ function Recommendation(props) {
   return (
     <div className="paper-situation">
       <div className="recommendation">R</div>
-      <Paper className={paperstyle.pageContent} elevation={6}>
+      <Paper className={paperstyle.pageContent} elevation={0}>
         <Grid container>
           <Grid12>
             <Inputgroup
