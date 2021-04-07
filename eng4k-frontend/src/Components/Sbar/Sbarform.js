@@ -10,7 +10,7 @@ import SubmitDone from "../Modal/SubmitDone";
 //CHECK NULL FIELDS TO SEE IF YOU CAN JUST MAKE THEM EMPTY STRINGS. MYSQL DOESNT LIKE NULL
 const situation = {
   note_id: "",
-  note_patient_id: 0,
+  note_patient_id: "",
   note_nurse_id: 0,
   note_room_id: -1,
   date_created: "",
@@ -135,6 +135,8 @@ export default function Sbarform(props) {
       handleClickOpen();
     }
   };
+
+  console.log(props.patientId);
 
   const creatNewSbarNote = useCallback(() => {
     fetch(`/nurse/addNewSBAR/${props.patientId}`, {

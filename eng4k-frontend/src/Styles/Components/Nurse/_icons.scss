@@ -21,6 +21,8 @@
 
 .situation {
   font-size: 20vw;
+  //width: 281.6px;
+  //height: auto;
   z-index: 5;
   color: $base-color;
 }
@@ -34,8 +36,8 @@
 }
 
 .assessment {
-  position: relative;
-  font-size: 17vw;
+  //position: relative;
+  font-size: 16.5vw;
   width: 281.6px;
   height: auto;
   z-index: 5;
@@ -43,7 +45,7 @@
 }
 
 .recommendation {
-  font-size: 17vw;
+  font-size: 16.5vw;
   width: 281.6px;
   height: auto;
   z-index: 5;

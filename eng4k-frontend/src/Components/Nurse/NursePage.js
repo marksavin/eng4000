@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Switch, Route } from "react-router-dom";
 
 import Navigation from "../NavBar/NavBar.js";
 import PatientTable from "./PatientTable.js";
@@ -103,10 +103,10 @@ const NursePage = (props) => {
             dateCreated={props.location.dateCreated}
           />
         </Route>
-
+        {/* 
         <Route path="/nurse/:patientName/:patientId">
           <Sbar nurseId={nurseId} nurseName="Mark Apple" />
-        </Route>
+        </Route> */}
       </Switch>
     </div>
   );

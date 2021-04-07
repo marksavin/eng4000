@@ -53,17 +53,18 @@ nurseApiCalls.currentPatientList = (id) => {
 
 nurseApiCalls.addNewSbar = (id, body) => {
   console.log("patient id:", body.note_patient_id);
-  return new Promise((resolve, reject) => {
-    pool.query(
-      `SELECT note_id FROM capstonedb.sbar_note WHERE note_patient_id =?;`,
+  if ((note_patient_id !== null) | (note_patient_id !== undefined)) {
+    return new Promise((resolve, reject) => {
+      pool.query(
+        `SELECT note_id FROM capstonedb.sbar_note WHERE note_patient_id =?;`,
 
-      [body.note_patient_id.toString()],
-      (error, result) => {
-        console.log("new query::", result);
-        if (error) return reject(error);
+        [body.note_patient_id.toString()],
+        (error, result) => {
+          console.log("new query::", result);
+          if (error) return reject(error);
 
-        pool.query(
-          `UPDATE capstonedb.sbar_note
+          pool.query(
+            `UPDATE capstonedb.sbar_note
         SET 
         note_nurse_id = ?,
         date_created = CURRENT_TIMESTAMP(),
@@ -110,133 +111,135 @@ nurseApiCalls.addNewSbar = (id, body) => {
         r_problem_persist_contact = ?,
         sbar_note_initial =  0
         WHERE note_id = ?;`,
-          [
-            body.note_nurse_id,
-            body.s_problem,
-            body.s_code_status,
-            body.s_BP,
-            body.s_pulse,
-            body.s_respiration,
-            body.s_temperature,
-            `${body.s_o2} %`,
-            body.s_concern_bp,
-            body.s_concern_pulse,
-            body.s_concern_temperature,
-            body.s_concern_respiration,
-            body.b_awareness_alert_oriented,
-            body.b_awareness_confused_cooperative,
-            body.b_awareness_non_coop_agit_combative,
-            body.b_awareness_lethargic,
-            body.b_awareness_stuporous,
-            body.b_awareness_comatose,
-            body.b_skin_warm_dry,
-            body.b_skin_pale,
-            body.b_skin_mottled,
-            body.b_skin_diaphoretic,
-            body.b_skin_extremities_cold,
-            body.b_skin_extremities_warm,
-            `${body.b_o2_percent} %`,
-            `${body.b_o2_time} hours`,
-            body.b_oximeter_detection,
-            body.a_problem,
-            body.a_problem_cardiac,
-            body.a_problem_infection,
-            body.a_problem_neurologic,
-            body.a_problem_respitory,
-            body.a_problem_unsure_deterioriating,
-            body.a_unstable,
-            body.a_arrest,
-            body.r_request,
-            parseInt(body.r_priority),
-            body.r_patient_family_code_status,
-            body.r_test_needed,
-            body.r_freq_vital_signs,
-            body.r_time_problem_will_last,
-            body.r_problem_persist_contact,
-            result[0].note_id,
-          ],
-          (err, result) => {
-            console.log("woooooooooow", result);
-            if (err) {
-              return reject(err);
-            }
-            console.log("first query", body.note_patient_id);
-            pool.query(
-              `SELECT A.patient_name, A.patient_date_of_birth, B.treats_physician_id, A.patient_room_id 
+            [
+              body.note_nurse_id,
+              body.s_problem,
+              body.s_code_status,
+              body.s_BP,
+              body.s_pulse,
+              body.s_respiration,
+              body.s_temperature,
+              `${body.s_o2} %`,
+              body.s_concern_bp,
+              body.s_concern_pulse,
+              body.s_concern_temperature,
+              body.s_concern_respiration,
+              body.b_awareness_alert_oriented,
+              body.b_awareness_confused_cooperative,
+              body.b_awareness_non_coop_agit_combative,
+              body.b_awareness_lethargic,
+              body.b_awareness_stuporous,
+              body.b_awareness_comatose,
+              body.b_skin_warm_dry,
+              body.b_skin_pale,
+              body.b_skin_mottled,
+              body.b_skin_diaphoretic,
+              body.b_skin_extremities_cold,
+              body.b_skin_extremities_warm,
+              `${body.b_o2_percent} %`,
+              `${body.b_o2_time} hours`,
+              body.b_oximeter_detection,
+              body.a_problem,
+              body.a_problem_cardiac,
+              body.a_problem_infection,
+              body.a_problem_neurologic,
+              body.a_problem_respitory,
+              body.a_problem_unsure_deterioriating,
+              body.a_unstable,
+              body.a_arrest,
+              body.r_request,
+              parseInt(body.r_priority),
+              body.r_patient_family_code_status,
+              body.r_test_needed,
+              body.r_freq_vital_signs,
+              body.r_time_problem_will_last,
+              body.r_problem_persist_contact,
+              result[0].note_id,
+            ],
+            (err, result) => {
+              if (err) {
+                return reject(err);
+              }
+              console.log("first query", body.note_patient_id);
+              pool.query(
+                `SELECT A.patient_name, A.patient_date_of_birth, B.treats_physician_id, A.patient_room_id 
           FROM patient as A INNER JOIN treats_physician_patient as B ON A.patient_id = B.treats_patient_id 
           WHERE B.treats_patient_id =?;`,
-              [body.note_patient_id.toString()],
-              (error, results, fields) => {
-                if (error) {
-                  return reject(error);
-                }
-                console.log("These are the results: ", results);
-                pool.query(
-                  `INSERT INTO capstonedb.sbar_note_archive
-              VALUES(CURRENT_TIMESTAMP(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);`,
-                  [
-                    body.note_patient_id.toString(),
-                    results[0].patient_name,
-                    results[0].patient_date_of_birth,
-                    body.note_nurse_id,
-                    results[0].treats_physician_id,
-                    results[0].patient_room_id,
-                    body.s_problem,
-                    body.s_code_status,
-                    body.s_BP,
-                    body.s_pulse,
-                    body.s_respiration,
-                    body.s_temperature,
-                    `${body.s_o2} mmHg`,
-                    body.s_concern_bp,
-                    body.s_concern_pulse,
-                    body.s_concern_temperature,
-                    body.s_concern_respiration,
-                    body.b_awareness_alert_oriented,
-                    body.b_awareness_confused_cooperative,
-                    body.b_awareness_non_coop_agit_combative,
-                    body.b_awareness_lethargic,
-                    body.b_awareness_stuporous,
-                    body.b_awareness_comatose,
-                    body.b_skin_warm_dry,
-                    body.b_skin_pale,
-                    body.b_skin_mottled,
-                    body.b_skin_diaphoretic,
-                    body.b_skin_extremities_cold,
-                    body.b_skin_extremities_warm,
-                    `${body.b_o2_percent} %`,
-                    `${body.b_o2_time} hours`,
-                    body.b_oximeter_detection,
-                    body.a_problem,
-                    body.a_problem_cardiac,
-                    body.a_problem_infection,
-                    body.a_problem_neurologic,
-                    body.a_problem_respitory,
-                    body.a_problem_unsure_deterioriating,
-                    body.a_unstable,
-                    body.a_arrest,
-                    body.r_request,
-                    parseInt(body.r_priority),
-                    body.r_patient_family_code_status,
-                    body.r_test_needed,
-                    body.r_freq_vital_signs,
-                    body.r_time_problem_will_last,
-                    body.r_problem_persist_contact,
-                  ],
-                  function (error, results, fields) {
-                    if (error) {
-                      return reject(error);
-                    }
-                    return resolve(results);
+                [body.note_patient_id.toString()],
+                (error, results, fields) => {
+                  if (error) {
+                    return reject(error);
                   }
-                );
-              }
-            );
-          }
-        );
-      }
-    );
-  });
+                  console.log("These are the results: ", results);
+                  pool.query(
+                    `INSERT INTO capstonedb.sbar_note_archive
+              VALUES(CURRENT_TIMESTAMP(),?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);`,
+                    [
+                      body.note_patient_id.toString(),
+                      results[0].patient_name,
+                      results[0].patient_date_of_birth,
+                      body.note_nurse_id,
+                      results[0].treats_physician_id,
+                      results[0].patient_room_id,
+                      body.s_problem,
+                      body.s_code_status,
+                      body.s_BP,
+                      body.s_pulse,
+                      body.s_respiration,
+                      body.s_temperature,
+                      `${body.s_o2} mmHg`,
+                      body.s_concern_bp,
+                      body.s_concern_pulse,
+                      body.s_concern_temperature,
+                      body.s_concern_respiration,
+                      body.b_awareness_alert_oriented,
+                      body.b_awareness_confused_cooperative,
+                      body.b_awareness_non_coop_agit_combative,
+                      body.b_awareness_lethargic,
+                      body.b_awareness_stuporous,
+                      body.b_awareness_comatose,
+                      body.b_skin_warm_dry,
+                      body.b_skin_pale,
+                      body.b_skin_mottled,
+                      body.b_skin_diaphoretic,
+                      body.b_skin_extremities_cold,
+                      body.b_skin_extremities_warm,
+                      `${body.b_o2_percent} %`,
+                      `${body.b_o2_time} hours`,
+                      body.b_oximeter_detection,
+                      body.a_problem,
+                      body.a_problem_cardiac,
+                      body.a_problem_infection,
+                      body.a_problem_neurologic,
+                      body.a_problem_respitory,
+                      body.a_problem_unsure_deterioriating,
+                      body.a_unstable,
+                      body.a_arrest,
+                      body.r_request,
+                      parseInt(body.r_priority),
+                      body.r_patient_family_code_status,
+                      body.r_test_needed,
+                      body.r_freq_vital_signs,
+                      body.r_time_problem_will_last,
+                      body.r_problem_persist_contact,
+                    ],
+                    function (error, results, fields) {
+                      if (error) {
+                        return reject(error);
+                      }
+                      return resolve(results);
+                    }
+                  );
+                }
+              );
+            }
+          );
+        }
+      );
+    });
+  } else {
+    return reject("patient id is empty");
+  }
 };
 
 nurseApiCalls.SBARHistory = (patientId) => {
